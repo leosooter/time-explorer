@@ -1,0 +1,19 @@
+1) Realistic map spawning
+try- start at x random points. Generate terrain to match point. Stop when another terrain is encountered and drop back a square to start again. 
+Stop when original point is reached and all directions have been generated
+
+try- start with base-terrain. Add random water, forest encountered
+
+both need spreadFromPoint function which takes power
+
+add mountain ranges and rivers
+
+2) Add plants and features, rocks, minerals, ect.
+
+3) Add natural units, creatures and ambiant?
+
+4) Add units - start with 1 units
+
+5) Add unit movement
+
+6) Add NPCs - create basic AI
