@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {random} from "lodash"
 import './App.css';
 import Grid from "./components/grid";
 // import Units from "./components/units";
@@ -25,6 +26,7 @@ function App() {
   const [turn, setTurn] = useState(0);
   const [grid, setGrid] = useState(newWorld.grid);
   const [creatures, setCreatures] = useState(newWorld.creatures);
+  const [reloadCreatures, setReloadCreatures] = useState(false)
   const [plants, setPlants] = useState(newWorld.plants);
   const [redHighlightIndexes, setRedHighlightIndexes] = useState([]);
   const [blueHighlightIndexes, setBlueHighlightIndexes] = useState([]);
@@ -34,6 +36,7 @@ function App() {
   const [unitIndex, setUnitIndex] = useState({height: 5, width: 5});
   const [unitArray, setUnitArray] = useState([]);
   const [playerPosition, setPlayerPosition] = useState({heightIndex: 1, widthIndex: 1});
+
 
 
 
@@ -107,13 +110,22 @@ function App() {
     }
   }
 
-  function moveCreatures(creatures) {
-    for (let index = 0; index < creatures.length; index++) {
-      const creature = creatures[index];
-      creature.heightIndex ++;
-    }
+  const creatureActionChance = 2;
 
-    setCreatures(creatures);
+  function moveCreatures(creatures) {
+    // let movedCreatures = 0;
+    // for (let index = 0; index < creatures.length; index++) {
+    //   if(random(1, creatureActionChance) === 1) {
+    //     const creature = creatures[index];
+    //     creature.action();
+    //     // creature.heightIndex ++;
+    //     movedCreatures ++;
+    //   }
+    // }
+    // console.log("movedCreatures", movedCreatures);
+    
+
+    // setCreatures(creatures);
   }
 
   function handleTurn() {
@@ -199,7 +211,7 @@ function App() {
         {/* <TestPosition /> */}
         <Plants plants={plants}/>
         <Structure {...house4Mock} />
-        <Creatures creatures={creatures}/>
+        <Creatures turn={turn} creatures={creatures}/>
         <Player heightIndex={playerPosition.heightIndex} widthIndex={playerPosition.widthIndex} id={"player-1"} currentSquareId={null} heightToSquare={.7} handleUnitSelect={handleUnitSelect}/>
       </div>
       

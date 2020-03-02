@@ -5,7 +5,7 @@ import Outline from "../outline";
 import Shadow from "../shadow";
 import { worldParams } from "../../constants/world";
 
-export default function Creature(props) {
+export default React.memo(function Creature(props) {
     const {heightIndex, widthIndex, heightToSquare, widthToHeight, isSwim, isMega, hasSwim} = props;
     const height = worldParams.squareHeight * heightToSquare * worldParams.creatureRelativeSize;
 
@@ -19,7 +19,8 @@ export default function Creature(props) {
     const wrapperStyles = {
         zIndex,
         position: "absolute",
-        transform: `translate(${left}px, ${top}px)`
+        transform: `translate(${left}px, ${top}px)`,
+        transition: "all .5s",
     }
 
     const creatureStyles = {
@@ -39,4 +40,4 @@ export default function Creature(props) {
             </div>
         </Fragment>
     )
-}
+});

@@ -49,11 +49,9 @@ function loopGrid(params) {
 }
 
 function addToCoastArray(square) {
-    for (let index = 0; index < square.sides.length; index++) {
-        const sideSquare = square.sides[index];
+    for (let index = 0; index < square.dirSides.length; index++) {
+        const sideSquare = square.dirSides[index];
         if(!sideSquare.terrainType.isSea) {
-            console.log("Adding to array");
-            
             waterCoastSquares.push(square);
             square.terrainType = terrainTypes.shallowWater;
 
@@ -145,7 +143,8 @@ function newSquare(heightIndex, widthIndex, id) {
         hasTree,
         terrainType: defaultTerrain,
         isSea: defaultTerrain.isSea,
-        sides: [],
+        dirSides: [],
+        allSides: [],
         hasCreature,
         unit: null
     }
@@ -157,20 +156,32 @@ function assignSides(grid) {
             const square = grid[heightIndex][widthIndex];
             const westSquare = grid[heightIndex][widthIndex - 1];
             const northSquare = grid[heightIndex - 1] && grid[heightIndex - 1][widthIndex];
-
             if(northSquare) {
-                square.north = northSquare;
-                northSquare.south = square;
-                square.sides.push(northSquare);
-                northSquare.sides.push(square);
+                square.n = northSquare;
+                northSquare.s = square;
+                square.dirSides.push(northSquare);
+                northSquare.dirSides.push(square);
+
+                // if(westSquare) {
+                //     square.nw = northSquare.w
+                //     square.allSides.push(northSquare.w);
+                //     northSquare.w.se = square;
+                //     northSquare.w.allSides.push(square);
+                // }
+
+                // if(northSquare.e) {
+
+                // }
             }
 
             if(westSquare) {
-                square.west = westSquare;
-                westSquare.east = square;
-                square.sides.push(westSquare);
-                westSquare.sides.push(square);
+                square.w = westSquare;
+                westSquare.e = square;
+                square.dirSides.push(westSquare);
+                westSquare.dirSides.push(square);
             }
+
+            
         }
         
     }
@@ -198,8 +209,6 @@ function assignTerrain(grid, power=10) {
 }
 
 function newCreature(creatureType, square) {
-    console.log(square.isSwim);
-    
     const creature = clone(creatureType);
     creature.id = `creature-${creatureId}`;
     creature.currentSquare = square;
@@ -209,10 +218,21 @@ function newCreature(creatureType, square) {
     creature.isSwim = square.terrainType.isSwim;
     creatureId ++;
 
-    if(creature.isSwim){
-        console.log("IS SWIM");
+    // creature.action = function() {
+    //     let plusMinus = sample([1, -1]);
+    //     if(random(1,2) === 2) {
+    //         if(this.heightIndex + plusMinus < 99 && this.heightIndex + plusMinus >= 0) {
+    //             this.heightIndex += plusMinus;
+    //             plusMinus = sample([1, -1]);
+    //         }
+    //     }
         
-    }
+    //     if(random(1,2) === 2) {
+    //         this.widthIndex += plusMinus;
+    //     }
+    //     this.currentSquare = world.grid[this.heightIndex][this.widthIndex];
+    // }
+
     return creature;
 }
 
@@ -322,6 +342,8 @@ export default function createNewWorld(height, width) {
     mapCoast(world.grid);
     assignTerrain(world.grid, worldType.landPower);
     assignPlants(world.grid, 20);
-    assignCreatures(world.grid, 30);    
+    assignCreatures(world.grid, 30);
+    console.log("Creatures length", creatures.length);
+        
     return world;
 }
