@@ -7,3 +7,4 @@ worldParams.squareWidth = worldParams.size * .01929;
 worldParams.creatureRelativeSize = .9;
 worldParams.plantRelativeSize = 1;
 worldParams.structureRelativeSize = 1;
+worldParams.unitRelativeSize = 2;

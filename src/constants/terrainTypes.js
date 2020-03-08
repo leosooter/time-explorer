@@ -27,7 +27,7 @@ export default {
         key: "grassland",
         type: "grassland",
         color: terrainColors.grassland,
-        isSea: false,
+        isWater: false,
         treeChance: 3,
         creatures: generateWeightedArray([
             {type: lesserArthropluera, occurance: 3}, 
@@ -46,7 +46,7 @@ export default {
         key: "forest",
         type: "forest",
         color: terrainColors.forest,
-        isSea: false,
+        isWater: false,
         treeChance: 8,
         creatures: generateWeightedArray([
             {type: greaterArthropluera, occurance: 6}, 
@@ -63,7 +63,7 @@ export default {
         key: "savannah",
         type: "savannah",
         color: terrainColors.savannah,
-        isSea: false,
+        isWater: false,
         treeChance: 2,
         creatures: generateWeightedArray([
             {type: lesserArthropluera, occurance: 1}, 
@@ -81,7 +81,7 @@ export default {
         key: "desert",
         type: "desert",
         color: terrainColors.desert,
-        isSea: false,
+        isWater: false,
         treeChance: 2,
         creatures: generateWeightedArray([
             {type: kingPulmonoscorpius, occurance: 1},
@@ -96,7 +96,7 @@ export default {
         key: "tundra",
         type: "tundra",
         color: terrainColors.tundra,
-        isSea: false,
+        isWater: false,
         treeChance: 2,
         creatures: generateWeightedArray([
             {type: kingPulmonoscorpius, occurance: 1},
@@ -111,7 +111,7 @@ export default {
         key: "shallowWater",
         type: "shallow water",
         color: terrainColors.shallowWater,
-        isSea: true,
+        isWater: true,
         treeChance: 0,
         creatures: [],
         plants: generateWeightedArray([
@@ -122,7 +122,7 @@ export default {
         key: "deepWater",
         type: "deep water",
         color: terrainColors.deepWater,
-        isSea: true,
+        isWater: true,
         treeChance: 0,
         creatures: [],
         plants: []

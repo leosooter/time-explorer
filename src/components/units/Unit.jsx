@@ -1,52 +1,42 @@
-import React, {useState} from  "react";
+import React, {Fragment} from "react";
+import {random, sample, clone} from "lodash";
+import {getPosition, getZIndex} from "../../helpers/grid-helpers";
+import Outline from "../outline";
+import Shadow from "../shadow";
+import { worldParams } from "../../constants/world";
 
-export default function Unit(props) {
-    const topOffset = 525;
-    const leftOffset = 75;
-    const modifier = 1.8;
+export default React.memo(function Unit(props) {
+    const {heightIndex, widthIndex, heightToSquare, widthToHeight, isSwim, hasSwim, speed, health, tempSpeed} = props;
+    const height = worldParams.squareHeight * heightToSquare * worldParams.unitRelativeSize;
 
-    const {heightIndex, widthIndex} = props;
+    const {top, left} = getPosition(heightIndex, widthIndex, height, widthToHeight);
 
-    let top = 615;
-    let left = 78;
-
-    top += (52 * heightIndex);
-    left += (90 * heightIndex);
     
-    top -= (52 * widthIndex);
-    left += (90 * widthIndex);
+    // let dir = "sw";
+
+    const wrapperStyles = {
+        zIndex: getZIndex(heightIndex, widthIndex, "unit"),
+        position: "absolute",
+        transform: `translate(${left}px, ${top}px)`,
+        transition: `all ${tempSpeed || speed}s linear`,
+    }
 
     const unitStyles = {
         position: "absolute",
-        top: `${top}px`,
-        left: `${left}px`,
-        height: "30px",
-        width: "30px",
-        borderRadius: "50%",
-        backgroundColor: "lightblue",
-        transition: "top 1s, left 1s",
+        width: `${height}px`
     }
 
-    if(props.isSelected) {
-        unitStyles.border = "2px solid black"
-    }
+    const dir = isSwim  && hasSwim ? `${props.dir}-swim` : props.dir;
 
-    return (<div key={props.id} style={unitStyles} onClick={() => props.handleUnitSelect(props.id)}></div>);
-}
-
-// function renderPlayer(widthIndex, heightIndex) {
-//     const height = heightIndex * 100 - 50;
-//     const width = widthIndex * 100 - 50;
-  
-//     const playerStyles = {
-//       position: "absolute",
-//       top: `${height}px`,
-//       left: `${width}px`,
-//       height: "10px",
-//       width: "10px",
-//       borderRadius: "50%",
-//       backgroundColor: "red"
-//     }
-  
-//     return (<div style={playerStyles}></div>);
-//   }
+    return (
+        <Fragment>
+            {/* <div style={shadowStyles}></div> */}
+            <div style={wrapperStyles}>
+                <span>{health}</span>
+                {/* <Outline size={size} color={"red"} /> */}
+                {/* <Shadow size={size} /> */}
+                <img src={require(`./images/${props.imgDir}/${dir}.png`)} style={unitStyles}></img>
+            </div>
+        </Fragment>
+    )
+});

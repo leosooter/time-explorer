@@ -26,7 +26,7 @@ export default {
     //             key: "grassland",
     //             type: "grassland",
     //             color: terrainColors.grassland,
-    //             isSea: false,
+    //             isWater: false,
     //             treeChance: 3,
     //             creatures: generateWeightedArray([
     //                 {type: lesserArthropluera, occurance: 3}, 

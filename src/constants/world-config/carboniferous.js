@@ -71,7 +71,8 @@ export default {
             key: "grassland",
             type: "grassland",
             color: terrainColors.grassland,
-            isSea: false,
+            isWater: false,
+            isSwim: false,
             creatures: generateWeightedArray([
                 {type: lesserArthropluera, occurance: 2}, 
                 {type: kingPulmonoscorpius, occurance: 1},
@@ -92,7 +93,8 @@ export default {
             key: "forest",
             type: "forest",
             color: terrainColors.forest,
-            isSea: false,
+            isWater: false,
+            isSwim: false,
             creatures: generateWeightedArray([
                 {type: greaterArthropluera, occurance: 2}, 
                 {type: lesserArthropluera, occurance: 4},
@@ -116,7 +118,8 @@ export default {
             key: "savannah",
             type: "savannah",
             color: terrainColors.savannah,
-            isSea: false,
+            isWater: false,
+            isSwim: false,
             creatures: generateWeightedArray([
                 {type: lesserArthropluera, occurance: 1}, 
                 {type: kingPulmonoscorpius, occurance: 3},
@@ -133,7 +136,7 @@ export default {
             key: "marsh",
             type: "marsh",
             color: terrainColors.marsh,
-            isSea: false,
+            isWater: true,
             isSwim: true,
             creatures: generateWeightedArray([
                 // {type: lesserArthropluera, occurance: 2},
@@ -152,7 +155,7 @@ export default {
             key: "swampForest",
             type: "swamp forest",
             color: terrainColors.swampForest,
-            isSea: false,
+            isWater: true,
             isSwim: true,
             creatures: generateWeightedArray([
                 // {type: lesserArthropluera, occurance: 2},
@@ -170,7 +173,7 @@ export default {
             key: "shallowWater",
             type: "shallow water",
             color: terrainColors.shallowWater,
-            isSea: true,
+            isWater: true,
             isSwim: true,
             creatures: generateWeightedArray([
                 {type: greaterProterogyrinus, occurance: 2},
@@ -184,7 +187,7 @@ export default {
             key: "deepWater",
             type: "deep water",
             color: terrainColors.deepWater,
-            isSea: true,
+            isWater: true,
             isSwim: true,
             creatures: generateWeightedArray([
                 {type: greaterProterogyrinus, occurance: 1},

@@ -23,7 +23,9 @@ const {
     yellowCrocodile,
     orangeDimetrodon,
     apatosaurus,
-    diplodocus
+    diplodocus,
+    purpleDarter,
+    redDarter
 } = creatureDirectory;
 
 const {
@@ -74,7 +76,7 @@ export default {
             key: "grassland",
             type: "grassland",
             color: terrainColors.grassland,
-            isSea: false,
+            isWater: false,
             creatures: generateWeightedArray([
                 {type: pulmonoscorpius, occurance: 1},
                 {type: scorpion, occurance: 3},
@@ -91,7 +93,7 @@ export default {
             key: "forest",
             type: "forest",
             color: terrainColors.forest,
-            isSea: false,
+            isWater: false,
             creatures: generateWeightedArray([
                 {type: pulmonoscorpius, occurance: 1},
                 {type: lesserMisophilae, occurance: 3},
@@ -109,7 +111,7 @@ export default {
             key: "savannah",
             type: "savannah",
             color: terrainColors.savannah,
-            isSea: false,
+            isWater: false,
             creatures: generateWeightedArray([
                 {type: pulmonoscorpius, occurance: 3},
                 {type: scorpion, occurance: 3},
@@ -128,10 +130,12 @@ export default {
             key: "marsh",
             type: "marsh",
             color: terrainColors.marsh,
-            isSea: false,
+            isWater: true,
             isSwim: true,
             creatures: generateWeightedArray([
-                {type: yellowCrocodile, occurance: 2}
+                {type: yellowCrocodile, occurance: 2},
+                {type: redDarter, occurance: 2},
+                {type: purpleDarter, occurance: 2}
             ], 25),
             plants: generateWeightedArray([
                 {type: horsetail, occurance: 3},
@@ -141,12 +145,14 @@ export default {
             key: "swampForest",
             type: "swamp forest",
             color: terrainColors.swampForest,
-            isSea: false,
+            isWater: true,
             isSwim: true,
             creatures: generateWeightedArray([
                 // {type: lesserArthropluera, occurance: 2},
                 // {type: greaterArthropluera, occurance: 2},
                 {type: greaterProterogyrinus, occurance: 2},
+                {type: redDarter, occurance: 2},
+                {type: purpleDarter, occurance: 2}
                 // {type: orangeMeganuera, occurance: 1},
                 // {type: blueMeganuera, occurance: 1},
             ], 25),
@@ -159,10 +165,12 @@ export default {
             key: "shallowWater",
             type: "shallow water",
             color: terrainColors.shallowWater,
-            isSea: true,
+            isWater: true,
             isSwim: true,
             creatures: generateWeightedArray([
-                {type: yellowCrocodile, occurance: 2}
+                {type: yellowCrocodile, occurance: 2},
+                {type: redDarter, occurance: 2},
+                {type: purpleDarter, occurance: 2}
             ], 25),
             plants: []
         },
@@ -170,9 +178,13 @@ export default {
             key: "deepWater",
             type: "deep water",
             color: terrainColors.deepWater,
-            isSea: true,
+            isWater: true,
             isSwim: true,
-            creatures: [],
+            creatures: generateWeightedArray([
+                {type: yellowCrocodile, occurance: 2},
+                {type: redDarter, occurance: 2},
+                {type: purpleDarter, occurance: 2}
+            ], 25),
             plants: []
         },
     }

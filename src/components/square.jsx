@@ -8,10 +8,10 @@ function getColorString(colorvalues) {
 } 
 
 export default function Square(props) {
-    const {heightIndex, widthIndex, handleSquareSelect, hasTree, isSea, terrainType, squareSize, id} = props
+    const {heightIndex, widthIndex, handleSquareSelect, hasTree, isWater, terrainType, squareSize, id, borderColor} = props
 
     const backgroundColor = getColorString(terrainType.color);
-    let border = `1px solid ${backgroundColor}`;
+    let border = borderColor ? `1px solid ${borderColor}`: `1px solid ${backgroundColor}`;
     
     // if(props.isLandCoast) {
     //   border = "1px solid red"

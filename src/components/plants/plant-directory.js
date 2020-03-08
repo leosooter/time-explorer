@@ -131,35 +131,35 @@ export default {
     greenFernClump: {
         name: "Green Fern Clump",
         imageArray: ["green-fern-clump1.png", "green-fern-clump2.png", "green-fern-clump3.png", "green-fern-clump4.png"],
-        heightToSquare: 1,
+        heightToSquare: .5,
         widthToHeight: 1.5,
         sizeRange: 10
     },
     redFernClump: {
         name: "Red Fern Clump",
         imageArray: ["red-fern-clump1.png", "red-fern-clump2.png"],
-        heightToSquare: 1,
+        heightToSquare: .5,
         widthToHeight: 1.5,
         sizeRange: 10
     },
     lightGreenFernClump: {
         name: "Light Green Fern Clump",
         imageArray: ["light-green-fern-clump1.png", "light-green-fern-clump2.png"],
-        heightToSquare: 1,
+        heightToSquare: .5,
         widthToHeight: 1.5,
         sizeRange: 10
     },
     greenBrownFernClump: {
         name: "Green Brown Fern Clump",
         imageArray: ["green-brown-fern-clump1.png", "green-brown-fern-clump2.png"],
-        heightToSquare: 1,
+        heightToSquare: .5,
         widthToHeight: 1.5,
         sizeRange: 10
     },
     darkGreenFernClump: {
         name: "Dark Green Fern Clump",
         imageArray: ["dark-green-fern-clump1.png", "dark-green-fern-clump2.png"],
-        heightToSquare: 1,
+        heightToSquare: .5,
         widthToHeight: 1.5,
         sizeRange: 10
     },

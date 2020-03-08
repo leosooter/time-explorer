@@ -11,13 +11,16 @@ import {worldParams} from "./constants/world";
 import Creature from './components/creatures/creature';
 import Creatures from "./components/creatures/creatures";
 import Plants from "./components/plants/plants";
-import Structure from "./components/structures/structure";
+import Structures from "./components/structures/structures.jsx";
+import Units from "./components/units/units.jsx";
 import Player from "./components/units/player/player";
 import TestPosition from "./components/test-position";
 import {house1Mock, house2Mock, house3Mock, house4Mock} from "./components/structures/mocks";
 
 let testHeightIndex = 5;
 let testWidthIndex = 5;
+
+const creatureActionChance = 1;
 
 const newWorld = createNewWorld(100, 100); // Returns and array with the grid and a squaresById object
 
@@ -26,6 +29,8 @@ function App() {
   const [turn, setTurn] = useState(0);
   const [grid, setGrid] = useState(newWorld.grid);
   const [creatures, setCreatures] = useState(newWorld.creatures);
+  const [structures, setStructures] = useState(newWorld.structures);
+  const [units, setUnits] = useState(newWorld.units);
   const [reloadCreatures, setReloadCreatures] = useState(false)
   const [plants, setPlants] = useState(newWorld.plants);
   const [redHighlightIndexes, setRedHighlightIndexes] = useState([]);
@@ -110,27 +115,28 @@ function App() {
     }
   }
 
-  const creatureActionChance = 2;
-
   function moveCreatures(creatures) {
-    // let movedCreatures = 0;
-    // for (let index = 0; index < creatures.length; index++) {
-    //   if(random(1, creatureActionChance) === 1) {
-    //     const creature = creatures[index];
-    //     creature.action();
-    //     // creature.heightIndex ++;
-    //     movedCreatures ++;
-    //   }
-    // }
-    // console.log("movedCreatures", movedCreatures);
+    let movedCreatures = 0;
+    for (let index = 0; index < creatures.length; index++) {
+      const creature = creatures[index];
+        creature.action();
+        // creature.heightIndex ++;
+        movedCreatures ++;
+      // if(random(1, creatureActionChance) === 1) {
+        
+      // }
+    }
+    console.log("movedCreatures", movedCreatures);
     
 
-    // setCreatures(creatures);
+    setCreatures(creatures);
   }
 
   function handleTurn() {
     moveCreatures(creatures);
     setTurn(turn + 1);
+    console.log("Number of creatures", creatures.length);
+    
   }
 
   function createUnit(x,y) {
@@ -209,8 +215,9 @@ function App() {
       /> */}
       <div style={unitsWrapper}>
         {/* <TestPosition /> */}
+        <Structures structures={structures}/>
+        <Units units={units}/>
         <Plants plants={plants}/>
-        <Structure {...house4Mock} />
         <Creatures turn={turn} creatures={creatures}/>
         <Player heightIndex={playerPosition.heightIndex} widthIndex={playerPosition.widthIndex} id={"player-1"} currentSquareId={null} heightToSquare={.7} handleUnitSelect={handleUnitSelect}/>
       </div>

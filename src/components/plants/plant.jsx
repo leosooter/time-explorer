@@ -1,12 +1,11 @@
 import React, {Fragment} from "react";
 import {random, sample, clone} from "lodash";
 import Shadow from "../shadow";
-import { getPlantPosition } from "../../helpers/grid-helpers";
+import { getPlantPosition, getZIndex } from "../../helpers/grid-helpers";
 
 export default function Plant(props) {    
     const {heightIndex, widthIndex, height, widthToHeight, image} = props;
-    const {top, left} = getPlantPosition(heightIndex, widthIndex, height, widthToHeight);
-    const zIndex = heightIndex * 1000 - widthIndex;
+    const {top, left} = getPlantPosition(heightIndex, widthIndex, height, widthToHeight, "plant");
 
     // if(props.name === "Red Fern") {
     //     console.log("height", height);
@@ -26,7 +25,7 @@ export default function Plant(props) {
         pointerEvents: "none",
         position: "absolute",
         transform: `translate(${left}px, ${top}px)`,
-        zIndex
+        zIndex: getZIndex(heightIndex, widthIndex, "plant")
     }
 
     const plantStyles = {
