@@ -1,19 +1,16 @@
 import {random, sample, clone} from "lodash";
 import {worldParams} from "../constants/world";
-import {getNewCreature} from "../helpers/creature-helpers";
+import {getNewCreature, creatureAction} from "../helpers/creature-helpers";
 import {loopGrid, spreadFromPoint} from "../helpers/grid-helpers";
 import structureDirectory from "../components/structures/structure-directory";
+import plantDirectory from "../components/plants/plant-directory";
 import tribeDirectory from "../components/units/tribeDirectory";
 // import terrainTypes from "../constants/terrainTypes";
 import worldTypes from "../constants/world-types";
-
-const {house1, house2, house3, house4} = structureDirectory;
-const {green, greenYellow, blue, red, orange, yellowOrange} = tribeDirectory;
-const tribes = [green, greenYellow, blue, red, orange, yellowOrange];
-console.log("TRIBE ARRAY", tribes);
-
+import {entityAction} from "./entity-helpers";
 
 const shortDirs = ["n","s","e","w"];
+const explorationMode = true;
 
 // const facingDirs = ["n","s","e","w","ne","nw","se","sw"];
 
@@ -24,44 +21,41 @@ const shortDirs = ["n","s","e","w"];
 //     "sw": ["s", "w"],
 // }
 
-const creatures = [];
-const plants = [];
-const structures = [];
-const units = [];
-const tribesById = {};
-const tribesIdsArray = [];
-const landCoastSquares = [];
-const waterCoastSquares = [];
-const landSquares = [];
-const waterSquares = [];
-const squaresById = {};
+let terrainArrays = {};
+let creatureArrays = {};
+let creaturesByTerrain = {};
 
-const creatureStats = {
+let creatures = [];
+let plants = [];
+let structures = [];
+let units = [];
+let playerUnits = [];
+let playerResources = {};
+let tribesById = {};
+let tribesIdsArray = [];
+let landCoastSquares = [];
+let waterCoastSquares = [];
+let landSquares = [];
+let waterSquares = [];
+let squaresById = {};
+
+let creatureStats = {
 
 }
 
 let plantId = 0;
 let tribeId = 0
+let unitId = 0;
+let playerUnitId = 0;
 
-export const world = {
-    grid: [],
-    creatures,
-    plants,
-    structures,
-    units,
-    waterSquares,
-    landCoastSquares,
-    waterCoastSquares,
-    landSquares,
-    squaresById
-}
+export let world = {}
 
 // import {spreadTerrainFromStart} from "./terrain-helpers";
 
-const worldType = worldTypes["carboniferous"];
-const {terrainTypes} = worldType;
+let worldType;
+let terrainTypes;
 
-const defaultTerrainType = worldType.defualtTerrainType;
+let defaultTerrainType;
 
 // function loopGrid(params) {
 //     const {grid, innerCallback, outerCallback, innerParams, outerParams} = params;
@@ -74,6 +68,52 @@ const defaultTerrainType = worldType.defualtTerrainType;
 //         }
 //     }
 // }
+
+function resetWorld(worldTypeSet) {
+    worldType = worldTypes[worldTypeSet];
+
+    terrainArrays = {};
+    creatureArrays = {};
+    creaturesByTerrain = {};
+    creatures = [];
+    plants = [];
+    structures = [];
+    units = [];
+    playerUnits = [];
+    tribesById = {};
+    tribesIdsArray = [];
+    landCoastSquares = [];
+    waterCoastSquares = [];
+    landSquares = [];
+    waterSquares = [];
+    squaresById = {};
+    creatureStats = {}
+    playerResources = {
+        food: 0,
+        wood: 0
+    }
+
+    terrainTypes = worldType.terrainTypes;
+    defaultTerrainType = worldType.defualtTerrainType
+
+
+    world = {
+        grid: [],
+        creatures,
+        plants,
+        structures,
+        units,
+        playerUnits,
+        playerResources,
+        waterSquares,
+        landCoastSquares,
+        waterCoastSquares,
+        landSquares,
+        squaresById,
+        terrainArrays
+    }
+
+}
 
 function addToCoastArray(square) {
     for (let index = 0; index < square.dirSides.length; index++) {
@@ -155,6 +195,7 @@ function newSquare(heightIndex, widthIndex, id) {
     defaultTerrain.color = morphColor(defaultTerrain.color, 5);
     const hasTree = !defaultTerrain.isWater && random(1,10) < defaultTerrain.treeChance;
     const entities = [];
+    const isVisible = !explorationMode || heightIndex < 3 && widthIndex < 3;
 
     return {
         heightIndex,
@@ -169,7 +210,8 @@ function newSquare(heightIndex, widthIndex, id) {
         dirSides: [],
         allSides: [],
         currentEntity: null,
-        plant: null
+        plant: null,
+        isVisible
     }
 }
 
@@ -240,15 +282,16 @@ function assignTerrain(grid, power=10) {
 }
 
 function newStructure(square, type) {
-    const {heightIndex, widthIndex} = square;
-    if(!type) {
-        type = sample([house1, house2, house3, house4])
-    }
+    const {heightIndex, widthIndex, isVisible} = square;
+    // if(!type) {
+    //     type = sample([house1, house2, house3, house4])
+    // }
 
     const structure = {
         ...type,
         heightIndex,
         widthIndex,
+        isVisible,
         currentSquare: square
     }
 
@@ -261,45 +304,76 @@ function newStructure(square, type) {
 
 const defaultUnit = {
     name: "Warrior",
+    isUnit: true,
     heightToSquare: .7,
-    widthToHeight: .7,
-    preyType: "dangerous-large",
+    widthToHeight: .5,
+    preyType: "human",
     isPredator: true,
-    prey: ["regular-large", "regular-medium", "regular-small", "dangerous-medium", "dangerous-small"],
-    possTerrain: ["grassland", "desert", "savannah", "forest"],
-    activityLevel: 5,
+    prey: ["dangerous-large", "regular-large", "regular-medium", "regular-small", "dangerous-medium", "dangerous-small"],
+    activityLevel: 10,
     hp: 15,
     hunger: 100,
     speed: 1.5,
     range: 1,
     aggression: 3,
-    attack: 5,
+    attack: 6,
     defence: 5,
-    escape: 3
+    escape: 3,
+    isTerritoryRestricted: true,
+    arrayType: "units"
 }
 
 function newUnit(square, tribe) {
     const unit = {
         ...defaultUnit,
+        possTerrain: tribe.possTerrain,
+        isVisible: square.isVisible,
+        id: `unit-${unitId ++}`,
         heightIndex: square.heightIndex,
         widthIndex: square.widthIndex,
         currentSquare: square,
         tribeId: tribe.id,
-        imgDir: tribe.imgDir,
+        imgDir: tribe.unitImgDir,
         dir: sample(shortDirs)
     }
+
+    unit.health = unit.hp
+    unit.action = () => entityAction(unit, "units")
 
     units.push(unit);
 
     return unit;
 }
 
+function newPlayerUnit(square) {
+    const unit = {
+        ...defaultUnit,
+        isPlayerUnit: true,
+        resources: playerResources,
+        heightToSquare: .18,
+        possTerrain: ["grassland", "desert", "savannah", "forest", "marsh"],
+        isTerritoryRestricted: false,
+        isVisible: square.isVisible,
+        id: `player-unit-${playerUnitId ++}`,
+        heightIndex: square.heightIndex,
+        widthIndex: square.widthIndex,
+        currentSquare: square,
+        imgDir: "red-black",
+        dir: "s",
+        arrayType: "playerUnits"
+    }
+
+    unit.health = unit.hp
+    return unit;
+}
+
 function addStructuresAndUnits(square, tribe) {
     const {color, structures, imgDir} = tribe;
+    square.innerTerritory = true;
+    // square.borderColor = "red";
     
-    if(!square.terrainType.isWater) {
-        square.borderColor = color;
-        square.territory = true;
+    if(square.terrainType.isWater === tribe.isWater) {
+        // square.village = true;
 
         if(random(1,3) === 1) {
             square.structure = newStructure(square, sample(structures));
@@ -310,14 +384,20 @@ function addStructuresAndUnits(square, tribe) {
     }
 }
 
-function startVillage(startSquare, power) {
-    const tribe = {...sample(tribes)};
-    
+function markOuterTerritory(square, tribe) {
+    square.outerTerritory = true;
+    if(!square.innerTerritory) {
+        // square.borderColor = tribe.color;
+    }
+}
+
+function startVillage(startSquare, tribe, power) {
     tribe.id = `tribe-${tribeId ++}`;
     tribesIdsArray.push(tribe.id);
     tribesById[tribe.id] = tribe;
 
     spreadFromPoint(startSquare, power, {callback: addStructuresAndUnits, innerParams: tribe});
+    spreadFromPoint(startSquare, (power * 3), {callback: markOuterTerritory, innerParams: tribe});
 }
 
 function assignTribes(grid, number, power) {
@@ -326,17 +406,48 @@ function assignTribes(grid, number, power) {
 
     while(assignedTribes > 0 && safety > 0) {
         safety --;
-
-        const startSquare = sample(landSquares);
+        const tribe = {...sample(worldType.tribes)};
+        console.log("Asigning Tribe", tribe.key);
         
-        if(!startSquare.territory) {
-            startVillage(startSquare, power);
+        const terrainKey = sample(tribe.possTerrain);
+        const startSquare = world.terrainArrays[terrainKey] && sample(world.terrainArrays[terrainKey])
+
+        // const startSquare = sample(landSquares);
+        
+        if(startSquare && !startSquare.outerTerritory) {
+            startVillage(startSquare, tribe, power);
             assignedTribes --;
-            console.log("Assigning village", startSquare.heightIndex, startSquare.widthIndex);
             
         }
     }
     
+}
+
+function assignPlayerUnit(grid, heightIndex, widthIndex) {
+    const startSquare = grid[heightIndex][widthIndex];
+
+    const player = newPlayerUnit(startSquare);
+    startSquare.currentEntity = player;
+    playerUnits.push(player);
+}
+
+function renderAllPlants() {
+    let widthIndex = 0;
+    // plants = [];
+
+    for (const key in plantDirectory) {
+        if (plantDirectory.hasOwnProperty(key)) {
+            const plantDir = plantDirectory[key];
+            const square = world.grid[0][widthIndex];
+
+            const plant = newPlant(plantDir, square);
+            plants.push(plant);
+            // square.plants.push(plant);
+            square.plant = plant;
+
+            widthIndex ++;
+        }
+    }
 }
 
 // function getDirFromFacing(facing) {
@@ -424,7 +535,7 @@ function assignTribes(grid, number, power) {
 // }
 
 function assignCreatureToSquare(square, density) {
-    if(square.currentEntity || square.territory) {
+    if(square.currentEntity || square.innerTerritory) {
         return;
     }
 
@@ -434,6 +545,15 @@ function assignCreatureToSquare(square, density) {
         if(selection) {
             const creature = getNewCreature(selection, square);
             creatures.push(creature);
+
+            if(!creaturesByTerrain[square.terrainType.key]) {
+                creaturesByTerrain[square.terrainType.key] = {}
+                creaturesByTerrain[square.terrainType.key][creature.name] = 1;
+            } else if(!creaturesByTerrain[square.terrainType.key][creature.name]) {
+                creaturesByTerrain[square.terrainType.key][creature.name] = 1;
+            } else {
+                creaturesByTerrain[square.terrainType.key][creature.name] ++;
+            }
             // square.creatures.push(creature);
             square.currentEntity = creature;
         }
@@ -468,6 +588,8 @@ function newPlant(plantType, square) {
     plant.heightIndex = square.heightIndex;
     plant.widthIndex = square.widthIndex;
     plant.height = height + (random(0, plant.sizeRange) * plusMinus);
+    plant.isVisible = square.isVisible;
+    plant.arrayType = "plants";
 
     return plant;
 }
@@ -504,16 +626,35 @@ function assignPlants(grid, density) {
     loopGrid(grid, params); 
 }
 
-function loadLandSquares(grid) {
+function loadTerrainArrays(grid) {
     const params = {
         grid,
-        innerCallback: (square) => {if(!square.terrainType.isWater){landSquares.push(square)}},
+        innerCallback: (square) => {
+            if(!terrainArrays[square.terrainType.key]) {
+                terrainArrays[square.terrainType.key] = [];
+            }
+
+            terrainArrays[square.terrainType.key].push(square);
+
+            if(!square.terrainType.isWater){
+                landSquares.push(square)
+            }
+        },
         // innerParams: [density],
     }
-    loopGrid(grid, params)
+    loopGrid(grid, params);
+    console.log("terrainArrays", terrainArrays);
+    
 }
 
-export default function createNewWorld(height, width) {
+function addTestStructure(square, structure) {
+
+    structures.push(newStructure(square, structure));
+}
+
+export default function createNewWorld(height, width, worldTypeSet) {
+    resetWorld(worldTypeSet);
+
     for (let heightIndex = 0; heightIndex < height; heightIndex++) {
         let row = [];
         for (let widthIndex = 0; widthIndex < width; widthIndex++) {
@@ -526,19 +667,62 @@ export default function createNewWorld(height, width) {
         world.grid.push(row);
     }
 
+    
+
     const seaPoints = random(worldType.seaPoints[0], worldType.seaPoints[1]);
     const lakePoints = random(worldType.lakePoints[0], worldType.lakePoints[1]);
+
+    const {
+        permianNomad1, 
+        permianNomad2, 
+        permianNomad3, 
+        permianNomad4,
+        permianAdobe1, 
+        permianAdobe2, 
+        permianAdobe3, 
+        permianAdobe4,
+        permianFarmers1, 
+        permianFarmers2, 
+        permianFarmers3, 
+        permianFarmers4,
+        triassicRiver1,
+        triassicRiver2,
+        triassicRiver3,
+        triassicRiver4,
+        triassicLake1,
+        triassicLake2,
+        triassicLake3,
+        triassicLake4
+    } = structureDirectory;
+    
 
     assignSides(world.grid);
     assignWater(world.grid, seaPoints, worldType.seaPower);
     assignWater(world.grid, lakePoints, worldType.lakePower);
     mapCoast(world.grid);
     assignTerrain(world.grid, worldType.landPower);
-    loadLandSquares(world.grid);
-    assignTribes(world.grid, 5, 3);
+    loadTerrainArrays(world.grid);
+    assignPlayerUnit(world.grid, 1, 1);
+    assignTribes(world.grid, 10, 3);
+    // addTestStructure(world.grid[2][1], triassicLake1);
+    // addTestStructure(world.grid[2][2], triassicLake2);
+    // addTestStructure(world.grid[2][3], triassicLake3);
+    // addTestStructure(world.grid[2][4], triassicLake4);
+    // addTestStructure(world.grid[5][1], permianFarmers1);
+    // addTestStructure(world.grid[5][2], permianFarmers2);
+    // addTestStructure(world.grid[5][3], permianFarmers3);
+    // addTestStructure(world.grid[5][4], permianFarmers4);
+
+    // addTestStructure(world.grid[7][1], permianNomad1);
+    // addTestStructure(world.grid[7][2], permianNomad2);
+    // addTestStructure(world.grid[7][3], permianNomad3);
+    // addTestStructure(world.grid[7][6], permianNomad4);
     assignPlants(world.grid, 20);
+    // renderAllPlants();
     assignCreatures(world.grid, 30);
     console.log("Creatures length", creatures.length);
+    console.log("CREATURES ___", creaturesByTerrain);
+    
         
     return world;
 }

@@ -68,6 +68,47 @@ export default {
         sizeRange: 20,
         resources: [{type: wood, quantity: [2,3]}, {type: nuts, quantity: [1,2]}]
     },
+    /////////////////////////////////// Conifers
+    pine: {
+        name: "Pine",
+        imageArray: ["conif-green-brown1.png", "conif-green-brown2.png", "conif-green-brown3.png", "conif-green-brown4.png"],
+        heightToSquare: 2,
+        widthToHeight: .75,
+        sizeRange: 20,
+        resources: [{type: wood, quantity: [2,3]}, {type: nuts, quantity: [1,2]}]
+    },
+    darkPine: {
+        name: "Dark Pine",
+        imageArray: ["dark-pine1.png", "dark-pine2.png", "dark-pine3.png", "dark-pine4.png"],
+        heightToSquare: 2,
+        widthToHeight: .75,
+        sizeRange: 20,
+        resources: [{type: wood, quantity: [2,3]}, {type: nuts, quantity: [1,2]}]
+    },
+    silverFir: {
+        name: "Silver Fir",
+        imageArray: ["silver-fir1.png", "silver-fir2.png", "silver-fir3.png"],
+        heightToSquare: 2,
+        widthToHeight: .75,
+        sizeRange: 20,
+        resources: [{type: wood, quantity: [2,3]}, {type: nuts, quantity: [1,2]}]
+    },
+    umbrellaPine: {
+        name: "Umbrella Pine",
+        imageArray: ["umbrella-pine1.png", "umbrella-pine2.png", "umbrella-pine3.png", "umbrella-pine4.png"],
+        heightToSquare: 2,
+        widthToHeight: .75,
+        sizeRange: 20,
+        resources: [{type: wood, quantity: [2,3]}, {type: nuts, quantity: [1,2]}]
+    },
+    greyUmbrellaPine: {
+        name: "Grey Umbrella Pine",
+        imageArray: ["umbrella-pine-grey1.png", "umbrella-pine-grey2.png", "umbrella-pine-grey3.png", "umbrella-pine-grey4.png"],
+        heightToSquare: 2,
+        widthToHeight: .75,
+        sizeRange: 20,
+        resources: [{type: wood, quantity: [2,3]}, {type: nuts, quantity: [1,2]}]
+    },
     //tree-fern
     /////////////////////////////////// Ferns
     barrelFern: {
@@ -259,5 +300,57 @@ export default {
         sizeRange: 10
     },
 }
+
+let plants = {};
+
+const {
+    horsetail,
+    goldenHorsetail,
+    giantHorsetail,
+    /////////////////////////////////// Trees
+    polycarpus,
+    marshPine,
+    darkMarshPine,
+    buttressRoot,
+    goldenButtressRoot,
+    /////////////////////////////////// Conifers
+    pine,
+    darkPine,
+    silverFir,
+    umbrellaPine,
+    greyUmbrellaPine,
+    //tree-fern
+    /////////////////////////////////// Ferns
+    barrelFern,
+    tallFern,
+    tallDarkFern,
+    greenFern,
+    yellowFern,
+    redFern,
+    blueFern,
+    yellowFernClump,
+    greenFernClump,
+    redFernClump,
+    lightGreenFernClump,
+    greenBrownFernClump,
+    darkGreenFernClump,
+    youngBlueTreeFern,
+    youngLightGreenTreeFern,
+    scalyTreeFern,
+    blueTreeFern,
+    ////////////////////////////////// Reeds
+    reed,
+    //////////////////////////////// Moss
+    greenMoss,
+    yellowMoss,
+    orangeMoss,
+    //////////////////////////////// Misc
+    yellowGlobe,
+    purpleGlobe,
+    //////////////////////////////// Shrubs
+    yellowRoundleaf,
+    orangeRoundleaf,
+    greenRoundleaf
+} = plants;
 
 //scrub-tree

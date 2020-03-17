@@ -1,8 +1,11 @@
 import creatureDirectory from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
 import {generateWeightedArray} from "../../helpers/array-helpers";
-import {terrainColors} from "../colors";
+import {terrainColors as colors} from "../colors";
 import structureDirectory from "../../components/structures/structure-directory";
+import tribeDirectory from "../../components/units/tribeDirectory";
+
+const terrainColors = colors.permian;
 
 const {
     house1,
@@ -10,6 +13,12 @@ const {
     house3,
     house4
 } = structureDirectory;
+
+const {
+        permianNomads,
+        permianAdobe,
+        permianFarmers
+    } = tribeDirectory;
 
 const {
     greaterArthropluera,
@@ -23,27 +32,61 @@ const {
     yellowCrocodile,
     orangeDimetrodon,
     yellowDarter,
-    greenDarter
+    greenDarter,
+    orangeEdaphasaurus,
+    greenEdaphasaurus,
+    blueDiictidon,
+    brownDiictidon,
+    greaterEdaphasaurus,
+    greaterGorgonopsid,
+    lesserGorgonopsid
 } = creatureDirectory;
 
 const {
-    barrelFern,
-    fern,
-    reed,
-    marshPine,
-    darkMarshPine,
-    polycarpus,
-    buttressRoot,
-    goldenButtressRoot,
-    greenFern,
-    yellowGlobe,
+    horsetail,
     goldenHorsetail,
     giantHorsetail,
-    horsetail,
-    yellowMoss,
-    greenMoss,
-    redFern,
+    /////////////////////////////////// Trees
+    polycarpus,
+    marshPine,
+    darkMarshPine,
+    buttressRoot,
+    goldenButtressRoot,
+    /////////////////////////////////// Conifers
+    pine,
+    darkPine,
+    silverFir,
+    umbrellaPine,
+    greyUmbrellaPine,
+    //tree-fern
+    /////////////////////////////////// Ferns
+    barrelFern,
+    tallFern,
+    tallDarkFern,
+    greenFern,
     yellowFern,
+    redFern,
+    blueFern,
+    yellowFernClump,
+    greenFernClump,
+    redFernClump,
+    lightGreenFernClump,
+    greenBrownFernClump,
+    darkGreenFernClump,
+    youngBlueTreeFern,
+    youngLightGreenTreeFern,
+    scalyTreeFern,
+    blueTreeFern,
+    ////////////////////////////////// Reeds
+    reed,
+    //////////////////////////////// Moss
+    greenMoss,
+    yellowMoss,
+    orangeMoss,
+    //////////////////////////////// Misc
+    yellowGlobe,
+    purpleGlobe,
+    //////////////////////////////// Shrubs
     yellowRoundleaf,
     orangeRoundleaf,
     greenRoundleaf
@@ -74,6 +117,7 @@ export default {
     riverPoints: [20, 30],
     riverPower: 20,
     landPower: 25,
+    tribes: [permianAdobe, permianFarmers, permianNomads],
     possTerrain: generateWeightedArray([
             {type: "savannah", occurance: 30}, 
             {type: "forest", occurance: 5}, 
@@ -88,12 +132,16 @@ export default {
             isWater: false,
             creatures: generateWeightedArray([
                 {type: scorpion, occurance: 6},
-                {type: orangeDimetrodon, occurance: 1}
-            ], 150),
+                {type: orangeDimetrodon, occurance: 3},
+                {type: greaterGorgonopsid, occurance: 1},
+                {type: orangeEdaphasaurus, occurance: 6},
+                {type: brownDiictidon, occurance: 6},
+                {type: greaterEdaphasaurus, occurance: 4},
+            ], 500),
             plants: generateWeightedArray([
                 {type: barrelFern, occurance: 1},
                 {type: yellowRoundleaf, occurance: 1}
-            ], 50)
+            ], 100)
         },
         grassland: {
             key: "grassland",
@@ -103,14 +151,18 @@ export default {
             creatures: generateWeightedArray([
                 {type: pulmonoscorpius, occurance: 1},
                 {type: scorpion, occurance: 3},
+                {type: greenEdaphasaurus, occurance: 3},
+                {type: blueDiictidon, occurance: 4},
+                {type: lesserGorgonopsid, occurance: 1},
+                {type: greaterEdaphasaurus, occurance: 1} 
             ], 50),
             plants: generateWeightedArray([
-                {type: fern, occurance: 5},
+                // {type: fern, occurance: 5},
                 {type: yellowFern, occurance: 5},
                 {type: greenFern, occurance: 5},
                 {type: redFern, occurance: 5},
                 {type: yellowMoss, occurance: 5},
-                {type: orangeRoundleaf, occurance: 1}, 
+                {type: orangeRoundleaf, occurance: 1}
             ], 50)
         },
         forest: {
@@ -121,6 +173,9 @@ export default {
             creatures: generateWeightedArray([
                 {type: pulmonoscorpius, occurance: 1},
                 {type: lesserMisophilae, occurance: 3},
+                {type: greenEdaphasaurus, occurance: 3},
+                {type: blueDiictidon, occurance: 4},
+                {type: lesserGorgonopsid, occurance: 1}
             ], 100),
             plants: generateWeightedArray([
                 {type: greenFern, occurance: 3},
@@ -139,7 +194,11 @@ export default {
             creatures: generateWeightedArray([
                 {type: pulmonoscorpius, occurance: 3},
                 {type: scorpion, occurance: 3},
-                {type: orangeDimetrodon, occurance: 3}
+                {type: orangeDimetrodon, occurance: 3},
+                {type: lesserGorgonopsid, occurance: 1},
+                {type: orangeEdaphasaurus, occurance: 3},
+                {type: brownDiictidon, occurance: 6},
+                {type: greaterEdaphasaurus, occurance: 1} 
             ], 500),
             plants: generateWeightedArray([
                 {type: redFern, occurance: 5},

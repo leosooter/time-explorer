@@ -1,7 +1,9 @@
 import creatureDirectory from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
 import {generateWeightedArray} from "../../helpers/array-helpers";
-import {terrainColors} from "../colors";
+import {terrainColors as colors} from "../colors";
+
+const terrainColors = colors.carboniferous;
 
 const {
     greaterArthropluera,

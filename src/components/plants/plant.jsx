@@ -4,7 +4,7 @@ import Shadow from "../shadow";
 import { getPlantPosition, getZIndex } from "../../helpers/grid-helpers";
 
 export default function Plant(props) {    
-    const {heightIndex, widthIndex, height, widthToHeight, image} = props;
+    const {heightIndex, widthIndex, height, widthToHeight, image, isVisible} = props;
     const {top, left} = getPlantPosition(heightIndex, widthIndex, height, widthToHeight, "plant");
 
     // if(props.name === "Red Fern") {
@@ -22,6 +22,7 @@ export default function Plant(props) {
     // left += (308.5 * widthIndex);
 
     const wrapperStyles = {
+        visibility: isVisible ? "visible" : "hidden",
         pointerEvents: "none",
         position: "absolute",
         transform: `translate(${left}px, ${top}px)`,

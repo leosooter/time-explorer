@@ -8,10 +8,11 @@ function getColorString(colorvalues) {
 } 
 
 export default function Square(props) {
-    const {heightIndex, widthIndex, handleSquareSelect, hasTree, isWater, terrainType, squareSize, id, borderColor} = props
+    const {heightIndex, widthIndex, handleSquareSelect, hasTree, isWater, terrainType, squareSize, id, borderColor, isVisible} = props
 
     const backgroundColor = getColorString(terrainType.color);
     let border = borderColor ? `1px solid ${borderColor}`: `1px solid ${backgroundColor}`;
+    let unexploredColor = "rgba(70, 70, 70, .95)"
     
     // if(props.isLandCoast) {
     //   border = "1px solid red"
@@ -20,12 +21,13 @@ export default function Square(props) {
     // }
     
     const squareStyles = {
+      // visibility: isVisible ? "visible" : "hidden",
       boxSizing: "border-box",
       height: `${squareSize}px`,
       width: `${squareSize}px`,
-      border: border,
+      border: isVisible? border : `1px solid ${unexploredColor}`,
       // border: "1px solid red",
-      backgroundColor,
+      backgroundColor: isVisible? backgroundColor : unexploredColor,
       margin: "0",
       padding: "0"
       // padding: "49px"
@@ -49,6 +51,6 @@ export default function Square(props) {
     };
   
     return (
-      <div style={squareStyles} onClick={() => handleSquareSelect(heightIndex, widthIndex)}></div>
+      <div style={squareStyles} onClick={() => handleSquareSelect(id)}></div>
     );
   }

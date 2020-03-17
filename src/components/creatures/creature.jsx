@@ -6,7 +6,21 @@ import Shadow from "../shadow";
 import { worldParams } from "../../constants/world";
 
 export default React.memo(function Creature(props) {
-    const {heightIndex, widthIndex, heightToSquare, widthToHeight, isSwim, isMega, hasSwim, speed, health, tempSpeed} = props;
+    const {
+        heightIndex,
+        widthIndex,
+        heightToSquare,
+        widthToHeight,
+        isSwim,
+        isMega,
+        hasSwim,
+        speed,
+        health,
+        tempSpeed,
+        isVisible,
+        id,
+        handlePlayerAttackEntity
+    } = props;
     const height = worldParams.squareHeight * heightToSquare * worldParams.creatureRelativeSize;
 
     const {top, left} = getPosition(heightIndex, widthIndex, height, widthToHeight);
@@ -15,6 +29,7 @@ export default React.memo(function Creature(props) {
     // let dir = "sw";
 
     const wrapperStyles = {
+        visibility: isVisible ? "visible" : "hidden",
         zIndex: getZIndex(heightIndex, widthIndex, "creature"),
         position: "absolute",
         transform: `translate(${left}px, ${top}px)`,
@@ -31,7 +46,7 @@ export default React.memo(function Creature(props) {
     return (
         <Fragment>
             {/* <div style={shadowStyles}></div> */}
-            <div style={wrapperStyles}>
+            <div style={wrapperStyles} onClick={() => handlePlayerAttackEntity("creatures", id)}>
                 <span>{health}</span>
                 {/* <Outline size={size} color={"red"} /> */}
                 {/* <Shadow size={size} /> */}

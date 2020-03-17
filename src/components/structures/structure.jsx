@@ -1,12 +1,24 @@
 import React, {Fragment} from "react";
 import {random, sample, clone} from "lodash";
-import { getPosition } from "../../helpers/grid-helpers";
+import { getPosition, getZIndex } from "../../helpers/grid-helpers";
 import Outline from "../outline";
 import Shadow from "../shadow";
 import { worldParams } from "../../constants/world";
 
 export default function Structure(props) {
-    const {heightIndex, widthIndex, heightToSquare, widthToHeight, isSwim, hasSwim, dir, topOffset, leftOffset} = props;
+    const {
+        heightIndex,
+        widthIndex, 
+        heightToSquare, 
+        widthToHeight, 
+        dir, 
+        topOffset, 
+        leftOffset, 
+        tribeImgDir,
+        imgDir,
+        isVisible
+        } = props;
+
     const height = worldParams.squareHeight * heightToSquare * worldParams.structureRelativeSize;
     // console.log("height", height);
     
@@ -24,6 +36,8 @@ export default function Structure(props) {
     // // let dir = "sw";
 
     const wrapperStyles = {
+        visibility: isVisible ? "visible" : "hidden",
+        zIndex: getZIndex(heightIndex, widthIndex, "plant"),
         position: "absolute",
         // transform: `translate(${left}px, ${top}px)`
         transform: `translate(${left}px, ${top}px)`
@@ -44,7 +58,7 @@ export default function Structure(props) {
             <div style={wrapperStyles}>
                 {/* <Outline size={size} color={"red"} /> */}
                 {/* <Shadow size={size} /> */}
-                <img src={require(`./images/${props.imgDir}/${dir}.png`)} style={structureStyles}></img>
+                <img src={require(`./images/${tribeImgDir}/${imgDir}/${dir}.png`)} style={structureStyles}></img>
             </div>
         </Fragment>
     )
