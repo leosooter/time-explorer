@@ -2,6 +2,10 @@ import React from "react";
 
 const worldTypes = ["ordovician", "devonian", "carboniferous", "permian", "triassic", "jurassic", "cretaceous"];
 
+const labelStyle = {
+    marginLeft: "10px"
+}
+
 const actionBarStyle = {
     position: "fixed",
     bottom: "20px",
@@ -19,7 +23,7 @@ function renderResources(resources) {
     for (const key in resources) {
         if (resources.hasOwnProperty(key)) {
             const resourceValue = resources[key];
-        resourceArray.push(<span>{key} : {resourceValue}</span>)
+        resourceArray.push(<span style={labelStyle}>{key} : {resourceValue}</span>)
         }
     }
 
@@ -34,5 +38,6 @@ export default (props) => {
         {renderWorldTypes(props.handleWorldSelect)}
         {renderResources(props.playerResources)}
         <button onClick={props.healPlayer}>Heal</button>
+        <button onClick={props.handleBuildStructure}>Build</button>
     </div>)
 }

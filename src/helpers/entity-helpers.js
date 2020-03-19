@@ -23,6 +23,7 @@
 import {random, sample, find, remove} from "lodash";
 import {world} from "./world-creator";
 import { logDOM } from "@testing-library/react";
+import { addToObject } from "./utility-helpers";
 
 const facingDirs = ["n","s","e","w","ne","nw","se","sw"];
 
@@ -31,6 +32,41 @@ const dirFind = {
     "se": ["s", "e"],
     "nw": ["n", "w"],
     "sw": ["s", "w"],
+}
+
+export function collectResources(entity, other) {
+    if(other.resources && other.resources.length) {
+        console.log("Collecting resources from ", other.name);
+        for (let index = 0; index < other.resources.length; index++) {
+            const resource = other.resources[index];
+            console.log(">>>>>>>>>>>>>>>>>>>>     resource", resource);
+            
+            let amount;
+            if(Array.isArray(resource.quantity)) {
+                amount = random(resource.quantity[0], resource.quantity[1]);
+            } else {
+                amount = resource.quantity;
+            }
+            console.log("adding", amount, ":", resource.type);
+            
+
+            addToObject(entity.resources, resource.type, amount);
+        }
+    }
+}
+
+export function harvestResource(entity, other) {
+    console.log("Harvest resource", entity, other);
+    
+    other.health -= entity.attack;
+    if(other.health <= 0) {
+        if(entity.isPlayerUnit) {
+            collectResources(entity, other);
+        }
+        other.currentSquare.plant = null;
+
+        removeEntity(other);
+    }
 }
 
 export function getDirFromFacing(facing) {
@@ -146,7 +182,7 @@ function addResources(entity, other) {
 }
 
 export function attackEntity(entity, other) {
-    console.log(`\n\n\n${entity.name} Attacking ${other.name}`);
+    // console.log(`\n\n\n${entity.name} Attacking ${other.name}`);
     // turnEntityToSquare(entity, other.currentSquare)
     
     other.health -= entity.attack;
@@ -171,11 +207,13 @@ export function getEntityById(type, id) {
 }
 
 function killEntity(entity, other) {
+    other.currentSquare.currentSquare = null;
     if(entity.possTerrain && entity.possTerrain.indexOf(other.currentSquare.terrainType.key) !== -1) {
         // console.log("moving to square");
         
         moveEntityToSquare(entity, other.currentSquare, .25);
     }
+
     
     removeEntity(other);
 }

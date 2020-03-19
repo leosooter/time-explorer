@@ -10,7 +10,18 @@ import worldTypes from "../constants/world-types";
 import {entityAction} from "./entity-helpers";
 
 const shortDirs = ["n","s","e","w"];
-const explorationMode = true;
+const explorationMode = false;
+
+const wadeDepths = {
+    "desert": 0,
+    "savannah": 0,
+    "grassland": 0,
+    "forest": 0,
+    "marsh": 30,
+    "swampForest": 40,
+    "shallowWater": 80,
+    "deepWater": 120
+}
 
 // const facingDirs = ["n","s","e","w","ne","nw","se","sw"];
 
@@ -112,7 +123,6 @@ function resetWorld(worldTypeSet) {
         squaresById,
         terrainArrays
     }
-
 }
 
 function addToCoastArray(square) {
@@ -121,6 +131,7 @@ function addToCoastArray(square) {
         if(!sideSquare.terrainType.isWater) {
             waterCoastSquares.push(square);
             square.terrainType = terrainTypes.shallowWater;
+            square.wadeDepth = wadeDepths["shallowWater"];
 
             landCoastSquares.push(sideSquare);
 
@@ -152,6 +163,9 @@ function spreadTerrainFromStart(baseTerrainType, start, power, endTerrain) {
     terrainType.color = morphColor(terrainTypes[baseTerrainType].color, 5);
     start.terrainType = terrainType;
     start.isWaterMapped = true;
+    // console.log("wadeDepths[baseTerrainType.key]", baseTerrainType);
+    
+    start.wadeDepth = wadeDepths[baseTerrainType] || 0;
 
     if(terrainType.isWater) {
         waterSquares.push(start);
@@ -190,12 +204,30 @@ function morphColor(baseColor, power) {
     return color;
 }
 
+function setSquareVisibility(square) {
+    square.isVisible = true;
+    if (square.currentEntity) {
+        square.currentEntity.isVisible = true;
+    } 
+    if (square.plant) {
+        square.plant.isVisible = true;
+    }
+    if (square.structure) {
+        square.structure.isVisible = true;
+    }
+}
+
+export function setVisibility(startSquare, power) {
+    setSquareVisibility(startSquare)
+    spreadFromPoint(startSquare, power, {callback: (square) => setSquareVisibility(square)});
+}
+
 function newSquare(heightIndex, widthIndex, id) {
     const defaultTerrain = clone(terrainTypes[defaultTerrainType]);
     defaultTerrain.color = morphColor(defaultTerrain.color, 5);
     const hasTree = !defaultTerrain.isWater && random(1,10) < defaultTerrain.treeChance;
     const entities = [];
-    const isVisible = !explorationMode || heightIndex < 3 && widthIndex < 3;
+    const isVisible = !explorationMode;
 
     return {
         heightIndex,
@@ -211,7 +243,8 @@ function newSquare(heightIndex, widthIndex, id) {
         allSides: [],
         currentEntity: null,
         plant: null,
-        isVisible
+        isVisible,
+        wadeDepth: wadeDepths[defaultTerrainType] || 0
     }
 }
 
@@ -283,9 +316,6 @@ function assignTerrain(grid, power=10) {
 
 function newStructure(square, type) {
     const {heightIndex, widthIndex, isVisible} = square;
-    // if(!type) {
-    //     type = sample([house1, house2, house3, house4])
-    // }
 
     const structure = {
         ...type,
@@ -372,11 +402,11 @@ function addStructuresAndUnits(square, tribe) {
     square.innerTerritory = true;
     // square.borderColor = "red";
     
-    if(square.terrainType.isWater === tribe.isWater) {
+    if(tribe.possTerrain.indexOf(square.terrainType.key) > 0) {
         // square.village = true;
 
         if(random(1,3) === 1) {
-            square.structure = newStructure(square, sample(structures));
+           addStructure(square, sample(structures));
         } else if(random(1,3) === 1) {
             square.currentEntity = newUnit(square, tribe);
             tribe.units.push(square.unit);
@@ -384,10 +414,16 @@ function addStructuresAndUnits(square, tribe) {
     }
 }
 
+export function addStructure(square, structure) {
+    if(!square.structure && !square.plant) {
+        square.structure = newStructure(square, structure);
+    }
+}
+
 function markOuterTerritory(square, tribe) {
     square.outerTerritory = true;
-    if(!square.innerTerritory) {
-        // square.borderColor = tribe.color;
+    if(!square.innerTerritory && tribe.possTerrain.indexOf(square.terrainType.key) > 0) {
+        square.borderColor = tribe.color;
     }
 }
 
@@ -395,8 +431,11 @@ function startVillage(startSquare, tribe, power) {
     tribe.id = `tribe-${tribeId ++}`;
     tribesIdsArray.push(tribe.id);
     tribesById[tribe.id] = tribe;
+    addStructure(startSquare, tribe.structures[0]);
+    startSquare.currentEntity = newUnit(startSquare, tribe);
+    tribe.units.push(startSquare.unit);
 
-    spreadFromPoint(startSquare, power, {callback: addStructuresAndUnits, innerParams: tribe});
+    // spreadFromPoint(startSquare, power, {callback: addStructuresAndUnits, innerParams: tribe});
     spreadFromPoint(startSquare, (power * 3), {callback: markOuterTerritory, innerParams: tribe});
 }
 
@@ -409,7 +448,7 @@ function assignTribes(grid, number, power) {
         const tribe = {...sample(worldType.tribes)};
         console.log("Asigning Tribe", tribe.key);
         
-        const terrainKey = sample(tribe.possTerrain);
+        const terrainKey = sample(tribe.startTerrain);
         const startSquare = world.terrainArrays[terrainKey] && sample(world.terrainArrays[terrainKey])
 
         // const startSquare = sample(landSquares);
@@ -428,6 +467,7 @@ function assignPlayerUnit(grid, heightIndex, widthIndex) {
 
     const player = newPlayerUnit(startSquare);
     startSquare.currentEntity = player;
+    spreadFromPoint(startSquare, 3, {callback: (square) => {square.playerStartZone = true}});
     playerUnits.push(player);
 }
 
@@ -543,6 +583,9 @@ function assignCreatureToSquare(square, density) {
         let selection = sample(square.terrainType.creatures);
         // let selection = scorpion;
         if(selection) {
+            if(selection.isHumanPredator && square.outerTerritory || selection.isHumanPredator && square.playerStartZone) {
+                return;
+            }
             const creature = getNewCreature(selection, square);
             creatures.push(creature);
 
@@ -693,8 +736,7 @@ export default function createNewWorld(height, width, worldTypeSet) {
         triassicLake2,
         triassicLake3,
         triassicLake4
-    } = structureDirectory;
-    
+    } = structureDirectory;    
 
     assignSides(world.grid);
     assignWater(world.grid, seaPoints, worldType.seaPower);
@@ -702,7 +744,13 @@ export default function createNewWorld(height, width, worldTypeSet) {
     mapCoast(world.grid);
     assignTerrain(world.grid, worldType.landPower);
     loadTerrainArrays(world.grid);
-    assignPlayerUnit(world.grid, 1, 1);
+    // const startSquare = sample(landSquares);
+    // const startSquare = world.grid[random(2,97)][random(2,97)];
+    const startSquare = world.grid[50][50];
+    console.log("START SQUARE", startSquare);
+    
+    setVisibility(startSquare, 3);
+    assignPlayerUnit(world.grid, startSquare.heightIndex, startSquare.widthIndex);
     assignTribes(world.grid, 10, 3);
     // addTestStructure(world.grid[2][1], triassicLake1);
     // addTestStructure(world.grid[2][2], triassicLake2);
@@ -726,3 +774,20 @@ export default function createNewWorld(height, width, worldTypeSet) {
         
     return world;
 }
+
+
+/*
+    steps:
+    harvest plants
+    choose tribe
+    add population cap
+    build structures
+    upgrade structure
+    produce new player unit
+
+
+
+
+    // Perf improvement
+    plants creatures ect loops through object renders memoized entity with update flag
+*/

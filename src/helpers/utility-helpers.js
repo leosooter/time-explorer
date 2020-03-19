@@ -10,3 +10,16 @@ export function generateWeightedArray(baseArray, nullSize = 20) {
 
     return weightedArray;
 }
+
+export function addToObject(object, key, value, modifier= 1) {
+    console.log("object, key, value", object, key, value);
+    
+    const modifiedValue = value * modifier;
+    console.log("object[key]", object[key], modifiedValue);
+
+    if(object[key]) {
+        object[key] += modifiedValue;
+    } else {
+        object[key] = modifiedValue;
+    }
+}

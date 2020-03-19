@@ -4,7 +4,7 @@ import Shadow from "../shadow";
 import { getPlantPosition, getZIndex } from "../../helpers/grid-helpers";
 
 export default function Plant(props) {    
-    const {heightIndex, widthIndex, height, widthToHeight, image, isVisible} = props;
+    const {heightIndex, widthIndex, height, widthToHeight, image, isVisible, id, handlePlayerHarvestResource, health} = props;
     const {top, left} = getPlantPosition(heightIndex, widthIndex, height, widthToHeight, "plant");
 
     // if(props.name === "Red Fern") {
@@ -23,7 +23,7 @@ export default function Plant(props) {
 
     const wrapperStyles = {
         visibility: isVisible ? "visible" : "hidden",
-        pointerEvents: "none",
+        // pointerEvents: "none",
         position: "absolute",
         transform: `translate(${left}px, ${top}px)`,
         zIndex: getZIndex(heightIndex, widthIndex, "plant")
@@ -45,8 +45,9 @@ export default function Plant(props) {
         <Fragment>
             {/* <div style={shadowStyles}></div> */}
             <div style={wrapperStyles}>
+                <span>{health}</span>
                 {/* <Shadow size={size} /> */}
-                <img src={require(`./images/${image}`)} style={plantStyles}></img>
+                <img src={require(`./images/${image}`)} style={plantStyles} onClick={()=> handlePlayerHarvestResource("plants", id)}></img>
             </div>
         </Fragment>
     )

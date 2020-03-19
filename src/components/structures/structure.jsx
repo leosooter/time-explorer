@@ -17,7 +17,7 @@ export default function Structure(props) {
         tribeImgDir,
         imgDir,
         isVisible
-        } = props;
+    } = props;
 
     const height = worldParams.squareHeight * heightToSquare * worldParams.structureRelativeSize;
     // console.log("height", height);

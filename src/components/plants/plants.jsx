@@ -6,7 +6,7 @@ import plantDirectory from "./plant-directory";
 
 let plantId = 1;
 export default function Plants(props) {
-  const {plants} = props;
+  const {plants, handlePlayerHarvestResource} = props;
   const plantsWrapper = {
     // position: "absolute",
     // transform: `translate(${(worldParams.size / 40) - 13}px, ${(worldParams.size / 2) - 60}px)`
@@ -38,7 +38,7 @@ export default function Plants(props) {
     <div style={plantsWrapper}>
       {/* <Plant {...testPlant} /> */}
       {plants.map((plant) => {
-        return (<Plant key={`plant:${plant.heightIndex}-${plant.widthIndex}`} {...plant} />);
+        return (<Plant key={`plant:${plant.heightIndex}-${plant.widthIndex}`} {...plant} handlePlayerHarvestResource={handlePlayerHarvestResource}/>);
       })}
     </div>
   );

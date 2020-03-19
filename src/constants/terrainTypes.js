@@ -1,6 +1,6 @@
 import creatureDirectory from "../components/creatures/creature-directory";
 import plantDirectory from "../components/plants/plant-directory";
-import {generateWeightedArray} from "../helpers/array-helpers";
+import {generateWeightedArray} from "../helpers/utility-helpers";
 import {terrainColors} from "./colors";
 
 const {greaterArthropluera, lesserArthropluera, kingPulmonoscorpius, pulmonoscorpius, scorpion} = creatureDirectory;

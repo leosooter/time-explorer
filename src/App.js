@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {random} from "lodash"
+import {random, sample} from "lodash"
 import './App.css';
 import Grid from "./components/grid";
+import {getPosition} from "./helpers/grid-helpers";
 // import Units from "./components/units";
-import createNewWorld from "./helpers/world-creator";
+import createNewWorld, { addStructure, setVisibility } from "./helpers/world-creator";
 import Tree from "./components/plants/tree";
 import Background from './components/texture-background';
 import {worldParams} from "./constants/world";
@@ -14,9 +15,15 @@ import Structures from "./components/structures/structures.jsx";
 import Units from "./components/units/units.jsx";
 import PlayerUnits from "./components/units/player/player-units";
 import ActionBar from "./components/action-bar/action-bar";
-import {attackEntity, getEntityById, moveEntityToSquare, healEntityFromFood} from "./helpers/entity-helpers"
+import StartScreen from "./components/start-screen";
+import {attackEntity, getEntityById, moveEntityToSquare, healEntityFromFood, harvestResource} from "./helpers/entity-helpers"
 import TestPosition from "./components/test-position";
-import {house1Mock, house2Mock, house3Mock, house4Mock} from "./components/structures/mocks";
+import structureDirectory from "./components/structures/structure-directory";
+import tribeDirectory from "./components/units/tribeDirectory";
+
+import worldChoices from "./constants/world-config/world-choices";
+
+let isStart = true;
 
 let testHeightIndex = 5;
 let testWidthIndex = 5;
@@ -26,6 +33,8 @@ const creatureActionChance = 1;
 // const explorationMode = true;
 
 let defaultWorld = "triassic";
+
+
 
 let world = createNewWorld(100, 100, defaultWorld);
 
@@ -41,7 +50,7 @@ function App() {
   const [plants, setPlants] = useState(world.plants);
   const [selectedUnit, setSelectedUnit] = useState(world.playerUnits[0]);
   const [selectedUnitId, setSelectedUnitId] = useState(null);
-  const [playerPosition, setPlayerPosition] = useState({heightIndex: 1, widthIndex: 1});
+  const [playerPosition, setPlayerPosition] = useState({});
 
   function updateAll() {
     setGrid(world.grid);
@@ -49,16 +58,37 @@ function App() {
     setStructures(world.structures);
     setUnits(world.units);
     setPlayerUnits(world.playerUnits);
+    setSelectedUnit(world.playerUnits[0]);
     setPlants(world.plants);
   }
 
-  function handleWorldSelect(worldType) {
+  function handleWorldSelect(worldType, tribeName) {
     world = createNewWorld(100, 100, worldType);
     setTurn(0);
     updateAll();
-    setSelectedUnit({});
-    setSelectedUnitId(null);
-    setPlayerPosition({heightIndex: 1, widthIndex: 1});
+    // let startSquare = sample(world.landSquares);
+    // const {heightIndex, widthIndex} = startSquare;
+    // startSquare.isVisible = true;
+    // moveEntityToSquare(selectedUnit, startSquare);
+    // updateVisibility(heightIndex, widthIndex);
+
+    isStart = false;
+    scrollToEntity(selectedUnit);
+    // handleTurn();
+  }
+
+  function scrollToEntity(entity) {
+    const {heightIndex, widthIndex} = entity.currentSquare;
+    let yScroll = 9500 + heightIndex * 100;
+    let xScroll = widthIndex * 100;
+    let {top, left} = getPosition(heightIndex, widthIndex, 100, .4);
+    top += 9500
+    console.log("yScroll", yScroll);
+    console.log("xScroll", xScroll);
+    
+    window.scrollTo(left, top)
+    console.log("document", document.body.scrollTop);
+    
   }
 
   function handleUnitSelect(id) {
@@ -66,6 +96,29 @@ function App() {
     
     setSelectedUnit(id);
     setSelectedUnitId(id);
+  }
+
+  function handleBuildStructure () {
+    if(world.playerResources.wood >= 20) {
+      const buildSquare = selectedUnit.currentSquare;
+      addStructure(buildSquare, structureDirectory.triassicLake4);
+      world.playerResources.wood -= 20;
+      handleTurn();
+    }
+  }
+
+  function handlePlayerHarvestResource(type, targetEntityId) {
+    
+    
+    const targetEntity = getEntityById(type, targetEntityId);
+    console.log("handlePlayerHarvestResource", targetEntity);
+    if(targetEntity) {
+      harvestResource(selectedUnit, targetEntity);
+      updateVisibility(selectedUnit.currentSquare.heightIndex, selectedUnit.currentSquare.widthIndex); 
+      handleTurn();
+    } else {
+      console.log("ERROR, No entity found");
+    }
   }
 
   function handlePlayerAttackEntity(type, targetEntityId) {
@@ -125,6 +178,7 @@ function App() {
     // }
 
     if(selectedUnit) {
+      console.log("selectedUnit", selectedUnit);
       moveEntityToSquare(selectedUnit, moveSquare);
       // console.log("selectedUnit");
       // const playerUnit = playerUnits[0];
@@ -137,7 +191,9 @@ function App() {
     }
 
     handleTurn();
-    updateVisibility(moveSquare.heightIndex, moveSquare.widthIndex); 
+    
+    setVisibility(moveSquare, 3);
+    // updateVisibility(moveSquare.heightIndex, moveSquare.widthIndex); 
   }
 
   function moveCreatures(creatures) {
@@ -231,15 +287,16 @@ function App() {
       /> */}
       <div style={unitsWrapper}>
         {/* <TestPosition /> */}
-        <Structures updateNumber={updateNumber} structures={structures}/>
+        <Structures turn={turn} updateNumber={updateNumber} structures={structures}/>
         <Units turn={turn} updateNumber={updateNumber} units={units} handlePlayerAttackEntity={handlePlayerAttackEntity}/>
-        <Plants plants={plants}/>
+        <Plants turn={turn} plants={plants} handlePlayerHarvestResource={handlePlayerHarvestResource}/>
         <Creatures turn={turn} updateNumber={updateNumber} creatures={creatures} handlePlayerAttackEntity={handlePlayerAttackEntity}/>
         <PlayerUnits turn={turn} playerUnits={playerUnits} handleUnitSelect={handleUnitSelect}/>
         {/* <Player heightIndex={playerPosition.heightIndex} widthIndex={playerPosition.widthIndex} id={"player-1"} currentSquareId={null} heightToSquare={.4} handleUnitSelect={handleUnitSelect}/> */}
       </div>
       
-      <ActionBar handleTurn={handleTurn} handleWorldSelect={handleWorldSelect} healPlayer={healPlayer} turn={turn} playerResources={world.playerResources}/>
+      <ActionBar handleTurn={handleTurn} handleWorldSelect={handleWorldSelect} healPlayer={healPlayer} turn={turn} playerResources={world.playerResources} handleBuildStructure={handleBuildStructure}/>
+      <StartScreen worldChoices={worldChoices} isStart={isStart} handleWorldSelect={handleWorldSelect}/>
   </div>
 
   );

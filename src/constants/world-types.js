@@ -8,6 +8,11 @@ import triassic from "./world-config/triassic";
 import jurassic from "./world-config/jurassic";
 import cretaceous from "./world-config/cretaceous";
 
+export const desert = {
+    key: "desert",
+    
+}
+
 export default {
     ordovician,
     devonian,

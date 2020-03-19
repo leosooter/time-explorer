@@ -1,6 +1,6 @@
 import creatureDirectory from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
-import {generateWeightedArray} from "../../helpers/array-helpers";
+import {generateWeightedArray} from "../../helpers/utility-helpers";
 import {terrainColors as colors} from "../colors";
 import structureDirectory from "../../components/structures/structure-directory";
 import tribeDirectory from "../../components/units/tribeDirectory";

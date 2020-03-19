@@ -24,7 +24,7 @@ Tribe is a randomly generated mix of attributes:
 */
 
 import structureDirectory from "../structures/structure-directory";
-import {generateWeightedArray} from "../../helpers/array-helpers";
+import {generateWeightedArray} from "../../helpers/utility-helpers";
 
 const {
         permianNomad1, 
@@ -140,7 +140,8 @@ export default {
         color: "purple",
         unitImgDir: "yellow-orange",
         territoriality: 1,
-        possTerrain: ["desert"],
+        startTerrain: ["desert"],
+        possTerrain: ["desert", "savannah", "grassland", "forest"],
         isWater: false,
         structures: generateWeightedArray([
             {type: permianNomad1, occurance: 2},
@@ -156,7 +157,8 @@ export default {
         color: "brown",
         unitImgDir: "orange",
         territoriality: 1,
-        possTerrain: ["savannah", "desert"],
+        startTerrain: ["savannah", "desert"],
+        possTerrain: ["desert", "savannah", "grassland", "forest"],
         isWater: false,
         structures: generateWeightedArray([
             {type: permianAdobe1, occurance: 2},
@@ -172,7 +174,8 @@ export default {
         color: "blue",
         unitImgDir: "blue",
         territoriality: 1,
-        possTerrain: ["grassland"],
+        startTerrain: ["grassland", "forest"],
+        possTerrain: ["desert", "savannah", "grassland", "forest"],
         isWater: false,
         structures: generateWeightedArray([
             {type: permianFarmers1, occurance: 2},
@@ -188,7 +191,8 @@ export default {
         color: "yellow",
         unitImgDir: "green-yellow",
         territoriality: 1,
-        possTerrain: ["grassland"],
+        startTerrain: ["grassland", "savannah"],
+        possTerrain: ["desert", "savannah", "grassland", "forest"],
         isWater: false,
         structures: generateWeightedArray([
             {type: triassicRiver1, occurance: 2},
@@ -204,7 +208,8 @@ export default {
         color: "blue",
         unitImgDir: "blue",
         territoriality: 1,
-        possTerrain: ["marsh", "shallowWater"],
+        startTerrain: ["marsh", "shallowWater", "swampForest"],
+        possTerrain: ["savannah", "grassland", "forest", "marsh", "shallowWater"],
         isWater: true,
         
         structures: generateWeightedArray([

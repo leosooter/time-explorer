@@ -1,5 +1,5 @@
 import resources from "./resources";
-const {wood, nuts, fruit, greens, medicine, poison} = resources; 
+// const {wood, nuts, fruit, food, "medicine", "poison"} = resources; 
 
 export default {
     /////////////////////////////////// Horsetails
@@ -9,7 +9,8 @@ export default {
         heightToSquare: .6,
         widthToHeight: 1.2,
         sizeRange: 20,
-        resources: [{type: medicine, quantity: [1,2]}]
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20
     },
     goldenHorsetail: {
         name: "Golden Horsetail",
@@ -17,7 +18,8 @@ export default {
         heightToSquare: .8,
         widthToHeight: 1,
         sizeRange: 20,
-        resources: [{type: medicine, quantity: [2,3]}]
+        resources: [{type: "medicine", quantity: 20}],
+        health: 20
     },
     giantHorsetail: {
         name: "Giant Horsetail",
@@ -25,7 +27,8 @@ export default {
         heightToSquare: 1.8,
         widthToHeight: .7,
         sizeRange: 20,
-        resources: [{type: medicine, quantity: [2,3]}]
+        resources: [{type: "medicine", quantity: 20}],
+        health: 20
     },
     /////////////////////////////////// Trees
     polycarpus: {
@@ -34,7 +37,8 @@ export default {
         heightToSquare: 2.2,
         widthToHeight: .54,
         sizeRange: 20,
-        resources: [{type: wood, quantity: [2,3]}, {type: nuts, quantity: [1,2]}]
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20
     },
     marshPine: {
         name: "Marsh Pine",
@@ -42,7 +46,8 @@ export default {
         heightToSquare: 2,
         widthToHeight: .54,
         sizeRange: 20,
-        resources: [{type: wood, quantity: [2,3]}, {type: nuts, quantity: [1,2]}]
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20
     },
     darkMarshPine: {
         name: "Dark Marsh Pine",
@@ -50,7 +55,8 @@ export default {
         heightToSquare: 2,
         widthToHeight: .54,
         sizeRange: 20,
-        resources: [{type: wood, quantity: [2,3]}, {type: nuts, quantity: [1,2]}]
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20
     },
     buttressRoot: {
         name: "Buttress Root",
@@ -58,7 +64,8 @@ export default {
         heightToSquare: 3,
         widthToHeight: .75,
         sizeRange: 20,
-        resources: [{type: wood, quantity: [2,3]}, {type: nuts, quantity: [1,2]}]
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20
     },
     goldenButtressRoot: {
         name: "Golden Buttress Root",
@@ -66,7 +73,8 @@ export default {
         heightToSquare: 2,
         widthToHeight: .75,
         sizeRange: 20,
-        resources: [{type: wood, quantity: [2,3]}, {type: nuts, quantity: [1,2]}]
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20
     },
     /////////////////////////////////// Conifers
     pine: {
@@ -75,7 +83,8 @@ export default {
         heightToSquare: 2,
         widthToHeight: .75,
         sizeRange: 20,
-        resources: [{type: wood, quantity: [2,3]}, {type: nuts, quantity: [1,2]}]
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20
     },
     darkPine: {
         name: "Dark Pine",
@@ -83,7 +92,8 @@ export default {
         heightToSquare: 2,
         widthToHeight: .75,
         sizeRange: 20,
-        resources: [{type: wood, quantity: [2,3]}, {type: nuts, quantity: [1,2]}]
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20
     },
     silverFir: {
         name: "Silver Fir",
@@ -91,7 +101,8 @@ export default {
         heightToSquare: 2,
         widthToHeight: .75,
         sizeRange: 20,
-        resources: [{type: wood, quantity: [2,3]}, {type: nuts, quantity: [1,2]}]
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20
     },
     umbrellaPine: {
         name: "Umbrella Pine",
@@ -99,7 +110,8 @@ export default {
         heightToSquare: 2,
         widthToHeight: .75,
         sizeRange: 20,
-        resources: [{type: wood, quantity: [2,3]}, {type: nuts, quantity: [1,2]}]
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20
     },
     greyUmbrellaPine: {
         name: "Grey Umbrella Pine",
@@ -107,7 +119,8 @@ export default {
         heightToSquare: 2,
         widthToHeight: .75,
         sizeRange: 20,
-        resources: [{type: wood, quantity: [2,3]}, {type: nuts, quantity: [1,2]}]
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20
     },
     //tree-fern
     /////////////////////////////////// Ferns
@@ -117,7 +130,8 @@ export default {
         heightToSquare: 1,
         widthToHeight: 1,
         sizeRange: 20,
-        resources: [{type: wood, quantity: [2,3]}, {type: nuts, quantity: [1,2]}]
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20
     },
     tallFern: {
         name: "Umbrella Fern",
@@ -125,112 +139,143 @@ export default {
         heightToSquare: .5,
         widthToHeight: 1.5,
         sizeRange: 20,
-        resources: [{type: greens, quantity: [1,2]}]
+        resources: [{type: "food", quantity: [1,2]}],
+        health: 5
     },
     tallDarkFern: {
         name: "Sword Fern",
         imageArray: ["dark-fern.png"],
         heightToSquare: .5,
         widthToHeight: 1.5,
-        sizeRange: 20
+        sizeRange: 20,
+        resources: [{type: "food", quantity: [1,2]}],
+        health: 5
     },
     greenFern: {
         name: "Green Fern",
         imageArray: ["low-fern1.png", "low-fern2.png", "low-fern3.png"],
         heightToSquare: .5,
         widthToHeight: 1.5,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [{type: "food", quantity: [1,2]}],
+        health: 5
     },
     yellowFern: {
         name: "Yellow Fern",
         imageArray: ["low-fern4.png", "low-fern5.png"],
         heightToSquare: .15,
         widthToHeight: 1.5,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [{type: "food", quantity: [1,2]}],
+        health: 5
     },
     redFern: {
         name: "Red Fern",
         imageArray: ["red-fern1.png", "red-fern2.png"],
         heightToSquare: .18,
         widthToHeight: 1.5,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [{type: "food", quantity: [1,2]}],
+        health: 5
     },
     blueFern: {
         name: "Blue Fern",
         imageArray: ["blue-fern1.png", "blue-fern1.png"],
         heightToSquare: .18,
         widthToHeight: 1.5,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [{type: "food", quantity: [1,2]}],
+        health: 5
     },
     yellowFernClump: {
         name: "Yellow Fern Clump",
         imageArray: ["yellow-fern-clump1.png", "yellow-fern-clump2.png"],
         heightToSquare: .5,
         widthToHeight: 2,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [{type: "food", quantity: [1,2]}],
+        health: 5
     },
     greenFernClump: {
         name: "Green Fern Clump",
         imageArray: ["green-fern-clump1.png", "green-fern-clump2.png", "green-fern-clump3.png", "green-fern-clump4.png"],
         heightToSquare: .5,
         widthToHeight: 1.5,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [{type: "food", quantity: [1,2]}],
+        health: 5
     },
     redFernClump: {
         name: "Red Fern Clump",
         imageArray: ["red-fern-clump1.png", "red-fern-clump2.png"],
         heightToSquare: .5,
         widthToHeight: 1.5,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [{type: "food", quantity: [1,2]}],
+        health: 5
     },
     lightGreenFernClump: {
         name: "Light Green Fern Clump",
         imageArray: ["light-green-fern-clump1.png", "light-green-fern-clump2.png"],
         heightToSquare: .5,
         widthToHeight: 1.5,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [{type: "food", quantity: [1,2]}],
+        health: 5
     },
     greenBrownFernClump: {
         name: "Green Brown Fern Clump",
         imageArray: ["green-brown-fern-clump1.png", "green-brown-fern-clump2.png"],
         heightToSquare: .5,
         widthToHeight: 1.5,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [{type: "food", quantity: [1,2]}],
+        health: 5
     },
     darkGreenFernClump: {
         name: "Dark Green Fern Clump",
         imageArray: ["dark-green-fern-clump1.png", "dark-green-fern-clump2.png"],
         heightToSquare: .5,
         widthToHeight: 1.5,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [{type: "food", quantity: [1,2]}],
+        health: 5
     },
     youngBlueTreeFern: {
         name: "Young Blue Tree Fern",
         imageArray: ["young-blue-tree-fern1.png"],
         heightToSquare: 1,
         widthToHeight: 1,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [1,2]}],
+        health: 10
     },
     youngLightGreenTreeFern: {
         name: "Young Light Green Tree Fern",
         imageArray: ["young-light-green-tree-fern1.png", "young-light-green-tree-fern2.png"],
         heightToSquare: 1,
         widthToHeight: 1,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [1,2]}],
+        health: 10
     },
     scalyTreeFern: {
         name: "Scaly Tree Fern",
         imageArray: ["scaly-tree-fern1.png", "scaly-tree-fern2.png", "scaly-tree-fern3.png"],
         heightToSquare: 1,
         widthToHeight: 1,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [1,2]}],
+        health: 10
     },
     blueTreeFern: {
         name: "Blue Tree Fern",
         imageArray: ["blue-tree-fern1.png", "blue-tree-fern2.png", "blue-tree-fern3.png"],
         heightToSquare: 1,
         widthToHeight: 1,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [1,2]}],
+        health: 10
     },
     ////////////////////////////////// Reeds
     reed: {
@@ -246,21 +291,27 @@ export default {
         imageArray: ["green-moss1.png", "green-moss2.png"],
         heightToSquare: .3,
         widthToHeight: 2,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [],
+        health: 5
     },
     yellowMoss: {
         name: "Yellow Moss",
         imageArray: ["yellow-moss1.png", "yellow-moss2.png", "yellow-moss3.png"],
         heightToSquare: .3,
         widthToHeight: 2,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [],
+        health: 5
     },
     orangeMoss: {
         name: "Orange Moss",
         imageArray: ["orange-moss1.png", "orange-moss2.png"],
         heightToSquare: .3,
         widthToHeight: 2,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [],
+        health: 5
     },
     //////////////////////////////// Misc
     yellowGlobe: {
@@ -268,14 +319,18 @@ export default {
         imageArray: ["yellow-globe1.png", "yellow-globe2.png", "yellow-globe3.png", "yellow-globe4.png"],
         heightToSquare: .4,
         widthToHeight: 1.5,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [],
+        health: 5
     },
     purpleGlobe: {
         name: "Purple Globe",
         imageArray: ["purple-globe1.png", "purple-globe2.png"],
         heightToSquare: .18,
         widthToHeight: 1.5,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [],
+        health: 5
     },
     //////////////////////////////// Shrubs
     yellowRoundleaf: {
@@ -283,21 +338,27 @@ export default {
         imageArray: ["yellow-roundleaf1.png", "yellow-roundleaf2.png", "yellow-roundleaf3.png", "yellow-roundleaf4.png"],
         heightToSquare: .7,
         widthToHeight: 1.5,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [1,2]}],
+        health: 10
     },
     orangeRoundleaf: {
         name: "Orange Roundleaf",
         imageArray: ["orange-roundleaf1.png", "orange-roundleaf2.png", "orange-roundleaf3.png", "orange-roundleaf4.png"],
         heightToSquare: .7,
         widthToHeight: 1.5,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [1,2]}],
+        health: 10
     },
     greenRoundleaf: {
         name: "Green Roundleaf",
         imageArray: ["green-roundleaf1.png", "green-roundleaf2.png", "green-roundleaf3.png", "green-roundleaf4.png"],
         heightToSquare: .7,
         widthToHeight: 1.5,
-        sizeRange: 10
+        sizeRange: 10,
+        resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [1,2]}],
+        health: 10
     },
 }
 
@@ -309,8 +370,8 @@ const {
     giantHorsetail,
     /////////////////////////////////// Trees
     polycarpus,
-    marshPine,
-    darkMarshPine,
+    marshealthine,
+    darkMarshealthine,
     buttressRoot,
     goldenButtressRoot,
     /////////////////////////////////// Conifers
