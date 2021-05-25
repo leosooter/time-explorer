@@ -3,10 +3,10 @@ import Square from "./square";
 import {worldParams} from "../constants/world";
 import {world} from "../helpers/world-creator";
 
-function renderGrid(handleSquareSelect) {
+function renderGrid(handleSquareSelect, squareSize) {
   const {grid} = world;
 
-  const rowStyles = {
+  const rowStyle = {
     display: "flex"
   }
   let newGrid = [];
@@ -19,19 +19,21 @@ function renderGrid(handleSquareSelect) {
         <Square 
           {...square}
           key={`${heightIndex}-${widthIndex}`}
-          squareSize={worldParams.size / grid[0].length}
+          squareSize={squareSize}
           handleSquareSelect={handleSquareSelect}
         />
       );
     }
-    newGrid.push(<div style={rowStyles} key={`row-${heightIndex}`}>{row}</div>);
+    newGrid.push(<div style={rowStyle} key={`row-${heightIndex}`}>{row}</div>);
   }
 
   return newGrid;
 }
 
 const Grid = function Grid(props) {
-  const gridStyles = {
+  const squareSize = props.squareSize || worldParams.squareSize;
+
+  const gridStyle = {
     position: "relative",
     minWidth: `${worldParams.size}px`,
     minHeight: `${worldParams.size}px`,
@@ -42,7 +44,7 @@ const Grid = function Grid(props) {
     transform: `rotate(-45deg) skew(20deg, 20deg) translate(${worldParams.size / 4}px, ${worldParams.size / 4}px)`,
   }
   
-  return (<div style={gridStyles} className="grid">{useMemo(() => renderGrid(props.handleSquareSelect))}</div>); 
+  return (<div style={gridStyle} className="grid">{useMemo(() => renderGrid(props.handleSquareSelect, squareSize))}</div>); 
 };
 
 export default Grid;

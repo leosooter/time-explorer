@@ -2,15 +2,16 @@ import React, {useState} from "react";
 import Tree from "./plants/tree";
 import Creature from "./creatures/creature";
 
-function getColorString(colorvalues) {
+function getColorString(colorvalues, isWater) {
   const {r,g,b} = colorvalues;
-  return `rgba(${r},${g},${b},.87)`
+  const opacity = isWater ? .9 : .7;
+  return `rgba(${r},${g},${b},${opacity})`
 } 
 
 export default function Square(props) {
-    const {heightIndex, widthIndex, handleSquareSelect, hasTree, isWater, terrainType, squareSize, id, borderColor, isVisible} = props
+    const {heightIndex, widthIndex, handleSquareSelect, terrainType, squareSize, id, borderColor, isVisible} = props
 
-    const backgroundColor = getColorString(terrainType.color);
+    const backgroundColor = getColorString(terrainType.color, terrainType.isWater);
     let border = borderColor ? `1px solid ${borderColor}`: `1px solid ${backgroundColor}`;
     let unexploredColor = "rgba(70, 70, 70, .95)"
     
@@ -20,27 +21,27 @@ export default function Square(props) {
     //   border = "1px solid yellow"
     // }
     
-    const squareStyles = {
+    const squareStyle = {
       // visibility: isVisible ? "visible" : "hidden",
       boxSizing: "border-box",
       height: `${squareSize}px`,
       width: `${squareSize}px`,
-      border: isVisible? border : `1px solid ${unexploredColor}`,
-      // border: "1px solid red",
+      // border: isVisible? border : `1px solid ${unexploredColor}`,
+      // border: "1px solid black",
       backgroundColor: isVisible? backgroundColor : unexploredColor,
       margin: "0",
       padding: "0"
       // padding: "49px"
     }
 
-    const dotStyles = {
+    const dotStyle = {
       height: "1px",
       width: "1px",
       backgroundColor: "black",
       display: "none"
     };
 
-    const disrupterStyles = {
+    const disrupterStyle = {
       position: "absolute",
       height: "20px",
       width: "20px",
@@ -51,6 +52,6 @@ export default function Square(props) {
     };
   
     return (
-      <div style={squareStyles} onClick={() => handleSquareSelect(id)}></div>
+      <div style={squareStyle} onClick={() => handleSquareSelect(id)}></div>
     );
   }

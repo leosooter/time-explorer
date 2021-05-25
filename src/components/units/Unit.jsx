@@ -2,7 +2,7 @@ import React, {Fragment} from "react";
 import {random, sample, clone} from "lodash";
 import {getPosition, getZIndex} from "../../helpers/grid-helpers";
 import Outline from "../outline";
-import Shadow from "../shadow";
+import Status from "../status";
 import { worldParams } from "../../constants/world";
 
 export default React.memo(function Unit(props) {
@@ -17,38 +17,54 @@ export default React.memo(function Unit(props) {
         tempSpeed,
         isVisible,
         id,
-        handlePlayerAttackEntity
+        handlePlayerAttackEntity,
+        imgDir,
+        dir,
+        currentSquare
     } = props;
-    const height = worldParams.squareHeight * heightToSquare * worldParams.unitRelativeSize;
 
-    const {top, left} = getPosition(heightIndex, widthIndex, height, widthToHeight, -30, -70);
-
+    const wadeDepth = currentSquare.wadeDepth || 0;
+    console.log("heightToSquare", heightToSquare);
     
+    let height = worldParams.squareHeight * heightToSquare * worldParams.unitRelativeSize;
+    const {top, left} = getPosition(heightIndex, widthIndex, height, widthToHeight, -50 + wadeDepth, -30);
+
+    // const height = worldParams.squareHeight * heightToSquare * worldParams.unitRelativeSize;
+
+    // const {top, left} = getPosition(heightIndex, widthIndex, height, widthToHeight, -30, -70);
+
+    let mainDir = dir === "s" || dir === "w" ? "s" : "n";
+    let flip = dir === "w" || dir === "e" ? -1 : 1;
     // let dir = "sw";
 
-    const wrapperStyles = {
+    const wrapperHeight = `${165 - wadeDepth}px`;
+
+    const wrapperStyle = {
         visibility: isVisible ? "visible" : "hidden",
         zIndex: getZIndex(heightIndex, widthIndex, "unit"),
         position: "absolute",
-        transform: `translate(${left}px, ${top}px)`,
-        transition: `all ${tempSpeed || speed}s linear`,
+        top: `${top}px`,
+        left: `${left}px`,
+        transform: `scaleX(${flip})`,
+        transition: `top ${tempSpeed || speed}s linear, left ${tempSpeed || speed}s linear`,
+        overflow: "hidden",
+        height: wrapperHeight,
+        width: "100px",
+        paddingTop: "30px",
     }
 
-    const unitStyles = {
+    const unitStyle = {
         position: "absolute",
         width: `${height}px`
     }
 
-    const dir = isSwim  && hasSwim ? `${props.dir}-swim` : props.dir;
-
     return (
         <Fragment>
-            {/* <div style={shadowStyles}></div> */}
-            <div style={wrapperStyles} onClick={() => handlePlayerAttackEntity("units", id)}>
+            <div style={wrapperStyle} onClick={() => handlePlayerAttackEntity("units", id)}>
                 <span>{health}</span>
                 {/* <Outline size={size} color={"red"} /> */}
-                {/* <Shadow size={size} /> */}
-                <img src={require(`./images/${props.imgDir}/${dir}.png`)} style={unitStyles}></img>
+                {/* <Status size={size} /> */}
+                <img src={require(`./new-images/${imgDir}/${mainDir}.png`)} style={unitStyle}></img>
             </div>
         </Fragment>
     )

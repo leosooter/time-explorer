@@ -2,7 +2,7 @@ import React, {Fragment} from "react";
 import {random, sample, clone} from "lodash";
 import { getPosition, getZIndex } from "../../helpers/grid-helpers";
 import Outline from "../outline";
-import Shadow from "../shadow";
+import Status from "../status";
 import { worldParams } from "../../constants/world";
 
 export default function Structure(props) {
@@ -35,7 +35,7 @@ export default function Structure(props) {
     // top -= height 
     // // let dir = "sw";
 
-    const wrapperStyles = {
+    const wrapperStyle = {
         visibility: isVisible ? "visible" : "hidden",
         zIndex: getZIndex(heightIndex, widthIndex, "plant"),
         position: "absolute",
@@ -43,7 +43,7 @@ export default function Structure(props) {
         transform: `translate(${left}px, ${top}px)`
     }
 
-    const structureStyles = {
+    const structureStyle = {
         position: "absolute",
         width: `${height}px`
     }
@@ -52,14 +52,21 @@ export default function Structure(props) {
 
     // const orient = "n";    
 
-    return (
-        <Fragment>
-            {/* <div style={shadowStyles}></div> */}
-            <div style={wrapperStyles}>
-                {/* <Outline size={size} color={"red"} /> */}
-                {/* <Shadow size={size} /> */}
-                <img src={require(`./images/${tribeImgDir}/${imgDir}/${dir}.png`)} style={structureStyles}></img>
-            </div>
-        </Fragment>
-    )
+    try {
+        return (
+            <Fragment>
+                {/* <div style={StatusStyle}></div> */}
+                <div style={wrapperStyle}>
+                    {/* <Outline size={size} color={"red"} /> */}
+                    {/* <Status size={size} /> */}
+                    <img src={require(`./images/${tribeImgDir}/${imgDir}/${dir}.png`)} style={structureStyle}></img>
+                </div>
+            </Fragment>
+        )
+    } catch (error) {
+        console.log("ERROR Rendering Structure", props);
+        console.log(error);
+        
+        return null;
+    }
 }

@@ -1,0 +1,12 @@
+.target {
+    text-align: center;
+    color: red;
+    position: absolute;
+    border: 1px solid none;
+    border-radius: 50%;
+    pointer-events: all;
+}
+
+.target:hover {
+    border: 3px solid red;
+}

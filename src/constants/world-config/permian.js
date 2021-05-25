@@ -39,7 +39,9 @@ const {
     brownDiictidon,
     greaterEdaphasaurus,
     greaterGorgonopsid,
-    lesserGorgonopsid
+    lesserGorgonopsid,
+    brownScutosaurus,
+    greyScutosaurus
 } = creatureDirectory;
 
 const {
@@ -137,11 +139,13 @@ export default {
                 {type: orangeEdaphasaurus, occurance: 6},
                 {type: brownDiictidon, occurance: 6},
                 {type: greaterEdaphasaurus, occurance: 4},
+                {type: brownScutosaurus, occurance: 4},
             ], 500),
             plants: generateWeightedArray([
                 {type: barrelFern, occurance: 1},
                 {type: yellowRoundleaf, occurance: 1}
-            ], 100)
+            ], 100),
+            resources: []
         },
         grassland: {
             key: "grassland",
@@ -152,6 +156,7 @@ export default {
                 {type: pulmonoscorpius, occurance: 1},
                 {type: scorpion, occurance: 3},
                 {type: greenEdaphasaurus, occurance: 3},
+                {type: greyScutosaurus, occurance: 4},
                 {type: blueDiictidon, occurance: 4},
                 {type: lesserGorgonopsid, occurance: 1},
                 {type: greaterEdaphasaurus, occurance: 1} 
@@ -163,7 +168,8 @@ export default {
                 {type: redFern, occurance: 5},
                 {type: yellowMoss, occurance: 5},
                 {type: orangeRoundleaf, occurance: 1}
-            ], 50)
+            ], 50),
+            resources: []
         },
         forest: {
             key: "forest",
@@ -171,9 +177,9 @@ export default {
             color: terrainColors.forest,
             isWater: false,
             creatures: generateWeightedArray([
-                {type: pulmonoscorpius, occurance: 1},
-                {type: lesserMisophilae, occurance: 3},
+                {type: pulmonoscorpius, occurance: 3},
                 {type: greenEdaphasaurus, occurance: 3},
+                {type: greyScutosaurus, occurance: 2},
                 {type: blueDiictidon, occurance: 4},
                 {type: lesserGorgonopsid, occurance: 1}
             ], 100),
@@ -184,7 +190,8 @@ export default {
             // {type: marshPine, occurance: 1},
                 {type: darkMarshPine, occurance: 8},
                 {type: greenRoundleaf, occurance: 6}
-            ], 20)
+            ], 20),
+            resources: []
         },
         savannah: {
             key: "savannah",
@@ -192,13 +199,13 @@ export default {
             color: terrainColors.savannah,
             isWater: false,
             creatures: generateWeightedArray([
-                {type: pulmonoscorpius, occurance: 3},
                 {type: scorpion, occurance: 3},
                 {type: orangeDimetrodon, occurance: 3},
                 {type: lesserGorgonopsid, occurance: 1},
                 {type: orangeEdaphasaurus, occurance: 3},
                 {type: brownDiictidon, occurance: 6},
-                {type: greaterEdaphasaurus, occurance: 1} 
+                {type: greaterEdaphasaurus, occurance: 1} ,
+                {type: brownScutosaurus, occurance: 4}
             ], 500),
             plants: generateWeightedArray([
                 {type: redFern, occurance: 5},
@@ -207,7 +214,8 @@ export default {
                 {type: greenRoundleaf, occurance: 4},
                 {type: orangeRoundleaf, occurance: 1},
                 {type: yellowRoundleaf, occurance: 1}
-            ], 50)
+            ], 50),
+            resources: []
         },
         marsh: {
             key: "marsh",
@@ -223,7 +231,8 @@ export default {
             plants: generateWeightedArray([
                 {type: horsetail, occurance: 3},
                 {type: goldenHorsetail, occurance: 1},
-            ], 10)
+            ], 10),
+            resources: []
         },
         shallowWater: {
             key: "shallowWater",
@@ -236,7 +245,8 @@ export default {
                 {type: yellowDarter, occurance: 2},
                 {type: greenDarter, occurance: 2}
             ], 25),
-            plants: []
+            plants: [],
+            resources: []
         },
         deepWater: {
             key: "deepWater",
@@ -249,7 +259,8 @@ export default {
                 {type: yellowDarter, occurance: 2},
                 {type: greenDarter, occurance: 2}
             ], 25),
-            plants: []
+            plants: [],
+            resources: []
         },
     }
 }

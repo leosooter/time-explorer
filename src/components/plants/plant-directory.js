@@ -1,4 +1,4 @@
-import resources from "./resources";
+// import resources from "../resources/resources";
 // const {wood, nuts, fruit, food, "medicine", "poison"} = resources; 
 
 export default {
@@ -10,7 +10,14 @@ export default {
         widthToHeight: 1.2,
         sizeRange: 20,
         resources: [{type: "medicine", quantity: 2}],
-        health: 20
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
     },
     goldenHorsetail: {
         name: "Golden Horsetail",
@@ -19,7 +26,14 @@ export default {
         widthToHeight: 1,
         sizeRange: 20,
         resources: [{type: "medicine", quantity: 20}],
-        health: 20
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
     },
     giantHorsetail: {
         name: "Giant Horsetail",
@@ -28,7 +42,14 @@ export default {
         widthToHeight: .7,
         sizeRange: 20,
         resources: [{type: "medicine", quantity: 20}],
-        health: 20
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
     },
     /////////////////////////////////// Trees
     polycarpus: {
@@ -38,7 +59,14 @@ export default {
         widthToHeight: .54,
         sizeRange: 20,
         resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
-        health: 20
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
     },
     marshPine: {
         name: "Marsh Pine",
@@ -47,7 +75,14 @@ export default {
         widthToHeight: .54,
         sizeRange: 20,
         resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
-        health: 20
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
     },
     darkMarshPine: {
         name: "Dark Marsh Pine",
@@ -56,7 +91,14 @@ export default {
         widthToHeight: .54,
         sizeRange: 20,
         resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
-        health: 20
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
     },
     buttressRoot: {
         name: "Buttress Root",
@@ -65,7 +107,14 @@ export default {
         widthToHeight: .75,
         sizeRange: 20,
         resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
-        health: 20
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
     },
     goldenButtressRoot: {
         name: "Golden Buttress Root",
@@ -74,7 +123,14 @@ export default {
         widthToHeight: .75,
         sizeRange: 20,
         resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
-        health: 20
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
     },
     /////////////////////////////////// Conifers
     pine: {
@@ -84,7 +140,14 @@ export default {
         widthToHeight: .75,
         sizeRange: 20,
         resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
-        health: 20
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
     },
     darkPine: {
         name: "Dark Pine",
@@ -93,7 +156,14 @@ export default {
         widthToHeight: .75,
         sizeRange: 20,
         resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
-        health: 20
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
     },
     silverFir: {
         name: "Silver Fir",
@@ -102,7 +172,14 @@ export default {
         widthToHeight: .75,
         sizeRange: 20,
         resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
-        health: 20
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
     },
     umbrellaPine: {
         name: "Umbrella Pine",
@@ -111,7 +188,14 @@ export default {
         widthToHeight: .75,
         sizeRange: 20,
         resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
-        health: 20
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
     },
     greyUmbrellaPine: {
         name: "Grey Umbrella Pine",
@@ -120,7 +204,30 @@ export default {
         widthToHeight: .75,
         sizeRange: 20,
         resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
-        health: 20
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    redwood: {
+        name: "Umbrella Pine",
+        imageArray: ["umbrella-pine1.png", "umbrella-pine2.png", "umbrella-pine3.png", "umbrella-pine4.png"],
+        heightToSquare: 5,
+        widthToHeight: .75,
+        sizeRange: 20,
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
     },
     //tree-fern
     /////////////////////////////////// Ferns
@@ -131,7 +238,14 @@ export default {
         widthToHeight: 1,
         sizeRange: 20,
         resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
-        health: 20
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
     },
     tallFern: {
         name: "Umbrella Fern",
@@ -140,7 +254,14 @@ export default {
         widthToHeight: 1.5,
         sizeRange: 20,
         resources: [{type: "food", quantity: [1,2]}],
-        health: 5
+        health: 5,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
     },
     tallDarkFern: {
         name: "Sword Fern",
@@ -149,7 +270,14 @@ export default {
         widthToHeight: 1.5,
         sizeRange: 20,
         resources: [{type: "food", quantity: [1,2]}],
-        health: 5
+        health: 5,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     greenFern: {
         name: "Green Fern",
@@ -158,7 +286,14 @@ export default {
         widthToHeight: 1.5,
         sizeRange: 10,
         resources: [{type: "food", quantity: [1,2]}],
-        health: 5
+        health: 5,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     yellowFern: {
         name: "Yellow Fern",
@@ -167,7 +302,14 @@ export default {
         widthToHeight: 1.5,
         sizeRange: 10,
         resources: [{type: "food", quantity: [1,2]}],
-        health: 5
+        health: 5,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     redFern: {
         name: "Red Fern",
@@ -176,7 +318,14 @@ export default {
         widthToHeight: 1.5,
         sizeRange: 10,
         resources: [{type: "food", quantity: [1,2]}],
-        health: 5
+        health: 5,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     blueFern: {
         name: "Blue Fern",
@@ -185,7 +334,14 @@ export default {
         widthToHeight: 1.5,
         sizeRange: 10,
         resources: [{type: "food", quantity: [1,2]}],
-        health: 5
+        health: 5,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     yellowFernClump: {
         name: "Yellow Fern Clump",
@@ -194,7 +350,14 @@ export default {
         widthToHeight: 2,
         sizeRange: 10,
         resources: [{type: "food", quantity: [1,2]}],
-        health: 5
+        health: 5,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     greenFernClump: {
         name: "Green Fern Clump",
@@ -203,7 +366,14 @@ export default {
         widthToHeight: 1.5,
         sizeRange: 10,
         resources: [{type: "food", quantity: [1,2]}],
-        health: 5
+        health: 5,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     redFernClump: {
         name: "Red Fern Clump",
@@ -212,7 +382,14 @@ export default {
         widthToHeight: 1.5,
         sizeRange: 10,
         resources: [{type: "food", quantity: [1,2]}],
-        health: 5
+        health: 5,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     lightGreenFernClump: {
         name: "Light Green Fern Clump",
@@ -221,7 +398,14 @@ export default {
         widthToHeight: 1.5,
         sizeRange: 10,
         resources: [{type: "food", quantity: [1,2]}],
-        health: 5
+        health: 5,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     greenBrownFernClump: {
         name: "Green Brown Fern Clump",
@@ -230,7 +414,14 @@ export default {
         widthToHeight: 1.5,
         sizeRange: 10,
         resources: [{type: "food", quantity: [1,2]}],
-        health: 5
+        health: 5,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     darkGreenFernClump: {
         name: "Dark Green Fern Clump",
@@ -239,7 +430,14 @@ export default {
         widthToHeight: 1.5,
         sizeRange: 10,
         resources: [{type: "food", quantity: [1,2]}],
-        health: 5
+        health: 5,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     youngBlueTreeFern: {
         name: "Young Blue Tree Fern",
@@ -248,7 +446,14 @@ export default {
         widthToHeight: 1,
         sizeRange: 10,
         resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [1,2]}],
-        health: 10
+        health: 10,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     youngLightGreenTreeFern: {
         name: "Young Light Green Tree Fern",
@@ -257,7 +462,14 @@ export default {
         widthToHeight: 1,
         sizeRange: 10,
         resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [1,2]}],
-        health: 10
+        health: 10,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     scalyTreeFern: {
         name: "Scaly Tree Fern",
@@ -266,7 +478,14 @@ export default {
         widthToHeight: 1,
         sizeRange: 10,
         resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [1,2]}],
-        health: 10
+        health: 10,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     blueTreeFern: {
         name: "Blue Tree Fern",
@@ -275,16 +494,23 @@ export default {
         widthToHeight: 1,
         sizeRange: 10,
         resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [1,2]}],
-        health: 10
+        health: 10,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     ////////////////////////////////// Reeds
-    reed: {
-        name: "Reed",
-        imageArray: ["reed1.png", "reed2.png"],
-        heightToSquare: 1,
-        widthToHeight: .75,
-        sizeRange: 20
-    },
+    // reed: {
+    //     name: "Reed",
+    //     imageArray: ["reed1.png", "reed2.png"],
+    //     heightToSquare: 1,
+    //     widthToHeight: .75,
+    //     sizeRange: 20
+    // },
     //////////////////////////////// Moss
     greenMoss: {
         name: "Green Moss",
@@ -293,7 +519,14 @@ export default {
         widthToHeight: 2,
         sizeRange: 10,
         resources: [],
-        health: 5
+        health: 5,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     yellowMoss: {
         name: "Yellow Moss",
@@ -302,7 +535,14 @@ export default {
         widthToHeight: 2,
         sizeRange: 10,
         resources: [],
-        health: 5
+        health: 5,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     orangeMoss: {
         name: "Orange Moss",
@@ -311,7 +551,14 @@ export default {
         widthToHeight: 2,
         sizeRange: 10,
         resources: [],
-        health: 5
+        health: 5,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     //////////////////////////////// Misc
     yellowGlobe: {
@@ -321,16 +568,30 @@ export default {
         widthToHeight: 1.5,
         sizeRange: 10,
         resources: [],
-        health: 5
+        health: 5,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     purpleGlobe: {
         name: "Purple Globe",
         imageArray: ["purple-globe1.png", "purple-globe2.png"],
-        heightToSquare: .18,
+        heightToSquare: .5,
         widthToHeight: 1.5,
         sizeRange: 10,
         resources: [],
-        health: 5
+        health: 5,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     //////////////////////////////// Shrubs
     yellowRoundleaf: {
@@ -340,7 +601,14 @@ export default {
         widthToHeight: 1.5,
         sizeRange: 10,
         resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [1,2]}],
-        health: 10
+        health: 10,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     orangeRoundleaf: {
         name: "Orange Roundleaf",
@@ -349,7 +617,14 @@ export default {
         widthToHeight: 1.5,
         sizeRange: 10,
         resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [1,2]}],
-        health: 10
+        health: 10,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
     greenRoundleaf: {
         name: "Green Roundleaf",
@@ -358,7 +633,14 @@ export default {
         widthToHeight: 1.5,
         sizeRange: 10,
         resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [1,2]}],
-        health: 10
+        health: 10,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+height: 100,
+width: 100,
+            color: "green"
+        }
     },
 }
 

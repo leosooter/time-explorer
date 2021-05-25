@@ -27,11 +27,6 @@ let creatureId = 1;
 const facingDirs = ["n","s","e","w","ne","nw","se","sw"];
 
 export function getNewCreature(creatureType, square) {
-    const shouldVisible = square.heightIndex < 5 && square.widthIndex < 5;
-    if(shouldVisible){
-        console.log("square sould be visible", square, square.isVisible);
-        
-    };
     const creature = clone(creatureType);
     creature.id = `creature-${creatureId}`;
     creature.currentSquare = square;
@@ -47,8 +42,21 @@ export function getNewCreature(creatureType, square) {
     creature.isVisible = square.isVisible;
     creature.arrayType = "creatures";
 
-
     creature.action = () => entityAction(creature, "creatures");
+
+    // Add to square(s)
+    square.currentEntity = creature;
+
+    if(creature.isMega) {
+        console.log("adding square to Mega");
+        creature.coveredSqaures = [];
+        creature.coveredSqaures.push(square.n);
+        square.n.currentEntity = creature;
+        creature.coveredSqaures.push(square.n.e);
+        square.n.e.currentEntity = creature;
+        creature.coveredSqaures.push(square.e);
+        square.e.currentEntity = creature;
+    }
 
     return creature;
 }

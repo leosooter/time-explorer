@@ -16,7 +16,7 @@ export default function Unit(props) {
     top -= (52 * widthIndex);
     left += (90 * widthIndex);
 
-    const unitStyles = {
+    const unitStyle = {
         position: "absolute",
         top: `${top}px`,
         left: `${left}px`,
@@ -28,17 +28,17 @@ export default function Unit(props) {
     }
 
     if(props.isSelected) {
-        unitStyles.border = "2px solid black"
+        unitStyle.border = "2px solid black"
     }
 
-    return (<div key={props.id} style={unitStyles} onClick={() => props.handleUnitSelect(props.id)}></div>);
+    return (<div key={props.id} style={unitStyle} onClick={() => props.handleUnitSelect(props.id)}></div>);
 }
 
 // function renderPlayer(widthIndex, heightIndex) {
 //     const height = heightIndex * 100 - 50;
 //     const width = widthIndex * 100 - 50;
   
-//     const playerStyles = {
+//     const playerStyle = {
 //       position: "absolute",
 //       top: `${height}px`,
 //       left: `${width}px`,
@@ -48,5 +48,5 @@ export default function Unit(props) {
 //       backgroundColor: "red"
 //     }
   
-//     return (<div style={playerStyles}></div>);
+//     return (<div style={playerStyle}></div>);
 //   }

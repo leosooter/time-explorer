@@ -26,28 +26,40 @@ Tribe is a randomly generated mix of attributes:
 import structureDirectory from "../structures/structure-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
 
+const genericAttributes = {
+    techLevel: 0,
+    structures: [],
+    buildingSquares: [],
+    innerTerritory: [],
+    outerTerritory: [],
+    populationCapcity: 0,
+    units: [],
+    food: 0,
+    wood: 80
+}
+
 const {
-        permianNomad1, 
-        permianNomad2, 
-        permianNomad3, 
-        permianNomad4,
-        permianAdobe1, 
-        permianAdobe2, 
-        permianAdobe3, 
-        permianAdobe4,
-        permianFarmers1, 
-        permianFarmers2, 
-        permianFarmers3, 
-        permianFarmers4,
-        triassicRiver1, 
-        triassicRiver2, 
-        triassicRiver3, 
-        triassicRiver4,
-        triassicLake1, 
-        triassicLake2, 
-        triassicLake3, 
-        triassicLake4
-    } = structureDirectory;
+    permianNomad1, 
+    permianNomad2, 
+    permianNomad3, 
+    permianNomad4,
+    permianAdobe1, 
+    permianAdobe2, 
+    permianAdobe3, 
+    permianAdobe4,
+    permianFarmers1,
+    permianFarmers2, 
+    permianFarmers3, 
+    permianFarmers4,
+    triassicRiver1, 
+    triassicRiver2, 
+    triassicRiver3, 
+    triassicRiver4,
+    triassicLake1, 
+    triassicLake2, 
+    triassicLake3, 
+    triassicLake4
+} = structureDirectory;
 
 export default {
     // blue: {
@@ -143,30 +155,38 @@ export default {
         startTerrain: ["desert"],
         possTerrain: ["desert", "savannah", "grassland", "forest"],
         isWater: false,
-        structures: generateWeightedArray([
-            {type: permianNomad1, occurance: 2},
-            {type: permianNomad2, occurance: 2},
-            {type: permianNomad3, occurance: 3},
-            {type: permianNomad4, occurance: 3},
-        ], 0),
-        units:[]
+        possStructures: [permianNomad1, permianNomad2, permianNomad3, permianNomad4,],
+        techLevel: 0,
+        structures: [],
+        buildingSquares: [],
+        innerTerritory: [],
+        outerTerritory: [],
+        populationCapcity: 0,
+        units: [],
+        food: 0,
+        wood: 80,
+        techPoints: 0
     },
     permianAdobe: {
         key: "permianAdobe",
         name: "Holsup",
         color: "brown",
-        unitImgDir: "orange",
+        unitImgDir: "red-orange",
         territoriality: 1,
         startTerrain: ["savannah", "desert"],
         possTerrain: ["desert", "savannah", "grassland", "forest"],
         isWater: false,
-        structures: generateWeightedArray([
-            {type: permianAdobe1, occurance: 2},
-            {type: permianAdobe2, occurance: 2},
-            {type: permianAdobe3, occurance: 3},
-            {type: permianAdobe4, occurance: 3},
-        ], 0),
-        units:[]
+        possStructures: [permianAdobe1, permianAdobe2, permianAdobe3, permianAdobe4],
+        techLevel: 0,
+        structures: [],
+        buildingSquares: [],
+        innerTerritory: [],
+        outerTerritory: [],
+        populationCapcity: 0,
+        units: [],
+        food: 0,
+        wood: 80,
+        techPoints: 0
     },
     permianFarmers: {
         key: "permianFarmers",
@@ -177,13 +197,17 @@ export default {
         startTerrain: ["grassland", "forest"],
         possTerrain: ["desert", "savannah", "grassland", "forest"],
         isWater: false,
-        structures: generateWeightedArray([
-            {type: permianFarmers1, occurance: 2},
-            {type: permianFarmers2, occurance: 2},
-            {type: permianFarmers3, occurance: 3},
-            {type: permianFarmers4, occurance: 3},
-        ], 0),
-        units:[]
+        possStructures: [permianFarmers1, permianFarmers2, permianFarmers3, permianFarmers4],
+        techLevel: 0,
+        structures: [],
+        buildingSquares: [],
+        innerTerritory: [],
+        outerTerritory: [],
+        populationCapcity: 0,
+        units: [],
+        food: 0,
+        wood: 80,
+        techPoints: 0
     },
     triassicRiver: {
         key: "triassicRiver",
@@ -194,30 +218,37 @@ export default {
         startTerrain: ["grassland", "savannah"],
         possTerrain: ["desert", "savannah", "grassland", "forest"],
         isWater: false,
-        structures: generateWeightedArray([
-            {type: triassicRiver1, occurance: 2},
-            {type: triassicRiver2, occurance: 2},
-            {type: triassicRiver3, occurance: 3},
-            {type: triassicRiver4, occurance: 3},
-        ], 0),
-        units:[]
+        possStructures: [triassicRiver1, triassicRiver2, triassicRiver3, triassicRiver4],
+        techLevel: 0,
+        structures: [],
+        buildingSquares: [],
+        innerTerritory: [],
+        outerTerritory: [],
+        populationCapcity: 0,
+        units: [],
+        food: 0,
+        wood: 80,
+        techPoints: 0
     },
     triassicLake: {
         key: "triassicLake",
-        name: "Silm-Sun",
+        name: "Sillm-Sun",
         color: "blue",
-        unitImgDir: "blue",
+        unitImgDir: "blue-green",
         territoriality: 1,
         startTerrain: ["marsh", "shallowWater", "swampForest"],
         possTerrain: ["savannah", "grassland", "forest", "marsh", "shallowWater"],
         isWater: true,
-        
-        structures: generateWeightedArray([
-            {type: triassicLake1, occurance: 2},
-            {type: triassicLake2, occurance: 2},
-            {type: triassicLake3, occurance: 3},
-            {type: triassicLake4, occurance: 3},
-        ], 0),
-        units:[]
+        possStructures: [triassicLake1, triassicLake2, triassicLake3, triassicLake4],
+        techLevel: 0,
+        structures: [],
+        buildingSquares: [],
+        innerTerritory: [],
+        outerTerritory: [],
+        populationCapcity: 0,
+        units: [],
+        food: 0,
+        wood: 80,
+        techPoints: 0
     }
 }

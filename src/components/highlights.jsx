@@ -1,5 +1,5 @@
 function highlight(color) {
-    const highlightStyles = {
+    const highlightStyle = {
         height: "50px",
         width: "50px",
         border: "10px solid rgba(0, 0, 0, 0.5)",
@@ -7,7 +7,7 @@ function highlight(color) {
         backgroundColor: color
     }
 
-    return (<div style={highlightStyles}></div>)
+    return (<div style={highlightStyle}></div>)
 }
 
 

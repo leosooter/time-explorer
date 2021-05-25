@@ -89,7 +89,8 @@ export default {
                 {type: greenFern, occurance: 5},
                 {type: yellowGlobe, occurance: 3},  
                 {type: polycarpus, occurance: 1}
-            ], 50)
+            ], 50),
+            resources: []
         },
         forest: {
             key: "forest",
@@ -114,7 +115,8 @@ export default {
                 {type: marshPine, occurance: 1},
                 {type: darkMarshPine, occurance: 7},
                 {type: buttressRoot, occurance: 1},
-            ], 20)
+            ], 20),
+            resources: []
         },
         savannah: {
             key: "savannah",
@@ -132,7 +134,8 @@ export default {
                 {type: yellowMoss, occurance: 5}, 
                 {type: redFern, occurance: 5},
                 {type: polycarpus, occurance: 1}
-            ], 50)
+            ], 50),
+            resources: []
         },
         marsh: {
             key: "marsh",
@@ -143,15 +146,16 @@ export default {
             creatures: generateWeightedArray([
                 // {type: lesserArthropluera, occurance: 2},
                 // {type: greaterArthropluera, occurance: 2},
-                {type: greaterProterogyrinus, occurance: 2},
-                {type: orangeMeganuera, occurance: 1},
+                {type: greaterProterogyrinus, occurance: 4},
+                {type: orangeMeganuera, occurance: 4},
                 {type: blueMeganuera, occurance: 1},
             ], 25),
             plants: generateWeightedArray([
                 {type: horsetail, occurance: 10},
                 {type: giantHorsetail, occurance: 5},
                 {type: yellowGlobe, occurance: 4} 
-            ], 10)
+            ], 20),
+            resources: []
         },
         swampForest: {
             key: "swampForest",
@@ -162,14 +166,15 @@ export default {
             creatures: generateWeightedArray([
                 // {type: lesserArthropluera, occurance: 2},
                 // {type: greaterArthropluera, occurance: 2},
-                {type: greaterProterogyrinus, occurance: 2},
-                {type: orangeMeganuera, occurance: 1},
+                {type: greaterProterogyrinus, occurance: 4},
+                {type: orangeMeganuera, occurance: 4},
                 {type: blueMeganuera, occurance: 1},
-            ], 25),
+            ], 50),
             plants: generateWeightedArray([
                 {type: buttressRoot, occurance: 15},
                 {type: goldenButtressRoot, occurance: 1}, 
-            ], 20)
+            ], 20),
+            resources: []
         },
         shallowWater: {
             key: "shallowWater",
@@ -178,12 +183,13 @@ export default {
             isWater: true,
             isSwim: true,
             creatures: generateWeightedArray([
-                {type: greaterProterogyrinus, occurance: 2},
-                {type: orangeMeganuera, occurance: 1},
+                {type: greaterProterogyrinus, occurance: 4},
+                {type: orangeMeganuera, occurance: 4},
                 {type: blueMeganuera, occurance: 1},
                 // {type: silverBarb, occurance: 1}
-            ], 70),
-            plants: []
+            ], 140),
+            plants: [],
+            resources: []
         },
         deepWater: {
             key: "deepWater",
@@ -193,11 +199,12 @@ export default {
             isSwim: true,
             creatures: generateWeightedArray([
                 {type: greaterProterogyrinus, occurance: 1},
-                {type: orangeMeganuera, occurance: 1},
+                {type: orangeMeganuera, occurance: 2},
                 {type: blueMeganuera, occurance: 1},
                 // {type: silverBarb, occurance: 1}
-            ], 100),
-            plants: []
+            ], 500),
+            plants: [],
+            resources: []
         },
     }
 }

@@ -4,7 +4,7 @@ import {worldParams} from "../constants/world";
 export default function Background() {
     const xTranslate = -937;
     const yTranslate = -687
-    const backgroundStyles = {
+    const backgroundStyle = {
         position: "absolute",
         backgroundImage: 'url("background1.jpg")',
         backgroundRepeat: "repeat",
@@ -18,6 +18,6 @@ export default function Background() {
     };
 
     return (
-        <div style={backgroundStyles}></div>
+        <div style={backgroundStyle}></div>
     );
 }

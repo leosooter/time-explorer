@@ -1,5 +1,6 @@
 import creatureDirectory from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
+import resourceDirectory from "../../components/resources/resource-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
 import {terrainColors as colors} from "../colors";
 import structureDirectory from "../../components/structures/structure-directory";
@@ -29,7 +30,10 @@ const {
     greenHerreresaurus,
     yellowHerreresaurus,
     brownPostosuchus,
-    greenPostosuchus
+    greenPostosuchus,
+    greenDesmatosuchus,
+    blueDesmatosuchus,
+    redDesmatosuchus
 } = creatureDirectory;
 
 const {
@@ -82,6 +86,15 @@ const {
     greenRoundleaf
 } = plantDirectory;
 
+const {
+    largeBlackRock,
+    largeDarkRedRock,
+    largeGreyRock,
+    largeRedRock,
+    largeYellowRock,
+    xLargeGreyRock
+} = resourceDirectory;
+
 /*
 Terrain Types define plant density and animal habitat and player movement types
 example: 
@@ -125,9 +138,14 @@ export default {
                 {type: yellowHerreresaurus, occurance: 3},
                 {type: brownPostosuchus, occurance: 1},
                 {type: redLystosaurus, occurance: 6},
+                {type: redDesmatosuchus, occurance: 6},
             ], 500),
             plants: generateWeightedArray([
                 {type: yellowRoundleaf, occurance: 1}
+            ], 100),
+            resources: generateWeightedArray([
+                // {type: largeRedRock, occurance: 1},
+                {type: largeYellowRock, occurance: 1},
             ], 100)
         },
         grassland: {
@@ -136,9 +154,10 @@ export default {
             color: terrainColors.grassland,
             isWater: false,
             creatures: generateWeightedArray([
-                {type: pulmonoscorpius, occurance: 1},
                 {type: scorpion, occurance: 3},
                 {type: purpleLystosaurus, occurance: 3},
+                {type: blueDesmatosuchus, occurance: 1},
+                {type: greenDesmatosuchus, occurance: 2},
                 {type: greenPostosuchus, occurance: 1},
                 {type: greenHerreresaurus, occurance: 1} 
             ], 50),
@@ -147,7 +166,10 @@ export default {
                 {type: lightGreenFernClump, occurance: 5},
                 {type: redFern, occurance: 5},
                 {type: orangeRoundleaf, occurance: 1}
-            ], 50)
+            ], 50),
+            resources: generateWeightedArray([
+                {type: xLargeGreyRock, occurance: 1},
+            ], 200)
         },
         forest: {
             key: "forest",
@@ -158,6 +180,7 @@ export default {
                 {type: pulmonoscorpius, occurance: 1},
                 {type: purpleLystosaurus, occurance: 3},
                 {type: greenPostosuchus, occurance: 1},
+                {type: greenDesmatosuchus, occurance: 1},
                 {type: greenHerreresaurus, occurance: 1} 
             ], 100),
             plants: generateWeightedArray([
@@ -165,7 +188,10 @@ export default {
                 {type: pine, occurance: 10},  
                 {type: umbrellaPine, occurance: 8},
                 {type: scalyTreeFern, occurance: 5}
-            ], 20)
+            ], 20),
+            resources: generateWeightedArray([
+                {type: largeGreyRock, occurance: 1},
+            ], 200)
         },
         savannah: {
             key: "savannah",
@@ -176,6 +202,8 @@ export default {
                 {type: pulmonoscorpius, occurance: 3},
                 {type: scorpion, occurance: 3},
                 {type: yellowHerreresaurus, occurance: 3},
+                {type: greenDesmatosuchus, occurance: 2},
+                {type: redDesmatosuchus, occurance: 2},
                 {type: greenPostosuchus, occurance: 1},
                 {type: redLystosaurus, occurance: 3}
             ], 500),
@@ -185,7 +213,10 @@ export default {
                 {type: pine, occurance: 1},  
                 {type: umbrellaPine, occurance: 3},
                 {type: yellowRoundleaf, occurance: 1}
-            ], 50)
+            ], 50),
+            resources: generateWeightedArray([
+                {type: largeYellowRock, occurance: 1},
+            ], 100)
         },
         marsh: {
             key: "marsh",
@@ -196,12 +227,14 @@ export default {
             creatures: generateWeightedArray([
                 {type: yellowCrocodile, occurance: 2},
                 {type: purpleDarter, occurance: 2},
+                {type: blueDesmatosuchus, occurance: 2},
                 {type: redDarter, occurance: 2}
             ], 25),
             plants: generateWeightedArray([
                 {type: horsetail, occurance: 3},
                 {type: goldenHorsetail, occurance: 1},
-            ], 10)
+            ], 10),
+            resources: []
         },
         shallowWater: {
             key: "shallowWater",
@@ -214,7 +247,8 @@ export default {
                 {type: purpleDarter, occurance: 2},
                 {type: redDarter, occurance: 2}
             ], 25),
-            plants: []
+            plants: [],
+            resources: []
         },
         deepWater: {
             key: "deepWater",
@@ -227,7 +261,8 @@ export default {
                 {type: purpleDarter, occurance: 2},
                 {type: redDarter, occurance: 2}
             ], 25),
-            plants: []
+            plants: [],
+            resources: []
         },
     }
 }

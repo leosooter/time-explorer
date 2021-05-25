@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Player from "./player";
+import Unit from "../unit";
 // import {worldParams} from "../../constants/world";
 
 export default React.memo(function Units(props) {
@@ -10,7 +11,7 @@ export default React.memo(function Units(props) {
 
   return (
       playerUnits.map((playerUnit) => {
-        return (<Player key={playerUnit.id} {...playerUnit} handleUnitSelect={handleUnitSelect}/>);
+        return (<Unit key={playerUnit.id} {...playerUnit} handleUnitSelect={handleUnitSelect}/>);
       })
   );
 });

@@ -1,0 +1,25 @@
+/***** Wiggle *****/
+
+.wiggle { 
+    animation: wiggle 200ms;
+    animation-timing-function: linear;   
+  }
+  
+  @keyframes wiggle {
+    0% { transform: translate(4px, 0); }
+    50% { transform: translate(-4px, 0); }
+    100% { transform: translate(4px, 0); }
+  }
+  
+  /***** Shake *****/
+  
+  .shake:hover{ 
+    animation: shake 200ms;
+    animation-timing-function: linear;   
+  }
+  
+  @keyframes shake {
+    0% { transform: rotate(1deg); }
+    50% { transform: rotate(-1deg); }
+    100% { transform: rotate(1deg); }
+  }

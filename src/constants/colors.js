@@ -1,8 +1,18 @@
 
 export const terrainColors = {
+    devonian: {
+        // desert: {r:220, g:170, b:38},
+        desert: {r:128, g:125, b:110},
+        savannah: {r:178, g:180, b:64},
+        grassland: {r:149, g:202, b:76},
+        forest: {r:150, g:160, b:38},
+        marsh: {r:74, g:164, b:159},
+        shallowWater: {r:82, g:142, b:172},
+        deepWater: {r:47, g:127, b:163},
+    },
     carboniferous: {
-        grassland: {r:30, g:90, b:17},
-        forest: {r:0, g:60, b:0},
+        grassland: {r:20, g:80, b:12},
+        forest: {r:0, g:60, b:5},
         swampForest: {r:31, g:87, b:91},
         marsh: {r:4, g:94, b:59},
         shallowWater: {r:42, g:102, b:132},

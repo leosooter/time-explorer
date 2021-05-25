@@ -7,7 +7,8 @@ import permian from "./world-config/permian";
 import triassic from "./world-config/triassic";
 import jurassic from "./world-config/jurassic";
 import cretaceous from "./world-config/cretaceous";
-
+import testWorld from "./world-config/test-world";
+ 
 export const desert = {
     key: "desert",
     
@@ -20,7 +21,8 @@ export default {
     permian,
     triassic,
     jurassic,
-    cretaceous
+    cretaceous,
+    testWorld
     // ordovician: {
     //     defualtTerrainType: "desert",
     //     waterPoints: [10, 20],

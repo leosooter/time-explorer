@@ -1,53 +1,45 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useEffect, useRef, useLayoutEffect} from "react";
 import {random, sample, clone} from "lodash";
-import Shadow from "../shadow";
-import { getPlantPosition, getZIndex } from "../../helpers/grid-helpers";
+import Status from "../status";
+import {getPosition, getZIndex} from "../../helpers/grid-helpers";
+import plantDirectory from "./plant-directory.js";
+import Target from "../target/target";
 
 export default function Plant(props) {    
-    const {heightIndex, widthIndex, height, widthToHeight, image, isVisible, id, handlePlayerHarvestResource, health} = props;
-    const {top, left} = getPlantPosition(heightIndex, widthIndex, height, widthToHeight, "plant");
+    const {keyName, heightIndex, widthIndex, height, widthToHeight, image, isVisible, id, handlePlayerHarvestResource, health, targetSpecs} = props;
+    const {top, left} = getPosition(heightIndex, widthIndex, height, widthToHeight, height * -.7, height * -.15);
 
-    // if(props.name === "Red Fern") {
-    //     console.log("height", height);
-    // } 
-    
-    // let top = 0;
-    // let left = 0;
-    
+    targetSpecs.height = height / 2;
+    targetSpecs.width = (height * widthToHeight) / 2;
 
-    // top += (144 * heightIndex);
-    // left += (308.5 * heightIndex);
-    
-    // top -= (144 * widthIndex);
-    // left += (308.5 * widthIndex);
-
-    const wrapperStyles = {
+    const wrapperStyle = {
         visibility: isVisible ? "visible" : "hidden",
-        // pointerEvents: "none",
+        // border: "1px solid green",
+        pointerEvents: "none",
         position: "absolute",
         transform: `translate(${left}px, ${top}px)`,
         zIndex: getZIndex(heightIndex, widthIndex, "plant")
     }
 
-    const plantStyles = {
-        height: `${height}px`
+    const plantStyle = {
+        height: `${height}px`,
+        pointerEvents: "none"
     }
 
-    const shadowStyles = {
-        height: "30px",
-        width: "80px",
-        backgroundColor: "rgba(100, 100, 100, .2)",
-        borderRadius: "20%",
-        transform: "translate(76px,0px) rotate(45deg) skew(0deg, 0deg)"
+    function handleClick() {
+        handlePlayerHarvestResource("plants", id)
     }
 
     return (
         <Fragment>
-            {/* <div style={shadowStyles}></div> */}
-            <div style={wrapperStyles}>
+            {/* <div style={StatusStyle}></div> */}
+            <div style={wrapperStyle}>
                 <span>{health}</span>
-                {/* <Shadow size={size} /> */}
-                <img src={require(`./images/${image}`)} style={plantStyles} onClick={()=> handlePlayerHarvestResource("plants", id)}></img>
+                {/* <Status size={size} /> */}
+                <img src={require(`./images/${image}`)} style={plantStyle}></img>
+                {/* {hasTarget && <div style={targetStyle} onClick={()=> handlePlayerHarvestResource("plants", id)}></div>} */}
+                <Target {...props.targetSpecs} handleClick={handleClick}></Target>
+
             </div>
         </Fragment>
     )

@@ -1,7 +1,8 @@
 import React from "react";
+import Anime, {anime} from 'react-anime';
 
 const outlineTypes = {
-    red: "rgba(250, 10, 10, .5)",
+    red: "rgba(250, 10, 10, .75)",
     blue: "rgba(50, 50, 250, .5)"
 }
 
@@ -21,11 +22,17 @@ export default function Outline(props) {
         height: outlineSize,
         width: outlineSize * 2,
         borderRadius: "50%",
-        border: `${outlineWidth}px solid ${outlineTypes[color]}`,
-        boxShadow: `black 0px 3px ${left}px`
+        // border: "1px solid black",
+        // boxShadow: `black 0px 3px ${left}px`
         // transform: "perspective(400px) rotateY(45deg)"
     }
     return (
-        <div style={outlineStyle}></div>
+        <Anime
+            {...outlineStyle}
+            duration={10000}
+            border={`${outlineWidth}px solid ${outlineTypes[color]}`}
+        >
+            <div style={outlineStyle}></div>
+        </Anime>
     )
 }

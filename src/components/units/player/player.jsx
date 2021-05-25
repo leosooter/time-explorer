@@ -1,5 +1,5 @@
 import React from "react";
-import Shadow from "../../shadow";
+import Status from "../../status";
 import Outline from "../../outline";
 import {getPosition, getZIndex} from "../../../helpers/grid-helpers";
 import {worldParams} from "../../../constants/world";
@@ -46,7 +46,7 @@ export default function Player(props) {
     // }\
     const wrapperHeight = `${138 - wadeDepth}px`;
     
-    const wrapperStyles = {
+    const wrapperStyle = {
         zIndex: getZIndex(heightIndex, widthIndex, "unit"),
         position: "absolute",
         transform: `translate(${left}px, ${top}px)`,
@@ -56,10 +56,13 @@ export default function Player(props) {
         overflow: "hidden",
         height: wrapperHeight,
         width: "100px",
-        paddingTop: "30px"
+        paddingTop: "30px",
+        // borderRadius: "10%",
+        // boxShadow: "0px 0px 50px blue"
+
     }
 
-    const playerStyles = {
+    const playerStyle = {
         position: "absolute",
         width: `${height}px`
     }
@@ -75,11 +78,11 @@ export default function Player(props) {
     }
 
     return (
-        <div style={wrapperStyles}>
+        <div style={wrapperStyle}>
             <span>{health}</span>
             {/* <Outline size={100} color={"blue"} /> */}
             <img src={require("../images/weapons/spear/front.png")} style={weaponStyle}></img>
-            <img onClick={handleClick} src={require(`../images/red-black/${dir}.png`)} style={playerStyles}></img>
+            <img onClick={handleClick} src={require(`../images/red-black/${dir}.png`)} style={playerStyle}></img>
         </div>
     )
 }

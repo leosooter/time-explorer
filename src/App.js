@@ -4,14 +4,16 @@ import './App.css';
 import Grid from "./components/grid";
 import {getPosition} from "./helpers/grid-helpers";
 // import Units from "./components/units";
-import createNewWorld, { addStructure, setVisibility } from "./helpers/world-creator";
-import Tree from "./components/plants/tree";
+import createNewWorld, {setVisibility, createNewTestWorld} from "./helpers/world-creator";
+import {setUpNewPlayer} from "./helpers/player-helpers";
+import {addStructure, tribeAction} from "./helpers/tribe-helpers";
 import Background from './components/texture-background';
 import {worldParams} from "./constants/world";
 import Creature from './components/creatures/creature';
 import Creatures from "./components/creatures/creatures";
 import Plants from "./components/plants/plants";
-import Structures from "./components/structures/structures.jsx";
+import Resources from "./components/resources/resources";
+import Structures from "./components/structures/structures";
 import Units from "./components/units/units.jsx";
 import PlayerUnits from "./components/units/player/player-units";
 import ActionBar from "./components/action-bar/action-bar";
@@ -23,47 +25,63 @@ import tribeDirectory from "./components/units/tribeDirectory";
 
 import worldChoices from "./constants/world-config/world-choices";
 
-let isStart = true;
+let isStart = false;
 
 let testHeightIndex = 5;
 let testWidthIndex = 5;
 let updateNumber = 0;
 
 const creatureActionChance = 1;
-// const explorationMode = true;
 
-let defaultWorld = "triassic";
+let defaultWorld = "devonian";
+let isExplorerMode = true;
+// isExplorerMode = false;
 
-
-
-let world = createNewWorld(100, 100, defaultWorld);
+// let world = createNewWorld(100, 100, defaultWorld, isExplorerMode, "permianAdobe");
+let world = createNewTestWorld(100, 100, isExplorerMode, "permianAdobe");
 
 function App() {
+  
   // const [squaresById, setSquaresById] = useState(newGrid[1]);
   const [turn, setTurn] = useState(0);
-  const [grid, setGrid] = useState(world.grid);
-  const [creatures, setCreatures] = useState(world.creatures);
-  const [structures, setStructures] = useState(world.structures);
-  const [units, setUnits] = useState(world.units);
-  const [playerUnits, setPlayerUnits] = useState(world.playerUnits);
-  // const [playerResources, setPlayerResources] = useState({wood: 0, food: 0});
-  const [plants, setPlants] = useState(world.plants);
+  // const [grid, setGrid] = useState(world.grid);
+  // const [creatures, setCreatures] = useState(world.creatures);
+  // const [structures, setStructures] = useState(world.structures);
+  // const [units, setUnits] = useState(world.units);
+  // const [tribes, setTribes] = useState(world.tribes);
+  // const [playerUnits, setPlayerUnits] = useState(world.playerUnits);
+  // // const [playerResources, setPlayerResources] = useState({wood: 0, food: 0});
+  // const [plants, setPlants] = useState(world.plants);
+  // const [resources, setResources] = useState(world.resources);
   const [selectedUnit, setSelectedUnit] = useState(world.playerUnits[0]);
   const [selectedUnitId, setSelectedUnitId] = useState(null);
   const [playerPosition, setPlayerPosition] = useState({});
 
+  const {
+    plants,
+    creatures,
+    units,
+    tribes,
+    structures,
+    playerUnits,
+    resources
+  } = world;
+
   function updateAll() {
-    setGrid(world.grid);
-    setCreatures(world.creatures);
-    setStructures(world.structures);
-    setUnits(world.units);
-    setPlayerUnits(world.playerUnits);
+    // setGrid(world.grid);
+    // setCreatures(world.creatures);
+    // setStructures(world.structures);
+    // setUnits(world.units);
+    // setTribes(world.tribes);
+    // setPlayerUnits(world.playerUnits);
     setSelectedUnit(world.playerUnits[0]);
-    setPlants(world.plants);
+    // setPlants(world.plants);
+    // setResources(world.resources);
   }
 
   function handleWorldSelect(worldType, tribeName) {
-    world = createNewWorld(100, 100, worldType);
+    world = createNewWorld(100, 100, worldType, isExplorerMode, tribeName);
+
     setTurn(0);
     updateAll();
     // let startSquare = sample(world.landSquares);
@@ -76,6 +94,8 @@ function App() {
     scrollToEntity(selectedUnit);
     // handleTurn();
   }
+
+
 
   function scrollToEntity(entity) {
     const {heightIndex, widthIndex} = entity.currentSquare;
@@ -99,10 +119,10 @@ function App() {
   }
 
   function handleBuildStructure () {
-    if(world.playerResources.wood >= 20) {
+    if(world.player.resources.wood >= 20) {
       const buildSquare = selectedUnit.currentSquare;
       addStructure(buildSquare, structureDirectory.triassicLake4);
-      world.playerResources.wood -= 20;
+      world.player.resources.wood -= 20;
       handleTurn();
     }
   }
@@ -133,7 +153,7 @@ function App() {
   }
 
   function healPlayer() {
-    healEntityFromFood(selectedUnit, world.playerResources);
+    healEntityFromFood(selectedUnit, world.player.resources);
     handleTurn();
   }
 
@@ -167,6 +187,17 @@ function App() {
     }
   }
 
+  function canMoveToSquare(entity, square) {
+    if (!isExplorerMode) {
+      return true;
+    }
+
+    let xDiff = Math.abs(entity.widthIndex - square.widthIndex);
+    let yDiff = Math.abs(entity.heightIndex - square.heightIndex);
+
+    return xDiff <= entity.range && yDiff <= entity.range;
+  }
+
   function handleSquareSelect(squareId) {
     console.log("handleSquareSelect");
     const moveSquare = world.squaresById[squareId];
@@ -177,22 +208,13 @@ function App() {
     //   setSelectedSquareId();
     // }
 
-    if(selectedUnit) {
+    if(selectedUnit && canMoveToSquare(selectedUnit, moveSquare)) {
       console.log("selectedUnit", selectedUnit);
       moveEntityToSquare(selectedUnit, moveSquare);
-      // console.log("selectedUnit");
-      // const playerUnit = playerUnits[0];
-
-      // selectedUnit.heightIndex = heightIndex;
-      // selectedUnit.widthIndex = widthIndex;
-      // selectedUnit.currentSquare = square
-      
-      // setPlayerPosition({heightIndex, widthIndex});
+      handleTurn();
+      setVisibility(moveSquare, 3);
     }
 
-    handleTurn();
-    
-    setVisibility(moveSquare, 3);
     // updateVisibility(moveSquare.heightIndex, moveSquare.widthIndex); 
   }
 
@@ -210,7 +232,18 @@ function App() {
     console.log("movedCreatures", movedCreatures);
     
 
-    setCreatures(creatures);
+    // setCreatures(creatures);
+  }
+
+  function tribeActions(tribes) {
+    for (let index = 0; index < tribes.length; index++) {
+      const tribe = tribes[index];
+      console.log("TRIBE", tribe);
+      
+      tribeAction(tribe);
+      tribe.wood += 10;
+      tribe.techPoints += 70;
+    }
   }
 
   function moveUnits(units) {
@@ -227,12 +260,13 @@ function App() {
     console.log("movedUnits", movedUnits);
     
 
-    setUnits(units);
+    // setUnits(units);
   }
 
   function handleTurn() {
     moveCreatures(creatures);
-    moveUnits(units)
+    moveUnits(units);
+    tribeActions(tribes);
     setTurn(turn + 1);
     console.log("Number of creatures", creatures.length);
     
@@ -245,7 +279,7 @@ function App() {
   }
 
   const wrapperStyles = {
-    height: `${worldParams.size * .8}px`,
+    height: `${worldParams.size * .7}px`,
     width: `${1}px`,
     border: "1px solid red",
     position: "absolute"
@@ -257,7 +291,6 @@ function App() {
   }
   // useEffect()
   console.log("playerPosition.heightIndex", playerPosition.heightIndex);
-  
 
   return (
     <div className="App" style={appStyles}>
@@ -265,37 +298,21 @@ function App() {
         <Background></Background>
         <Grid
           handleSquareSelect={handleSquareSelect}
-          // redHighlightIndexes={redHighlightIndexes}
-          // blueHighlightIndexes={blueHighlightIndexes}
-          // grid={grid}
         />
-        {/* <Units
-          unitArray={unitArray}
-          handleUnitSelect={handleUnitSelect}
-          selectedUnitId={selectedUnitId}
-        /> */}
       </div>
       
-      {/* <Unit
-            // id={unitId}
-            // key={unitId}
-            heightIndex={unitIndex.height}
-            widthIndex={unitIndex.width}
-      /> */}
-      {/* <ActionBar 
-        createUnit={createUnit}
-      /> */}
       <div style={unitsWrapper}>
         {/* <TestPosition /> */}
         <Structures turn={turn} updateNumber={updateNumber} structures={structures}/>
         <Units turn={turn} updateNumber={updateNumber} units={units} handlePlayerAttackEntity={handlePlayerAttackEntity}/>
         <Plants turn={turn} plants={plants} handlePlayerHarvestResource={handlePlayerHarvestResource}/>
+        <Resources turn={turn} resources={resources} handlePlayerHarvestResource={handlePlayerHarvestResource}/>
         <Creatures turn={turn} updateNumber={updateNumber} creatures={creatures} handlePlayerAttackEntity={handlePlayerAttackEntity}/>
         <PlayerUnits turn={turn} playerUnits={playerUnits} handleUnitSelect={handleUnitSelect}/>
         {/* <Player heightIndex={playerPosition.heightIndex} widthIndex={playerPosition.widthIndex} id={"player-1"} currentSquareId={null} heightToSquare={.4} handleUnitSelect={handleUnitSelect}/> */}
       </div>
       
-      <ActionBar handleTurn={handleTurn} handleWorldSelect={handleWorldSelect} healPlayer={healPlayer} turn={turn} playerResources={world.playerResources} handleBuildStructure={handleBuildStructure}/>
+      <ActionBar handleTurn={handleTurn} handleWorldSelect={handleWorldSelect} healPlayer={healPlayer} turn={turn} playerResources={world.player.resources} handleBuildStructure={handleBuildStructure}/>
       <StartScreen worldChoices={worldChoices} isStart={isStart} handleWorldSelect={handleWorldSelect}/>
   </div>
 

@@ -1,214 +1,262 @@
 export default {
-    house1: {
-        name: "House level-1",
-        imgDir: "house1",
-        heightToSquare: .6,
-        widthToHeight: .9,
-        topOffset: -10,
-        leftOffset: 0
-    },
-    house2: {
-        name: "House level-2",
-        imgDir: "house2",
-        heightToSquare: .8,
-        widthToHeight: .9,
-        topOffset: -50,
-        leftOffset: 0
-    },
-    house3: {
-        name: "House level-3",
-        imgDir: "house3",
-        heightToSquare: 1,
-        widthToHeight: .9,
-        topOffset: -50,
-        leftOffset: 0
-    },
-    house4: {
-        name: "House level-4",
-        imgDir: "house4",
-        heightToSquare: 1.5,
-        widthToHeight: 1.2,
-        topOffset: -50,
-        leftOffset: 0
-    },
+    // house1: {
+    //     name: "House level-1",
+    //     imgDir: "house1",
+    //     populationCapacity: 2,
+    //     cost: 40,
+    //     heightToSquare: .6,
+    //     widthToHeight: .9,
+    //     topOffset: -10,
+    //     leftOffset: 0
+    // },
+    // house2: {
+    //     name: "House level-2",
+    //     imgDir: "house2",
+    //     populationCapacity: 2,
+    //     cost: 40,
+    //     heightToSquare: .8,
+    //     widthToHeight: .9,
+    //     topOffset: -50,
+    //     leftOffset: 0
+    // },
+    // house3: {
+    //     name: "House level-3",
+    //     imgDir: "house3",
+    //     populationCapacity: 2,
+    //     cost: 40,
+    //     heightToSquare: 1,
+    //     widthToHeight: .9,
+    //     topOffset: -50,
+    //     leftOffset: 0
+    // },
+    // house4: {
+    //     name: "House level-4",
+    //     imgDir: "house4",
+    //     populationCapacity: 2,
+    //     cost: 40,
+    //     heightToSquare: 1.5,
+    //     widthToHeight: 1.2,
+    //     topOffset: -50,
+    //     leftOffset: 0
+    // },
     permianNomad1: {
         name: "House level-1",
         tribeImgDir: "permian-nomads",
         imgDir: "1",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: .9,
         widthToHeight: 1.2,
-        topOffset: -50,
+        topOffset: -100,
         leftOffset: 0
     },
     permianNomad2: {
         name: "House level-2",
         tribeImgDir: "permian-nomads",
         imgDir: "2",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: 1,
         widthToHeight: 1.2,
-        topOffset: -50,
+        topOffset: -100,
         leftOffset: 0
     },
     permianNomad3: {
         name: "House level-3",
         tribeImgDir: "permian-nomads",
         imgDir: "3",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: 1.3,
         widthToHeight: 1.2,
-        topOffset: -90,
+        topOffset: -140,
         leftOffset: -20
     },
     permianNomad4: {
         name: "House level-4",
         tribeImgDir: "permian-nomads",
         imgDir: "4",
-        heightToSquare: 3,
+        populationCapacity: 2,
+        cost: 40,
+        heightToSquare: 2.5,
         widthToHeight: 1.5,
-        topOffset: -80,
+        topOffset: -120,
         leftOffset: 0
     },
     permianAdobe1: {
         name: "House level-1",
         tribeImgDir: "permian-adobe",
         imgDir: "1",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: .7,
         widthToHeight: 1,
-        topOffset: -30,
+        topOffset: -50,
         leftOffset: -20
     },
     permianAdobe2: {
         name: "House level-2",
         tribeImgDir: "permian-adobe",
         imgDir: "2",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: 1,
         widthToHeight: 1,
-        topOffset: -50,
+        topOffset: -100,
         leftOffset: -30
     },
     permianAdobe3: {
         name: "House level-3",
         tribeImgDir: "permian-adobe",
         imgDir: "3",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: 1.3,
         widthToHeight: 1,
-        topOffset: -80,
-        leftOffset: -40
+        topOffset: -150,
+        leftOffset: -60
     },
     permianAdobe4: {
         name: "House level-4",
         tribeImgDir: "permian-adobe",
         imgDir: "4",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: 1.8,
         widthToHeight: 1,
-        topOffset: -160,
-        leftOffset: -50
+        topOffset: -260,
+        leftOffset: -100
     },
     permianFarmers1: {
         name: "House level-1",
         tribeImgDir: "permian-farmers",
         imgDir: "1",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: .9,
         widthToHeight: 1,
-        topOffset: -50,
-        leftOffset: 0
+        topOffset: -90,
+        leftOffset: -50
     },
     permianFarmers2: {
         name: "House level-2",
         tribeImgDir: "permian-farmers",
         imgDir: "2",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: 1,
         widthToHeight: 1,
-        topOffset: -50,
-        leftOffset: 0
+        topOffset: -100,
+        leftOffset: -50
     },
     permianFarmers3: {
         name: "House level-3",
         tribeImgDir: "permian-farmers",
         imgDir: "3",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: 1.5,
         widthToHeight: 1,
-        topOffset: -70,
-        leftOffset: -40
+        topOffset: -130,
+        leftOffset: -50
     },
     permianFarmers4: {
         name: "House level-4",
         tribeImgDir: "permian-farmers",
         imgDir: "4",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: 1.8,
         widthToHeight: 1,
-        topOffset: -150,
-        leftOffset: -60
+        topOffset: -230,
+        leftOffset: -80
     },
     triassicRiver1: {
         name: "House level-1",
         tribeImgDir: "triassic-river",
         imgDir: "1",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: .9,
         widthToHeight: 1,
-        topOffset: -50,
+        topOffset: -80,
         leftOffset: 0
     },
     triassicRiver2: {
         name: "House level-2",
         tribeImgDir: "triassic-river",
         imgDir: "2",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: 1,
         widthToHeight: 1,
-        topOffset: -50,
+        topOffset: -80,
         leftOffset: 0
     },
     triassicRiver3: {
         name: "House level-3",
         tribeImgDir: "triassic-river",
         imgDir: "3",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: 1.5,
         widthToHeight: 1,
-        topOffset: -70,
+        topOffset: -100,
         leftOffset: -40
     },
     triassicRiver4: {
         name: "House level-4",
         tribeImgDir: "triassic-river",
         imgDir: "4",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: 1.8,
         widthToHeight: 1,
-        topOffset: -60,
-        leftOffset: -60
+        topOffset: -80,
+        leftOffset: -90
     },
     triassicLake1: {
         name: "House level-1",
         tribeImgDir: "triassic-lake",
         imgDir: "1",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: .9,
         widthToHeight: 1,
-        topOffset: -70,
+        topOffset: -120,
         leftOffset: -30
     },
     triassicLake2: {
         name: "House level-2",
         tribeImgDir: "triassic-lake",
         imgDir: "2",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: 1.3,
         widthToHeight: 1,
-        topOffset: -80,
-        leftOffset: -40
+        topOffset: -120,
+        leftOffset: -60
     },
     triassicLake3: {
         name: "House level-3",
         tribeImgDir: "triassic-lake",
         imgDir: "3",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: 1.5,
         widthToHeight: 1,
-        topOffset: -70,
-        leftOffset: -40
+        topOffset: -150,
+        leftOffset: -80
     },
     triassicLake4: {
         name: "House level-4",
         tribeImgDir: "triassic-lake",
         imgDir: "4",
+        populationCapacity: 2,
+        cost: 40,
         heightToSquare: 1.8,
         widthToHeight: 1,
-        topOffset: -180,
-        leftOffset: -50
+        topOffset: -280,
+        leftOffset: -80
     }
 }
