@@ -301,8 +301,8 @@ width: 100,
         targetSpecs: {
             top: 50,
             left: 50,
-height: 100,
-width: 100,
+            height: 100,
+            width: 100,
             color: "green"
         },
         escape: 1
