@@ -130,6 +130,166 @@ width: 100,
 
 export default {
     // All
+      greenFish: {
+        ...genericFish,
+        name: "Green Fish",
+        imgDir: "green-fish",
+    },
+    blueFish: {
+        ...genericFish,
+        name: "Blue Fish",
+        imgDir: "blue-fish",
+    },
+    yellowFish: {
+        ...genericFish,
+        name: "Yellow Fish",
+        imgDir: "yellow-fish",
+    },
+    silverBarb: {
+        ...genericFish,
+        name: "Silver Barb",
+        imgDir: "silver-barb",
+    },
+    hynerpeton: {
+      name: "Hynerpeton",
+      imgDir: "hynerpeton",
+      heightToSquare: 1,
+      widthToHeight: 1.3,
+      hasSwim: true,
+      preyType: "dangerous-medium",
+      isPredator: true,
+      isHumanPredator: false,
+      prey: ["regular-medium", "regular-small", "dangerous-medium", "dangerous-small"],
+      possTerrain: ["grassland", "forest", "marsh", "swampForest", "shallowWater", "deepWater"],
+      activityLevel: 5,
+      hp: 10,
+      hunger: 100,
+      speed: 2,
+      range: 1,
+      aggression: 4,
+      attack: 2,
+      defence: 3,
+      targetSpecs: {
+          top: 50,
+          left: 50,
+height: 100,
+width: 100,
+          color: "green"
+      },
+      escape: 1
+      // offSets: {
+      //     n: {
+      //         topOffset: -20,
+      //         leftOffset: 50,
+      //     },
+      //     s: {
+      //         topOffset: 0,
+      //         leftOffset: 0,
+      //     },
+      //     e: {
+      //         topOffset: -50,
+      //         leftOffset: 30,
+      //     },
+      //     w: {
+      //         topOffset: 0,
+      //         leftOffset: 50,
+      //     }
+      // }
+    },
+    hyneria: {
+      name: "Hyneria",
+      imgDir: "hyneria",
+      heightToSquare: 6,
+      widthToHeight: 1.8,
+      preyType: "dangerous-XXlarge",
+      isPredator: true,
+      isHumanPredator: true,
+      prey: ["human", "dangerous-Xlarge", "regular-Xlarge", "dangerous-large", "regular-large", "regular-medium", "dangerous-medium"],
+      possTerrain: ["shallowWater", "marsh", "deepWater"],
+      activityLevel: 5,
+      hp: 35,
+      hunger: 100,
+      speed: 1.5,
+      range: 1,
+      aggression: 5,
+      attack: 15,
+      defence: 8,
+      targetSpecs: {
+          top: 50,
+          left: 50,
+          height: 100,
+          width: 100,
+          color: "green"
+      },
+      escape: 1,
+      waterOnly: false,
+      isUnderWater: true,
+      // offSets: {
+      //     n: {
+      //         topOffset: -20,
+      //         leftOffset: 50,
+      //     },
+      //     s: {
+      //         topOffset: 0,
+      //         leftOffset: 0,
+      //     },
+      //     e: {
+      //         topOffset: -50,
+      //         leftOffset: 30,
+      //     },
+      //     w: {
+      //         topOffset: 0,
+      //         leftOffset: 50,
+      //     }
+      // }
+    },
+    dunkleosteus: {
+      name: "Dunkleosteus",
+      imgDir: "dunkleost",
+      heightToSquare: 7,
+      widthToHeight: 1.2,
+      preyType: "dangerous-XXlarge",
+      isPredator: true,
+      isHumanPredator: true,
+      prey: ["human", "dangerous-Xlarge", "regular-Xlarge", "dangerous-large", "regular-large", "regular-medium", "dangerous-medium"],
+      possTerrain: ["deepWater"],
+      activityLevel: 3,
+      hp: 45,
+      hunger: 100,
+      speed: 1.5,
+      range: 1,
+      aggression: 5,
+      attack: 20,
+      defence: 6,
+      targetSpecs: {
+          top: 50,
+          left: 50,
+height: 100,
+width: 100,
+          color: "green"
+      },
+      escape: 1,
+      waterOnly: false,
+      isUnderWater: true,
+      // offSets: {
+      //     n: {
+      //         topOffset: -20,
+      //         leftOffset: 50,
+      //     },
+      //     s: {
+      //         topOffset: 0,
+      //         leftOffset: 0,
+      //     },
+      //     e: {
+      //         topOffset: -50,
+      //         leftOffset: 30,
+      //     },
+      //     w: {
+      //         topOffset: 0,
+      //         leftOffset: 50,
+      //     }
+      // }
+  },
     scorpion: {
         name: "scorpion",
         imgDir: "scorp",
@@ -482,7 +642,7 @@ width: 100,
         widthToHeight: 1.2,
         preyType: "dangerous-large",
         isPredator: true,
-        prey: ["regular-large", "regular-medium", "regular-small", "dangerous-medium", "dangerous-small"],
+        prey: [ "human", "regular-large", "regular-medium", "regular-small", "dangerous-medium", "dangerous-small"],
         possTerrain: ["grassland", "desert", "savannah"],
         activityLevel: 5,
         hp: 20,
@@ -501,31 +661,7 @@ width: 100,
         },
         escape: 1
     },
-    greaterEdaphasaurus: {
-        name: "Greater Edaphasaurus",
-        imgDir: "yellow-green-elaph",
-        heightToSquare: 1.8,
-        widthToHeight: 1.5,
-        preyType: "regular-large",
-        isPredator: false,
-        possTerrain: ["grassland", "savannah"],
-        activityLevel: 4,
-        hp: 20,
-        hunger: 100,
-        speed: 3,
-        range: 1,
-        aggression: 1,
-        attack: 5,
-        defence: 5,
-        targetSpecs: {
-            top: 50,
-            left: 50,
-height: 100,
-width: 100,
-            color: "green"
-        },
-        escape: 2
-    },
+    
     greyScutosaurus: {
         name: "Grey Scutosaurus",
         imgDir: "grey-scuta",
@@ -612,6 +748,33 @@ width: 100,
             }
         }
     },
+
+    greaterEdaphasaurus: {
+      name: "Greater Edaphasaurus",
+      imgDir: "yellow-green-elaph",
+      heightToSquare: 1.8,
+      widthToHeight: 1.5,
+      preyType: "regular-large",
+      isPredator: false,
+      possTerrain: ["grassland", "savannah"],
+      activityLevel: 4,
+      hp: 20,
+      hunger: 100,
+      speed: 3,
+      range: 1,
+      aggression: 1,
+      attack: 5,
+      defence: 5,
+      targetSpecs: {
+          top: 50,
+          left: 50,
+height: 100,
+width: 100,
+          color: "green"
+      },
+      escape: 2
+  },
+
     orangeEdaphasaurus: {
         name: "Orange Edaphasaurus",
         imgDir: "orange-elaph",
@@ -1013,26 +1176,7 @@ width: 100,
         },
         escape: 2
     },
-    greenFish: {
-        ...genericFish,
-        name: "Green Fish",
-        imgDir: "green-fish",
-    },
-    blueFish: {
-        ...genericFish,
-        name: "Blue Fish",
-        imgDir: "blue-fish",
-    },
-    yellowFish: {
-        ...genericFish,
-        name: "Yellow Fish",
-        imgDir: "yellow-fish",
-    },
-    silverBarb: {
-        ...genericFish,
-        name: "Silver Barb",
-        imgDir: "silver-barb",
-    },
+    
     // diplodocus: {
     //     name: "Diplodocus",
     //     imgDir: "diplo",
@@ -1052,146 +1196,7 @@ width: 100,
     //     defence: 1,
     //     escape: 1
     // },
-    hynerpeton: {
-        name: "Hynerpeton",
-        imgDir: "hynerpeton",
-        heightToSquare: 1,
-        widthToHeight: 1.3,
-        hasSwim: true,
-        preyType: "dangerous-medium",
-        isPredator: true,
-        isHumanPredator: false,
-        prey: ["regular-medium", "regular-small", "dangerous-medium", "dangerous-small"],
-        possTerrain: ["grassland", "forest", "marsh", "swampForest", "shallowWater", "deepWater"],
-        activityLevel: 5,
-        hp: 10,
-        hunger: 100,
-        speed: 2,
-        range: 1,
-        aggression: 4,
-        attack: 2,
-        defence: 3,
-        targetSpecs: {
-            top: 50,
-            left: 50,
-height: 100,
-width: 100,
-            color: "green"
-        },
-        escape: 1
-        // offSets: {
-        //     n: {
-        //         topOffset: -20,
-        //         leftOffset: 50,
-        //     },
-        //     s: {
-        //         topOffset: 0,
-        //         leftOffset: 0,
-        //     },
-        //     e: {
-        //         topOffset: -50,
-        //         leftOffset: 30,
-        //     },
-        //     w: {
-        //         topOffset: 0,
-        //         leftOffset: 50,
-        //     }
-        // }
-    },
-    hyneria: {
-        name: "Hyneria",
-        imgDir: "hyneria",
-        heightToSquare: 6,
-        widthToHeight: 1.8,
-        preyType: "dangerous-XXlarge",
-        isPredator: true,
-        isHumanPredator: true,
-        prey: ["human", "dangerous-Xlarge", "regular-Xlarge", "dangerous-large", "regular-large", "regular-medium", "dangerous-medium"],
-        possTerrain: ["shallowWater", "marsh", "deepWater"],
-        activityLevel: 5,
-        hp: 35,
-        hunger: 100,
-        speed: 1.5,
-        range: 1,
-        aggression: 5,
-        attack: 15,
-        defence: 8,
-        targetSpecs: {
-            top: 50,
-            left: 50,
-height: 100,
-width: 100,
-            color: "green"
-        },
-        escape: 1,
-        waterOnly: false,
-        isUnderWater: true,
-        // offSets: {
-        //     n: {
-        //         topOffset: -20,
-        //         leftOffset: 50,
-        //     },
-        //     s: {
-        //         topOffset: 0,
-        //         leftOffset: 0,
-        //     },
-        //     e: {
-        //         topOffset: -50,
-        //         leftOffset: 30,
-        //     },
-        //     w: {
-        //         topOffset: 0,
-        //         leftOffset: 50,
-        //     }
-        // }
-    },
-    dunkleosteus: {
-        name: "Dunkleosteus",
-        imgDir: "dunkleost",
-        heightToSquare: 7,
-        widthToHeight: 1.2,
-        preyType: "dangerous-XXlarge",
-        isPredator: true,
-        isHumanPredator: true,
-        prey: ["human", "dangerous-Xlarge", "regular-Xlarge", "dangerous-large", "regular-large", "regular-medium", "dangerous-medium"],
-        possTerrain: ["deepWater"],
-        activityLevel: 3,
-        hp: 45,
-        hunger: 100,
-        speed: 1.5,
-        range: 1,
-        aggression: 5,
-        attack: 20,
-        defence: 6,
-        targetSpecs: {
-            top: 50,
-            left: 50,
-height: 100,
-width: 100,
-            color: "green"
-        },
-        escape: 1,
-        waterOnly: false,
-        isUnderWater: true,
-        // offSets: {
-        //     n: {
-        //         topOffset: -20,
-        //         leftOffset: 50,
-        //     },
-        //     s: {
-        //         topOffset: 0,
-        //         leftOffset: 0,
-        //     },
-        //     e: {
-        //         topOffset: -50,
-        //         leftOffset: 30,
-        //     },
-        //     w: {
-        //         topOffset: 0,
-        //         leftOffset: 50,
-        //     }
-        // }
-    },
+    
     yellowOrnitholestes: {
         name: "Yellow-Ornitholestes",
         imgDir: "yellow-ornitho",
@@ -1290,9 +1295,9 @@ width: 100,
             }
         }
     },
-    baryonx: {
-        name: "Baryonx",
-        imgDir: "baryonx",
+    baryonyx: {
+        name: "Baryonyx",
+        imgDir: "baryonyx",
         heightToSquare: 5,
         widthToHeight: 1.8,
         preyType: "dangerous-XXlarge",
@@ -1306,8 +1311,8 @@ width: 100,
         speed: 1.5,
         range: 1,
         aggression: 5,
-        // attack: 35,
-        attack: 5,
+        attack: 25,
+        //attack: 5,
         defence: 6,
         targetSpecs: {
             top: 50,
@@ -1392,9 +1397,9 @@ width: 100,
         prey: ["regular-mega", "human", "dangerous-Xlarge", "regular-Xlarge", "dangerous-large", "regular-large", "regular-medium", "dangerous-medium"],
         possTerrain: ["desert", "grassland", "forest", "savannah"],
         activityLevel: 4,
-        hp: 90,
+        hp: 85,
         hunger: 100,
-        speed: 1.5,
+        speed: 3,
         range: 1,
         aggression: 5,
         // attack: 35,
@@ -1427,10 +1432,107 @@ width: 100,
             }
         }
     },
+
+    tarbosaurus: {
+      name: "Tarbosaurus",
+      imgDir: "trex-green",
+      heightToSquare: 7,
+      widthToHeight: 1.8,
+      preyType: "dangerous-mega",
+      isPredator: true,
+      isHumanPredator: true,
+      hasSwim: true,
+      prey: ["regular-mega", "human", "dangerous-Xlarge", "regular-Xlarge", "dangerous-large", "regular-large", "regular-medium", "dangerous-medium"],
+      possTerrain: ["desert", "grassland", "forest", "savannah"],
+      activityLevel: 4,
+      hp: 90,
+      hunger: 100,
+      speed: 1.5,
+      range: 1,
+      aggression: 6,
+      // attack: 35,
+      attack: 5,
+      defence: 6,
+      targetSpecs: {
+          top: 50,
+          left: 50,
+height: 100,
+width: 100,
+          color: "green"
+      },
+      escape: 1,
+      offSets: {
+          n: {
+              topOffset: -50,
+              leftOffset: 100,
+          },
+          s: {
+              topOffset: -60,
+              leftOffset: 0,
+          },
+          e: {
+              topOffset: -50,
+              leftOffset: 30,
+          },
+          w: {
+              topOffset: -50,
+              leftOffset: 100,
+          }
+      }
+  },
+
+
+    tyrannosaurus: {
+      name: "Tyrannosaurus",
+      imgDir: "trex-black",
+      heightToSquare: 7.1,
+      widthToHeight: 1.8,
+      preyType: "dangerous-mega",
+      isPredator: true,
+      isHumanPredator: true,
+      prey: ["regular-mega", "human", "dangerous-Xlarge", "regular-Xlarge", "dangerous-large", "regular-large", "regular-medium", "dangerous-medium"],
+      possTerrain: ["desert", "grassland", "forest", "savannah"],
+      activityLevel: 4,
+      hp: 92,
+      hunger: 100,
+      speed: 1,
+      range: 1,
+      aggression: 7,
+      // attack: 35,
+      attack: 5,
+      defence: 6,
+      targetSpecs: {
+          top: 50,
+          left: 50,
+height: 100,
+width: 100,
+          color: "green"
+      },
+      escape: 1,
+      offSets: {
+          n: {
+              topOffset: -50,
+              leftOffset: 100,
+          },
+          s: {
+              topOffset: -60,
+              leftOffset: 0,
+          },
+          e: {
+              topOffset: -50,
+              leftOffset: 30,
+          },
+          w: {
+              topOffset: -50,
+              leftOffset: 100,
+          }
+      }
+  },
+
     spinosaurus: {
         name: "Spinosaurus",
         imgDir: "spino-green",
-        heightToSquare: 10,
+        heightToSquare: 12,
         widthToHeight: 1.8,
         preyType: "dangerous-mega",
         isPredator: true,
@@ -1565,7 +1667,7 @@ width: 100,
         range: 1,
         aggression: 1,
         attack: 3,
-        defence: 10,
+        defence: 15,
         targetSpecs: {
             top: 50,
             left: 50,
@@ -1608,7 +1710,7 @@ width: 100,
         range: 1,
         aggression: 1,
         attack: 3,
-        defence: 13,
+        defence: 20,
         targetSpecs: {
             top: 50,
             left: 50,
@@ -1638,6 +1740,233 @@ width: 100,
             }
         }
     },
+    redStegosaurus: {
+      name: "Red Stegosaurus",
+      imgDir: "red-stego",
+      heightToSquare: 4.8,
+      widthToHeight: 1.4,
+      preyType: "regular-XXXlarge",
+      isPredator: false,
+      possTerrain: ["savannah", "grassland"],
+      activityLevel: 5,
+      hp: 60,
+      hunger: 100,
+      speed: 2,
+      range: 1,
+      aggression: 1,
+      attack: 3,
+      defence: 20,
+      targetSpecs: {
+          top: 50,
+          left: 50,
+height: 100,
+width: 100,
+          color: "green"
+      },
+      escape: 2,
+      topOffset: -130,
+      leftOffset: 100,
+      offSets: {
+          n: {
+              topOffset: -130,
+              leftOffset: 30,
+          },
+          s: {
+              topOffset: -150,
+              leftOffset: -120,
+          },
+          e: {
+              topOffset: -100,
+              leftOffset: -120,
+          },
+          w: {
+              topOffset: -150,
+              leftOffset: 50,
+          }
+      }
+  },
+
+    blueParasaurolophus: {
+      name: "Blue Parasaurolophus",
+      imgDir: "para-blue",
+      heightToSquare: 4.8,
+      widthToHeight: 1.4,
+      preyType: "regular-XXXlarge",
+      isPredator: false,
+      hasSwim: true,
+      possTerrain: ["swamp-forest", "marsh", "forest", "grassland"],
+      activityLevel: 5,
+      hp: 50,
+      hunger: 100,
+      speed: 2.5,
+      range: 1,
+      aggression: 1,
+      attack: 10,
+      defence: 13,
+      targetSpecs: {
+          top: 50,
+          left: 50,
+height: 100,
+width: 100,
+          color: "green"
+      },
+      escape: 2,
+      topOffset: -130,
+      leftOffset: 100,
+      offSets: {
+          n: {
+              topOffset: -130,
+              leftOffset: 30,
+          },
+          s: {
+              topOffset: -150,
+              leftOffset: -120,
+          },
+          e: {
+              topOffset: -100,
+              leftOffset: -120,
+          },
+          w: {
+              topOffset: -150,
+              leftOffset: 50,
+          }
+      }
+  },
+  greyParasaurolophus: {
+    name: "Grey Parasaurolophus",
+    imgDir: "para-grey",
+    heightToSquare: 5,
+    widthToHeight: 1.4,
+    preyType: "regular-XXXlarge",
+    isPredator: false,
+    possTerrain: ["swamp-forest", "marsh", "grassland"],
+    activityLevel: 5,
+    hp: 55,
+    hunger: 100,
+    speed: 2,
+    range: 1,
+    aggression: 1,
+    attack: 12,
+    defence: 15,
+    targetSpecs: {
+        top: 50,
+        left: 50,
+height: 100,
+width: 100,
+        color: "green"
+    },
+    escape: 2,
+    topOffset: -130,
+    leftOffset: 100,
+    offSets: {
+        n: {
+            topOffset: -130,
+            leftOffset: 30,
+        },
+        s: {
+            topOffset: -150,
+            leftOffset: -120,
+        },
+        e: {
+            topOffset: -100,
+            leftOffset: -120,
+        },
+        w: {
+            topOffset: -150,
+            leftOffset: 50,
+        }
+    }
+},
+orangeOrangosaurus: {
+  name: "Orange Oraungosaurus",
+  imgDir: "oraungosaurus",
+  heightToSquare: 4.8,
+  widthToHeight: 1.4,
+  preyType: "regular-XXXlarge",
+  isPredator: false,
+  possTerrain: ["savannah", "desert"],
+  activityLevel: 5,
+  hp: 60,
+  hunger: 100,
+  speed: 2,
+  range: 1,
+  aggression: 1,
+  attack: 12,
+  defence: 15,
+  targetSpecs: {
+      top: 50,
+      left: 50,
+height: 100,
+width: 100,
+      color: "green"
+  },
+  escape: 2,
+  topOffset: -130,
+  leftOffset: 100,
+  offSets: {
+      n: {
+          topOffset: -130,
+          leftOffset: 30,
+      },
+      s: {
+          topOffset: -150,
+          leftOffset: -120,
+      },
+      e: {
+          topOffset: -100,
+          leftOffset: -120,
+      },
+      w: {
+          topOffset: -150,
+          leftOffset: 50,
+      }
+  }
+},
+yellowOraungosaurus: {
+  name: "Yellow Oraungosaurus",
+  imgDir: "oraungosaurus-yellow",
+  heightToSquare: 4.5,
+  widthToHeight: 1.4,
+  preyType: "regular-XXXlarge",
+  isPredator: false,
+  possTerrain: ["savannah", "grassland"],
+  activityLevel: 5,
+  hp: 55,
+  hunger: 100,
+  speed: 2,
+  range: 1,
+  aggression: 1,
+  attack: 10,
+  defence: 14,
+  targetSpecs: {
+      top: 50,
+      left: 50,
+height: 100,
+width: 100,
+      color: "green"
+  },
+  escape: 2,
+  topOffset: -130,
+  leftOffset: 100,
+  offSets: {
+      n: {
+          topOffset: -130,
+          leftOffset: 30,
+      },
+      s: {
+          topOffset: -150,
+          leftOffset: -120,
+      },
+      e: {
+          topOffset: -100,
+          leftOffset: -120,
+      },
+      w: {
+          topOffset: -150,
+          leftOffset: 50,
+      }
+  }
+},
     apatosaurus: {
         ...genericApatosaurus,
         name: "Apatosaurus",

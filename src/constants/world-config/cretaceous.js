@@ -34,7 +34,13 @@ const {
     diplodocus,
     purpleDarter,
     redDarter,
+    yellowOraungosaurus,
+    orangeOrangosaurus,
+    blueParasaurolophus,
+    greyParasaurolophus,
     spinosaurus,
+    tyrannosaurus,
+    tarbosaurus,
     baryonyx
 } = creatureDirectory;
 
@@ -80,7 +86,8 @@ export default {
             {type: "grassland", occurance: 30}, 
             {type: "forest", occurance: 15}, 
             {type: "swampForest", occurance: 10},
-            {type: "marsh", occurance: 5}
+            {type: "marsh", occurance: 5},
+            {type: "desert", occurance: 5},
         ], 0),
     terrainTypes: {
         grassland: {
@@ -89,11 +96,16 @@ export default {
             color: terrainColors.grassland,
             isWater: false,
             creatures: generateWeightedArray([
-                {type: pulmonoscorpius, occurance: 1},
-                {type: scorpion, occurance: 3},
-                {type: apatosaurus, occurance: 2},
-                {type: baryonyx, occurance: 1}
-            ], 50),
+                //{type: pulmonoscorpius, occurance: 1},
+                {type: scorpion, occurance: 30},
+                {type: apatosaurus, occurance: 20},
+                {type: tarbosaurus, occurance: 10},
+                {type: tyrannosaurus, occurance: 5},
+                {type: baryonyx, occurance: 10},
+                {type: yellowOraungosaurus, occurance: 5},
+                {type: blueParasaurolophus, occurance: 10},
+                {type: greyParasaurolophus, occurance: 6}
+            ], 500),
             plants: generateWeightedArray([
                 {type: greenBrownFernClump, occurance: 5},
                 // {type: yellowFern, occurance: 5},
@@ -108,8 +120,10 @@ export default {
             color: terrainColors.forest,
             isWater: false,
             creatures: generateWeightedArray([
-                {type: pulmonoscorpius, occurance: 1},
+                //{type: pulmonoscorpius, occurance: 1},
                 {type: lesserMisophilae, occurance: 3},
+                {type: tarbosaurus, occurance: 1},
+                {type: blueParasaurolophus, occurance: 2},
                 {type: baryonyx, occurance: 1}
             ], 100),
             plants: generateWeightedArray([
@@ -128,10 +142,13 @@ export default {
             color: terrainColors.savannah,
             isWater: false,
             creatures: generateWeightedArray([
-                {type: pulmonoscorpius, occurance: 3},
+                //{type: pulmonoscorpius, occurance: 3},
                 {type: scorpion, occurance: 3},
-                {type: apatosaurus, occurance: 1},
+                {type: apatosaurus, occurance: 2},
                 {type: diplodocus, occurance: 3},
+                {type: tyrannosaurus, occurance: 2},
+                {type: yellowOraungosaurus, occurance: 2},
+                {type: orangeOrangosaurus, occurance: 1}
             ], 500),
             plants: generateWeightedArray([
                 // {type: redFern, occurance: 5},
@@ -142,6 +159,26 @@ export default {
             ], 50),
             resources: []
         },
+        desert: {
+          key: "desert",
+          type: "desert",
+          color: terrainColors.desert,
+          isWater: false,
+          creatures: generateWeightedArray([
+              //{type: pulmonoscorpius, occurance: 1},
+              {type: orangeOrangosaurus, occurance: 1},
+              {type: scorpion, occurance: 3}
+          ], 100),
+          plants: generateWeightedArray([
+              // {type: greenFern, occurance: 3},
+              //{type: tallFern, occurance: 2},  
+              //{type: scalyTreeFern, occurance: 8},
+              // {type: marshPine, occurance: 1},
+              //{type: buttressRoot, occurance: 5},
+              {type: yellowRoundleaf, occurance: 6}
+          ], 20),
+          resources: []
+        },
         marsh: {
             key: "marsh",
             type: "marsh",
@@ -150,10 +187,12 @@ export default {
             isSwim: true,
             creatures: generateWeightedArray([
                 // {type: yellowCrocodile, occurance: 2},
-                {type: redDarter, occurance: 2},
-                {type: purpleDarter, occurance: 2},
-                {type: spinosaurus, occurance: 1}
-            ], 25),
+                {type: redDarter, occurance: 20},
+                {type: purpleDarter, occurance: 20},
+                {type: tarbosaurus, occurance: 6},
+                {type: baryonyx, occurance: 8},
+                {type: spinosaurus, occurance: 5}
+            ], 250),
             plants: generateWeightedArray([
                 {type: horsetail, occurance: 3},
             ], 10),
@@ -168,13 +207,15 @@ export default {
             creatures: generateWeightedArray([
                 // {type: lesserArthropluera, occurance: 2},
                 // {type: greaterArthropluera, occurance: 2},
-                {type: greaterProterogyrinus, occurance: 2},
-                {type: redDarter, occurance: 2},
-                {type: purpleDarter, occurance: 2},
-                {type: spinosaurus, occurance: 1}
+                {type: greaterProterogyrinus, occurance: 20},
+                {type: redDarter, occurance: 20},
+                {type: purpleDarter, occurance: 20},
+                {type: tarbosaurus, occurance: 10},
+                {type: baryonyx, occurance: 10},
+                {type: spinosaurus, occurance: 6}
                 // {type: orangeMeganuera, occurance: 1},
                 // {type: blueMeganuera, occurance: 1},
-            ], 25),
+            ], 250),
             plants: generateWeightedArray([
                 {type: buttressRoot, occurance: 15},
                 {type: tallFern, occurance: 2}
@@ -189,10 +230,11 @@ export default {
             isSwim: true,
             creatures: generateWeightedArray([
                 // {type: yellowCrocodile, occurance: 2},
-                {type: redDarter, occurance: 2},
-                {type: purpleDarter, occurance: 2},
-                {type: spinosaurus, occurance: 1}
-            ], 25),
+                {type: redDarter, occurance: 20},
+                {type: purpleDarter, occurance: 20},
+                {type: baryonyx, occurance: 10},
+                {type: spinosaurus, occurance: 8}
+            ], 250),
             plants: [],
             resources: []
         },

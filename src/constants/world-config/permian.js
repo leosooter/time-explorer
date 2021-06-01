@@ -121,9 +121,9 @@ export default {
     landPower: 25,
     tribes: [permianAdobe, permianFarmers, permianNomads],
     possTerrain: generateWeightedArray([
-            {type: "savannah", occurance: 30}, 
-            {type: "forest", occurance: 5}, 
-            {type: "grassland", occurance: 10},
+            {type: "savannah", occurance: 10}, 
+            {type: "forest", occurance: 2}, 
+            {type: "grassland", occurance: 5},
             {type: "marsh", occurance: 1}
         ], 0),
     terrainTypes: {
