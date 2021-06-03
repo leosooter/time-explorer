@@ -442,7 +442,7 @@ width: 100,
     youngBlueTreeFern: {
         name: "Young Blue Tree Fern",
         imageArray: ["young-blue-tree-fern1.png"],
-        heightToSquare: 1,
+        heightToSquare: .8,
         widthToHeight: 1,
         sizeRange: 10,
         resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [1,2]}],
@@ -490,7 +490,7 @@ width: 100,
     blueTreeFern: {
         name: "Blue Tree Fern",
         imageArray: ["blue-tree-fern1.png", "blue-tree-fern2.png", "blue-tree-fern3.png"],
-        heightToSquare: 1,
+        heightToSquare: 1.5,
         widthToHeight: 1,
         sizeRange: 10,
         resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [1,2]}],
@@ -504,13 +504,22 @@ width: 100,
         }
     },
     ////////////////////////////////// Reeds
-    // reed: {
-    //     name: "Reed",
-    //     imageArray: ["reed1.png", "reed2.png"],
-    //     heightToSquare: 1,
-    //     widthToHeight: .75,
-    //     sizeRange: 20
-    // },
+     reed: {
+         name: "Reed",
+         imageArray: ["reed1.png", "reed2.png"],
+         heightToSquare: 1,
+         widthToHeight: .75,
+         sizeRange: 20,
+         resources: [],
+         health: 5,
+         targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+     },
     //////////////////////////////// Moss
     greenMoss: {
         name: "Green Moss",
