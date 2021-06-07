@@ -1709,6 +1709,88 @@ width: 100,
         },
         name: "Apatosaurus Nomad 4",
         imgDir: "apato-house-4",
+    },
+    woolyMammoth: {
+        name: "Wooly Mammoth",
+        imgDir: "wooly-mammoth",
+        heightToSquare: 3,
+        widthToHeight: 1.4,
+        preyType: "regular-Xlarge",
+        isPredator: false,
+        possTerrain: ["grassland", "forest"],
+        activityLevel: 5,
+        hasSwim: false,
+        hp: 25,
+        hunger: 100,
+        speed: 2,
+        range: 1,
+        aggression: 1,
+        attack: 4,
+        defence: 6,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        },
+        escape: 2,
+        offSets: {
+            ...genericOffsets,
+            s: {
+                topOffset: -100,
+                leftOffset: -100
+            },
+            e: {
+                topOffset: 0,
+                leftOffset: -50
+            },
+            w: {
+                topOffset: -50,
+                leftOffset: 50
+            }
+        }
+    },
+    greyMastodon: {
+        name: "Grey Mastodon",
+        imgDir: "mastadon-grey",
+        heightToSquare: 3,
+        widthToHeight: 1.4,
+        preyType: "regular-Xlarge",
+        isPredator: false,
+        possTerrain: ["savannah", "marsh", "swamp forest"],
+        activityLevel: 5,
+        hasSwim: true,
+        hp: 25,
+        hunger: 100,
+        speed: 2,
+        range: 1,
+        aggression: 1,
+        attack: 4,
+        defence: 6,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        },
+        escape: 2,
+        offSets: {
+            ...genericOffsets,
+            s: {
+                topOffset: -100,
+                leftOffset: -100
+            },
+            e: {
+                topOffset: 0,
+                leftOffset: -50
+            },
+            w: {
+                topOffset: -50,
+                leftOffset: 50
+            }
+        }
     }
 }
 

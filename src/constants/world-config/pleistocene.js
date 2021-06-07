@@ -44,7 +44,9 @@ const {
     yellowKentrosaurus,
     greenKentrosaurus,
     blueStegosaurus,
-    redStegosaurus
+    redStegosaurus,
+    greyMastodon,
+    woolyMammoth
 } = creatureDirectory;
 
 const {
@@ -141,17 +143,7 @@ export default {
             isWater: false,
             terrainPower: 120,
             creatures: generateWeightedArray([
-                {type: scorpion, occurance: 3},
-                {type: yellowOrnitholestes, occurance: 3},
-                {type: greenKentrosaurus, occurance: 3},
-                {type: redStegosaurus, occurance: 2},
-                {type: apatosaurus, occurance: 1},
-                // {type: apatosaurusHouse1, occurance: 1},
-                // {type: apatosaurusHouse2, occurance: 1},
-                // {type: apatosaurusHouse3, occurance: 1},
-                // {type: apatosaurusHouse4, occurance: 1},
-                {type: ceratosaurus, occurance: 2},
-                {type: allosaurus, occurance: 1} 
+                {type: woolyMammoth, occurance: 3}
             ], 500),
             plants: generateWeightedArray([
                 {type: snowPine, occurance: 1},
@@ -166,11 +158,7 @@ export default {
             isWater: false,
             terrainPower: 70,
             creatures: generateWeightedArray([
-                {type: pulmonoscorpius, occurance: 1},
-                {type: greenKentrosaurus, occurance: 3},
-                {type: blueStegosaurus, occurance: 1},
-                {type: allosaurus, occurance: 1},
-                {type: blueOrnitholestes, occurance: 1} 
+                {type: woolyMammoth, occurance: 3}
             ], 100),
             plants: generateWeightedArray([
                 {type: greenFern, occurance: 3},
@@ -186,18 +174,7 @@ export default {
             color: terrainColors.savannah,
             isWater: false,
             creatures: generateWeightedArray([
-                {type: pulmonoscorpius, occurance: 3},
-                {type: scorpion, occurance: 3},
-                {type: yellowOrnitholestes, occurance: 2},
-                {type: yellowKentrosaurus, occurance: 3},
-                {type: redStegosaurus, occurance: 1},
-                {type: ceratosaurus, occurance: 1},
-                {type: sarcophaganax, occurance: 1},
-                {type: apatosaurus, occurance: 1},
-                // {type: apatosaurusHouse1, occurance: 1},
-                // {type: apatosaurusHouse2, occurance: 1},
-                // {type: apatosaurusHouse3, occurance: 1},
-                // {type: apatosaurusHouse4, occurance: 1},
+                {type: greyMastodon, occurance: 3}
             ], 500),
             plants: generateWeightedArray([
                 {type: redFern, occurance: 5},
@@ -216,13 +193,7 @@ export default {
             isSwim: true,
             terrainPower: 30,
             creatures: generateWeightedArray([
-                {type: blueOrnitholestes, occurance: 1},
-                {type: blueStegosaurus, occurance: 1}, 
-                {type: yellowCrocodile, occurance: 1},
-                {type: silverBarb, occurance: 3},
-                {type: yellowFish, occurance: 3},
-                {type: purpleDarter, occurance: 2},
-                {type: redDarter, occurance: 2}
+                {type: greyMastodon, occurance: 3}
             ], 25),
             plants: generateWeightedArray([
                 {type: horsetail, occurance: 3},
@@ -238,10 +209,7 @@ export default {
             isSwim: true,
             terrainPower: 40,
             creatures: generateWeightedArray([
-                {type: blueOrnitholestes, occurance: 1} ,
-                {type: blueStegosaurus, occurance: 1},
-                {type: greenKentrosaurus, occurance: 2},
-                {type: yellowCrocodile, occurance: 1},
+                {type: greyMastodon, occurance: 3},
                 {type: silverBarb, occurance: 3},
                 {type: blueFish, occurance: 3},
                 {type: yellowFish, occurance: 3},
@@ -261,7 +229,6 @@ export default {
             isWater: true,
             isSwim: true,
             creatures: generateWeightedArray([
-                {type: yellowCrocodile, occurance: 1},
                 {type: silverBarb, occurance: 4},
                 {type: blueFish, occurance: 2},
                 {type: purpleDarter, occurance: 2},
