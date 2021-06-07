@@ -49,11 +49,13 @@ const {
     goldenHorsetail,
     giantHorsetail,
     /////////////////////////////////// Trees
-    polycarpus,
-    marshPine,
-    darkMarshPine,
-    buttressRoot,
-    goldenButtressRoot,
+    tallCalamite,
+    yellowLycopsid,
+    shrubLycopsid,
+    greenCalamite,
+    orangeCalamite,
+    purpleWaterCalamite,
+    orangeWaterCalamite,
     /////////////////////////////////// Conifers
     pine,
     darkPine,
@@ -151,8 +153,10 @@ export default {
             ], 50),
             plants: generateWeightedArray([
                 {type: yellowMoss, occurance: 3},
-                {type: greenMoss, occurance: 5},
-                {type: yellowGlobe, occurance: 10},  
+                {type: yellowGlobe, occurance: 3},
+                {type: orangeCalamite, occurance: 1},
+                {type: greenCalamite, occurance: 2}, 
+                {type: tallCalamite, occurance: 1}, 
             ], 50),
             resources: []
         },
@@ -169,6 +173,7 @@ export default {
             plants: generateWeightedArray([
                 {type: yellowMoss, occurance: 3},
                 {type: orangeMoss, occurance: 5},
+                {type: orangeCalamite, occurance: 5},
             ], 10),
             resources: []
         },
@@ -184,7 +189,9 @@ export default {
             ], 25),
             plants: generateWeightedArray([
                 {type: yellowGlobe, occurance: 6},
-                {type: purpleGlobe, occurance: 10}, 
+                {type: purpleGlobe, occurance: 10},
+                {type: orangeWaterCalamite, occurance: 10},
+                {type: purpleWaterCalamite, occurance: 10},  
             ], 10),
             resources: []
         },

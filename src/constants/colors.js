@@ -59,4 +59,14 @@ export const terrainColors = {
         shallowWater: {r:82, g:142, b:172},
         deepWater: {r:47, g:127, b:163},
     },
+    pleistocene: {
+        desert: {r:220, g:170, b:38},
+        savannah: {r:120, g:180, b:108},
+        grassland: {r:240, g:255, b:255},
+        forest: {r:230, g:255, b:255},
+        swampForest: {r:71, g:127, b:131},
+        marsh: {r:34, g:134, b:99},
+        shallowWater: {r:62, g:122, b:152},
+        deepWater: {r:17, g:107, b:143},
+    },
 };

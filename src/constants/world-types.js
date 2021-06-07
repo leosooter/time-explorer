@@ -7,6 +7,7 @@ import permian from "./world-config/permian";
 import triassic from "./world-config/triassic";
 import jurassic from "./world-config/jurassic";
 import cretaceous from "./world-config/cretaceous";
+import pleistocene from "./world-config/pleistocene";
 import testWorld from "./world-config/test-world";
  
 export const desert = {
@@ -22,6 +23,7 @@ export default {
     triassic,
     jurassic,
     cretaceous,
+    pleistocene,
     testWorld
     // ordovician: {
     //     defualtTerrainType: "desert",

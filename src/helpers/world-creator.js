@@ -233,6 +233,7 @@ function morphHue(hue, power) {
 }
 
 function morphColor(baseColor, power) {
+    return baseColor;
     let color = clone(baseColor);
 
     color.r = morphHue(color.r, power);
