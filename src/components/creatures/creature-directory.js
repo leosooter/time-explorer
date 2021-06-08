@@ -565,16 +565,17 @@ width: 100,
         name: "Green Darter",
         imgDir: "green-darter",
     },
+    blueDarter: {
+      ...genericDarter,
+      name: "Blue Darter",
+      imgDir: "blue-meg",
+    },
     purpleDarter: {
         ...genericDarter,
         name: "Purple Darter",
         imgDir: "purple-darter",
     },
-    blueDarter: {
-        ...genericDarter,
-        name: "Blue Darter",
-        imgDir: "blue-meg",
-    },
+    
     // Carboniferous
     greaterProterogyrinus: {
         name: "Greater Proterogyrinus",
@@ -1212,7 +1213,7 @@ width: 100,
         speed: .7,
         range: 1,
         aggression: 5,
-        attack: 5,
+        attack: 3,
         defence: 1,
         targetSpecs: {
             top: 50,
@@ -1239,7 +1240,7 @@ width: 100,
         speed: .7,
         range: 1,
         aggression: 5,
-        attack: 5,
+        attack: 3,
         defence: 1,
         targetSpecs: {
             top: 50,
@@ -1250,6 +1251,106 @@ width: 100,
         },
         escape: 1
     },
+    velociraptor: {
+      name: "Velociraptor",
+      imgDir: "veloc",
+      heightToSquare: 1.8,
+      widthToHeight: 1,
+      preyType: "dangerous-medium",
+      isPredator: true,
+      prey: ["dangerous-medium", "regular-medium", "regular-small", "dangerous-small","regular-tiny", "dangerous-tiny"],
+      possTerrain: ["savannah", "grassland"],
+      activityLevel: 8,
+      hp: 10,
+      hunger: 100,
+      speed: .7,
+      range: 1,
+      aggression: 5,
+      attack: 5,
+      defence: 1,
+      targetSpecs: {
+          top: 50,
+          left: 50,
+height: 100,
+width: 100,
+          color: "green"
+      },
+      escape: 1
+  },
+
+  deinonychus: {
+      name: "Deinonychus",
+      imgDir: "deino-green",
+      heightToSquare: 2.5,
+      widthToHeight: 1,
+      preyType: "dangerous-Xlarge",
+      isPredator: true,
+      hasSwim: true,
+      prey: ["dangerous-medium", "human","regular-medium", "regular-Xlarge", "dangerous-large", "regular-large", "regular-small", "dangerous-small",],
+      possTerrain: ["forest", "marsh", "swampForest"],
+      activityLevel: 8,
+      hp: 20,
+      hunger: 100,
+      speed: .7,
+      range: 1,
+      aggression: 5,
+      attack: 10,
+      defence: 1,
+      targetSpecs: {
+          top: 50,
+          left: 50,
+height: 100,
+width: 100,
+          color: "green"
+      },
+      escape: 1
+  },
+  utahRaptor: {
+      name: "Utah Raptor",
+      imgDir: "utah",
+      heightToSquare: 3.8,
+      widthToHeight: 1.8,
+      preyType: "dangerous-XXlarge",
+      isPredator: true,
+      isHumanPredator: true,
+      hasSwim: true,
+      prey: ["human", "dangerous-Xlarge", "regular-Xlarge", "dangerous-large", "regular-large", "regular-medium", "dangerous-medium"],
+      possTerrain: ["desert", "grassland", "forest", "savannah", "shallowWater"],
+      activityLevel: 3,
+      hp: 42,
+      hunger: 100,
+      speed: 1.5,
+      range: 1,
+      aggression: 5,
+      attack: 22,
+      defence: 6,
+      targetSpecs: {
+          top: 50,
+          left: 50,
+height: 100,
+width: 100,
+          color: "green"
+      },
+      escape: 1,
+      offSets: {
+          n: {
+              topOffset: -20,
+              leftOffset: 50,
+          },
+          s: {
+              topOffset: 0,
+              leftOffset: 0,
+          },
+          e: {
+              topOffset: -50,
+              leftOffset: 30,
+          },
+          w: {
+              topOffset: 0,
+              leftOffset: 50,
+          }
+      }
+  },
     ceratosaurus: {
         name: "Ceratosaurus",
         imgDir: "ceratosaurus",
@@ -1304,7 +1405,7 @@ width: 100,
         isPredator: true,
         isHumanPredator: true,
         prey: ["human", "dangerous-Xlarge", "regular-Xlarge", "dangerous-large", "regular-large", "regular-medium", "dangerous-medium"],
-        possTerrain: ["grassland", "forest", "savannah"],
+        possTerrain: ["grassland", "forest", "marsh"],
         activityLevel: 4,
         hp: 55,
         hunger: 100,
@@ -1539,7 +1640,7 @@ width: 100,
         isHumanPredator: true,
         hasSwim: true,
         prey: ["human", "dangerous-Xlarge", "regular-Xlarge", "dangerous-large", "regular-large", "regular-medium", "dangerous-medium"],
-        possTerrain: ["grassland", "swampForest", "marsh", "shallowWater"],
+        possTerrain: ["grassland", "swampForest", "marsh", "shallowWater", "deepWater"],
         activityLevel: 4,
         hp: 120,
         hunger: 100,
@@ -1740,16 +1841,17 @@ width: 100,
             }
         }
     },
-    redStegosaurus: {
-      name: "Red Stegosaurus",
-      imgDir: "red-stego",
+    brownTriceratops: {
+      name: "Brown Triceratops",
+      imgDir: "tri-brown",
       heightToSquare: 4.8,
       widthToHeight: 1.4,
       preyType: "regular-XXXlarge",
       isPredator: false,
-      possTerrain: ["savannah", "grassland"],
+      hasSwim: true,
+      possTerrain: ["savannah", "grassland", "swamp-forest", "marsh"],
       activityLevel: 5,
-      hp: 60,
+      hp: 58,
       hunger: 100,
       speed: 2,
       range: 1,
@@ -1759,8 +1861,8 @@ width: 100,
       targetSpecs: {
           top: 50,
           left: 50,
-height: 100,
-width: 100,
+          height: 100,
+          width: 100,
           color: "green"
       },
       escape: 2,
@@ -1785,6 +1887,148 @@ width: 100,
           }
       }
   },
+
+  greyTriceratops: {
+    name: "Grey Triceratops",
+    imgDir: "tri-grey",
+    heightToSquare: 5,
+    widthToHeight: 1.4,
+    preyType: "regular-XXXlarge",
+    isPredator: false,
+    hasSwim: true,
+    possTerrain: ["savannah", "grassland", "swamp-forest", "marsh"],
+    activityLevel: 5,
+    hp: 60,
+    hunger: 100,
+    speed: 2,
+    range: 1,
+    aggression: 1,
+    attack: 3,
+    defence: 20,
+    targetSpecs: {
+        top: 50,
+        left: 50,
+height: 100,
+width: 100,
+        color: "green"
+    },
+    escape: 2,
+    topOffset: -130,
+    leftOffset: 100,
+    offSets: {
+        n: {
+            topOffset: -130,
+            leftOffset: 30,
+        },
+        s: {
+            topOffset: -150,
+            leftOffset: -120,
+        },
+        e: {
+            topOffset: -100,
+            leftOffset: -120,
+        },
+        w: {
+            topOffset: -150,
+            leftOffset: 50,
+        }
+    }
+},
+
+greenStyracosaurus: {
+  name: "Green Styracosaurus",
+  imgDir: "styrack-green",
+  heightToSquare: 4,
+  widthToHeight: 1.4,
+  preyType: "regular-XXlarge",
+  isPredator: false,
+  hasSwim: true,
+  possTerrain: ["savannah", "grassland", "swamp-forest", "marsh"],
+  activityLevel: 5,
+  hp: 55,
+  hunger: 100,
+  speed: 2,
+  range: 1,
+  aggression: 1,
+  attack: 3,
+  defence: 20,
+  targetSpecs: {
+      top: 50,
+      left: 50,
+height: 100,
+width: 100,
+      color: "green"
+  },
+  escape: 2,
+  topOffset: -130,
+  leftOffset: 100,
+  offSets: {
+      n: {
+          topOffset: -130,
+          leftOffset: 30,
+      },
+      s: {
+          topOffset: -150,
+          leftOffset: -120,
+      },
+      e: {
+          topOffset: -100,
+          leftOffset: -120,
+      },
+      w: {
+          topOffset: -150,
+          leftOffset: 50,
+      }
+  }
+},
+
+blueStyracosaurus: {
+  name: "Blue Styracosaurus",
+  imgDir: "styrack-blue",
+  heightToSquare: 3.8,
+  widthToHeight: 1.4,
+  preyType: "regular-XXlarge",
+  isPredator: false,
+  hasSwim: true,
+  possTerrain: ["forest", "grassland", "swamp-forest", "marsh"],
+  activityLevel: 5,
+  hp: 52,
+  hunger: 100,
+  speed: 2,
+  range: 1,
+  aggression: 1,
+  attack: 3,
+  defence: 20,
+  targetSpecs: {
+      top: 50,
+      left: 50,
+height: 100,
+width: 100,
+      color: "green"
+  },
+  escape: 2,
+  topOffset: -130,
+  leftOffset: 100,
+  offSets: {
+      n: {
+          topOffset: -130,
+          leftOffset: 30,
+      },
+      s: {
+          topOffset: -150,
+          leftOffset: -120,
+      },
+      e: {
+          topOffset: -100,
+          leftOffset: -120,
+      },
+      w: {
+          topOffset: -150,
+          leftOffset: 50,
+      }
+  }
+},
+
 
     blueParasaurolophus: {
       name: "Blue Parasaurolophus",

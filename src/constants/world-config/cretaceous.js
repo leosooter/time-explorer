@@ -41,7 +41,14 @@ const {
     spinosaurus,
     tyrannosaurus,
     tarbosaurus,
-    baryonyx
+    baryonyx,
+    greyTriceratops,
+    brownTriceratops,
+    greenStyracosaurus,
+    blueStyracosaurus,
+    utahRaptor,
+    deinonychus,
+    velociraptor,
 } = creatureDirectory;
 
 const {
@@ -133,7 +140,14 @@ export default {
                 {type: baryonyx, occurance: 1},
                 {type: yellowOraungosaurus, occurance: 5},
                 {type: blueParasaurolophus, occurance: 10},
-                {type: greyParasaurolophus, occurance: 6}
+                {type: greyParasaurolophus, occurance: 6},
+                {type: blueStyracosaurus, occurance: 5},
+                {type: greenStyracosaurus, occurance: 5},
+                {type: greyTriceratops, occurance: 5},
+                {type: brownTriceratops, occurance: 5},
+                {type: deinonychus, occurance: 12},
+                {type: utahRaptor, occurance: 10},
+                {type: velociraptor, occurance: 18},
             ], 500),
             plants: generateWeightedArray([
                 {type: greenBrownFernClump, occurance: 10},
@@ -159,9 +173,11 @@ export default {
             isWater: false,
             creatures: generateWeightedArray([
                 //{type: pulmonoscorpius, occurance: 1},
-                {type: lesserMisophilae, occurance: 3},
-                {type: tarbosaurus, occurance: 1},
-                {type: blueParasaurolophus, occurance: 2},
+                {type: lesserMisophilae, occurance: 5},
+                {type: tarbosaurus, occurance: 2},
+                {type: blueParasaurolophus, occurance: 4},
+                {type: blueStyracosaurus, occurance: 5},
+                {type: deinonychus, occurance: 3},
                 {type: baryonyx, occurance: 1}
             ], 100),
             plants: generateWeightedArray([
@@ -197,10 +213,16 @@ export default {
             isWater: false,
             creatures: generateWeightedArray([
                 //{type: pulmonoscorpius, occurance: 3},
-                {type: scorpion, occurance: 3},
+                {type: scorpion, occurance: 5},
                 {type: apatosaurus, occurance: 2},
                 {type: diplodocus, occurance: 3},
                 {type: tyrannosaurus, occurance: 2},
+                {type: greenStyracosaurus, occurance: 5},
+                {type: greyTriceratops, occurance: 5},
+                {type: brownTriceratops, occurance: 5},
+                {type: velociraptor, occurance: 4},
+                {type: utahRaptor, occurance: 3},
+                {type: deinonychus, occurance: 2},
                 {type: yellowOraungosaurus, occurance: 2},
                 {type: orangeOrangosaurus, occurance: 1}
             ], 500),
@@ -222,6 +244,8 @@ export default {
           creatures: generateWeightedArray([
               //{type: pulmonoscorpius, occurance: 1},
               {type: orangeOrangosaurus, occurance: 1},
+              {type: brownTriceratops, occurance: 1},
+              {type: velociraptor, occurance: 4},
               {type: scorpion, occurance: 3}
           ], 100),
           plants: generateWeightedArray([
@@ -244,6 +268,12 @@ export default {
                 {type: purpleDarter, occurance: 20},
                 {type: tarbosaurus, occurance: 6},
                 {type: baryonyx, occurance: 8},
+                {type: blueStyracosaurus, occurance: 5},
+                {type: greenStyracosaurus, occurance: 5},
+                {type: greyTriceratops, occurance: 5},
+                {type: brownTriceratops, occurance: 5},
+                {type: utahRaptor, occurance: 8},
+                {type: deinonychus, occurance: 8},
                 {type: spinosaurus, occurance: 5}
             ], 250),
             plants: generateWeightedArray([
@@ -263,12 +293,18 @@ export default {
             creatures: generateWeightedArray([
                 // {type: lesserArthropluera, occurance: 2},
                 // {type: greaterArthropluera, occurance: 2},
-                {type: greaterProterogyrinus, occurance: 20},
+                {type: greaterProterogyrinus, occurance: 5},
                 {type: redDarter, occurance: 20},
                 {type: purpleDarter, occurance: 20},
                 {type: tarbosaurus, occurance: 5},
                 {type: baryonyx, occurance: 5},
-                {type: spinosaurus, occurance: 2}
+                {type: spinosaurus, occurance: 2},
+                {type: blueStyracosaurus, occurance: 5},
+                {type: greenStyracosaurus, occurance: 5},
+                {type: greyTriceratops, occurance: 5},
+                {type: brownTriceratops, occurance: 5},
+                {type: utahRaptor, occurance: 8},
+                {type: deinonychus, occurance: 8},
                 // {type: orangeMeganuera, occurance: 1},
                 // {type: blueMeganuera, occurance: 1},
             ], 250),

@@ -33,9 +33,9 @@ let updateNumber = 0;
 
 const creatureActionChance = 1;
 
-let defaultWorld = "devonian";
+let defaultWorld = "ultrarealm";
 let isExplorerMode = true;
- isExplorerMode = false;
+isExplorerMode = false;
 
 // let world = createNewWorld(100, 100, defaultWorld, isExplorerMode, "permianAdobe");
 let world = createNewTestWorld(100, 100, isExplorerMode, "permianAdobe");
