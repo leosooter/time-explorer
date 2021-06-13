@@ -1,5 +1,6 @@
 import creatureDirectory from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
+import resourceDirectory from "../../components/resources/resource-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
 import {terrainColors as colors} from "../colors";
 
@@ -37,6 +38,17 @@ const {
     greenMoss,
     redFern
 } = plantDirectory;
+
+
+const {
+  largeBlackRock,
+  largeDarkRedRock,
+  largeGreyRock,
+  largeRedRock,
+  largeYellowRock,
+  xLargeGreyRock
+} = resourceDirectory;
+
 
 /*
 Terrain Types define plant density and animal habitat and player movement types
@@ -90,7 +102,11 @@ export default {
                 {type: yellowGlobe, occurance: 3},  
                 {type: polycarpus, occurance: 1}
             ], 50),
-            resources: []
+            resources: [
+              // {type: largeBlackRock, occurance: 1},
+              // {type: largeGreyRock, occurance: 1},
+              // {type: xLargeGreyRock, occurance: 1},
+            ]
         },
         forest: {
             key: "forest",
@@ -116,7 +132,11 @@ export default {
                 {type: darkMarshPine, occurance: 7},
                 {type: buttressRoot, occurance: 1},
             ], 20),
-            resources: []
+            resources: [
+              // {type: largeBlackRock, occurance: 1},
+              // {type: largeGreyRock, occurance: 1},
+              // {type: xLargeGreyRock, occurance: 1},
+            ]
         },
         savannah: {
             key: "savannah",
@@ -135,7 +155,10 @@ export default {
                 {type: redFern, occurance: 5},
                 {type: polycarpus, occurance: 1}
             ], 50),
-            resources: []
+            resources: [
+              // {type: largeYellowRock, occurance: 1},
+              // {type: largeBlackRock, occurance: 1},
+            ]
         },
         marsh: {
             key: "marsh",

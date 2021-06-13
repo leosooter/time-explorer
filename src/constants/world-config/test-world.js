@@ -39,14 +39,14 @@ export default {
     possTerrain: [],
     tribes: [permianAdobe, permianFarmers, permianNomads],
     terrainTypes: {
-        savannah: {
-            key: "savannah",
-            type: "savannah",
-            color: terrainColors.savannah,
-            isWater: false,
-            isSwim: false,
-            creatures:[],
-            plants: []
-        }
-    }
+      savannah: {
+        key: "savannah",
+        type: "savannah",
+        color: terrainColors.savannah,
+        isWater: false,
+        creatures: [],
+        plants: [],
+        resources: []
+    },
+  }
 }

@@ -28,6 +28,9 @@ const facingDirs = ["n","s","e","w","ne","nw","se","sw"];
 
 export function getNewCreature(creatureType, square) {
     const creature = clone(creatureType);
+    if(!square) {
+      console.log(creatureType, square)
+    }
     creature.id = `creature-${creatureId}`;
     creature.currentSquare = square;
     creature.heightIndex = square.heightIndex;

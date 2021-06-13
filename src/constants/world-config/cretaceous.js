@@ -1,5 +1,6 @@
 import creatureDirectory from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
+import resourceDirectory from "../../components/resources/resource-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
 import {terrainColors as colors} from "../colors";
 import structureDirectory from "../../components/structures/structure-directory";
@@ -49,6 +50,8 @@ const {
     utahRaptor,
     deinonychus,
     velociraptor,
+    greenMosasaurus,
+    blueMosasaurus
 } = creatureDirectory;
 
 const {
@@ -91,6 +94,18 @@ const {
     youngBlueTreeFern,
     youngLightGreenTreeFern,
 } = plantDirectory;
+
+
+const {
+  largeBlackRock,
+  largeDarkRedRock,
+  largeGreyRock,
+  largeRedRock,
+  largeYellowRock,
+  xLargeGreyRock
+} = resourceDirectory;
+
+
 
 /*
 Terrain Types define plant density and animal habitat and player movement types
@@ -164,7 +179,11 @@ export default {
                 {type: fern, occurance: 4},
                 {type: darkFern, occurance: 1}
             ], 50),
-            resources: []
+            resources: [
+              // {type: largeYellowRock, occurance: 1},
+              // {type: largeGreyRock, occurance: 1},
+              // {type: xLargeGreyRock, occurance: 1}
+            ]            
         },
         forest: {
             key: "forest",
@@ -174,9 +193,9 @@ export default {
             creatures: generateWeightedArray([
                 //{type: pulmonoscorpius, occurance: 1},
                 {type: lesserMisophilae, occurance: 5},
-                {type: tarbosaurus, occurance: 2},
+                {type: tarbosaurus, occurance: 1},
                 {type: blueParasaurolophus, occurance: 4},
-                {type: blueStyracosaurus, occurance: 5},
+                {type: blueStyracosaurus, occurance: 4},
                 {type: deinonychus, occurance: 3},
                 {type: baryonyx, occurance: 1}
             ], 100),
@@ -204,7 +223,11 @@ export default {
                 {type: greyUmbrellaPine, occurance: 1},
                 {type: silverFir, occurance: 1}
             ], 20),
-            resources: []
+            resources: [
+              // {type: largeBlackRock, occurance: 1},
+              // {type: largeGreyRock, occurance: 1},
+              // {type: xLargeGreyRock, occurance: 1}
+            ]
         },
         savannah: {
             key: "savannah",
@@ -234,7 +257,9 @@ export default {
                 {type: yellowRoundleaf, occurance: 3},
                 {type: orangeRoundleaf, occurance: 1}
             ], 50),
-            resources: []
+            resources: [
+              // {type: largeYellowRock, occurance: 1}
+            ]
         },
         desert: {
           key: "desert",
@@ -254,7 +279,10 @@ export default {
               {type: redFernClump, occurance: 6},
               {type: redFern, occurance: 6}
           ], 200),
-          resources: []
+          resources: [
+            // {type: largeRedRock, occurance: 2},
+            // {type: largeDarkRedRock, occurance: 1}
+          ]
         },
         marsh: {
             key: "marsh",
@@ -342,7 +370,9 @@ export default {
                 // {type: yellowCrocodile, occurance: 2},
                 {type: redDarter, occurance: 20},
                 {type: purpleDarter, occurance: 20},
-                {type: spinosaurus, occurance: 2}
+                {type: spinosaurus, occurance: 1},
+                {type: blueMosasaurus, occurance: 10},
+                {type: greenMosasaurus, occurance: 5}
             ], 2500),
             plants: [],
             resources: []

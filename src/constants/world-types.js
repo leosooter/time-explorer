@@ -7,7 +7,21 @@ import permian from "./world-config/permian";
 import triassic from "./world-config/triassic";
 import jurassic from "./world-config/jurassic";
 import cretaceous from "./world-config/cretaceous";
+import pleistocene from "./world-config/pleistocene";
 import testWorld from "./world-config/test-world";
+
+export const worldNames = {
+  ORDOVICIAN: "ordovician",
+  DEVONIAN: "devonian",
+  CARBONIFEROUS: "carboniferous",
+  PERMIAN: "permian",
+  TRIASSIC: "triassic",
+  JURASSIC: "jurassic",
+  CREATACCEOUS: "cretaceous",
+  PLEISTOCENE: "pleistocene",
+  ULTRA_REALM: "ultraRealm",
+  TEST_WORLD: "testWorld",
+}
  
 export const desert = {
     key: "desert",
@@ -22,7 +36,9 @@ export default {
     triassic,
     jurassic,
     cretaceous,
-    testWorld
+    pleistocene,
+    ultraRealm,
+    testWorld,
     // ordovician: {
     //     defualtTerrainType: "desert",
     //     waterPoints: [10, 20],

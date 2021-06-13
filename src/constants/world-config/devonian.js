@@ -1,45 +1,21 @@
 import creatureDirectory from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
+import resourceDirectory from "../../components/resources/resource-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
 import {terrainColors as colors} from "../colors";
 
 const terrainColors = colors.devonian;
 
 const {
-    greaterArthropluera,
-    lesserArthropluera,
-    kingPulmonoscorpius,
-    pulmonoscorpius,
-    scorpion,
-    greaterMisophilae,
-    lesserMisophilae,
-    greaterProterogyrinus,
-    yellowCrocodile,
     purpleDarter,
     redDarter,
-    redLystosaurus,
-    yellowHerreresaurus,
-    brownPostosuchus,
-    greenPostosuchus,
-    apatosaurus,
-    apatosaurusHouse1,
-    apatosaurusHouse2,
-    apatosaurusHouse3,
-    apatosaurusHouse4,
     silverBarb,
     blueFish,
     yellowFish,
     greenFish,
-    allosaurus,
-    sarcophaganax,
-    ceratosaurus,
-    yellowOrnitholestes,
-    blueOrnitholestes,
-    yellowKentrosaurus,
-    greenKentrosaurus,
-    blueStegosaurus,
-    redStegosaurus,
     hyneria,
+    scorpion,
+    pulmonoscorpius,
     hynerpeton,
     dunkleosteus
 } = creatureDirectory;
@@ -49,11 +25,13 @@ const {
     goldenHorsetail,
     giantHorsetail,
     /////////////////////////////////// Trees
-    polycarpus,
-    marshPine,
-    darkMarshPine,
-    buttressRoot,
-    goldenButtressRoot,
+    tallCalamite,
+    yellowLycopsid,
+    shrubLycopsid,
+    greenCalamite,
+    orangeCalamite,
+    purpleWaterCalamite,
+    orangeWaterCalamite,
     /////////////////////////////////// Conifers
     pine,
     darkPine,
@@ -94,6 +72,18 @@ const {
     greenRoundleaf,
     redwood
 } = plantDirectory;
+
+
+const {
+  largeBlackRock,
+  largeDarkRedRock,
+  largeGreyRock,
+  largeRedRock,
+  largeYellowRock,
+  xLargeGreyRock
+} = resourceDirectory;
+
+
 
 /*
 Terrain Types define plant density and animal habitat and player movement types
@@ -136,7 +126,10 @@ export default {
             ], 500),
             plants: generateWeightedArray([
             ], 100),
-            resources: []
+            resources: [
+              // {type: largeGreyRock, occurance: 1},
+              // {type: xLargeGreyRock, occurance: 1},
+            ]
         },
         grassland: {
             key: "grassland",
@@ -151,10 +144,14 @@ export default {
             ], 50),
             plants: generateWeightedArray([
                 {type: yellowMoss, occurance: 3},
-                {type: greenMoss, occurance: 5},
-                {type: yellowGlobe, occurance: 10},  
+                {type: yellowGlobe, occurance: 3},
+                {type: orangeCalamite, occurance: 1},
+                {type: greenCalamite, occurance: 2}, 
+                {type: tallCalamite, occurance: 1}, 
             ], 50),
-            resources: []
+            resources: [
+              // {type: largeYellowRock, occurance: 1},
+            ]
         },
         savannah: {
             key: "savannah",
@@ -169,8 +166,11 @@ export default {
             plants: generateWeightedArray([
                 {type: yellowMoss, occurance: 3},
                 {type: orangeMoss, occurance: 5},
+                {type: orangeCalamite, occurance: 5},
             ], 10),
-            resources: []
+            resources: [
+              // {type: largeYellowRock, occurance: 1},
+            ]
         },
         marsh: {
             key: "marsh",
@@ -184,7 +184,9 @@ export default {
             ], 25),
             plants: generateWeightedArray([
                 {type: yellowGlobe, occurance: 6},
-                {type: purpleGlobe, occurance: 10}, 
+                {type: purpleGlobe, occurance: 10},
+                {type: orangeWaterCalamite, occurance: 10},
+                {type: purpleWaterCalamite, occurance: 10},  
             ], 10),
             resources: []
         },

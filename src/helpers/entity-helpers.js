@@ -528,4 +528,47 @@ Unit action logic
     - If food low
     - If wood low
     - If Housing low
+
+
+
+
+
+
+
+
+    Creature action logic
+
+    Every turn, creature can do one of:
+    Nothing
+    Turn
+    Attack
+    Travel
+    Travel + Attack
+
+    helperFunctions
+        checkOutwardsFromPoint
+        findPathToPoint
+
+    evaluateSurroundings-
+        logThreats
+        logTargets
+
+    faceSquare
+    movetToSquare
+
+    moveAwayFromThreats
+    moveTowardTarget
+    isTargetInRange
+    attackTarget
+
+
+
+
+
+    Single
+
+    Group
+
 */
+
+

@@ -51,6 +51,152 @@ export default {
             color: "green"
         }
     },
+
+    /////////////////////////////////// Primitive Trees
+    greenCalamite: {
+        name: "Green Calamite",
+        imageArray: ["succulent-green1.png", "succulent-green2.png", "succulent-green3.png", "succulent-green4.png"],
+        heightToSquare: 2.6,
+        widthToHeight: .1,
+        sizeRange: 20,
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    orangeCalamite: {
+        name: "Orange Calamite",
+        imageArray: ["succulent-orange1.png", "succulent-orange2.png", "succulent-orange3.png"],
+        heightToSquare: 2.6,
+        widthToHeight: .2,
+        sizeRange: 20,
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    orangeWaterCalamite: {
+        name: "Orange Water Calamite",
+        imageArray: ["succulent-orange-water1.png", "succulent-orange-water2.png", "succulent-orange-water3.png", "succulent-orange-water4.png"],
+        heightToSquare: 2.6,
+        widthToHeight: .2,
+        sizeRange: 20,
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    purpleWaterCalamite: {
+        name: "Purple Water Calamite",
+        imageArray: ["succulent-purple-water1.png", "succulent-purple-water2.png", "succulent-purple-water3.png"],
+        heightToSquare: 2.6,
+        widthToHeight: .2,
+        sizeRange: 20,
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    tallCalamite: {
+        name: "Tall Calamite",
+        imageArray: ["tall-calamite1.png", "tall-calamite2.png", "tall-calamite3.png", "tall-calamite4.png", "tall-calamite5.png", "tall-calamite6.png", "tall-calamite7.png"],
+        heightToSquare: 2.8,
+        widthToHeight: .34,
+        sizeRange: 20,
+        resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [2,3]}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    greenLycopsid: {
+        name: "Green Lycopsid",
+        imageArray: ["lyco-green1.png", "lyco-green2.png", "lyco-green3.png"],
+        heightToSquare: 2.2,
+        widthToHeight: .54,
+        sizeRange: 20,
+        resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [2,3]}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    yellowLycopsid: {
+        name: "Yellow Lycopsid",
+        imageArray: ["lyco-yellow1.png", "lyco-yellow2.png", "lyco-yellow3.png"],
+        heightToSquare: 2.2,
+        widthToHeight: .54,
+        sizeRange: 20,
+        resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [2,3]}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    shrubLycopsid: {
+        name: "Shrub Lycopsid",
+        imageArray: ["lyco-low1.png", "lyco-low2.png", "lyco-low3.png", "lyco-low4.png"],
+        heightToSquare: 2.2,
+        widthToHeight: .54,
+        sizeRange: 20,
+        resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [2,3]}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    monkeyPuzzle: {
+        name: "Monkey Puzzle",
+        imageArray: ["monkey-puzzle1.png", "monkey-puzzle2.png", "monkey-puzzle3.png", "monkey-puzzle4.png"],
+        heightToSquare: 2.2,
+        widthToHeight: .54,
+        sizeRange: 20,
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
     /////////////////////////////////// Trees
     polycarpus: {
         name: "Polycarpus",
@@ -219,6 +365,54 @@ export default {
         heightToSquare: 5,
         widthToHeight: .75,
         sizeRange: 20,
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    snowPine: {
+        name: "Snowy Pine",
+        imageArray: ["snow-pine1.png", "snow-pine2.png"],
+        heightToSquare: 3,
+        widthToHeight: .75,
+        sizeRange: 100,
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    snowFir: {
+        name: "Snowy Fir",
+        imageArray: ["snow-fir1.png", "snow-fir2.png", "snow-fir3.png", "snow-fir4.png", "snow-fir5.png"],
+        heightToSquare: 5,
+        widthToHeight: .75,
+        sizeRange: 100,
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    snowSpruce: {
+        name: "Snowy Spruce",
+        imageArray: ["snow-spruce1.png", "snow-spruce2.png", "snow-spruce3.png"],
+        heightToSquare: 3.5,
+        widthToHeight: .75,
+        sizeRange: 100,
         resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
         health: 20,
         targetSpecs: {

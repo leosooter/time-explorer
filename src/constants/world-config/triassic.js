@@ -145,7 +145,8 @@ export default {
             ], 100),
             resources: generateWeightedArray([
                 // {type: largeRedRock, occurance: 1},
-                {type: largeYellowRock, occurance: 1},
+                // {type: largeYellowRock, occurance: 1},
+                // {type: largeDarkRedRock, occurance: 1}
             ], 100)
         },
         grassland: {
@@ -168,7 +169,9 @@ export default {
                 {type: orangeRoundleaf, occurance: 1}
             ], 50),
             resources: generateWeightedArray([
-                {type: xLargeGreyRock, occurance: 1},
+                // {type: xLargeGreyRock, occurance: 1},
+                // {type: largeYellowRock, occurance: 1},
+                // {type: largeGreyRock, occurance: 1},
             ], 200)
         },
         forest: {
@@ -190,7 +193,8 @@ export default {
                 {type: scalyTreeFern, occurance: 5}
             ], 20),
             resources: generateWeightedArray([
-                {type: largeGreyRock, occurance: 1},
+                // {type: largeGreyRock, occurance: 1},
+                // {type: largeBlackRock, occurance: 1},
             ], 200)
         },
         savannah: {
@@ -215,7 +219,7 @@ export default {
                 {type: yellowRoundleaf, occurance: 1}
             ], 50),
             resources: generateWeightedArray([
-                {type: largeYellowRock, occurance: 1},
+                // {type: largeYellowRock, occurance: 1},
             ], 100)
         },
         marsh: {
