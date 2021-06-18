@@ -213,9 +213,9 @@ export default {
             isWater: true,
             isSwim: true,
             creatures: generateWeightedArray([
-                {type: dunkleosteus, occurance: 1},
+                {type: dunkleosteus, occurance: 2},
                 {type: silverBarb, occurance: 2},
-                {type: greenFish, occurance: 300},
+                {type: greenFish, occurance: 5},
             ], 100),
             plants: [],
             resources: []

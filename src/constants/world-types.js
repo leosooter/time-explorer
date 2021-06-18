@@ -8,6 +8,7 @@ import triassic from "./world-config/triassic";
 import jurassic from "./world-config/jurassic";
 import cretaceous from "./world-config/cretaceous";
 import pleistocene from "./world-config/pleistocene";
+import ultraRealm from "./world-config/ultra-realm";
 import testWorld from "./world-config/test-world";
 
 export const worldNames = {

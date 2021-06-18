@@ -77,8 +77,23 @@ export const terrainColors = {
         deepWater: {r:17, g:107, b:143},
     },
     ultraRealm: {
-      grassland: {r:20, g:0, b:0},
+      savannah: {r:20, g:0, b:0},
+      forest: {r:20, g:20, b:0},
+      marsh: {r:30, g:30, b:10},
       shallowWater: {r:70, g:40, b:120},
       deepWater: {r:70, g:40, b:120},
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+

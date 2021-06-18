@@ -58,8 +58,8 @@ const genericFish = {
     targetSpecs: {
             top: 50,
             left: 50,
-height: 100,
-width: 100,
+            height: 100,
+            width: 100,
             color: "green"
         },
     escape: 1,
@@ -103,8 +103,8 @@ const genericApatosaurus = {
     targetSpecs: {
             top: 50,
             left: 50,
-height: 100,
-width: 100,
+            height: 100,
+            width: 100,
             color: "green"
         },
     escape: 1,
@@ -173,8 +173,8 @@ export default {
       targetSpecs: {
           top: 50,
           left: 50,
-height: 100,
-width: 100,
+            height: 100,
+            width: 100,
           color: "green"
       },
       escape: 1,
@@ -252,7 +252,7 @@ width: 100,
       preyType: "dangerous-XXlarge",
       isPredator: true,
       isHumanPredator: true,
-      prey: ["regular-XXlarge", "regular-Xlarge", "dangerous-Xlarge", "dangerous-XXlarge", "regular-large", "human", "dangerous-large"],
+      prey: ["regular-XXlarge", "regular-bnv cXlarge", "dangerous-Xlarge", "dangerous-XXlarge", "regular-large", "human", "dangerous-large"],
       possTerrain: ["deepWater"],
       activityLevel: 3,
       hp: 70,
@@ -265,8 +265,8 @@ width: 100,
       targetSpecs: {
           top: 50,
           left: 50,
-height: 100,
-width: 100,
+            height: 100,
+            width: 100,
           color: "green"
       },
       escape: 1,
@@ -310,8 +310,8 @@ width: 100,
         targetSpecs: {
             top: 50,
             left: 50,
-height: 100,
-width: 100,
+            height: 100,
+            width: 100,
             color: "green"
         },
         escape: 1
@@ -336,8 +336,8 @@ width: 100,
         targetSpecs: {
             top: 50,
             left: 50,
-height: 100,
-width: 100,
+            height: 100,
+            width: 100,
             color: "green"
         },
         escape: 1
@@ -363,32 +363,33 @@ width: 100,
         targetSpecs: {
             top: 50,
             left: 50,
-height: 100,
-width: 100,
+            height: 100,
+            width: 100,
             color: "green"
         },
         escape: 1
     },
 
-    // ultraPulmonoscorpius: {
-    //     name: "Ultra Pulmonoscorpius",
-    //     imgDir: "gre-scorp",
-    //     heightToSquare: 5,
-    //     widthToHeight: 1.5,
-    //     preyType: "dangerous-mega",
-    //     isPredator: true,
-    //     prey: ["regular-large", "dangerous-large", "regular-medium", "dangerous-medium"],
-    //     possTerrain: ["grassland", "desert", "savannah", "forest"],
-    //     activityLevel: 5,
-    //     hp: 50,
-    //     hunger: 100,
-    //     speed: .3,
-    //     range: 2,
-    //     aggression: 5,
-    //     attack: 40,
-    //     defence: 45,
-    //     escape: 1
-    // },
+     megaPulmonoscorpius: {
+         name: "Mega Pulmonoscorpius",
+         imgDir: "gre-scorp",
+         heightToSquare: 4,
+         widthToHeight: 1.5,
+         preyType: "dangerous-Xlarge",
+         isPredator: true,
+         isHumanPredator: true,
+         prey: ["human"],
+         possTerrain: ["savannah", "forest"],
+         activityLevel: 5,
+         hp: 30,
+         hunger: 100,
+         speed: .3,
+         range: 2,
+         aggression: 5,
+         attack: 15,
+         defence: 6,
+         escape: 1
+     },
 
     // Carboniferous
     greaterArthropluera: {
@@ -410,8 +411,8 @@ width: 100,
         targetSpecs: {
             top: 50,
             left: 50,
-height: 100,
-width: 100,
+            height: 100,
+            width: 100,
             color: "green"
         },
         escape: 1
@@ -436,11 +437,38 @@ width: 100,
         targetSpecs: {
             top: 50,
             left: 50,
-height: 100,
-width: 100,
+            height: 100,
+            width: 100,
             color: "green"
         },
         escape: 1
+    },
+    megaMisophilae: {
+      name: "Mega Misophilae",
+      imgDir: "mega-meso",
+      heightToSquare: 5,
+      widthToHeight: 1,
+      preyType: "dangerous-large",
+      isPredator: true,
+      isHumanPredator: true,
+      prey: ["human"],
+      possTerrain: ["shallow-water", "deep-water", "marsh",  "savannah", "forest"],
+      activityLevel: 6,
+      hp: 25,
+      hunger: 100,
+      speed: .7,
+      range: 1,
+      aggression: 5,
+      attack: 10,
+      defence: 1,
+      targetSpecs: {
+          top: 50,
+          left: 50,
+          height: 100,
+          width: 100,
+          color: "green"
+      },
+      escape: 1
     },
     // Carboniferous
     greaterMisophilae: {
@@ -518,8 +546,8 @@ width: 100,
         targetSpecs: {
             top: 50,
             left: 50,
-height: 100,
-width: 100,
+            height: 100,
+            width: 100,
             color: "green"
         },
         escape: 8
@@ -601,8 +629,8 @@ width: 100,
         targetSpecs: {
             top: 50,
             left: 50,
-height: 100,
-width: 100,
+            height: 100,
+            width: 100,
             color: "green"
         },
         escape: 1
@@ -630,8 +658,8 @@ width: 100,
         targetSpecs: {
             top: 50,
             left: 50,
-height: 100,
-width: 100,
+            height: 100,
+            width: 100,
             color: "green"
         },
         escape: 1,
@@ -932,7 +960,33 @@ width: 100,
         },
         escape: 1
     },
-
+    megaGorgonopsid: {
+      name: "Mega Gorgonopsid",
+      imgDir: "mega-gorganopsid",
+      heightToSquare: 6,
+      widthToHeight: 1.8,
+      preyType: "dangerous-XXlarge",
+      isPredator: true,
+      isHumanPredator: true,
+      prey: ["human"],
+      possTerrain: ["forest", "savannah"],
+      activityLevel: 5,
+      hp: 50,
+      hunger: 100,
+      speed: .5,
+      range: 1,
+      aggression: 6,
+      attack: 12,
+      defence: 3,
+      targetSpecs: {
+          top: 50,
+          left: 50,
+          height: 100,
+          width: 100,
+          color: "green"
+      },
+      escape: 1
+    },
     redLystosaurus: {
         name: "Red Lystosaurus",
         imgDir: "red-lyst",
@@ -952,8 +1006,8 @@ width: 100,
         targetSpecs: {
             top: 50,
             left: 50,
-height: 100,
-width: 100,
+            height: 100,
+            width: 100,
             color: "green"
         },
         escape: 1
@@ -1050,6 +1104,40 @@ width: 100,
                 leftOffset: 50,
             },
         }
+    },
+    megaPostosuchus: {
+      name: "Mega Postosuchus",
+      imgDir: "mega-posto",
+      heightToSquare: 10,
+      widthToHeight: 1.8,
+      preyType: "dangerous-XXXlarge",
+      isPredator: true,
+      isHumanPredator: true,
+      prey: ["human"],
+      possTerrain: ["forest", "savannah"],
+      activityLevel: 4,
+      hp: 60,
+      hunger: 100,
+      speed: 1,
+      range: 1,
+      aggression: 5,
+      attack: 25,
+      defence: 5,
+      targetSpecs: {
+          top: 50,
+          left: 50,
+          height: 100,
+          width: 100,
+          color: "green"
+      },
+      escape: 1,
+      offSets: {
+          ...genericOffsets,
+          w: {
+              topOffset: -40,
+              leftOffset: 50,
+          },
+      }
     },
     yellowHerreresaurus: {
         name: "Yellow Herreresaurus",
@@ -2459,7 +2547,7 @@ width: 100,
                  leftOffset: 50
              }
          }
-     }
+     } 
 }
 /*
 Sizes

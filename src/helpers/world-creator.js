@@ -798,6 +798,7 @@ function testAllStructures(row, dir) {
 }
 
 function testAllCreatures(row, dir) {
+    let heightIndex = row;
     let widthIndex = 0;
     for (const key in creatureDirectory) {
         if (creatureDirectory.hasOwnProperty(key)) {
@@ -805,7 +806,13 @@ function testAllCreatures(row, dir) {
             if(!creatureType.waterOnly) {
                 let widthChange = creatureType.heightToSquare >= 3 ? 2 : 1;
                 widthIndex += widthChange;
-                const creature = getNewCreature(creatureType, world.grid[row][widthIndex]);
+
+                if(widthIndex >= 99) {
+                  heightIndex += 3;
+                  widthIndex = 1;
+                }
+
+                const creature = getNewCreature(creatureType, world.grid[heightIndex][widthIndex]);
 
                 if(dir) {
                     creature.dir = dir;
@@ -1003,11 +1010,11 @@ export function createNewTestWorld(height, width, tribeName) {
     testAllStructures(4, "w");
 
     testAllCreatures(6, "n");
-    testAllCreatures(8, "e");
-    testAllCreatures(10, "s");
-    testAllCreatures(12, "w");
+    testAllCreatures(12, "e");
+    testAllCreatures(18, "s");
+    testAllCreatures(24, "w");
 
-    testAllPlants(20);
+    testAllPlants(30);
     // addTestStructure(world.grid[7][1], triassicLake1);
     // addTestStructure(world.grid[7][2], triassicLake2);
     // addTestStructure(world.grid[7][3], triassicLake3);

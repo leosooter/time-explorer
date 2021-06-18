@@ -56,7 +56,7 @@ export default {
     greenCalamite: {
         name: "Green Calamite",
         imageArray: ["succulent-green1.png", "succulent-green2.png", "succulent-green3.png", "succulent-green4.png"],
-        heightToSquare: 2.6,
+        heightToSquare: 2,
         widthToHeight: .1,
         sizeRange: 20,
         resources: [{type: "medicine", quantity: 2}],
@@ -72,7 +72,7 @@ export default {
     orangeCalamite: {
         name: "Orange Calamite",
         imageArray: ["succulent-orange1.png", "succulent-orange2.png", "succulent-orange3.png"],
-        heightToSquare: 2.6,
+        heightToSquare: 2,
         widthToHeight: .2,
         sizeRange: 20,
         resources: [{type: "medicine", quantity: 2}],
@@ -88,7 +88,7 @@ export default {
     orangeWaterCalamite: {
         name: "Orange Water Calamite",
         imageArray: ["succulent-orange-water1.png", "succulent-orange-water2.png", "succulent-orange-water3.png", "succulent-orange-water4.png"],
-        heightToSquare: 2.6,
+        heightToSquare: 2,
         widthToHeight: .2,
         sizeRange: 20,
         resources: [{type: "medicine", quantity: 2}],
@@ -104,7 +104,7 @@ export default {
     purpleWaterCalamite: {
         name: "Purple Water Calamite",
         imageArray: ["succulent-purple-water1.png", "succulent-purple-water2.png", "succulent-purple-water3.png"],
-        heightToSquare: 2.6,
+        heightToSquare: 2,
         widthToHeight: .2,
         sizeRange: 20,
         resources: [{type: "medicine", quantity: 2}],

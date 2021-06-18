@@ -31,6 +31,7 @@ export function getNewCreature(creatureType, square) {
     if(!square) {
       console.log(creatureType, square)
     }
+
     creature.id = `creature-${creatureId}`;
     creature.currentSquare = square;
     creature.heightIndex = square.heightIndex;
