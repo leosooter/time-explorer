@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
+import {getModeColor} from "../new-helpers/entity-helpers.js";
 
 export default function Status(props) {
-
+    console.log("PROPS", props);
     // if(props.flash) {
     //     
     //     setTimeout(props.resetFlash, 1000);
@@ -13,17 +14,17 @@ export default function Status(props) {
             setFlashColor("rgba(255, 0, 0, .01)");
             props.resetFlash();
         } else {
-            setFlashColor("none");
+            setFlashColor("");
         }
     })
 
     const sizeAdjust = props.size * .3;
     // const top = sizeAdjust;
     // const left = sizeAdjust * 1.5;
-    const top = 0;
-    const left = 0;
     const height = sizeAdjust * 2;
     const width = height * 2;
+    const {top, left} = props.specs || {top: props.size * .25, left: 0};
+    const modeColor = getModeColor(props.mode);
 
     const statusStyle = {
         backgroundColor: flashColor,
@@ -34,7 +35,7 @@ export default function Status(props) {
         width,
         top,
         left, 
-        boxShadow: "red 1px 1px 20px"
+        boxShadow: `${modeColor} 1px 1px 20px`
     }
 
     return (

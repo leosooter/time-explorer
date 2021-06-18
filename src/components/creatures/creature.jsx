@@ -26,6 +26,8 @@ export default React.memo(function Creature(props) {
         imgDir,
         isUnderWater,
         offSets,
+        statusSpecs,
+        mode
         // leftOffset,
         // topOffset
     } = props;
@@ -58,7 +60,8 @@ export default React.memo(function Creature(props) {
         zIndex: getZIndex(heightIndex, widthIndex, "creature"),
         position: "absolute",
         transform: `translate(${left}px, ${top}px)`,
-        transition: `all ${tempSpeed || speed}s linear`,
+        // transition: `all ${tempSpeed || speed}s linear`,
+        transition: `all 3s ease`,
     }
 
     const creatureStyle = {
@@ -89,7 +92,7 @@ export default React.memo(function Creature(props) {
             <div style={wrapperStyle} className={"wiggle"}>
                 <span>{health}</span>
                 {oldIndex != newIndex && <Outline size={height} color={"blue"} />}
-                {/* <Status size={height}/> */}
+                <Status specs={statusSpecs} size={height} mode={mode}/>
                 <img src={require(`./images/${imgDir}/${dir}.png`)} style={creatureStyle}></img>
                 <Target {...props.targetSpecs} handleClick={handleClick}></Target>
             </div>

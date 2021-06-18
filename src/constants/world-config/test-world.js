@@ -47,6 +47,26 @@ export default {
             isSwim: false,
             creatures:[],
             plants: []
-        }
+        },
+        shallowWater: {
+            key: "shallowWater",
+            type: "shallow water",
+            color: terrainColors.shallowWater,
+            isWater: true,
+            isSwim: true,
+            creatures: [],
+            plants: [],
+            resources: []
+        },
+        deepWater: {
+            key: "deepWater",
+            type: "deep water",
+            color: terrainColors.deepWater,
+            isWater: true,
+            isSwim: true,
+            creatures: [],
+            plants: [],
+            resources: []
+        },
     }
 }

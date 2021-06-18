@@ -8,7 +8,6 @@ import resourceDirectory from "../components/resources/resource-directory";
 import tribeDirectory from "../components/units/tribeDirectory";
 import creatureDirectory from "../components/creatures/creature-directory";
 import unitDirectory from "../components/units/unit-directory";
-// import terrainTypes from "../constants/terrainTypes";
 import worldTypes from "../constants/world-types";
 import {entityAction} from "./entity-helpers";
 import {tribeAction, addStructure, newStructure} from "./tribe-helpers";
@@ -899,7 +898,7 @@ function addTestEntity(square, entity, type, dir) {
     square.currentEntity = newEntity;
 }
 
-export function createNewTestWorld(height, width, tribeName) {
+export function createNewTestWorld(height, width, tribeName, renderAll= true) {
     resetWorld("testWorld");
 
     for (let heightIndex = 0; heightIndex < height; heightIndex++) {
@@ -988,8 +987,8 @@ export function createNewTestWorld(height, width, tribeName) {
     // const startSquare = sample(landSquares);
     // const startSquare = world.grid[random(2,97)][random(2,97)];
     // const startSquare = world.grid[world.grid.length/2][world.grid[0].length/2];
-    const startSquare = world.grid[0][0];
-    const tribeSquare = world.grid[2][2];
+    const startSquare = world.grid[50][50];
+    const tribeSquare = world.grid[52][52];
     console.log("START SQUARE", startSquare);
     
     setVisibility(startSquare, 3);
@@ -997,17 +996,19 @@ export function createNewTestWorld(height, width, tribeName) {
     // startVillage(tribeSquare, tribe, 3);
     // assignTribes(world.grid, 10, 3);
 
-    testAllStructures(1, "n");
-    testAllStructures(2, "e");
-    testAllStructures(3, "s");
-    testAllStructures(4, "w");
+    // if(renderAll) {
+    //     testAllStructures(1, "n");
+    //     testAllStructures(2, "e");
+    //     testAllStructures(3, "s");
+    //     testAllStructures(4, "w");
 
-    testAllCreatures(6, "n");
-    testAllCreatures(8, "e");
-    testAllCreatures(10, "s");
-    testAllCreatures(12, "w");
+    //     testAllCreatures(6, "n");
+    //     testAllCreatures(8, "e");
+    //     testAllCreatures(10, "s");
+    //     testAllCreatures(12, "w");
 
-    testAllPlants(20);
+    //     testAllPlants(20);
+    // }
     // addTestStructure(world.grid[7][1], triassicLake1);
     // addTestStructure(world.grid[7][2], triassicLake2);
     // addTestStructure(world.grid[7][3], triassicLake3);
@@ -1032,7 +1033,27 @@ export function createNewTestWorld(height, width, tribeName) {
     // addTestEntity(world.grid[2][12], sarcophaganax, "creatures", "n");
     // addTestEntity(world.grid[3][11], apatosaurus, "creatures", "n");
     // addTestEntity(world.grid[4][4], allosaurus, "creatures", "n");   
-    addTestEntity(world.grid[1][1], creatureDirectory.redDesmatosuchus, "creatures", "n");
+    addTestEntity(world.grid[5][5], creatureDirectory.blueDesmatosuchus, "creatures", "n");
+    addTestEntity(world.grid[2][2], creatureDirectory.ceratosaurus, "creatures", "n");
+    /*
+        4- 98
+        3- 76
+        2- 54
+        1- 32
+        0- 10
+
+
+    
+       90 + 10 >= 100 true
+       90 + 90 >= true
+       90 + 0  >= false
+
+       10 + 90 >= 100 true
+       10 + 10 >= false
+
+
+
+    */
     // addTestEntity(world.grid[3][3], null, "units"); 
 
     // testAllResources(2);

@@ -25,6 +25,8 @@ import tribeDirectory from "./components/units/tribeDirectory";
 
 import worldChoices from "./constants/world-config/world-choices";
 
+import {takeEntityTurn} from "./new-helpers/creature-helpers";
+
 let isStart = false;
 
 let testHeightIndex = 5;
@@ -37,8 +39,8 @@ let defaultWorld = "pleistocene";
 let isExplorerMode = true;
 isExplorerMode = false;
 
-let world = createNewWorld(100, 100, defaultWorld, isExplorerMode, "permianAdobe");
-// let world = createNewTestWorld(100, 100, isExplorerMode, "permianAdobe");
+// let world = createNewWorld(100, 100, defaultWorld, isExplorerMode, "permianAdobe");
+let world = createNewTestWorld(100, 100, isExplorerMode, "permianAdobe", false);
 
 function App() {
   
@@ -58,6 +60,7 @@ function App() {
   const [playerPosition, setPlayerPosition] = useState({});
 
   const {
+    grid,
     plants,
     creatures,
     units,
@@ -222,7 +225,8 @@ function App() {
     let movedCreatures = 0;
     for (let index = 0; index < creatures.length; index++) {
       const creature = creatures[index];
-        creature.action();
+        takeEntityTurn(creature, grid)
+        // creature.action();
         // creature.heightIndex ++;
         movedCreatures ++;
       // if(random(1, creatureActionChance) === 1) {

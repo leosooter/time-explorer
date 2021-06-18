@@ -41,11 +41,16 @@ export function getNewCreature(creatureType, square) {
     creature.health = creature.hp;
     creature.isVisible = square.isVisible;
     creature.arrayType = "creatures";
+    creature.mode = "idle";
 
     creature.action = () => entityAction(creature, "creatures");
 
     // Add to square(s)
     square.currentEntity = creature;
+
+    if(creature.isTerritoryRestricted) {
+        creature.territoryCenter = {heightIndex: square.heightIndex, widthIndex: square.widthIndex};
+    }
 
     if(creature.isMega) {
         console.log("adding square to Mega");

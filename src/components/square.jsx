@@ -27,7 +27,7 @@ export default function Square(props) {
       height: `${squareSize}px`,
       width: `${squareSize}px`,
       // border: isVisible? border : `1px solid ${unexploredColor}`,
-      // border: "1px solid black",
+      border: "1px solid rgba(100, 100, 100, .1)",
       backgroundColor: isVisible? backgroundColor : unexploredColor,
       margin: "0",
       padding: "0"

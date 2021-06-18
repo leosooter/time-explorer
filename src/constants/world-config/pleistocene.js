@@ -1,4 +1,4 @@
-import creatureDirectory from "../../components/creatures/creature-directory";
+import cd from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
 import {terrainColors as colors} from "../colors";
@@ -11,43 +11,6 @@ const {
         triassicRiver,
         triassicLake
     } = tribeDirectory;
-
-const {
-    greaterArthropluera,
-    lesserArthropluera,
-    kingPulmonoscorpius,
-    pulmonoscorpius,
-    scorpion,
-    greaterMisophilae,
-    lesserMisophilae,
-    greaterProterogyrinus,
-    yellowCrocodile,
-    purpleDarter,
-    redDarter,
-    redLystosaurus,
-    yellowHerreresaurus,
-    brownPostosuchus,
-    greenPostosuchus,
-    apatosaurus,
-    apatosaurusHouse1,
-    apatosaurusHouse2,
-    apatosaurusHouse3,
-    apatosaurusHouse4,
-    silverBarb,
-    blueFish,
-    yellowFish,
-    allosaurus,
-    sarcophaganax,
-    ceratosaurus,
-    yellowOrnitholestes,
-    blueOrnitholestes,
-    yellowKentrosaurus,
-    greenKentrosaurus,
-    blueStegosaurus,
-    redStegosaurus,
-    greyMastodon,
-    woolyMammoth
-} = creatureDirectory;
 
 const {
     horsetail,
@@ -143,7 +106,8 @@ export default {
             isWater: false,
             terrainPower: 120,
             creatures: generateWeightedArray([
-                {type: woolyMammoth, occurance: 3}
+                {type: cd.woolyMammoth, occurance: 3},
+                {type: cd.ceratosaurus, occurance: 3}
             ], 500),
             plants: generateWeightedArray([
                 {type: snowPine, occurance: 1},
@@ -158,7 +122,7 @@ export default {
             isWater: false,
             terrainPower: 70,
             creatures: generateWeightedArray([
-                {type: woolyMammoth, occurance: 3}
+                {type: cd.woolyMammoth, occurance: 3}
             ], 100),
             plants: generateWeightedArray([
                 {type: greenFern, occurance: 3},
@@ -174,7 +138,8 @@ export default {
             color: terrainColors.savannah,
             isWater: false,
             creatures: generateWeightedArray([
-                {type: greyMastodon, occurance: 3}
+                {type: cd.greyMastodon, occurance: 3},
+                {type: cd.ceratosaurus, occurance: 3}
             ], 500),
             plants: generateWeightedArray([
                 {type: redFern, occurance: 5},
@@ -193,7 +158,7 @@ export default {
             isSwim: true,
             terrainPower: 30,
             creatures: generateWeightedArray([
-                {type: greyMastodon, occurance: 3}
+                {type: cd.greyMastodon, occurance: 3}
             ], 25),
             plants: generateWeightedArray([
                 {type: horsetail, occurance: 3},
@@ -209,12 +174,7 @@ export default {
             isSwim: true,
             terrainPower: 40,
             creatures: generateWeightedArray([
-                {type: greyMastodon, occurance: 3},
-                {type: silverBarb, occurance: 3},
-                {type: blueFish, occurance: 3},
-                {type: yellowFish, occurance: 3},
-                {type: purpleDarter, occurance: 2},
-                {type: redDarter, occurance: 2}
+                {type: cd.greyMastodon, occurance: 3}
             ], 25),
             plants: generateWeightedArray([
                 {type: horsetail, occurance: 3},
@@ -228,12 +188,7 @@ export default {
             color: terrainColors.shallowWater,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
-                {type: silverBarb, occurance: 4},
-                {type: blueFish, occurance: 2},
-                {type: purpleDarter, occurance: 2},
-                {type: redDarter, occurance: 2}
-            ], 25),
+            creatures: [],
             plants: [],
             resources: []
         },
@@ -243,12 +198,7 @@ export default {
             color: terrainColors.deepWater,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
-                {type: silverBarb, occurance: 3},
-                {type: blueFish, occurance: 4},
-                {type: purpleDarter, occurance: 1},
-                {type: redDarter, occurance: 1}
-            ], 25),
+            creatures: [],
             plants: [],
             resources: []
         },
