@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Tree from "./plants/tree";
 import Creature from "./creatures/creature";
+import {random} from "lodash"
 
 function getColorString(colorvalues, isWater) {
   const {r,g,b} = colorvalues;
@@ -9,9 +10,16 @@ function getColorString(colorvalues, isWater) {
 } 
 
 export default function Square(props) {
-    const {heightIndex, widthIndex, handleSquareSelect, terrainType, squareSize, id, borderColor, isVisible} = props
+    const {heightIndex, widthIndex, handleSquareSelect, terrainType, squareSize, id, borderColor, isVisible} = props;
+    let squareColor;
 
-    const backgroundColor = getColorString(terrainType.color, terrainType.isWater);
+    if(Array.isArray(terrainType.color)) {
+      squareColor = terrainType.color[random(0, terrainType.color.length - 1)];
+    } else {
+      squareColor = terrainType.color;
+    }
+
+    const backgroundColor = getColorString(squareColor, terrainType.isWater);
     let border = borderColor ? `1px solid ${borderColor}`: `1px solid ${backgroundColor}`;
     let unexploredColor = "rgba(70, 70, 70, .95)"
     

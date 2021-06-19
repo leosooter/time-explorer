@@ -83,7 +83,7 @@ swamp forest - wet version of forest
 */
 
 export default {
-    defualtTerrainType: "savannah",
+    defualtTerrainType: "grassland",
     seaPoints: [2, 4],
     seaPower: 30,
     lakePoints: [3, 6],
@@ -93,16 +93,18 @@ export default {
     landPower: 0,
     tribes: [triassicRiver, triassicLake],
     possTerrain: generateWeightedArray([
-            {type: "forest", occurance: 3}, 
-            {type: "grassland", occurance: 5},
+            {type: "snowForest", occurance: 3},
+            {type: "forest", occurance: 5}, 
+            {type: "tundra", occurance: 5},
             {type: "marsh", occurance: 1},
             {type: "swampForest", occurance: 1}
+            
         ], 0),
     terrainTypes: {
-        grassland: {
-            key: "grassland",
+        tundra: {
+            key: "tundra",
             type: "grassland",
-            color: terrainColors.grassland,
+            color: terrainColors.tundra,
             isWater: false,
             terrainPower: 120,
             creatures: generateWeightedArray([
@@ -115,10 +117,10 @@ export default {
             ], 50),
             resources: []
         },
-        forest: {
-            key: "forest",
+        snowForest: {
+            key: "snowForest",
             type: "forest",
-            color: terrainColors.forest,
+            color: terrainColors.snowForest,
             isWater: false,
             terrainPower: 70,
             creatures: generateWeightedArray([
@@ -132,10 +134,10 @@ export default {
             ], 20),
             resources: []
         },
-        savannah: {
-            key: "savannah",
-            type: "savannah",
-            color: terrainColors.savannah,
+        grassland: {
+            key: "grassland",
+            type: "grassland",
+            color: terrainColors.grassland,
             isWater: false,
             creatures: generateWeightedArray([
                 {type: cd.greyMastodon, occurance: 3},
@@ -145,10 +147,31 @@ export default {
                 {type: redFern, occurance: 5},
                 {type: yellowFernClump, occurance: 5},
                 {type: pine, occurance: 1},  
-                {type: umbrellaPine, occurance: 3},
-                {type: yellowRoundleaf, occurance: 1}
+                {type: umbrellaPine, occurance: 1},
             ], 50),
             resources: []
+        },
+      forest: {
+          key: "forest",
+          type: "forest",
+          color: terrainColors.forest,
+          isWater: false,
+          terrainPower: 120,
+          creatures: generateWeightedArray([
+            {type: cd.greyMastodon, occurance: 2},
+            {type: cd.woolyMammoth, occurance: 3}
+          ], 500),
+          plants: generateWeightedArray([
+            {type: greenRoundleaf, occurance: 1},
+            {type: umbrellaPine, occurance: 2},
+            {type: greyUmbrellaPine, occurance: 4},
+            {type: darkPine, occurance: 2},
+            {type: silverFir, occurance: 2},
+            {type: snowFir, occurance: 1},  
+            {type: snowPine, occurance: 1},  
+            {type: snowSpruce, occurance: 1},  
+          ], 50),
+          resources: []
         },
         swampForest: {
             key: "swampForest",

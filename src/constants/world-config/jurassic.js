@@ -1,5 +1,6 @@
 import creatureDirectory from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
+import resourceDirectory from "../../components/resources/resource-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
 import {terrainColors as colors} from "../colors";
 import structureDirectory from "../../components/structures/structure-directory";
@@ -53,8 +54,10 @@ const {
     giantHorsetail,
     /////////////////////////////////// Trees
     polycarpus,
+    fallenPolycarpus,
     marshPine,
     darkMarshPine,
+    lightMarshPine,
     buttressRoot,
     goldenButtressRoot,
     /////////////////////////////////// Conifers
@@ -70,7 +73,10 @@ const {
     tallDarkFern,
     greenFern,
     yellowFern,
+    darkFern,
     redFern,
+    lowFern,
+    fern,
     blueFern,
     yellowFernClump,
     greenFernClump,
@@ -80,6 +86,7 @@ const {
     darkGreenFernClump,
     youngBlueTreeFern,
     youngLightGreenTreeFern,
+    LightGreenTreeFern,
     scalyTreeFern,
     blueTreeFern,
     ////////////////////////////////// Reeds
@@ -97,6 +104,18 @@ const {
     greenRoundleaf,
     redwood
 } = plantDirectory;
+
+
+const {
+  largeBlackRock,
+  largeDarkRedRock,
+  largeGreyRock,
+  largeRedRock,
+  largeYellowRock,
+  xLargeGreyRock
+} = resourceDirectory;
+
+
 
 /*
 Terrain Types define plant density and animal habitat and player movement types
@@ -143,20 +162,25 @@ export default {
                 {type: greenKentrosaurus, occurance: 3},
                 {type: redStegosaurus, occurance: 2},
                 {type: apatosaurus, occurance: 1},
-                // {type: apatosaurusHouse1, occurance: 1},
-                // {type: apatosaurusHouse2, occurance: 1},
-                // {type: apatosaurusHouse3, occurance: 1},
-                // {type: apatosaurusHouse4, occurance: 1},
                 {type: ceratosaurus, occurance: 2},
                 {type: allosaurus, occurance: 1} 
             ], 500),
             plants: generateWeightedArray([
-                {type: yellowFern, occurance: 5},
-                {type: lightGreenFernClump, occurance: 5},
-                {type: redFern, occurance: 5},
-                {type: orangeRoundleaf, occurance: 1}
+              {type: greenBrownFernClump, occurance: 10},
+              {type: greenFernClump, occurance: 5},             
+              {type: lightGreenFernClump, occurance: 12},
+              {type: darkGreenFernClump, occurance: 2},
+              {type: greenFern, occurance: 5},              
+              {type: blueFern, occurance: 3},
+              {type: lowFern, occurance: 2},
+              {type: fern, occurance: 4},
+              {type: darkFern, occurance: 1}
             ], 50),
-            resources: []
+            resources: [
+              // {type: largeYellowRock, occurance: 1},
+              // {type: largeGreyRock, occurance: 1},
+              // {type: xLargeGreyRock, occurance: 1}
+            ]
         },
         forest: {
             key: "forest",
@@ -172,13 +196,34 @@ export default {
                 {type: blueOrnitholestes, occurance: 1} 
             ], 100),
             plants: generateWeightedArray([
-                {type: greenFern, occurance: 3},
-                {type: pine, occurance: 10},  
-                {type: umbrellaPine, occurance: 8},
-                {type: redwood, occurance: 8},
-                {type: scalyTreeFern, occurance: 5}
+              {type: greenFern, occurance: 3},
+              {type: lowFern, occurance: 3},
+              {type: blueFern, occurance: 5},
+              {type: darkFern, occurance: 3},
+              {type: darkGreenFernClump, occurance: 3},
+              {type: fern, occurance: 3},
+              {type: tallFern, occurance: 10}, 
+              {type: blueTreeFern, occurance: 10},
+              {type: scalyTreeFern, occurance: 8},
+              {type: youngBlueTreeFern, occurance: 6}, 
+              {type: youngLightGreenTreeFern, occurance: 8},
+              {type: polycarpus, occurance: 10},
+              {type: fallenPolycarpus, occurance: 8},
+              {type: LightGreenTreeFern, occurance: 10},
+              {type: lightMarshPine, occurance: 1},
+              {type: buttressRoot, occurance: 5},
+              {type: goldenButtressRoot, occurance: 2},
+              {type: greenRoundleaf, occurance: 6},
+              {type: darkPine, occurance: 1},
+              {type: umbrellaPine, occurance: 5},
+              {type: greyUmbrellaPine, occurance: 1},
+              {type: silverFir, occurance: 1}
             ], 20),
-            resources: []
+            resources: [
+              // {type: largeBlackRock, occurance: 1},
+              // {type: largeGreyRock, occurance: 1},
+              // {type: xLargeGreyRock, occurance: 1},
+            ]
         },
         savannah: {
             key: "savannah",
@@ -206,7 +251,9 @@ export default {
                 {type: umbrellaPine, occurance: 3},
                 {type: yellowRoundleaf, occurance: 1}
             ], 50),
-            resources: []
+            resources: [
+              {type: largeYellowRock, occurance: 1},
+            ]
         },
         swampForest: {
             key: "swampForest",

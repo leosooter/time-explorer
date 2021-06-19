@@ -2,7 +2,7 @@ import React, {Fragment} from "react";
 import {random, sample, clone} from "lodash";
 import { getPosition, getZIndex } from "../../helpers/grid-helpers";
 import Outline from "../outline";
-import Status from "../status";
+import Status from "../status/status";
 import { worldParams } from "../../constants/world";
 
 export default function Structure(props) {

@@ -56,7 +56,7 @@ export default {
     greenCalamite: {
         name: "Green Calamite",
         imageArray: ["succulent-green1.png", "succulent-green2.png", "succulent-green3.png", "succulent-green4.png"],
-        heightToSquare: 2.6,
+        heightToSquare: 2,
         widthToHeight: .1,
         sizeRange: 20,
         resources: [{type: "medicine", quantity: 2}],
@@ -72,7 +72,7 @@ export default {
     orangeCalamite: {
         name: "Orange Calamite",
         imageArray: ["succulent-orange1.png", "succulent-orange2.png", "succulent-orange3.png"],
-        heightToSquare: 2.6,
+        heightToSquare: 2,
         widthToHeight: .2,
         sizeRange: 20,
         resources: [{type: "medicine", quantity: 2}],
@@ -88,7 +88,7 @@ export default {
     orangeWaterCalamite: {
         name: "Orange Water Calamite",
         imageArray: ["succulent-orange-water1.png", "succulent-orange-water2.png", "succulent-orange-water3.png", "succulent-orange-water4.png"],
-        heightToSquare: 2.6,
+        heightToSquare: 2,
         widthToHeight: .2,
         sizeRange: 20,
         resources: [{type: "medicine", quantity: 2}],
@@ -104,7 +104,7 @@ export default {
     purpleWaterCalamite: {
         name: "Purple Water Calamite",
         imageArray: ["succulent-purple-water1.png", "succulent-purple-water2.png", "succulent-purple-water3.png"],
-        heightToSquare: 2.6,
+        heightToSquare: 2,
         widthToHeight: .2,
         sizeRange: 20,
         resources: [{type: "medicine", quantity: 2}],
@@ -636,7 +636,7 @@ width: 100,
     youngBlueTreeFern: {
         name: "Young Blue Tree Fern",
         imageArray: ["young-blue-tree-fern1.png"],
-        heightToSquare: 1,
+        heightToSquare: .8,
         widthToHeight: 1,
         sizeRange: 10,
         resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [1,2]}],
@@ -684,7 +684,7 @@ width: 100,
     blueTreeFern: {
         name: "Blue Tree Fern",
         imageArray: ["blue-tree-fern1.png", "blue-tree-fern2.png", "blue-tree-fern3.png"],
-        heightToSquare: 1,
+        heightToSquare: 1.5,
         widthToHeight: 1,
         sizeRange: 10,
         resources: [{type: "wood", quantity: 10}, {type: "food", quantity: [1,2]}],
@@ -698,13 +698,22 @@ width: 100,
         }
     },
     ////////////////////////////////// Reeds
-    // reed: {
-    //     name: "Reed",
-    //     imageArray: ["reed1.png", "reed2.png"],
-    //     heightToSquare: 1,
-    //     widthToHeight: .75,
-    //     sizeRange: 20
-    // },
+     reed: {
+         name: "Reed",
+         imageArray: ["reed1.png", "reed2.png"],
+         heightToSquare: 1,
+         widthToHeight: .75,
+         sizeRange: 20,
+         resources: [],
+         health: 5,
+         targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+     },
     //////////////////////////////// Moss
     greenMoss: {
         name: "Green Moss",

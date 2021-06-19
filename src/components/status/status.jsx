@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
-import {getModeColor} from "../new-helpers/entity-helpers.js";
+import {getModeColor} from "../../new-helpers/entity-helpers.js";
+import "./status.css";
 
 export default function Status(props) {
-    console.log("PROPS", props);
     // if(props.flash) {
     //     
     //     setTimeout(props.resetFlash, 1000);
@@ -39,7 +39,7 @@ export default function Status(props) {
     }
 
     return (
-        <div style={statusStyle}>{flashColor}</div>
+        <div className="status" style={statusStyle}>{flashColor}</div>
     );
 }
 

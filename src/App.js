@@ -22,6 +22,7 @@ import {attackEntity, getEntityById, moveEntityToSquare, healEntityFromFood, har
 import TestPosition from "./components/test-position";
 import structureDirectory from "./components/structures/structure-directory";
 import tribeDirectory from "./components/units/tribeDirectory";
+import {worldNames} from "./constants/world-types";
 
 import worldChoices from "./constants/world-config/world-choices";
 
@@ -35,12 +36,12 @@ let updateNumber = 0;
 
 const creatureActionChance = 1;
 
-let defaultWorld = "pleistocene";
+let defaultWorld = worldNames.PLEISTOCENE;
 let isExplorerMode = true;
 isExplorerMode = false;
 
-// let world = createNewWorld(100, 100, defaultWorld, isExplorerMode, "permianAdobe");
-let world = createNewTestWorld(100, 100, isExplorerMode, "permianAdobe", false);
+let world = createNewWorld(100, 100, defaultWorld, isExplorerMode, "permianAdobe");
+// let world = createNewTestWorld(100, 100, isExplorerMode, "permianAdobe", false);
 
 function App() {
   

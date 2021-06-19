@@ -797,6 +797,7 @@ function testAllStructures(row, dir) {
 }
 
 function testAllCreatures(row, dir) {
+    let heightIndex = row;
     let widthIndex = 0;
     for (const key in creatureDirectory) {
         if (creatureDirectory.hasOwnProperty(key)) {
@@ -804,7 +805,13 @@ function testAllCreatures(row, dir) {
             if(!creatureType.waterOnly) {
                 let widthChange = creatureType.heightToSquare >= 3 ? 2 : 1;
                 widthIndex += widthChange;
-                const creature = getNewCreature(creatureType, world.grid[row][widthIndex]);
+
+                if(widthIndex >= 99) {
+                  heightIndex += 3;
+                  widthIndex = 1;
+                }
+
+                const creature = getNewCreature(creatureType, world.grid[heightIndex][widthIndex]);
 
                 if(dir) {
                     creature.dir = dir;

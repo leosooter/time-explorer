@@ -3,7 +3,7 @@ import Anime, {anime} from 'react-anime';
 import {random, sample, clone} from "lodash";
 import {getPosition, getZIndex} from "../../helpers/grid-helpers";
 import Outline from "../outline";
-import Status from "../status";
+import Status from "../status/status";
 import Target from "../target/target";
 import {worldParams} from "../../constants/world";
 import "../effects/css/hover-animations.css";

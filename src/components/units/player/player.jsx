@@ -1,5 +1,5 @@
 import React from "react";
-import Status from "../../status";
+import Status from "../../status/status";
 import Outline from "../../outline";
 import {getPosition, getZIndex} from "../../../helpers/grid-helpers";
 import {worldParams} from "../../../constants/world";

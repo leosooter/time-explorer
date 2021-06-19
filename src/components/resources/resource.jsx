@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import {random, sample, clone} from "lodash";
-import Status from "../status";
+import Status from "../status/status";
 import { getPosition, getZIndex } from "../../helpers/grid-helpers";
 
 export default function Resource(props) {    

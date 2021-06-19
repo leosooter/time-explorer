@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useRef, useLayoutEffect} from "react";
 import {random, sample, clone} from "lodash";
-import Status from "../status";
+import Status from "../status/status";
 import {getPosition, getZIndex} from "../../helpers/grid-helpers";
 import plantDirectory from "./plant-directory.js";
 import Target from "../target/target";

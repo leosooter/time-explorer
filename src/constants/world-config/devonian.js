@@ -1,45 +1,21 @@
 import creatureDirectory from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
+import resourceDirectory from "../../components/resources/resource-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
 import {terrainColors as colors} from "../colors";
 
 const terrainColors = colors.devonian;
 
 const {
-    greaterArthropluera,
-    lesserArthropluera,
-    kingPulmonoscorpius,
-    pulmonoscorpius,
-    scorpion,
-    greaterMisophilae,
-    lesserMisophilae,
-    greaterProterogyrinus,
-    yellowCrocodile,
     purpleDarter,
     redDarter,
-    redLystosaurus,
-    yellowHerreresaurus,
-    brownPostosuchus,
-    greenPostosuchus,
-    apatosaurus,
-    apatosaurusHouse1,
-    apatosaurusHouse2,
-    apatosaurusHouse3,
-    apatosaurusHouse4,
     silverBarb,
     blueFish,
     yellowFish,
     greenFish,
-    allosaurus,
-    sarcophaganax,
-    ceratosaurus,
-    yellowOrnitholestes,
-    blueOrnitholestes,
-    yellowKentrosaurus,
-    greenKentrosaurus,
-    blueStegosaurus,
-    redStegosaurus,
     hyneria,
+    scorpion,
+    pulmonoscorpius,
     hynerpeton,
     dunkleosteus
 } = creatureDirectory;
@@ -97,6 +73,18 @@ const {
     redwood
 } = plantDirectory;
 
+
+const {
+  largeBlackRock,
+  largeDarkRedRock,
+  largeGreyRock,
+  largeRedRock,
+  largeYellowRock,
+  xLargeGreyRock
+} = resourceDirectory;
+
+
+
 /*
 Terrain Types define plant density and animal habitat and player movement types
 example: 
@@ -138,7 +126,10 @@ export default {
             ], 500),
             plants: generateWeightedArray([
             ], 100),
-            resources: []
+            resources: [
+              // {type: largeGreyRock, occurance: 1},
+              // {type: xLargeGreyRock, occurance: 1},
+            ]
         },
         grassland: {
             key: "grassland",
@@ -158,7 +149,9 @@ export default {
                 {type: greenCalamite, occurance: 2}, 
                 {type: tallCalamite, occurance: 1}, 
             ], 50),
-            resources: []
+            resources: [
+              // {type: largeYellowRock, occurance: 1},
+            ]
         },
         savannah: {
             key: "savannah",
@@ -175,7 +168,9 @@ export default {
                 {type: orangeMoss, occurance: 5},
                 {type: orangeCalamite, occurance: 5},
             ], 10),
-            resources: []
+            resources: [
+              // {type: largeYellowRock, occurance: 1},
+            ]
         },
         marsh: {
             key: "marsh",
@@ -218,9 +213,9 @@ export default {
             isWater: true,
             isSwim: true,
             creatures: generateWeightedArray([
-                {type: dunkleosteus, occurance: 1},
+                {type: dunkleosteus, occurance: 2},
                 {type: silverBarb, occurance: 2},
-                {type: greenFish, occurance: 300},
+                {type: greenFish, occurance: 5},
             ], 100),
             plants: [],
             resources: []

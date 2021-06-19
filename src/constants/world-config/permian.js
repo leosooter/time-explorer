@@ -1,5 +1,6 @@
 import creatureDirectory from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
+import resourceDirectory from "../../components/resources/resource-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
 import {terrainColors as colors} from "../colors";
 import structureDirectory from "../../components/structures/structure-directory";
@@ -94,6 +95,15 @@ const {
     greenRoundleaf
 } = plantDirectory;
 
+const {
+  largeBlackRock,
+  largeDarkRedRock,
+  largeGreyRock,
+  largeRedRock,
+  largeYellowRock,
+  xLargeGreyRock
+} = resourceDirectory;
+
 /*
 Terrain Types define plant density and animal habitat and player movement types
 example: 
@@ -121,9 +131,9 @@ export default {
     landPower: 25,
     tribes: [permianAdobe, permianFarmers, permianNomads],
     possTerrain: generateWeightedArray([
-            {type: "savannah", occurance: 30}, 
-            {type: "forest", occurance: 5}, 
-            {type: "grassland", occurance: 10},
+            {type: "savannah", occurance: 10}, 
+            {type: "forest", occurance: 2}, 
+            {type: "grassland", occurance: 5},
             {type: "marsh", occurance: 1}
         ], 0),
     terrainTypes: {
@@ -145,7 +155,12 @@ export default {
                 {type: barrelFern, occurance: 1},
                 {type: yellowRoundleaf, occurance: 1}
             ], 100),
-            resources: []
+            resources: [
+              // {type: largeYellowRock, occurance: 1},
+              // {type: largeRedRock, occurance: 1},
+              // {type: largeDarkRedRock, occurance: 1},
+              // {type: largeGreyRock, occurance: 1},
+            ]
         },
         grassland: {
             key: "grassland",
@@ -169,7 +184,10 @@ export default {
                 {type: yellowMoss, occurance: 5},
                 {type: orangeRoundleaf, occurance: 1}
             ], 50),
-            resources: []
+            resources: [
+              // {type: largeGreyRock, occurance: 1},
+              // {type: xLargeGreyRock, occurance: 1},
+            ]
         },
         forest: {
             key: "forest",
@@ -191,7 +209,10 @@ export default {
                 {type: darkMarshPine, occurance: 8},
                 {type: greenRoundleaf, occurance: 6}
             ], 20),
-            resources: []
+            resources: [
+              // {type: largeGreyRock, occurance: 1},
+              // {type: xLargeGreyRock, occurance: 1},
+            ]
         },
         savannah: {
             key: "savannah",
@@ -215,7 +236,9 @@ export default {
                 {type: orangeRoundleaf, occurance: 1},
                 {type: yellowRoundleaf, occurance: 1}
             ], 50),
-            resources: []
+            resources: [
+              // {type: largeYellowRock, occurance: 1},
+            ]
         },
         marsh: {
             key: "marsh",

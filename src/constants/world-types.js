@@ -7,7 +7,21 @@ import triassic from "./world-config/triassic";
 import jurassic from "./world-config/jurassic";
 import cretaceous from "./world-config/cretaceous";
 import pleistocene from "./world-config/pleistocene";
+import ultraRealm from "./world-config/ultra-realm";
 import testWorld from "./world-config/test-world";
+
+export const worldNames = {
+  ORDOVICIAN: "ordovician",
+  DEVONIAN: "devonian",
+  CARBONIFEROUS: "carboniferous",
+  PERMIAN: "permian",
+  TRIASSIC: "triassic",
+  JURASSIC: "jurassic",
+  CREATACCEOUS: "cretaceous",
+  PLEISTOCENE: "pleistocene",
+  ULTRA_REALM: "ultraRealm",
+  TEST_WORLD: "testWorld",
+}
  
 export const desert = {
     key: "desert",
@@ -23,7 +37,97 @@ export default {
     jurassic,
     cretaceous,
     pleistocene,
-    testWorld
+    ultraRealm,
+    testWorld,
+    // ordovician: {
+    //     defualtTerrainType: "desert",
+    //     waterPoints: [10, 20],
+    //     waterPower: 70,
+    //     landPower: 1,
+    //     terrainTypes: [
+    //         {
+    //             key: "grassland",
+    //             type: "grassland",
+    //             color: terrainColors.grassland,
+    //             isWater: false,
+    //             treeChance: 3,
+    //             creatures: generateWeightedArray([
+    //                 {type: lesserArthropluera, occurance: 3}, 
+    //                 {type: kingPulmonoscorpius, occurance: 2},
+    //                 {type: scorpion, occurance: 5}
+    //             ], 20),
+    //             plants: generateWeightedArray([
+    //                 {type: reed, occurance: 5},
+    //                 {type: fern, occurance: 5}, 
+    //                 {type: barrelFern, occurance: 5},
+    //                 {type: horsetail, occurance: 1},
+    //                 {type: polycarpus, occurance: 3}
+    //             ], 50)
+    //         }
+    //     ]
+    // },
+    // devonian: {
+    //     defualtTerrainType: "desert",
+    //     waterPoints: [10, 20],
+    //     waterPower: 60,
+    //     landPower: 40,
+    //     possTerrain: ["grassland", "grassland", "grassland", "grassland", "forest"]
+    // },
+    // carboniferous: {
+    //     defualtTerrainType: "forest",
+    //     seaPoints: [30, 50],
+    //     seaPower: 20,
+    //     lakePoints: [20, 30],
+    //     lakePower: 20,
+    //     riverPoints: [20, 30],
+    //     riverPower: 20,
+    //     landPower: 20,
+    //     possTerrain: ["savannah", "grassland", "grassland", "grassland", "grassland"]
+    // },
+    // permian: {
+    //     defualtTerrainType: "desert",
+    //     seaPoints: [2, 3],
+    //     seaPower: 15,
+    //     lakePoints: [20, 30],
+    //     lakePower: 15,
+    //     riverPoints: [20, 30],
+    //     riverPower: 20,
+    //     landPower: 25,
+    //     possTerrain: ["savannah", "savannah", "savannah", "savannah", "grassland"]
+    // },
+    // triassic: {
+    //     defualtTerrainType: "desert",
+    //     seaPoints: [5, 10],
+    //     seaPower: 30,
+    //     lakePoints: [5, 10],
+    //     lakePower: 5,
+    //     riverPoints: [20, 30],
+    //     riverPower: 20,
+    //     landPower: 40,
+    //     possTerrain: ["savannah", "savannah","savannah","savannah", "savannah", "savannah", "grassland","grassland","forest","forest"]
+    // },
+    // jurassic: {
+    //     defualtTerrainType: "savannah",
+    //     seaPoints: [3, 5],
+    //     seaPower: 80,
+    //     lakePoints: [3, 6],
+    //     lakePower: 5,
+    //     riverPoints: [20, 30],
+    //     riverPower: 20,
+    //     landPower: 150,
+    //     possTerrain: ["grassland", "grassland", "grassland","forest","forest"]
+    // },
+    // cretaceous: {
+    //     defualtTerrainType: "savannah",
+    //     seaPoints: [1, 2],
+    //     seaPower: 100,
+    //     lakePoints: [2, 3],
+    //     lakePower: 20,
+    //     riverPoints: [20, 30],
+    //     riverPower: 20,
+    //     landPower: 30,
+    //     possTerrain: [,"grassland","grassland","forest","forest"]
+    // }
 }
 
 

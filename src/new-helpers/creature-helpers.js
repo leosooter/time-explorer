@@ -46,21 +46,17 @@ function getPredationIndex({prey, predator}) {
         return 0;
     }
 
-    let preyPreferenceIndex = predator.prey.indexOf(prey.preyType);
+    let preyPreference = predator.preyPreference[prey.preyType];
 
-    if(preyPreferenceIndex === -1) {
+    if(!preyPreference) {
         return 0;
     }
 
     let proximityWeight = 1;
     let preferenceWeight = 1;
-    let preyArrayLength = predator.prey.length;
-    let preyTypePosition = preyArrayLength -  preyPreferenceIndex; // How close is the preyType to the beggining of the prey array
-
-    let preyPreferenceLevel = (preyTypePosition / (preyArrayLength) * 100) * preferenceWeight; // 1-100 predator preferece for current prey item
     let predatorProximity = ((MAX_SIGHT_RANGE - getDistance(prey.currentSquare, predator)) * 20) * proximityWeight; // 10 - 100 proximity score
 
-    return (preyPreferenceLevel + predatorProximity) / 2;
+    return (preyPreference + predatorProximity) / 2;
 }
 
 export function evaluateSquare(square, level, {entity}) {

@@ -39,34 +39,14 @@ export default {
     possTerrain: [],
     tribes: [permianAdobe, permianFarmers, permianNomads],
     terrainTypes: {
-        savannah: {
-            key: "savannah",
-            type: "savannah",
-            color: terrainColors.savannah,
-            isWater: false,
-            isSwim: false,
-            creatures:[],
-            plants: []
-        },
-        shallowWater: {
-            key: "shallowWater",
-            type: "shallow water",
-            color: terrainColors.shallowWater,
-            isWater: true,
-            isSwim: true,
-            creatures: [],
-            plants: [],
-            resources: []
-        },
-        deepWater: {
-            key: "deepWater",
-            type: "deep water",
-            color: terrainColors.deepWater,
-            isWater: true,
-            isSwim: true,
-            creatures: [],
-            plants: [],
-            resources: []
-        },
-    }
+      savannah: {
+        key: "savannah",
+        type: "savannah",
+        color: terrainColors.savannah,
+        isWater: false,
+        creatures: [],
+        plants: [],
+        resources: []
+    },
+  }
 }
