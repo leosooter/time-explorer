@@ -28,6 +28,19 @@ import worldChoices from "./constants/world-config/world-choices";
 
 import {takeEntityTurn} from "./new-helpers/creature-helpers";
 
+const {
+  ORDOVICIAN,
+  DEVONIAN,
+  CARBONIFEROUS,
+  PERMIAN,
+  TRIASSIC,
+  JURASSIC,
+  CRETACEOUS,
+  PLEISTOCENE,
+  ULTRA_REALM,
+  TEST_WORLD,
+} = worldNames;
+
 let isStart = false;
 
 let testHeightIndex = 5;
@@ -36,7 +49,7 @@ let updateNumber = 0;
 
 const creatureActionChance = 1;
 
-let defaultWorld = worldNames.PLEISTOCENE;
+let defaultWorld = CRETACEOUS;
 let isExplorerMode = true;
 isExplorerMode = false;
 
@@ -270,8 +283,8 @@ function App() {
 
   function handleTurn() {
     moveCreatures(creatures);
-    moveUnits(units);
-    tribeActions(tribes);
+    // moveUnits(units);
+    // tribeActions(tribes);
     setTurn(turn + 1);
     console.log("Number of creatures", creatures.length);
     

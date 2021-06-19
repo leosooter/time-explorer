@@ -139,7 +139,6 @@ function getTerritoryInfluence(entity, square) {
 }
 
 function willEntityMoveToSquare(entity, square, motivationLevel = 0) {
-    console.log(entity.name, "willEntityMoveToSquare", entity, square);
 
     if(!square) {
         console.log("Square is undefined - canEntityMoveToSquare");
@@ -151,12 +150,10 @@ function willEntityMoveToSquare(entity, square, motivationLevel = 0) {
     }
 
     if(entity.terrainPreference[entity.currentSquare.terrainType] - entity.terrainPreference[square.terrainType] > motivationLevel) {
-        console.log("Move blocked by terrain");
         return false;
     }
 
     if(entity.isTerritoryRestricted && getTerritoryInfluence(entity, square) > motivationLevel) {
-        console.log("Move blocked by territory");
         return false;
     }
 
@@ -166,12 +163,10 @@ function willEntityMoveToSquare(entity, square, motivationLevel = 0) {
 function canEntityMoveToSquare(entity, square) {
     const moveTerrain = square.terrainType;
     if(square.structure || square.currentEntity) {
-        console.log("Move blocked by structure, entity, or terrain");
         return false;
     }
 
     if(entity.coveredSquares && entity.coveredSquares.length && !canMegaMoveToSquare(entity)) {
-        console.log("Move blocked by Mega");
         return false;
     }
 
@@ -179,11 +174,8 @@ function canEntityMoveToSquare(entity, square) {
 }
 
 function canMegaMoveToSquare(entity) {
-    console.log("Checking covered squares");
     for (let index = 0; index < entity.coveredSquares.length; index++) {
-        console.log("Recursive");
         if(!canEntityMoveToSquare(entity, entity.coveredSquares[index])) {
-            console.log("recursive returned false");
             return false;
         }
     }
@@ -323,7 +315,6 @@ export function moveEntityAwayFromTarget(entity, target, motivationLevel) {
     let bestSquare = entity.currentSquare;
     let bestSquareDiff = getDistance(bestSquare, target);
     let sideQuadrant = getQuadrant(getDirectionToTarget(entity.currentSquare, target), true);
-    console.log();
 
     for (let index = 0; index < entity.speed; index++) {
         for (let index = 0; index < sideQuadrant.length; index++) {

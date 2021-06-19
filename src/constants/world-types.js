@@ -17,7 +17,7 @@ export const worldNames = {
   PERMIAN: "permian",
   TRIASSIC: "triassic",
   JURASSIC: "jurassic",
-  CREATACCEOUS: "cretaceous",
+  CRETACEOUS: "cretaceous",
   PLEISTOCENE: "pleistocene",
   ULTRA_REALM: "ultraRealm",
   TEST_WORLD: "testWorld",

@@ -46,9 +46,9 @@ function getPredationIndex({prey, predator}) {
         return 0;
     }
 
-    let preyPreference = predator.preyPreference[prey.preyType];
+    let preyPreferenceLevel = predator.preyPreference[prey.preyType];
 
-    if(!preyPreference) {
+    if(!preyPreferenceLevel) {
         return 0;
     }
 
@@ -56,7 +56,7 @@ function getPredationIndex({prey, predator}) {
     let preferenceWeight = 1;
     let predatorProximity = ((MAX_SIGHT_RANGE - getDistance(prey.currentSquare, predator)) * 20) * proximityWeight; // 10 - 100 proximity score
 
-    return (preyPreference + predatorProximity) / 2;
+    return (preyPreferenceLevel + predatorProximity) / 2;
 }
 
 export function evaluateSquare(square, level, {entity}) {
@@ -96,8 +96,6 @@ export function evaluateSurroundings(entity, grid) {
 
 export function takeEntityTurn(entity, grid) {
     evaluateSurroundings(entity, grid);
-    console.log(entity.name, "HIGHEST_THREAT", highestThreat);
-    console.log(entity.name, "HIGHEST_TARGET", highestTarget);
     let isTurnOver = false;
 
     if(highestThreat.level) {
