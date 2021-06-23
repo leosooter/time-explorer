@@ -24,7 +24,7 @@ export default function Status(props) {
     const height = sizeAdjust * 2;
     const width = height * 2;
     const {top, left} = props.specs || {top: props.size * .25, left: 0};
-    const modeColor = getModeColor(props.mode);
+    const modeColor = getModeColor(props.mode, props.isGroupLeader);
 
     const statusStyle = {
         backgroundColor: flashColor,

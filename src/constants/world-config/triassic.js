@@ -2,6 +2,7 @@ import creatureDirectory from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
 import resourceDirectory from "../../components/resources/resource-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
+import {generateCreatureArray} from "../../new-helpers/creature-helpers";
 import {terrainColors as colors} from "../colors";
 import structureDirectory from "../../components/structures/structure-directory";
 import tribeDirectory from "../../components/units/tribeDirectory";
@@ -133,7 +134,7 @@ export default {
             type: "desert",
             color: terrainColors.desert,
             isWater: false,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: scorpion, occurance: 6},
                 {type: yellowHerreresaurus, occurance: 3},
                 {type: brownPostosuchus, occurance: 1},
@@ -154,7 +155,7 @@ export default {
             type: "grassland",
             color: terrainColors.grassland,
             isWater: false,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: scorpion, occurance: 3},
                 {type: purpleLystosaurus, occurance: 3},
                 {type: blueDesmatosuchus, occurance: 1},
@@ -179,7 +180,7 @@ export default {
             type: "forest",
             color: terrainColors.forest,
             isWater: false,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: pulmonoscorpius, occurance: 1},
                 {type: purpleLystosaurus, occurance: 3},
                 {type: greenPostosuchus, occurance: 1},
@@ -202,7 +203,7 @@ export default {
             type: "savannah",
             color: terrainColors.savannah,
             isWater: false,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: pulmonoscorpius, occurance: 3},
                 {type: scorpion, occurance: 3},
                 {type: yellowHerreresaurus, occurance: 3},
@@ -228,7 +229,7 @@ export default {
             color: terrainColors.marsh,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: yellowCrocodile, occurance: 2},
                 {type: purpleDarter, occurance: 2},
                 {type: blueDesmatosuchus, occurance: 2},
@@ -246,7 +247,7 @@ export default {
             color: terrainColors.shallowWater,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: yellowCrocodile, occurance: 2},
                 {type: purpleDarter, occurance: 2},
                 {type: redDarter, occurance: 2}
@@ -260,7 +261,7 @@ export default {
             color: terrainColors.deepWater,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: yellowCrocodile, occurance: 2},
                 {type: purpleDarter, occurance: 2},
                 {type: redDarter, occurance: 2}

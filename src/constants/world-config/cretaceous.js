@@ -2,6 +2,7 @@ import cd from "../../components/creatures/creature-directory";
 import pd from "../../components/plants/plant-directory";
 import resourceDirectory from "../../components/resources/resource-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
+import {generateCreatureArray} from "../../new-helpers/creature-helpers";
 import {terrainColors as colors} from "../colors";
 import structureDirectory from "../../components/structures/structure-directory";
 import tribeDirectory from "../../components/units/tribeDirectory";
@@ -68,54 +69,91 @@ Land -
 
         greyParasaurolophus marsh forest
         blueParasaurolophus swampForest marsh
-        yellowOraungosaurus desert
-        orangeOrangosaurus savanah
-
-
-
-
-
-
-
+        yellowOuranosaurus desert
+        orangeOuranosaurus savanah
 */
 
 export default {
-    defualtTerrainType: "forest",
-    seaPoints: [0, 0],
+    defualtTerrainType: "savannah",
+    seaPoints: [1, 2],
     seaPower: 100,
-    lakePoints: [0, 0],
+    lakePoints: [2, 3],
     lakePower: 20,
-    riverPoints: [0, 0],
+    riverPoints: [20, 30],
     riverPower: 20,
-    // seaPoints: [1, 2],
-    // seaPower: 100,
-    // lakePoints: [2, 3],
-    // lakePower: 20,
-    // riverPoints: [20, 30],
-    // riverPower: 20,
     landPower: 50,
     tribes: [triassicRiver, triassicLake],
     possTerrain: generateWeightedArray([
-            {type: "grassland", occurance: 0}, 
-            {type: "forest", occurance: 0}, 
-            {type: "swampForest", occurance: 0},
-            {type: "marsh", occurance: 0},
-            {type: "desert", occurance: 0},
+            {type: "grassland", occurance: 30}, 
+            {type: "forest", occurance: 15}, 
+            {type: "swampForest", occurance: 10},
+            {type: "marsh", occurance: 5},
+            {type: "desert", occurance: 5},
         ], 0),
-    // possTerrain: generateWeightedArray([
-    //         {type: "grassland", occurance: 30}, 
-    //         {type: "forest", occurance: 15}, 
-    //         {type: "swampForest", occurance: 10},
-    //         {type: "marsh", occurance: 5},
-    //         {type: "desert", occurance: 5},
-    //     ], 0),
     terrainTypes: {
+        desert: {
+          key: "desert",
+          type: "desert",
+          color: terrainColors.desert,
+          isWater: false,
+          creatures: generateCreatureArray([
+                {type: cd.tyrannosaurus, occurance: 1},
+
+                {type: cd.velociraptor, occurance: 6},
+
+                {type: cd.brownTriceratops, occurance: 8},
+                {type: cd.yellowOuranosaurus, occurance: 12},
+
+                {type: cd.scorpion, occurance: 10},
+            ], 2000),
+          plants: generateWeightedArray([
+              {type: pd.orangeRoundleaf, occurance: 6},
+              {type: pd.barrelFern, occurance: 6},
+              {type: pd.redFernClump, occurance: 6},
+              {type: pd.redFern, occurance: 6}
+          ], 200),
+          resources: [
+            // {type: largeRedRock, occurance: 2},
+            // {type: largeDarkRedRock, occurance: 1}
+          ]
+        },
+        savannah: {
+            key: "savannah",
+            type: "savannah",
+            color: terrainColors.savannah,
+            isWater: false,
+            creatures: generateCreatureArray([
+                {type: cd.tyrannosaurus, occurance: 3},
+                {type: cd.tarbosaurus, occurance: 1},
+
+                {type: cd.velociraptor, occurance: 6},
+
+                {type: cd.apatosaurus, occurance: 2},
+
+                {type: cd.greyTriceratops, occurance: 12},
+                {type: cd.orangeOuranosaurus, occurance: 12},
+                {type: cd.brownTriceratops, occurance: 8},
+
+                {type: cd.scorpion, occurance: 10},
+            ], 3000),
+            plants: generateWeightedArray([
+                {type: pd.redFern, occurance: 5},
+                {type: pd.yellowFern, occurance: 5},
+                {type: pd.yellowFernClump, occurance: 8},
+                {type: pd.redFernClump, occurance: 4},
+                {type: pd.yellowRoundleaf, occurance: 3},
+                {type: pd.orangeRoundleaf, occurance: 1}
+            ], 50),
+            resources: [
+              // {type: largeYellowRock, occurance: 1}
+            ]
+        },
         grassland: {
             key: "grassland",
             type: "grassland",
             color: terrainColors.grassland,
             isWater: false,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: cd.tarbosaurus, occurance: 2},
 
                 {type: cd.deinonychus, occurance: 2},
@@ -128,7 +166,7 @@ export default {
                 {type: cd.greyTriceratops, occurance: 8},
 
                 {type: cd.scorpion, occurance: 6},
-            ], 5000),
+            ], 3000),
             plants: generateWeightedArray([
                 {type: pd.greenBrownFernClump, occurance: 10},
                 {type: pd.greenFernClump, occurance: 5},
@@ -155,7 +193,7 @@ export default {
             type: "forest",
             color: terrainColors.forest,
             isWater: false,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: cd.utahRaptor, occurance: 2},
                 {type: cd.deinonychus, occurance: 4},
 
@@ -194,112 +232,23 @@ export default {
               // {type: xLargeGreyRock, occurance: 1}
             ]
         },
-        savannah: {
-            key: "savannah",
-            type: "savannah",
-            color: terrainColors.savannah,
-            isWater: false,
-            creatures: generateWeightedArray([
-                {type: cd.tyrannosaurus, occurance: 3},
-                {type: cd.tarbosaurus, occurance: 1},
-
-                {type: cd.velociraptor, occurance: 6},
-
-                {type: cd.apatosaurus, occurance: 2},
-
-                {type: cd.greyTriceratops, occurance: 12},
-                {type: cd.orangeOrangosaurus, occurance: 12},
-                {type: cd.brownTriceratops, occurance: 8},
-
-                {type: cd.scorpion, occurance: 10},
-            ], 5000),
-            plants: generateWeightedArray([
-                {type: pd.redFern, occurance: 5},
-                {type: pd.yellowFern, occurance: 5},
-                {type: pd.yellowFernClump, occurance: 8},
-                {type: pd.redFernClump, occurance: 4},
-                {type: pd.yellowRoundleaf, occurance: 3},
-                {type: pd.orangeRoundleaf, occurance: 1}
-            ], 50),
-            resources: [
-              // {type: largeYellowRock, occurance: 1}
-            ]
-        },
-        desert: {
-          key: "desert",
-          type: "desert",
-          color: terrainColors.desert,
-          isWater: false,
-          creatures: generateWeightedArray([
-              //{type: pulmonoscorpius, occurance: 1},
-              {type: cd.orangeOrangosaurus, occurance: 1},
-              {type: cd.brownTriceratops, occurance: 1},
-              {type: cd.velociraptor, occurance: 4},
-              {type: cd.scorpion, occurance: 3}
-          ], 100),
-          plants: generateWeightedArray([
-              {type: pd.orangeRoundleaf, occurance: 6},
-              {type: pd.barrelFern, occurance: 6},
-              {type: pd.redFernClump, occurance: 6},
-              {type: pd.redFern, occurance: 6}
-          ], 200),
-          resources: [
-            // {type: largeRedRock, occurance: 2},
-            // {type: largeDarkRedRock, occurance: 1}
-          ]
-        },
-        marsh: {
-            key: "marsh",
-            type: "marsh",
-            color: terrainColors.marsh,
-            isWater: true,
-            isSwim: true,
-            creatures: generateWeightedArray([
-                // {type: yellowCrocodile, occurance: 2},
-                {type: cd.redDarter, occurance: 20},
-                {type: cd.purpleDarter, occurance: 20},
-                {type: cd.tarbosaurus, occurance: 6},
-                {type: cd.baryonyx, occurance: 8},
-                {type: cd.blueStyracosaurus, occurance: 5},
-                {type: cd.greenStyracosaurus, occurance: 5},
-                {type: cd.greyTriceratops, occurance: 5},
-                {type: cd.brownTriceratops, occurance: 5},
-                {type: cd.utahRaptor, occurance: 8},
-                {type: cd.deinonychus, occurance: 8},
-                {type: cd.spinosaurus, occurance: 5}
-            ], 250),
-            plants: generateWeightedArray([
-                {type: pd.horsetail, occurance: 3},
-                {type: pd.gianthorsetail, occurance: 3},
-                {type: pd.goldenhorsetail, occurance: 3},
-                {type: pd.reed, occurance: 1},
-            ], 10),
-            resources: []
-        },
         swampForest: {
             key: "swampForest",
             type: "swamp forest",
             color: terrainColors.swampForest,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
-                // {type: lesserArthropluera, occurance: 2},
-                // {type: greaterArthropluera, occurance: 2},
-                {type: cd.greaterProterogyrinus, occurance: 5},
-                {type: cd.redDarter, occurance: 20},
-                {type: cd.purpleDarter, occurance: 20},
-                {type: cd.tarbosaurus, occurance: 5},
-                {type: cd.baryonyx, occurance: 5},
-                {type: cd.spinosaurus, occurance: 2},
-                {type: cd.blueStyracosaurus, occurance: 5},
-                {type: cd.greenStyracosaurus, occurance: 5},
-                {type: cd.greyTriceratops, occurance: 5},
-                {type: cd.brownTriceratops, occurance: 5},
-                {type: cd.utahRaptor, occurance: 8},
-                {type: cd.deinonychus, occurance: 8},
-                // {type: orangeMeganuera, occurance: 1},
-                // {type: blueMeganuera, occurance: 1},
-            ], 250),
+            creatures: generateCreatureArray([
+                {type: cd.spinosaurus, occurance: 1},
+                {type: cd.baryonyx, occurance: 2},
+
+                {type: cd.deinonychus, occurance: 4},
+
+                {type: cd.blueStyracosaurus, occurance: 12},
+                {type: cd.blueParasaurolophus, occurance: 8},
+
+                {type: cd.lesserMisophilae, occurance: 10},
+            ], 500),
             plants: generateWeightedArray([
                 {type: pd.buttressRoot, occurance: 15},
                 {type: pd.goldenButtressRoot, occurance: 5},
@@ -308,19 +257,42 @@ export default {
             ], 20),
             resources: []
         },
+        marsh: {
+            key: "marsh",
+            type: "marsh",
+            color: terrainColors.marsh,
+            isWater: true,
+            isSwim: true,
+            creatures: generateCreatureArray([
+                {type: cd.spinosaurus, occurance: 1},
+                {type: cd.baryonyx, occurance: 2},
+
+                {type: cd.deinonychus, occurance: 2},
+
+                {type: cd.blueStyracosaurus, occurance: 5},
+                {type: cd.blueParasaurolophus, occurance: 5}
+            ], 500),
+            plants: generateWeightedArray([
+                {type: pd.horsetail, occurance: 3},
+                {type: pd.gianthorsetail, occurance: 3},
+                {type: pd.goldenhorsetail, occurance: 3},
+                {type: pd.reed, occurance: 1},
+            ], 10),
+            resources: []
+        },
         shallowWater: {
             key: "shallowWater",
             type: "shallow water",
             color: terrainColors.shallowWater,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 // {type: yellowCrocodile, occurance: 2},
                 {type: cd.redDarter, occurance: 20},
                 {type: cd.purpleDarter, occurance: 20},
-                {type: cd.baryonyx, occurance: 5},
+                {type: cd.baryonyx, occurance: 2},
                 {type: cd.spinosaurus, occurance: 5}
-            ], 250),
+            ], 1000),
             plants: [],
             resources: []
         },
@@ -330,11 +302,10 @@ export default {
             color: terrainColors.deepWater,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 // {type: yellowCrocodile, occurance: 2},
                 {type: cd.redDarter, occurance: 20},
                 {type: cd.purpleDarter, occurance: 20},
-                {type: cd.spinosaurus, occurance: 1},
                 {type: cd.blueMosasaurus, occurance: 10},
                 {type: cd.greenMosasaurus, occurance: 5}
             ], 2500),

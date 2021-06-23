@@ -2,6 +2,7 @@ import creatureDirectory from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
 import resourceDirectory from "../../components/resources/resource-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
+import {generateCreatureArray} from "../../new-helpers/creature-helpers";
 import {terrainColors as colors} from "../colors";
 import structureDirectory from "../../components/structures/structure-directory";
 import tribeDirectory from "../../components/units/tribeDirectory";
@@ -156,7 +157,7 @@ export default {
             color: terrainColors.grassland,
             isWater: false,
             terrainPower: 120,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: scorpion, occurance: 3},
                 {type: yellowOrnitholestes, occurance: 3},
                 {type: greenKentrosaurus, occurance: 3},
@@ -188,7 +189,7 @@ export default {
             color: terrainColors.forest,
             isWater: false,
             terrainPower: 70,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: pulmonoscorpius, occurance: 1},
                 {type: greenKentrosaurus, occurance: 3},
                 {type: blueStegosaurus, occurance: 1},
@@ -230,7 +231,7 @@ export default {
             type: "savannah",
             color: terrainColors.savannah,
             isWater: false,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: pulmonoscorpius, occurance: 3},
                 {type: scorpion, occurance: 3},
                 {type: yellowOrnitholestes, occurance: 2},
@@ -262,7 +263,7 @@ export default {
             isWater: true,
             isSwim: true,
             terrainPower: 30,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: blueOrnitholestes, occurance: 1},
                 {type: blueStegosaurus, occurance: 1}, 
                 {type: yellowCrocodile, occurance: 1},
@@ -284,7 +285,7 @@ export default {
             isWater: true,
             isSwim: true,
             terrainPower: 40,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: blueOrnitholestes, occurance: 1} ,
                 {type: blueStegosaurus, occurance: 1},
                 {type: greenKentrosaurus, occurance: 2},
@@ -307,7 +308,7 @@ export default {
             color: terrainColors.shallowWater,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: yellowCrocodile, occurance: 1},
                 {type: silverBarb, occurance: 4},
                 {type: blueFish, occurance: 2},
@@ -323,7 +324,7 @@ export default {
             color: terrainColors.deepWater,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: silverBarb, occurance: 3},
                 {type: blueFish, occurance: 4},
                 {type: purpleDarter, occurance: 1},

@@ -23,8 +23,10 @@ Animal rules
     }
 */
 
+import {round, clamp, random} from "lodash";
 import {spreadSquareFromPoint, getDistance} from "./grid-helpers";
 import {moveEntityAwayFromTarget, moveEntityTowardTarget, idleMove} from "./movement-helpers";
+import {getDiffFromIdeal, generateWeightedArray} from "./utilities";
 import {
     attackEntity,
     IDLE,
@@ -36,8 +38,38 @@ import {
 } from "./entity-helpers.js";
 
 const MAX_SIGHT_RANGE = 6;
+const HUNGER_PER_TURN = 5;
 let highestTarget = {level: 0};
 let highestThreat = {level: 0};
+
+
+export function generateCreatureArray(creatureArray, weight) {
+    for (let index = 0; index < creatureArray.length; index++) {
+        const creature = creatureArray[index];
+
+        if(creature.type.isGroup) {
+            creature.occurance = round(creature.occurance / ((creature.groupMaxSize || 5) * .75));
+        }
+    }
+
+    return generateWeightedArray(creatureArray, weight);
+}
+
+
+export function getPreyPreferenceLevel({prey, predator, data}) {
+    let predToPreyAttack = prey.attack / predator.attack;
+    let attackIdeal = round((predToPreyAttack > 1 ? 0 : (1 - predToPreyAttack) * 100) * 2, 2);
+
+    let hpIdeal = round(getDiffFromIdeal(prey.hp, predator.idealPreySize, predator.preySizeRange) * .5);
+
+    let level = round(hpIdeal > 0 && (hpIdeal + attackIdeal) / 2 || 0);
+
+    if(data) {
+        return {level, hpIdeal, attackIdeal};
+    }
+
+    return level;
+}
 
 
 // How likely is predation on 0-99 scale given prey/predator
@@ -46,7 +78,11 @@ function getPredationIndex({prey, predator}) {
         return 0;
     }
 
-    let preyPreferenceLevel = predator.preyPreference[prey.preyType];
+    if(predator.isOpenOceanOnly && !prey.currentSquare.isOpenOcean) {
+        return 0;
+    }
+
+    let preyPreferenceLevel = getPreyPreferenceLevel({prey, predator});
 
     if(!preyPreferenceLevel) {
         return 0;
@@ -95,6 +131,7 @@ export function evaluateSurroundings(entity, grid) {
 }
 
 export function takeEntityTurn(entity, grid) {
+    entity.hunger = clamp(entity.hunger + HUNGER_PER_TURN, 0, 100);
     evaluateSurroundings(entity, grid);
     let isTurnOver = false;
 
@@ -108,6 +145,7 @@ export function takeEntityTurn(entity, grid) {
 
     if(!isTurnOver) {
         entity.mode = IDLE;
+        entity.status = "Idle";
         idleAction({entity, grid});
     }
 }
@@ -118,6 +156,7 @@ function reactToThreat({entity, grid, highestThreat}) {
     }
 
     entity.mode = ESCAPING_PREDATOR;
+    entity.status = `Escaping from ${highestThreat.entity.name}`;
     return moveToEscape(entity, highestThreat.entity, highestThreat.level);
 }
 
@@ -127,6 +166,7 @@ function reactToTarget({entity, grid, highestTarget}) {
     }
 
     entity.mode = CHASING_PREY;
+    entity.status = `Chasing ${highestTarget.entity.name}`;
     return moveToAttack(entity, highestTarget.entity, highestTarget.level);
 }
 

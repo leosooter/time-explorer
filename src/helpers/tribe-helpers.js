@@ -25,8 +25,6 @@ export function newStructure(square, type) {
 }
 
 export function addStructure(square, structureType, tribe) {
-    console.log("addStructure", tribe.structures);
-
     if(square.plant) {
         removeEntity(square.plant)
     }
@@ -43,15 +41,11 @@ function removeSquareFromBuildingSquares(square, tribe) {
 }
 
 export function buildStructure(tribe, square) {
-    console.log("buildStructure");
-    
     const buildSquare = square ? square : sample(tribe.buildingSquares);
     const structure = tribe.possStructures[tribe.techLevel]
     addStructure(buildSquare, structure, tribe);
     removeSquareFromBuildingSquares(buildSquare, tribe);
-    tribe.wood -= structure.cost;
-    console.log("tribe.buildingSquares", tribe.buildingSquares);
-    
+    tribe.wood -= structure.cost;    
 }
 
 // export function removeStructure(removeStructure, tribe) {
@@ -78,17 +72,13 @@ function upgradeStructure(structure, tribe) {
     // structure.dir = dir;
     // tribe.structures.push(structure);
     // tribe.populationCapacity += structure.populationSupport;
-    structure = Object.assign(structure, tribe.possStructures[tribe.techLevel]);
-    console.log("Structure after upgrade", structure);
-    
+    structure = Object.assign(structure, tribe.possStructures[tribe.techLevel]);    
 }
 
 function upgradeTechLevel(tribe) {
     tribe.techLevel ++;
     for (let index = 0; index < tribe.structures.length; index++) {
-        const structure = tribe.structures[index];
-        console.log("structure", structure);
-        
+        const structure = tribe.structures[index];        
         upgradeStructure(structure, tribe);
     }
 }
@@ -119,10 +109,7 @@ function canBuildStructure(tribe) {
 }
 
 
-export function tribeAction(tribe) {
-    console.log("TRIBE ACTION", tribe);
-    console.log("canBuildStructure(tribe)", canBuildStructure(tribe));
-    
+export function tribeAction(tribe) {    
     if(canBuildStructure(tribe)) {
         buildStructure(tribe);
     }

@@ -18,7 +18,7 @@ export default function Plant(props) {
         pointerEvents: "none",
         position: "absolute",
         transform: `translate(${left}px, ${top}px)`,
-        zIndex: getZIndex(heightIndex, widthIndex, "plant")
+        zIndex: height < 1.5 ? -1000 : getZIndex(heightIndex, widthIndex, "plant")
     }
 
     const plantStyle = {

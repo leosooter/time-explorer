@@ -27,6 +27,7 @@ export default React.memo(function Creature(props) {
         isUnderWater,
         offSets,
         statusSpecs,
+        isGroupLeader,
         mode
         // leftOffset,
         // topOffset
@@ -73,6 +74,7 @@ export default React.memo(function Creature(props) {
     const dir = isSwim  && hasSwim ? `${props.dir}-swim` : props.dir;
 
     function handleClick() {
+        console.log("Status", props.status);
         console.log("Creature", props);
         // handlePlayerAttackEntity("creatures", id);
         // setOldIndex(newIndex);
@@ -92,7 +94,7 @@ export default React.memo(function Creature(props) {
             <div style={wrapperStyle} className={"wiggle"}>
                 <span>{health}</span>
                 {oldIndex != newIndex && <Outline size={height} color={"blue"} />}
-                <Status specs={statusSpecs} size={height} mode={mode}/>
+                <Status specs={statusSpecs} size={height} mode={mode} isGroupLeader={isGroupLeader}/>
                 <img src={require(`./images/${imgDir}/${dir}.png`)} style={creatureStyle}></img>
                 <Target {...props.targetSpecs} handleClick={handleClick}></Target>
             </div>

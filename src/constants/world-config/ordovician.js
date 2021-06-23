@@ -1,6 +1,7 @@
 import creatureDirectory from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
+import {generateCreatureArray} from "../../new-helpers/creature-helpers";
 import {terrainColors as colors} from "../colors";
 
 const terrainColors = colors.devonian;
@@ -68,8 +69,8 @@ export default {
             type: "desert",
             color: terrainColors.desert,
             isWater: false,
-            creatures: generateWeightedArray([
-              kingPulmonoscorpius
+            creatures: generateCreatureArray([
+              {type: kingPulmonoscorpius, occurance: 3}
             ], 500),
             plants: generateWeightedArray([
             ], 100),
@@ -82,7 +83,7 @@ export default {
             color: terrainColors.savannah,
             isWater: false,
             isSwim: false,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: pulmonoscorpius, occurance: 1},
                 {type: scorpion, occurance: 3}
             ], 500),
@@ -99,7 +100,7 @@ export default {
             color: terrainColors.shallowWater,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
               {type: kingPulmonoscorpius, occurance: 1},
               {type: pulmonoscorpius, occurance: 3}
             ], 100),
@@ -112,7 +113,7 @@ export default {
             color: terrainColors.deepWater,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
               {type: kingPulmonoscorpius, occurance: 2},
               {type: pulmonoscorpius, occurance: 1}
             ], 100),

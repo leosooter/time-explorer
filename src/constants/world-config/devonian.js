@@ -2,6 +2,7 @@ import creatureDirectory from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
 import resourceDirectory from "../../components/resources/resource-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
+import {generateCreatureArray} from "../../new-helpers/creature-helpers";
 import {terrainColors as colors} from "../colors";
 
 const terrainColors = colors.devonian;
@@ -121,7 +122,7 @@ export default {
             type: "desert",
             color: terrainColors.desert,
             isWater: false,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: scorpion, occurance: 1},
             ], 500),
             plants: generateWeightedArray([
@@ -137,7 +138,7 @@ export default {
             color: terrainColors.grassland,
             isWater: false,
             isSwim: false,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: pulmonoscorpius, occurance: 1},
                 {type: scorpion, occurance: 3},
                 {type: hynerpeton, occurance: 2}
@@ -159,7 +160,7 @@ export default {
             color: terrainColors.savannah,
             isWater: false,
             isSwim: false,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: pulmonoscorpius, occurance: 3},
                 {type: scorpion, occurance: 3}
             ], 500),
@@ -178,7 +179,7 @@ export default {
             color: terrainColors.marsh,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: hyneria, occurance: .4},
                 {type: hynerpeton, occurance: 4},
             ], 25),
@@ -196,7 +197,7 @@ export default {
             color: terrainColors.shallowWater,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: hyneria, occurance: 1},
                 {type: hynerpeton, occurance: 3},
                 {type: silverBarb, occurance: 1},
@@ -212,7 +213,7 @@ export default {
             color: terrainColors.deepWater,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: dunkleosteus, occurance: 2},
                 {type: silverBarb, occurance: 2},
                 {type: greenFish, occurance: 5},

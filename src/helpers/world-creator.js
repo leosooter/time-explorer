@@ -1,7 +1,8 @@
 import {random, sample, clone} from "lodash";
+import {nanoid} from "nanoid";
 import {worldParams} from "../constants/world";
 import {getNewCreature, creatureAction} from "../helpers/creature-helpers";
-import {loopGrid, spreadFromPoint} from "../helpers/grid-helpers";
+import {loopGrid, spreadSquareFromPoint, searchSquareFromPoint} from "../new-helpers/grid-helpers";
 import structureDirectory from "../components/structures/structure-directory";
 import plantDirectory from "../components/plants/plant-directory";
 import resourceDirectory from "../components/resources/resource-directory";
@@ -11,8 +12,9 @@ import unitDirectory from "../components/units/unit-directory";
 import worldTypes from "../constants/world-types";
 import {entityAction} from "./entity-helpers";
 import {tribeAction, addStructure, newStructure} from "./tribe-helpers";
-import { testMatches } from "./entity-helpers.test";
-import { setUpNewPlayer } from "./player-helpers";
+import {testMatches} from "./entity-helpers.test";
+import {setUpNewPlayer} from "./player-helpers";
+import {testCreaturePredation, generateHPFromSize} from "../new-helpers/test-helpers";
 
 const shortDirs = ["n","s","e","w"];
 let explorationMode = false;
@@ -42,6 +44,7 @@ let creatureArrays = {};
 let creaturesByTerrain = {};
 
 let creatures = [];
+let groupCreatures = [];
 let plants = [];
 let resources = [];
 let structures = [];
@@ -53,6 +56,8 @@ let tribesById = {};
 let tribesIdsArray = [];
 let landCoastSquares = [];
 let waterCoastSquares = [];
+let deepWaterCoastSquares = [];
+let openOceanSquares = [];
 let landSquares = [];
 let waterSquares = [];
 let squaresById = {};
@@ -99,6 +104,7 @@ function resetWorld(worldTypeSet) {
     creatureArrays = {};
     creaturesByTerrain = {};
     creatures = [];
+    groupCreatures = [];
     plants = [];
     resources = [];
     structures = [];
@@ -109,6 +115,8 @@ function resetWorld(worldTypeSet) {
     tribesIdsArray = [];
     landCoastSquares = [];
     waterCoastSquares = [];
+    deepWaterCoastSquares = [];
+    openOceanSquares = [];
     landSquares = [];
     waterSquares = [];
     squaresById = {};
@@ -125,6 +133,7 @@ function resetWorld(worldTypeSet) {
     world = {
         grid: [],
         creatures,
+        groupCreatures,
         plants,
         resources,
         structures,
@@ -135,6 +144,8 @@ function resetWorld(worldTypeSet) {
         waterSquares,
         landCoastSquares,
         waterCoastSquares,
+        deepWaterCoastSquares,
+        openOceanSquares,
         landSquares,
         squaresById,
         terrainArrays
@@ -187,7 +198,68 @@ function mapCoast(grid) {
     }
 }
 
-function spreadTerrainFromStart(baseTerrainType, start, power, endTerrain) {    
+// function checkOpenOcean(square) {
+//     let isOpenOcean = true;
+//     for (let index = 0; index < square.dirSides.length; index++) {
+//         const sideSquare = square.dirSides[index];
+//         if(sideSquare.terrainType.key !== "deepWater") {
+//             deepWaterCoastSquares.push(square);
+//             square.terrainType = terrainTypes.shallowWater;
+//             isOpenOcean = false;
+//             square.isOpenOcean = false;
+//         }
+//     }
+
+//     if(isOpenOcean) {
+//         if(!square.openOceanCheck) {
+//             openOceanSquares.push(square);
+//         } else {
+//             square.terrainType.color = darkenColor(square.terrainType.color, 10);
+//         }
+//         square.isOpenOcean = true;
+//     }
+
+//     square.openOceanCheck = true;
+// }
+
+// function reCheckOpenOcean(square) {
+//     square.openOceanCheck = true;
+
+//     for (let index = 0; index < square.dirSides.length; index++) {
+//         const sideSquare = square.dirSides[index];
+//         if(!sideSquare.isOpenOcean && square.openOceanCheck) {
+//             deepWaterCoastSquares.push(square);
+//             square.isOpenOcean = false
+//         }
+//     }
+
+//     if(square.isOpenOcean) {
+        
+//     }
+// }
+
+function checkOpenOcean(square, grid) {
+    let nonDeepWaterSquare = searchSquareFromPoint(square, grid, 2, (sideSquare) => sideSquare.terrainType.key !== "deepWater");
+
+    if(!nonDeepWaterSquare) {
+        openOceanSquares.push(square);
+        square.isOpenOcean = true;
+        square.terrainType.color = darkenColor(square.terrainType.color, 10);
+    } else {
+        deepWaterCoastSquares.push(square);
+    }
+}
+
+function mapOpenOcean(grid) {
+    for (let index = 0; index < waterSquares.length; index++) {
+        const square = waterSquares[index];
+        if(square.terrainType.key === "deepWater") {
+            checkOpenOcean(square, grid);
+        }
+    }
+}
+
+function assignTerrainToSquare(baseTerrainType, square) {
     const terrainType = clone(terrainTypes[baseTerrainType]);
     if(!terrainTypes[baseTerrainType]) {
         console.log("Terrain Error !!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -195,18 +267,26 @@ function spreadTerrainFromStart(baseTerrainType, start, power, endTerrain) {
         console.log("terrainTypes", terrainTypes);
         console.log("baseTerrainType", baseTerrainType);
         
-        return;
+        return false;
     }
     terrainType.color = morphColor(terrainTypes[baseTerrainType].color, 5);
-    start.terrainType = terrainType;
-    start.isWaterMapped = true;
+    square.terrainType = terrainType;
+    square.isWaterMapped = true;
     // console.log("wadeDepths[baseTerrainType.key]", baseTerrainType);
     
-    start.wadeDepth = wadeDepths[baseTerrainType] || 0;
+    square.wadeDepth = wadeDepths[baseTerrainType] || 0;
 
     if(terrainType.isWater) {
-        waterSquares.push(start);
-        start.isSwim = true;
+        waterSquares.push(square);
+        square.isSwim = true;
+    }
+
+    return true;
+}
+
+function spreadTerrainFromStart(terrainType, start, power, endTerrain) {    
+    if(!assignTerrainToSquare(terrainType, start)) {
+        return;
     }
 
     function spreadInDirection(dir) {        
@@ -214,7 +294,7 @@ function spreadTerrainFromStart(baseTerrainType, start, power, endTerrain) {
 
         if(start[dir] && !start[dir].isWaterMapped) {
             if(rand >= 10) {
-                spreadTerrainFromStart(terrainType.key, start[dir], power - 1, endTerrain);
+                spreadTerrainFromStart(terrainType, start[dir], power - 1, endTerrain);
             }
         }
     }
@@ -242,6 +322,26 @@ function morphColor(baseColor, power) {
     return color;
 }
 
+function lightenColor(baseColor, power) {
+    let color = clone(baseColor);
+
+    color.r += power;
+    color.g += power;
+    color.b += power;
+
+    return color;
+}
+
+function darkenColor(baseColor, power) {
+    let color = clone(baseColor);
+
+    color.r -= power;
+    color.g -= power;
+    color.b -= power;
+
+    return color;
+}
+
 function setSquareVisibility(square) {
     square.isVisible = true;
     if (square.currentEntity) {
@@ -257,7 +357,7 @@ function setSquareVisibility(square) {
 
 export function setVisibility(startSquare, power) {
     setSquareVisibility(startSquare)
-    spreadFromPoint(startSquare, power, {callback: (square) => setSquareVisibility(square)});
+    spreadSquareFromPoint(startSquare, world.grid, power, (square) => setSquareVisibility(square));
 }
 
 function newSquare(heightIndex, widthIndex, id) {
@@ -349,8 +449,6 @@ function assignTerrain(grid, power=10) {
         if(random(1,3) === 3) {
             const randTerrain = sample(possibleTerrain);
             const terrainPower = terrainTypes[randTerrain].terrainPower || power;
-            console.log("randTerrain", randTerrain);
-            console.log("terrainPower", terrainPower);
             spreadTerrainFromStart(randTerrain, landCoastSquares[index], terrainPower);
         }
     }
@@ -416,7 +514,7 @@ function addStructuresAndUnits(square, tribe) {
     }
 }
 
-function markOuterTerritory(square, tribe) {
+function markOuterTerritory(square, level, tribe) {
     square.safteyZone = true;
     if(!square.innerTerritory && tribe.possTerrain.indexOf(square.terrainType.key) > -1) {
         square.borderColor = tribe.color;
@@ -425,7 +523,7 @@ function markOuterTerritory(square, tribe) {
     }
 }
 
-function markInnerTerritory(square, tribe) {
+function markInnerTerritory(square, level, tribe) {
     square.safteyZone = true;
     if(tribe.possTerrain.indexOf(square.terrainType.key) > -1) {
         square.borderColor = "red";
@@ -445,9 +543,9 @@ function startVillage(startSquare, tribe, power) {
     startSquare.currentEntity = newUnit(startSquare, tribe);
     tribe.units.push(startSquare.unit);
 
-    // spreadFromPoint(startSquare, power, {callback: addStructuresAndUnits, innerParams: tribe});
-    spreadFromPoint(startSquare, (power), {callback: markInnerTerritory, innerParams: tribe});
-    spreadFromPoint(startSquare, (power * 3), {callback: markOuterTerritory, innerParams: tribe});
+    // spreadSquareFromPoint(startSquare, power, {callback: addStructuresAndUnits, innerParams: tribe});
+    spreadSquareFromPoint(startSquare, world.grid, power, markInnerTerritory, tribe);
+    spreadSquareFromPoint(startSquare, world.grid, (power * 3), markOuterTerritory, tribe);
 }
 
 function assignTribes(grid, number, power) {
@@ -458,7 +556,6 @@ function assignTribes(grid, number, power) {
     while(assignedTribes > 0 && safety > 0) {
         safety --;
         tribe = clone({...sample(worldType.tribes)});
-        console.log("NEW TRIBE STRUCTURES", tribe.structures);
         
         // tribe.action = () => tribeAction(tribe);
 
@@ -480,7 +577,7 @@ function assignPlayerUnit(grid, heightIndex, widthIndex) {
 
     const player = newPlayerUnit(startSquare);
     startSquare.currentEntity = player;
-    spreadFromPoint(startSquare, 3, {callback: (square) => {square.safteyZone = true}});
+    spreadSquareFromPoint(startSquare, world.grid, 3, (square) => {square.safteyZone = true});
     playerUnits.push(player);
 }
 
@@ -589,7 +686,11 @@ function assignPlayerUnit(grid, heightIndex, widthIndex) {
 
 
 
-function isSquareEligableForCreature(square) {
+function isSquareEligableForCreature(square, entity) {
+    if(entity && entity.isOpenOceanOnly && !square.isOpenOcean) {
+        return false;
+    }
+
     return square && !square.currentEntity && !square.innerTerritory
 }
 
@@ -597,41 +698,80 @@ function canAssignCreatureToSquare(selection, square) {
     return selection && !(selection.isHumanPredator && square.safteyZone)
 }
 
-function canAssignMegaToSquare(selection, square) {
+function canAssignMegaToSquare(entity, square) {
 
-    const canAssignMega = isSquareEligableForCreature(square.n) && canAssignCreatureToSquare(selection, square.n) &&
-        isSquareEligableForCreature(square.n.e) && canAssignCreatureToSquare(selection, square.n.e) &&
-        isSquareEligableForCreature(square.e) && canAssignCreatureToSquare(selection, square.e);
-    console.log("CAN ASSIGN MEGA", square, canAssignMega);
+    const canAssignMega = isSquareEligableForCreature(square.n, entity) && canAssignCreatureToSquare(entity, square.n) &&
+        isSquareEligableForCreature(square.n.e, entity) && canAssignCreatureToSquare(entity, square.n.e) &&
+        isSquareEligableForCreature(square.e, entity) && canAssignCreatureToSquare(entity, square.e);
     return canAssignMega;
 }
 
-function assignCreatureToSquare(square, density) {
-    if(!isSquareEligableForCreature(square)) {
+function createNewGroupEntity(square, level, groupLeader) {
+    if(groupLeader.groupArray.length >= groupLeader.groupMaxSize) {
         return;
     }
 
-    let selection = square.terrainType.creatures.length > 0 && sample(square.terrainType.creatures);
-    // console.log("SELECTION", selection);
-    if(selection && selection.name === "Apatosaurus") {
-        console.log("SELECTION", selection);
+    let entity = assignCreatureToSquare(square, groupLeader.groupDensity, groupLeader);
+
+    if(!entity) {
+        return;
     }
+
+   groupLeader.groupArray.push(entity);
+   entity.groupLeader = groupLeader;
+   console.log(groupLeader.name, "GROUP SIZE", groupLeader.groupArray.length);
+}
+
+function createNewGroup(groupLeader, square) {
+    groupLeader.groupArray = [];
+    spreadSquareFromPoint(square, world.grid, groupLeader.groupCohesion, createNewGroupEntity, groupLeader);
+
+    if(groupLeader.groupArray.length) {
+        groupLeader.isGroupLeader = true;
+    }
+}
+
+function assignCreatureToSquare(square, density = null, groupLeader = null) {
+    if(density && random(1, 10) > density) {
+        return null;
+    }
+    if(!isSquareEligableForCreature(square)) {
+        return null;
+    }
+
+    let selection;
+
+    if(groupLeader) {
+        selection = groupLeader;
+    } else {
+        selection = square.terrainType.creatures.length > 0 && sample(square.terrainType.creatures);
+    }
+    
     // let selection = scorpion;
     if(!canAssignCreatureToSquare(selection, square)) {
-        return;
+        return null;
     }
 
     //Mega creatures also cover a block of squares to the n, ne and e of it's current square
     if(selection.isMega && !canAssignMegaToSquare(selection, square)) {
-        return;
+        return null;
     }
 
     const creature = getNewCreature(selection, square);
     creatures.push(creature);
-    
-    if(creature.isMega) {
-        console.log("MEGA CREATED");
-    } 
+
+    if(creature.terrainPreference[square.terrainType.key] < 60) { // If creature is assigned to square- update preference
+        creatureDirectory[creature.keyName].terrainPreference[square.terrainType.key] = 60;
+    }
+
+
+    if(creature.isGroup) {
+        groupCreatures.push(creature);
+    }
+
+    if(!groupLeader && creature.isGroup) {
+        createNewGroup(creature, square);
+    }
 
     if(!creaturesByTerrain[square.terrainType.key]) {
         creaturesByTerrain[square.terrainType.key] = {}
@@ -641,12 +781,8 @@ function assignCreatureToSquare(square, density) {
     } else {
         creaturesByTerrain[square.terrainType.key][creature.name] ++;
     }
-    
-    // if(random(1, density) === 1) {
-    //     const creature = newCreature(sample(square.terrainType.creatures), square);
-    //     creatures.push(creature);
-    //     square.creatures.push(creature)
-    // }
+
+    return creature;
 }
 
 function assignCreatures(grid, density) {
@@ -659,6 +795,7 @@ function assignCreatures(grid, density) {
     loopGrid(grid, params);
     // const square = grid[99][0];
     // assignCreatureToSquare(square, density);
+    console.log("Number of group creatures", world.groupCreatures.length);
 }
 
 function newResource(resourceType, square) {
@@ -778,8 +915,13 @@ function loadTerrainArrays(grid) {
         // innerParams: [density],
     }
     loopGrid(grid, params);
-    console.log("terrainArrays", terrainArrays);
-    
+}
+
+function addTestTerrain(square, baseTerrainType, size) {
+    assignTerrainToSquare(baseTerrainType, square);
+    if(size) {
+        spreadSquareFromPoint(square, world.grid, size, (targetSquare) => assignTerrainToSquare(baseTerrainType, targetSquare));
+    }
 }
 
 function testAllStructures(row, dir) {
@@ -793,6 +935,12 @@ function testAllStructures(row, dir) {
             }
             structures.push(newStructure(world.grid[row][widthIndex], structure));
         }
+    }
+}
+
+function updateCreatureDirectory() {
+    for (const key in creatureDirectory) {
+        creatureDirectory[key].key = `${key}`;
     }
 }
 
@@ -988,7 +1136,9 @@ export function createNewTestWorld(height, width, tribeName, renderAll= true) {
     assignSides(world.grid);
     assignWater(world.grid, seaPoints, worldType.seaPower);
     assignWater(world.grid, lakePoints, worldType.lakePower);
+    addTestTerrain(world.grid[0][0], "deepWater", 10);   //+++++++++++++++++++++++++++++++++++++++++ Test Terrain
     mapCoast(world.grid);
+    mapOpenOcean(world.grid);
     assignTerrain(world.grid, worldType.landPower);
     loadTerrainArrays(world.grid);
     // const startSquare = sample(landSquares);
@@ -996,7 +1146,6 @@ export function createNewTestWorld(height, width, tribeName, renderAll= true) {
     // const startSquare = world.grid[world.grid.length/2][world.grid[0].length/2];
     const startSquare = world.grid[50][50];
     const tribeSquare = world.grid[52][52];
-    console.log("START SQUARE", startSquare);
     
     setVisibility(startSquare, 3);
     assignPlayerUnit(world.grid, startSquare.heightIndex, startSquare.widthIndex);
@@ -1028,7 +1177,7 @@ export function createNewTestWorld(height, width, tribeName, renderAll= true) {
     // addTestStructure(world.grid[11][2], permianNomad2);
     // addTestStructure(world.grid[11][3], permianNomad3);
     // addTestStructure(world.grid[11][6], permianNomad4);
-    addTestPlant(world.grid[1][1], plantDirectory.polycarpus)
+    // addTestPlant(world.grid[1][1], plantDirectory.polycarpus)
     
     // testMatches();
     // addTestEntity(world.grid[1][1], null, "units");
@@ -1040,8 +1189,10 @@ export function createNewTestWorld(height, width, tribeName, renderAll= true) {
     // addTestEntity(world.grid[2][12], sarcophaganax, "creatures", "n");
     // addTestEntity(world.grid[3][11], apatosaurus, "creatures", "n");
     // addTestEntity(world.grid[4][4], allosaurus, "creatures", "n");   
-    addTestEntity(world.grid[5][5], creatureDirectory.blueDesmatosuchus, "creatures", "n");
-    addTestEntity(world.grid[2][2], creatureDirectory.ceratosaurus, "creatures", "n");
+    addTestEntity(world.grid[2][4], creatureDirectory.greenMosasaurus, "creatures", "n");
+    addTestEntity(world.grid[2][8], creatureDirectory.brownScutosaurus, "creatures", "n");
+
+    testCreaturePredation(creatureDirectory.tyrannosaurus);
     /*
         4- 98
         3- 76
@@ -1098,6 +1249,7 @@ export default function createNewWorld(height, width, worldTypeSet, isExplorerMo
     assignWater(world.grid, seaPoints, worldType.seaPower);
     assignWater(world.grid, lakePoints, worldType.lakePower);
     mapCoast(world.grid);
+    mapOpenOcean(world.grid);
     assignTerrain(world.grid, worldType.landPower);
     loadTerrainArrays(world.grid);
     // const startSquare = sample(landSquares);

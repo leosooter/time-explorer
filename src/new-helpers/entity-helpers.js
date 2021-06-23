@@ -1,4 +1,4 @@
-import {random, sample, find, remove} from "lodash";
+import {random, sample, find, remove, clamp} from "lodash";
 import {world} from "../helpers/world-creator";
 
 export const IDLE = "idle";
@@ -9,7 +9,8 @@ export const ESCAPING_PLAYER = "escaping player";
 export const FIGHTING = "fighting";
 
 const modeColors = {
-    "idle": "rgba(100,100,100,.1)",
+    "idle": "rgba(100,100,100, .1)",
+    "idleGroupLeader": "black",
     "chasing prey": "orangeRed",
     "chasing player": "red",
     "escaping predator": "blue",
@@ -17,7 +18,8 @@ const modeColors = {
     "fighting": "purple"
 }
 
-export function getModeColor(mode) {
+export function getModeColor(startMode, isGroupLeader) {
+    let mode = isGroupLeader && startMode === "idle" ? "idleGroupLeader" : startMode;
     return modeColors[mode] || "";
 }
 
@@ -35,6 +37,7 @@ export function healEntityFromPrey(entity, other) {
     let healAmount = other.hp < diffToFullHealth ? other.hp : diffToFullHealth;
 
     entity.health += healAmount;
+    entity.hunger = clamp(entity.hunger, 0, 100);
 }
 
 function addResources(entity, other) {
@@ -47,7 +50,9 @@ export function attackEntity(entity, other) {
     // console.log(`\n\n\n${entity.name} Attacking ${other.name}`);
     // turnEntityToSquare(entity, other.currentSquare)
     entity.mode = FIGHTING;
+    entity.status = `Fighting ${other.name}`;
     other.mode = FIGHTING;
+    other.status = `Fighting ${entity.name}`;
     entity.attacking = other;
     other.attacker = entity;
     other.health -= entity.attack;

@@ -1,6 +1,7 @@
 import cd from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
+import {generateCreatureArray} from "../../new-helpers/creature-helpers";
 import {terrainColors as colors} from "../colors";
 import structureDirectory from "../../components/structures/structure-directory";
 import tribeDirectory from "../../components/units/tribeDirectory";
@@ -107,7 +108,7 @@ export default {
             color: terrainColors.tundra,
             isWater: false,
             terrainPower: 120,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: cd.woolyMammoth, occurance: 3},
                 {type: cd.ceratosaurus, occurance: 3}
             ], 500),
@@ -123,7 +124,7 @@ export default {
             color: terrainColors.snowForest,
             isWater: false,
             terrainPower: 70,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: cd.woolyMammoth, occurance: 3}
             ], 100),
             plants: generateWeightedArray([
@@ -139,7 +140,7 @@ export default {
             type: "grassland",
             color: terrainColors.grassland,
             isWater: false,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: cd.greyMastodon, occurance: 3},
                 {type: cd.ceratosaurus, occurance: 3}
             ], 500),
@@ -157,7 +158,7 @@ export default {
           color: terrainColors.forest,
           isWater: false,
           terrainPower: 120,
-          creatures: generateWeightedArray([
+          creatures: generateCreatureArray([
             {type: cd.greyMastodon, occurance: 2},
             {type: cd.woolyMammoth, occurance: 3}
           ], 500),
@@ -180,7 +181,7 @@ export default {
             isWater: true,
             isSwim: true,
             terrainPower: 30,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: cd.greyMastodon, occurance: 3}
             ], 25),
             plants: generateWeightedArray([
@@ -196,7 +197,7 @@ export default {
             isWater: true,
             isSwim: true,
             terrainPower: 40,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: cd.greyMastodon, occurance: 3}
             ], 25),
             plants: generateWeightedArray([

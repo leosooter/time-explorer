@@ -51,7 +51,7 @@ export default {
     //             color: terrainColors.grassland,
     //             isWater: false,
     //             treeChance: 3,
-    //             creatures: generateWeightedArray([
+    //             creatures: generateCreatureArray([
     //                 {type: lesserArthropluera, occurance: 3}, 
     //                 {type: kingPulmonoscorpius, occurance: 2},
     //                 {type: scorpion, occurance: 5}

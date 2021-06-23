@@ -20,7 +20,7 @@
         - Turn and Move
 */
 
-import {sample, clone} from "lodash";
+import {sample, clone, random} from "lodash";
 import { entityAction, getDirFromFacing } from "./entity-helpers";
 
 let creatureId = 1;
@@ -46,25 +46,33 @@ export function getNewCreature(creatureType, square) {
     creature.isVisible = square.isVisible;
     creature.arrayType = "creatures";
     creature.mode = "idle";
+    creature.hunger = random(0,100);
+
 
     creature.action = () => entityAction(creature, "creatures");
 
     // Add to square(s)
     square.currentEntity = creature;
 
+    if(creature.isPredator) {
+        creature.idealPreySize = creature.hp * .6;
+        creature.preySizeRange = creature.idealPreySize * .75;
+    }
+
+    if(creature.isGroup) {
+        creature.groupCohesion = creature.groupCohesion || 3;
+        creature.groupDensity = creature.groupDensity || 1;
+        creature.groupMaxSize = creature.groupMaxSize || 5;
+    }
+
     if(creature.isTerritoryRestricted) {
         creature.territoryCenter = {heightIndex: square.heightIndex, widthIndex: square.widthIndex};
     }
 
     if(creature.isMega) {
-        console.log("adding square to Mega");
-        creature.coveredSqaures = [];
-        creature.coveredSqaures.push(square.n);
-        square.n.currentEntity = creature;
-        creature.coveredSqaures.push(square.n.e);
-        square.n.e.currentEntity = creature;
-        creature.coveredSqaures.push(square.e);
-        square.e.currentEntity = creature;
+        if(creature.waterOnly && creature.isOpenOceanOnly === "undefined") { // Any mega water creature is openOcean unless specifically set as false;
+            creature.isOpenOceanOnly = true;
+        }
     }
 
     return creature;

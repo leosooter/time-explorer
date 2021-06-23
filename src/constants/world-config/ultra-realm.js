@@ -2,6 +2,7 @@ import creatureDirectory from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
 import resourceDirectory from "../../components/resources/resource-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
+import {generateCreatureArray} from "../../new-helpers/creature-helpers";
 import {terrainColors as colors} from "../colors";
 import structureDirectory from "../../components/structures/structure-directory";
 import tribeDirectory from "../../components/units/tribeDirectory";
@@ -75,7 +76,7 @@ export default {
             type: "forest",
             color: terrainColors.forest,
             isWater: false,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
               {type: megaMisophilae, occurance: 2},
               {type: megaPostosuchus, occurance: 1},
               {type: megaPulmonoscorpius, occurance: 2}
@@ -95,7 +96,7 @@ export default {
             type: "savannah",
             color: terrainColors.savannah,
             isWater: false,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
               {type: megaGorgonopsid, occurance: 3},
               {type: megaPostosuchus, occurance: 1},
               {type: megaPulmonoscorpius, occurance: 2}
@@ -113,7 +114,7 @@ export default {
             color: terrainColors.marsh,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
               {type: megaMisophilae, occurance: 2},
             ], 250),
             plants: generateWeightedArray([
@@ -129,7 +130,7 @@ export default {
             color: terrainColors.shallowWater,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
             ], 250),
             plants: generateWeightedArray([
               {type: purpleWaterCalamite, occurance: 5},
@@ -142,7 +143,7 @@ export default {
             color: terrainColors.deepWater,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
             ], 2500),
             plants: generateWeightedArray([
               {type: orangeCalamite, occurance: 50},

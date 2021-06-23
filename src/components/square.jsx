@@ -13,6 +13,10 @@ export default function Square(props) {
     const {heightIndex, widthIndex, handleSquareSelect, terrainType, squareSize, id, borderColor, isVisible} = props;
     let squareColor;
 
+    function handleSquareSelectTest() {
+      console.log("SELECTED_SQUARE", props);
+    }
+
     if(Array.isArray(terrainType.color)) {
       squareColor = terrainType.color[random(0, terrainType.color.length - 1)];
     } else {
@@ -60,6 +64,6 @@ export default function Square(props) {
     };
   
     return (
-      <div style={squareStyle} onClick={() => handleSquareSelect(id)}></div>
+      <div style={squareStyle} onClick={() => handleSquareSelectTest(id)}></div>
     );
   }

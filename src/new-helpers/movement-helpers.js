@@ -6,7 +6,7 @@
 // }
 
 import {random, sample} from "lodash";
-import {getDistance} from "./grid-helpers";
+import {getDistance, searchSquareFromPoint} from "./grid-helpers";
 
 const facingDirs = ["n","s","e","w","ne","nw","se","sw"];
 
@@ -138,14 +138,25 @@ function getTerritoryInfluence(entity, square) {
     return territoryInfluence;
 }
 
-function willEntityMoveToSquare(entity, square, motivationLevel = 0) {
-
+function evaluateSquareForMove(entity, square, motivationLevel) {
     if(!square) {
         console.log("Square is undefined - canEntityMoveToSquare");
         return false;
     }
 
-    if(!canEntityMoveToSquare(entity, square)) {
+    if(square.structure) {
+        return false;
+    }
+
+    if(square.currentEntity && square.currentEntity.id !== entity.id) {
+        return false;
+    }
+
+    if(entity.isOpenOcean && !square.isOpenOcean) {
+        return false;
+    }
+
+    if(entity.terrainPreference[square.terrainType.key] === 0) {
         return false;
     }
 
@@ -160,22 +171,41 @@ function willEntityMoveToSquare(entity, square, motivationLevel = 0) {
     return true;
 }
 
-function canEntityMoveToSquare(entity, square) {
-    const moveTerrain = square.terrainType;
-    if(square.structure || square.currentEntity) {
+function willEntityMoveToSquare(entity, square, motivationLevel = 0) {
+    let canMoveToTargetSquare = evaluateSquareForMove(entity, square, motivationLevel);
+    if(!canMoveToTargetSquare) {
         return false;
     }
 
-    if(entity.coveredSquares && entity.coveredSquares.length && !canMegaMoveToSquare(entity)) {
-        return false;
+    if(entity.isMega) {
+        canMoveToTargetSquare = canMegaMoveToSquare(entity, square, motivationLevel);
     }
 
-    return true;
+    return canMoveToTargetSquare;
 }
 
-function canMegaMoveToSquare(entity) {
-    for (let index = 0; index < entity.coveredSquares.length; index++) {
-        if(!canEntityMoveToSquare(entity, entity.coveredSquares[index])) {
+// function canEntityMoveToSquare(entity, square, motivationLevel, isMegaCheck) {
+//     const moveTerrain = square.terrainType;
+//     if(square.structure) {
+//         return false;
+//     }
+
+//     if(square.currentEntity && square.currentEntity.id !== entity.id) {
+//         return false;
+//     }
+
+//     if(!isMegaCheck) {
+//         if(entity.isMega && !canMegaMoveToSquare(entity, square, motivationLevel)) {
+//             return false;
+//         }
+//     }
+
+//     return true;
+// }
+
+function canMegaMoveToSquare(entity, square, motivationLevel) {
+    for (let index = 0; index < square.allSides.length; index++) {
+        if(!evaluateSquareForMove(entity, square.allSides[index], motivationLevel)) {
             return false;
         }
     }
@@ -186,7 +216,7 @@ function canMegaMoveToSquare(entity) {
 function moveEntity(entity) {
     const moveSquare = entity.currentSquare[entity.facing];
     const moveTerrain = moveSquare && moveSquare.terrainType;
-    if(willEntityMoveToSquare(entity, moveSquare)) {
+    if(moveSquare && willEntityMoveToSquare(entity, moveSquare)) {
         moveEntityToSquare(entity, moveSquare);
     } else {
         turnEntity(entity);

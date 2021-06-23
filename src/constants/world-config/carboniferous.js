@@ -2,6 +2,7 @@ import creatureDirectory from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
 import resourceDirectory from "../../components/resources/resource-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
+import {generateCreatureArray} from "../../new-helpers/creature-helpers";
 import {terrainColors as colors} from "../colors";
 
 const terrainColors = colors.carboniferous;
@@ -87,7 +88,7 @@ export default {
             color: terrainColors.grassland,
             isWater: false,
             isSwim: false,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: lesserArthropluera, occurance: 2}, 
                 {type: kingPulmonoscorpius, occurance: 1},
                 {type: scorpion, occurance: 3},
@@ -114,7 +115,7 @@ export default {
             color: terrainColors.forest,
             isWater: false,
             isSwim: false,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: greaterArthropluera, occurance: 2}, 
                 {type: lesserArthropluera, occurance: 4},
                 {type: pulmonoscorpius, occurance: 1},
@@ -144,7 +145,7 @@ export default {
             color: terrainColors.savannah,
             isWater: false,
             isSwim: false,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: lesserArthropluera, occurance: 1}, 
                 {type: kingPulmonoscorpius, occurance: 3},
                 {type: pulmonoscorpius, occurance: 3},
@@ -166,7 +167,7 @@ export default {
             color: terrainColors.marsh,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 // {type: lesserArthropluera, occurance: 2},
                 // {type: greaterArthropluera, occurance: 2},
                 {type: greaterProterogyrinus, occurance: 4},
@@ -186,7 +187,7 @@ export default {
             color: terrainColors.swampForest,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 // {type: lesserArthropluera, occurance: 2},
                 // {type: greaterArthropluera, occurance: 2},
                 {type: greaterProterogyrinus, occurance: 4},
@@ -205,7 +206,7 @@ export default {
             color: terrainColors.shallowWater,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: greaterProterogyrinus, occurance: 4},
                 {type: orangeMeganuera, occurance: 4},
                 {type: blueMeganuera, occurance: 1},
@@ -220,7 +221,7 @@ export default {
             color: terrainColors.deepWater,
             isWater: true,
             isSwim: true,
-            creatures: generateWeightedArray([
+            creatures: generateCreatureArray([
                 {type: greaterProterogyrinus, occurance: 1},
                 {type: orangeMeganuera, occurance: 2},
                 {type: blueMeganuera, occurance: 1},
