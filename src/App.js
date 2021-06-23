@@ -54,8 +54,8 @@ let isExplorerMode = true;
 isExplorerMode = false;
 let world;
 
-world = createNewWorld(100, 100, defaultWorld, isExplorerMode, "permianAdobe");
-// world = createNewTestWorld(100, 100, isExplorerMode, "permianAdobe", false);
+// world = createNewWorld(100, 100, defaultWorld, isExplorerMode, "permianAdobe");
+world = createNewTestWorld(100, 100, isExplorerMode, "permianAdobe", false);
 
 function App() {
   

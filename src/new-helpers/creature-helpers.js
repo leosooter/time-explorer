@@ -177,7 +177,9 @@ function moveToEscape(entity, other, motivationLevel) {
 function moveToAttack(entity, other, motivationLevel) {
     moveEntityTowardTarget(entity, other.currentSquare, motivationLevel);
 
-    if(getDistance(entity.currentSquare, other.currentSquare) === 1) {
+    let attackRange = entity.isMega ? 2 : 1;
+
+    if(getDistance(entity.currentSquare, other.currentSquare) <= attackRange) {
         attackEntity(entity, other);
     }
 

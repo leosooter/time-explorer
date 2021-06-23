@@ -1048,7 +1048,7 @@ function addTestEntity(square, entity, type, dir) {
         newEntity = newPlayerUnit(square, entity);
     }
 
-
+    newEntity.hunger = 100;
     world[type].push(newEntity);
     square.currentEntity = newEntity;
 }
@@ -1136,7 +1136,7 @@ export function createNewTestWorld(height, width, tribeName, renderAll= true) {
     assignSides(world.grid);
     assignWater(world.grid, seaPoints, worldType.seaPower);
     assignWater(world.grid, lakePoints, worldType.lakePower);
-    addTestTerrain(world.grid[0][0], "deepWater", 10);   //+++++++++++++++++++++++++++++++++++++++++ Test Terrain
+    // addTestTerrain(world.grid[0][0], "deepWater", 10);   //+++++++++++++++++++++++++++++++++++++++++ Test Terrain
     mapCoast(world.grid);
     mapOpenOcean(world.grid);
     assignTerrain(world.grid, worldType.landPower);
@@ -1189,8 +1189,8 @@ export function createNewTestWorld(height, width, tribeName, renderAll= true) {
     // addTestEntity(world.grid[2][12], sarcophaganax, "creatures", "n");
     // addTestEntity(world.grid[3][11], apatosaurus, "creatures", "n");
     // addTestEntity(world.grid[4][4], allosaurus, "creatures", "n");   
-    addTestEntity(world.grid[2][4], creatureDirectory.greenMosasaurus, "creatures", "n");
-    addTestEntity(world.grid[2][8], creatureDirectory.brownScutosaurus, "creatures", "n");
+    addTestEntity(world.grid[2][4], creatureDirectory.tyrannosaurus, "creatures", "n");
+    addTestEntity(world.grid[2][6], creatureDirectory.greyTriceratops, "creatures", "n");
 
     testCreaturePredation(creatureDirectory.tyrannosaurus);
     /*
