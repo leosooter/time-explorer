@@ -24,7 +24,6 @@ export default React.memo(function Unit(props) {
     } = props;
 
     const wadeDepth = currentSquare.wadeDepth || 0;
-    console.log("heightToSquare", heightToSquare);
     
     let height = worldParams.squareHeight * heightToSquare * worldParams.unitRelativeSize;
     const {top, left} = getPosition(heightIndex, widthIndex, height, widthToHeight, -50 + wadeDepth, -30);

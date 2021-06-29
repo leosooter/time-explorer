@@ -1,4 +1,4 @@
-import creatureDirectory from "../../components/creatures/creature-directory";
+// import creatureDirectory from "../../components/creatures/creature-directory";
 import plantDirectory from "../../components/plants/plant-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
 import {generateCreatureArray} from "../../new-helpers/creature-helpers";

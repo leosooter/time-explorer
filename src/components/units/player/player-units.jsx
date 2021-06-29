@@ -5,8 +5,6 @@ import Unit from "../unit";
 
 export default React.memo(function Units(props) {
   const {playerUnits, handleUnitSelect} = props;
-
-  console.log("playerUnits", playerUnits);
   
 
   return (

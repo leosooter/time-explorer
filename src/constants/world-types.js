@@ -29,16 +29,16 @@ export const desert = {
 }
 
 export default {
-    ordovician,
-    devonian,
-    carboniferous,
-    permian,
-    triassic,
-    jurassic,
+    // ordovician,
+    // devonian,
+    // carboniferous,
+    // permian,
+    // triassic,
+    // jurassic,
     cretaceous,
-    pleistocene,
-    ultraRealm,
-    testWorld,
+    // pleistocene,
+    // ultraRealm,
+    testWorld
     // ordovician: {
     //     defualtTerrainType: "desert",
     //     waterPoints: [10, 20],

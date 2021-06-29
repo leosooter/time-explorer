@@ -308,8 +308,6 @@ function App() {
     position: "absolute",
     transform: `translate(${(worldParams.size / 36.5)}px, ${worldParams.size / 2}px)`
   }
-  // useEffect()
-  console.log("playerPosition.heightIndex", playerPosition.heightIndex);
 
   return (
     <div className="App" style={appStyles}>

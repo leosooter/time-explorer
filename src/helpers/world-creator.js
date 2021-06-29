@@ -272,7 +272,6 @@ function assignTerrainToSquare(baseTerrainType, square) {
     terrainType.color = morphColor(terrainTypes[baseTerrainType].color, 5);
     square.terrainType = terrainType;
     square.isWaterMapped = true;
-    // console.log("wadeDepths[baseTerrainType.key]", baseTerrainType);
     
     square.wadeDepth = wadeDepths[baseTerrainType] || 0;
 
@@ -1189,10 +1188,10 @@ export function createNewTestWorld(height, width, tribeName, renderAll= true) {
     // addTestEntity(world.grid[2][12], sarcophaganax, "creatures", "n");
     // addTestEntity(world.grid[3][11], apatosaurus, "creatures", "n");
     // addTestEntity(world.grid[4][4], allosaurus, "creatures", "n");   
-    addTestEntity(world.grid[2][4], creatureDirectory.tyrannosaurus, "creatures", "n");
-    addTestEntity(world.grid[2][6], creatureDirectory.greyTriceratops, "creatures", "n");
+    // addTestEntity(world.grid[2][4], creatureDirectory.tyrannosaurus, "creatures", "n");
+    // addTestEntity(world.grid[2][6], creatureDirectory.greyTriceratops, "creatures", "n");
 
-    testCreaturePredation(creatureDirectory.tyrannosaurus);
+    // testCreaturePredation(creatureDirectory.tyrannosaurus);
     /*
         4- 98
         3- 76
