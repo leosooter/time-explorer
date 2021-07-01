@@ -15,6 +15,7 @@ import {tribeAction, addStructure, newStructure} from "./tribe-helpers";
 import {testMatches} from "./entity-helpers.test";
 import {setUpNewPlayer} from "./player-helpers";
 import {testCreaturePredation, generateHPFromSize} from "../new-helpers/test-helpers";
+import {generateCreatureStats, loadCreaturesIntoWorlds} from "../new-helpers/creature-generation";
 
 const shortDirs = ["n","s","e","w"];
 let explorationMode = false;
@@ -163,13 +164,8 @@ function initializePlantDirectory() {
 }
 
 function initializeCreatureDirectory() {
-    for (const objectKey in creatureDirectory) {
-        if (creatureDirectory.hasOwnProperty(objectKey)) {
-            const creature = creatureDirectory[objectKey];
-            creature.keyName = objectKey;
-            creature.isMega = creature.isMega || creature.heightToSquare > 6;
-        }
-    }
+    generateCreatureStats();
+    loadCreaturesIntoWorlds();
 }
 
 
@@ -197,46 +193,6 @@ function mapCoast(grid) {
         addToCoastArray(square);
     }
 }
-
-// function checkOpenOcean(square) {
-//     let isOpenOcean = true;
-//     for (let index = 0; index < square.dirSides.length; index++) {
-//         const sideSquare = square.dirSides[index];
-//         if(sideSquare.terrainType.key !== "deepWater") {
-//             deepWaterCoastSquares.push(square);
-//             square.terrainType = terrainTypes.shallowWater;
-//             isOpenOcean = false;
-//             square.isOpenOcean = false;
-//         }
-//     }
-
-//     if(isOpenOcean) {
-//         if(!square.openOceanCheck) {
-//             openOceanSquares.push(square);
-//         } else {
-//             square.terrainType.color = darkenColor(square.terrainType.color, 10);
-//         }
-//         square.isOpenOcean = true;
-//     }
-
-//     square.openOceanCheck = true;
-// }
-
-// function reCheckOpenOcean(square) {
-//     square.openOceanCheck = true;
-
-//     for (let index = 0; index < square.dirSides.length; index++) {
-//         const sideSquare = square.dirSides[index];
-//         if(!sideSquare.isOpenOcean && square.openOceanCheck) {
-//             deepWaterCoastSquares.push(square);
-//             square.isOpenOcean = false
-//         }
-//     }
-
-//     if(square.isOpenOcean) {
-        
-//     }
-// }
 
 function checkOpenOcean(square, grid) {
     let nonDeepWaterSquare = searchSquareFromPoint(square, grid, 2, (sideSquare) => sideSquare.terrainType.key !== "deepWater");
@@ -731,9 +687,17 @@ function createNewGroup(groupLeader, square) {
 }
 
 function assignCreatureToSquare(square, density = null, groupLeader = null) {
-    if(density && random(1, 10) > density) {
-        return null;
+    if(density) {
+        if(random(1, density) !== 1) {
+            return null;
+        }
+    } else {
+        if(random(1, square.terrainType.creatureDensity) !== 1) {
+            return null;
+        }
     }
+
+
     if(!isSquareEligableForCreature(square)) {
         return null;
     }
@@ -743,9 +707,9 @@ function assignCreatureToSquare(square, density = null, groupLeader = null) {
     if(groupLeader) {
         selection = groupLeader;
     } else {
-        selection = square.terrainType.creatures.length > 0 && sample(square.terrainType.creatures);
+        let selectionKey = square.terrainType.creatures.length > 0 && sample(square.terrainType.creatures);
+        selection = creatureDirectory[selectionKey];
     }
-    
     // let selection = scorpion;
     if(!canAssignCreatureToSquare(selection, square)) {
         return null;
@@ -758,11 +722,6 @@ function assignCreatureToSquare(square, density = null, groupLeader = null) {
 
     const creature = getNewCreature(selection, square);
     creatures.push(creature);
-
-    if(creature.terrainPreference[square.terrainType.key] < 60) { // If creature is assigned to square- update preference
-        creatureDirectory[creature.keyName].terrainPreference[square.terrainType.key] = 60;
-    }
-
 
     if(creature.isGroup) {
         groupCreatures.push(creature);
@@ -784,11 +743,10 @@ function assignCreatureToSquare(square, density = null, groupLeader = null) {
     return creature;
 }
 
-function assignCreatures(grid, density) {
+function assignCreatures(grid) {
     const params = {
         grid,
-        innerCallback: assignCreatureToSquare,
-        innerParams: [density],
+        innerCallback: assignCreatureToSquare
     }
 
     loopGrid(grid, params);
@@ -1093,42 +1051,7 @@ export function createNewTestWorld(height, width, tribeName, renderAll= true) {
         triassicLake2,
         triassicLake3,
         triassicLake4
-    } = structureDirectory;  
-
-    const {
-        greaterArthropluera,
-        lesserArthropluera,
-        kingPulmonoscorpius,
-        pulmonoscorpius,
-        scorpion,
-        greaterMisophilae,
-        lesserMisophilae,
-        greaterProterogyrinus,
-        yellowCrocodile,
-        purpleDarter,
-        redDarter,
-        redLystosaurus,
-        yellowHerreresaurus,
-        brownPostosuchus,
-        greenPostosuchus,
-        apatosaurus,
-        apatosaurusHouse1,
-        apatosaurusHouse2,
-        apatosaurusHouse3,
-        apatosaurusHouse4,
-        silverBarb,
-        blueFish,
-        yellowFish,
-        allosaurus,
-        sarcophaganax,
-        ceratosaurus,
-        yellowOrnitholestes,
-        blueOrnitholestes,
-        yellowKentrosaurus,
-        greenKentrosaurus,
-        blueStegosaurus,
-        redStegosaurus
-    } = creatureDirectory;
+    } = structureDirectory;
 
     const tribe = worldType.tribes[0];
     
@@ -1148,6 +1071,10 @@ export function createNewTestWorld(height, width, tribeName, renderAll= true) {
     
     setVisibility(startSquare, 3);
     assignPlayerUnit(world.grid, startSquare.heightIndex, startSquare.widthIndex);
+    // testAllCreatures(6, "n");
+    // testAllCreatures(8, "e");
+    testAllCreatures(0, "s");
+    // testAllCreatures(12, "w");
     // startVillage(tribeSquare, tribe, 3);
     // assignTribes(world.grid, 10, 3);
 

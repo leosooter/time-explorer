@@ -33,13 +33,13 @@ export function getNewCreature(creatureType, square) {
     }
 
     creature.id = `creature-${creatureId}`;
+    creatureId ++;
     creature.currentSquare = square;
     creature.heightIndex = square.heightIndex;
     creature.widthIndex = square.widthIndex;
     creature.facing = sample(facingDirs);
     creature.dir = getDirFromFacing(creature.facing); 
     creature.isSwim = square.terrainType.isSwim;
-    creatureId ++;
     creature.attacking = null;
     creature.attacker = null;
     creature.health = creature.hp;

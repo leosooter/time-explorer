@@ -1,6 +1,7 @@
 import {random as lodashRandom, clamp, round, remove, orderBy, forEach} from "lodash";
 import {getDistance} from "./grid-helpers";
 
+// Adds and element
 export function generateWeightedArray(baseArray, nullSize = 20) {
     const weightedArray = new Array(nullSize).fill(null);
 
@@ -12,6 +13,14 @@ export function generateWeightedArray(baseArray, nullSize = 20) {
     }
 
     return weightedArray;
+}
+
+export function addXToArray(element, array, timesToAdd) {
+  for (let index = 0; index < timesToAdd; index++) {
+    array.push(element)
+  }
+
+  return array;
 }
 
 export function addToObject(object, key, value, modifier= 1) {

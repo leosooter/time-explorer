@@ -1,404 +1,4 @@
-//Height is defined as a percentage of square height.
-
-/*
-Sizes
-
-Tiny - bug
-Small - rabbit
-Medium - dog
-Large - person
-XLarge - lion
-XXLarge - horse
-XXXLarge - elephant
-Mega - apatosaurus
-Massive - argentinosaurus
-
-hp : 2 -300
-attack : 1 - 100
-
-dragonfly -hp: 2 a: 1
-diictodon -hp: 6 a: 3
-velociraptor -hp: 8 a: 5
-dienonycus -hp: 15 a: 10
-dimetrodon - hp: 20 a: 12
-gorgonopsid -hp: 30 a: 17
-utahraptor -hp: 40 a: 25
-ceratosaurus -hp: 50 a: 33
-allosaurus -hp: 60 a: 38
-sarcophaganax -hp: 70 a: 48
-tyrannosaurus -hp: 80 a: 60
-spinosaurus -hp: 100 a: 70
-apatosaurus -hp: 200 a: 80
-argentinosaurus - 300 hp: a: 100
-
-speed-
-0-15mph - 1
-15-30 - 2
-30+ - 3
-
-sightRange 1-5 how many square can detect entities
-speed - 1-3 how many spaces can move per turn
-threatReaction 1-10 - how much will react to threat based on level and distance
-aggression - 1-10 scale how likely to fight vs flight
-
-
-*/
-
-import {round, clamp, forEach} from "lodash";
-import {getDiffFromIdeal} from "../../new-helpers/utilities";
-
-const SMALL_TERRITORY = 3;
-const MEDIUM_TERRITORY = 6;
-const LARGE_TERRITORY = 12;
-
-const SMALL_HERD = 2;
-const MEDIUM_HERD = 5;
-const LARGE_HERD = 8;
-
-export function addTerritory(entity, size) {
-    entity.isTerritoryRestricted = true;
-    entity.territorySize = size;
-}
-
-export function normalize(value) {
-    return round(clamp(value, 0, 100));
-}
-
-export function adjustPredator(entity) {
-    if(entity.isPredator) {
-        return
-    }
-
-    entity.isPredator = true;
-    adjust(entity, "hp", .6);
-    adjust(entity, "attack", 1.5);
-}
-
-export function adjustForHerdAnimal(entity, size) {
-    entity.isGroup = true;
-    entity.groupMaxSize = size;
-    entity.groupCohesion = 3;
-    entity.groupDensity = 3;
-}
-
-export function adjustForNoSwim(entity) {
-    entity.terrainPreference = {
-        ...entity.terrainPreference,
-        ocean: 0,
-        deepWater: 0,
-        shallowWater: 0,
-        marsh: 0,
-        swampForest: 0
-    }
-}
-
-// export function adjustSpeed(entity, multiplier) {
-//     entity.speed = (entity.speed * multiplier, {clampMin: 0, clampMax: 3});
-// }
-
-export function adjustSpeed(entity, speed) {
-    entity.speed = speed;
-}
-
-export function adjust(entity, key, multiplier) {
-    entity[key] = normalize(entity[key] * multiplier);
-}
-
-export const timePeriods = {
-    ple: "pleistocene",
-    pli: "pliocene",
-    ogl: "ogliocene",
-    eoc: "eocene",
-    cre: "creataceous",
-    jur: "jurrasic",
-    tri: "triassic",
-    per: "permian",
-    car: "carboniferous",
-    dev: "devonian",
-    ord: "ordovician"
-}
-
-const timePeriodDetails = {
-    allCreatures: [],
-    predatorCount: 0,
-    preyCount: 0,
-    predators: {
-        small: [],
-        medium: [],
-        large: [],
-        xLarge: [],
-        xxLarge: [],
-    },
-    prey: {
-        small: [],
-        medium: [],
-        large: [],
-        xLarge: [],
-        xxLarge: [],
-    }
-}
-
-export const creaturesByPeriod = {
-    "pleistocene": {...timePeriodDetails},
-    "pliocene": {...timePeriodDetails},
-    "ogliocene": {...timePeriodDetails},
-    "eocene": {...timePeriodDetails},
-    "creataceous": {...timePeriodDetails},
-    "jurrasic": {...timePeriodDetails},
-    "triassic": {...timePeriodDetails},
-    "permian": {...timePeriodDetails},
-    "carboniferous": {...timePeriodDetails},
-    "devonian": {...timePeriodDetails},
-    "ordovician": {...timePeriodDetails}
-}
-
-
-const ct = {
-    // teritory size - 
-    // defualt none
-    smallTerritory: (entity) => addTerritory(entity, SMALL_TERRITORY),
-    mediumTerritory: (entity) => addTerritory(entity, MEDIUM_TERRITORY),
-    largeTerritory: (entity) => addTerritory(entity, LARGE_TERRITORY),
-
-    migratory: (entity) => {
-        if(!entity.isTerritoryRestricted) {
-            addTerritory(entity, MEDIUM_TERRITORY);
-        }
-
-        entity.isMigratory = true;
-    },
-
-    // Predator type
-    specialistPredator: (entity) => {
-        adjustPredator(entity);
-        adjust(entity, "preyRange", .75);
-    }, // Narrow prey range
-    generalistPredator: (entity) => {
-        adjustPredator(entity);
-        adjust(entity, "preyRange", 1.5);
-    }, // Wide prey range -- Default
-    
-    // Predator strategy
-    ambushPredator: (entity) => {
-        adjustPredator(entity);
-        adjustSpeed(entity, 2);
-        adjust(entity, "endurance", .75);
-    }, // high speed but lacks endurance, good camoflage
-    persuitPredator: (entity) => {
-        adjustPredator(entity);
-        adjust(entity, "hp", .8);
-        adjust(entity, "endurance", 1.5);
-        adjust(entity, "heightToSquare", 1.5);
-    }, // high endurance but moderate speed
-    omnivore: (entity) => {
-        adjustPredator(entity);
-        adjust(entity, "endurance", 1.2);
-        adjust(entity, "hp", 1.2);
-        adjust(entity, "attack", .75);
-        adjust(entity, "defence", 1.5);
-        adjust(entity, "heightToSquare", .5);
-    }, // moderate endurance and speed -- Default
-
-    // Escape type
-    // default running
-    //terrainEscape, // moderate speed, low endurance - will head for nearest escape terrain
-    //burrowEscape, // terrainEscape + smallTerritory - gets a burrow at territory center 
-    //waterEscape, // terrainEscape + mediumTerritory - never stray far from water - escape to water - defaults to runningEscape for water predators
-    runningEscape: (entity) => {
-        adjustSpeed(entity, 2);
-        adjust(entity, "hp", .8);
-        adjust(entity, "threatReaction", 1.5);
-        adjust(entity, "endurance", 1.5);
-        adjust(entity, "defence", .75);
-        adjust(entity, "attack", .75);
-        adjust(entity, "aggression", .5);
-        adjust(entity, "heightToSquare", 1.5);
-    }, //moderate speed, high endurance, low defence, low attack, low aggression -- Default
-    passiveDefence: (entity) => {
-        adjust(entity, "defence", 2);
-        adjust(entity, "threatReaction", .5);
-        adjust(entity, "attack", .5);
-        adjust(entity, "aggression", .5);
-        adjust(entity, "heightToSquare", .5);
-    },  //low speed, high defence, low attack, low aggression
-    activeDefence: (entity) => {
-        adjust(entity, "aggression", 1.5);
-        adjust(entity, "attack", 1.5);
-        adjust(entity, "defence", .5);
-        adjust(entity, "threatReaction", 1.5);
-        adjust(entity, "heightToSquare", .75);
-    }, // moderate speed, low defence, high attack, high aggression
-
-    packHunter: (entity) => () => {}, //herdAnimal + shared target hunting
-    groupDefence: (entity) => () => {}, // herdAnimal + shared defence
-
-    smallHerdAnimal: (entity) => {
-        adjustForHerdAnimal(entity, SMALL_HERD);
-    },
-    mediumHerdAnimal: (entity) => {
-        adjustForHerdAnimal(entity, MEDIUM_HERD);
-    },
-    largeHerdAnimal: (entity) => {
-        adjustForHerdAnimal(entity, LARGE_HERD);
-    },
-    // Default none
-
-    // flying: (entity) => {
-    //     entity.isFlying = true,
-    //     adjustSpeed(entity, 3);
-    //     adjust(entity, "hp", .5);
-    //     adjust(entity, "attack", 1.5);
-    //     adjust(entity, "defence", .5);
-    // }, // air only
-
-    highSpeed: (entity) => {
-        adjust(entity, "hp", .8);
-        adjustSpeed(entity, 3);
-    },
-    agressive: (entity) => {
-        adjust(entity, "aggression", 1.2);
-    },
-    noSwim: (entity) => {
-        adjustForNoSwim(entity);
-    }
-}
-
-
-
-/*
-    desert -- dry/ open
-    desertScrub -- dry/ scrub
-    dryForest -- dry/ thick 
-
-    savannah -- arid/ open
-    savannahScrub -- arid/ scrub
-    savannahForest -- arid/ open
-
-    plain -- wet/ open
-    grassland -- wet/ scrub
-    forest -- wet/ thick
-
-    shallowWater -- water/ open
-    marsh -- water/ scrub
-    swampForest -- water/ thick
-
-    deepWater
-    ocean
-
-    ocean -- ocean -- 100
-    sea -- deepWater ocean  -- 100
-    coastal -- shallowWater deepWater -- 100 ocean -- 50
-    shallowWater -- shallowWater swampForest, marsh -- 100 deepWater -- 60
-    semiAquatic shallowWater swampForest, marsh -- 80 deepWater -- 40
-    canSwim -- shallowWater swampForest, marsh -- 50 deepWater -- 20
-
-    aridOpenLand -- desert: 100, savannah: 100
-    desert -- desert: 100, desertScrub: 100
-    wetForest
-    wetLand
-
-    openLand
-
-    dryOpen
-    wetOpen
-
-*/
-
-const terrainTypes = {
-    "desert": {moistureLevel: 0, foliageDensity: 0},
-    "desertScrub": {moistureLevel: 0, foliageDensity: 5},
-    "desertForest": {moistureLevel: 0, foliageDensity: 10},
-    "savannah": {moistureLevel: 5, foliageDensity: 0},
-    "savannahScrub": {moistureLevel: 5, foliageDensity: 5},
-    "savannahForest": {moistureLevel: 5, foliageDensity: 10},
-    "plain": {moistureLevel: 10, foliageDensity: 0},
-    "grassland": {moistureLevel: 10, foliageDensity: 5},
-    "forest": {moistureLevel: 10, foliageDensity: 10},
-    "shallowWater": {moistureLevel: 15, foliageDensity: 0},
-    "marsh": {moistureLevel: 15, foliageDensity: 5},
-    "swampForest": {moistureLevel: 15, foliageDensity: 10},
-    "deepWater": {moistureLevel: 20, foliageDensity: 0},
-    "ocean": {moistureLevel: 25, foliageDensity: 0}
-}
-
-function getLevelForSeaTerrain(key, moistureLevel) {
-    return getDiffFromIdeal(moistureLevel, terrainTypes[key].moistureLevel, 10);
-}
-
-function getLevelForTerrain(key, moistureLevel, foliageDensity) {
-    let moistureScore = getDiffFromIdeal(moistureLevel, terrainTypes[key].moistureLevel, 10);
-    if(key === "ocean" || key === "deepWater") {
-        return round(moistureScore);
-    }
-
-    let densityScore = getDiffFromIdeal(foliageDensity, terrainTypes[key].foliageDensity, 10);
-
-    return round((moistureScore + densityScore) / 2);
-}
-
-export function getTerrainPreference(entity) {
-    const {moistureLevel, foliageDensity} = entity;
-    const preferences = {
-        "desert": 0,
-        "desertScrub": 0,
-        "desertForest": 0,
-        "savannah": 0,
-        "savannahScrub": 0,
-        "savannahForest": 0,
-        "plain": 0,
-        "grassland": 0,
-        "forest": 0,
-        "shallowWater": 0,
-        "marsh": 0,
-        "swampForest": 0,
-        "deepWater": 0,
-        "ocean": 0
-    }
-
-    forEach(preferences, (value, key) => {
-        preferences[key] = getLevelForTerrain(key, moistureLevel, foliageDensity);
-    });
-
-    return preferences;
-}
-
-function getCommonality(entity) {
-    // Returns a score of 1 - 100 for how common a creature is
-    return 100;
-}
-
-function generateNameFromKey(key) {
-    return key;
-}
-
-function generateHpFromSize (size) {
-    return size * 2;
-}
-
-function generateAttackFromSize(size) {
-    return clamp(round(size / 2), 1, 100);
-}
-
-function generateDefenceFromSize(size) {
-    return clamp(round(size / 2.2), 1, 100);
-}
-
-function getSizeRangeForEntity(entity) {
-    const {size} = entity;
-    if(size >= 90) {
-        return "xxLarge";
-    }
-    if(size >= 60) {
-        return "xLarge";
-    }
-    if(size >= 30) {
-        return "large";
-    }
-    if(size >= 10) {
-        return "medium";
-    }
-    return "small"
-}
+import {timePeriods} from "../../constants/world-types";
 
 /*
 Creature Sizing 1 - 100
@@ -451,139 +51,312 @@ prey
 
 const genericCreatureStats = {
     sightRange: 3,
+    terrainRange: 10,
+    moistureRange: 10,
+    densityRange: 10,
     threatReaction: 50,
     activityLevel: 5,
     speed: 2,
     endurance: 4,
-    //hp: g, //////////
     range: 1,
     aggression: 50,
     isUnderWater: false,
-    //attack: g, ////////////
-    //defence: g, //////////////
+    /* generated stats
+    hp,
+    attack,
+    defence,
+    health,
+    */
 }
 
 const genericDarter = {
+    ...genericCreatureStats,
     size: 1,
-    types: [ct.flying],
+    tags: ["flying", "runningEscape", "wideRange", "ambushPredator"],
     moistureLevel: 15, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
     foliageDensity: 5, // 0-10;
 }
 
 
-const creatureDirectory = {
-    blueStyracosaurus: {
+export default {
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ------------ Multiple Time Periods ----------------
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Prey ----------------
+    ///////////////////////////////// ------------ Arthropods ----------------
+    yellowDarter: {
+        ...genericDarter,
+        timePeriod: [timePeriods.car, timePeriods.tri, timePeriods.jur, timePeriods.ogl],
+    },
+    purpleDarter: {
+        ...genericDarter,
+        size: 2,
+        timePeriod: [timePeriods.per, timePeriods.cre, timePeriods.eoc, timePeriods.pli],
+    },
+    greenDarter: {
+        ...genericDarter,
+        timePeriod: [timePeriods.per, timePeriods.tri, timePeriods.eoc, timePeriods.ple],
+    },
+    redDarter: {
+        ...genericDarter,
+        size: 2,
+        timePeriod: [timePeriods.car, timePeriods.jur, timePeriods.cre, timePeriods.pli],
+    },
+    scorpion: {
         ...genericCreatureStats,
-        timePeriod: timePeriods.cre,
-        size: 30,
-        types: [ct.activeDefence],
+        timePeriod: [timePeriods.ord, timePeriods.dev, timePeriods.car, timePeriods.per, timePeriods.tri, timePeriods.jur, timePeriods.cre, timePeriods.eoc, timePeriods.ogl, timePeriods.pli],
+        size: 1,
+        tags: ["passiveDefence", "ambushPredator"],
+        moistureLevel: 3, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 4, // 0-10;
+    },
+    yellowScorpion: {
+        ...genericCreatureStats,
+        timePeriod: [timePeriods.ord, timePeriods.dev, timePeriods.car, timePeriods.per, timePeriods.tri, timePeriods.jur, timePeriods.cre, timePeriods.eoc, timePeriods.ogl, timePeriods.pli],
+        size: 2,
+        tags: ["passiveDefence", "ambushPredator"],
+        moistureLevel: 6, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 6, // 0-10;
+    },
+
+    ///////////////////////////////// ------------ Fish ----------------
+    yellowFish: {
+        ...genericCreatureStats,
+        timePeriod: [timePeriods.per, timePeriods.tri, timePeriods.eoc, timePeriods.ple],
+        isUnderWater: true,
+        size: 5,
+        tags: ["runningEscape", "ambushPredator"],
+        moistureLevel: 22, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 0, // 0-10;
+    },
+    greenFish: {
+        ...genericCreatureStats,
+        timePeriod: [timePeriods.car, timePeriods.tri, timePeriods.jur, timePeriods.ogl],
+        isUnderWater: true,
+        size: 3,
+        tags: ["runningEscape", "smallHerdAnimal"],
+        moistureLevel: 15, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 6, // 0-10;
+    },
+    blueFish: {
+        ...genericCreatureStats,
+        timePeriod: [timePeriods.car, timePeriods.jur, timePeriods.cre, timePeriods.pli],
+        isUnderWater: true,
+        size: 7,
+        tags: ["runningEscape", "ambushPredator"],
+        moistureLevel: 19, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 3, // 0-10;
+    },
+    silverBarb: {
+        ...genericCreatureStats,
+        timePeriod: [timePeriods.per, timePeriods.cre, timePeriods.eoc, timePeriods.pli],
+        isUnderWater: true,
+        size: 15,
+        tags: ["runningEscape", "smallHerdAnimal"],
+        moistureLevel: 24, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 0, // 0-10;
+    },
+
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ------------ Jurrasic ----------------
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Prey ----------------
+    ///////////////////////////////// ------------ Stegosaurs ----------------
+    blueStegosaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.jur,
+        size: 35,
+        tags: ["passiveDefence"],
         moistureLevel: 14, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
         foliageDensity: 5, // 0-10;
     },
+    redStegosaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.jur,
+        size: 43,
+        tags: ["passiveDefence"],
+        moistureLevel: 6, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 2, // 0-10;
+    },
+    
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ------------ Cretaceous ----------------
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Prey ----------------
+    ///////////////////////////////// ------------ Duckbills ----------------
+    greyParasaurolophus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.cre,
+        size: 43,
+        tags: ["runningEscape", "smallHerdAnimal"],
+        moistureLevel: 10, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 5, // 0-10;
+    },
+    blueParasaurolophus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.cre,
+        size: 40,
+        tags: ["runningEscape"],
+        moistureLevel: 12, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 8, // 0-10;
+    },
+    brownOuranosaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.cre,
+        size: 35,
+        tags: ["runningEscape"],
+        moistureLevel: 5, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 5, // 0-10;
+    },
+    yellowOuranosaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.cre,
+        size: 33,
+        tags: ["runningEscape", "narrowRange", "smallHerdAnimal"],
+        moistureLevel: 2, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 2, // 0-10;
+    },
+    ///////////////////////////////// ------------ Ceretopsians ----------------
     greenStyracosaurus: {
         ...genericCreatureStats,
         timePeriod: timePeriods.cre,
-        size: 25,
-        types: [ct.activeDefence],
+        size: 32,
+        tags: ["activeDefence"],
         moistureLevel: 12, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
         foliageDensity: 8, // 0-10;
+    },
+    blueStyracosaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.cre,
+        size: 35,
+        tags: ["activeDefence", "smallHerdAnimal"],
+        moistureLevel: 14, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 5, // 0-10;
+    },
+    greyTriceratops: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.cre,
+        size: 45,
+        tags: ["activeDefence", "aggressive", "largeHerdAnimal"],
+        moistureLevel: 2, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 2, // 0-10;
     },
     brownTriceratops: {
         ...genericCreatureStats,
         timePeriod: timePeriods.cre,
         size: 50,
-        types: [ct.activeDefence, ct.aggressive],
+        tags: ["activeDefence", "aggressive", "mediumHerdAnimal"],
         moistureLevel: 4, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
         foliageDensity: 0, // 0-10;
     },
-    greyTriceratops: {
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Predators ----------------
+    ///////////////////////////////// ------------ Raptors ----------------
+    velociraptor: {
         ...genericCreatureStats,
         timePeriod: timePeriods.cre,
-        size: 48,
-        types: [ct.activeDefence, ct.aggressive],
+        size: 5,
+        tags: ["generalistPredator", "persuitPredator", "runningEscape", "mediumHerdAnimal"],
         moistureLevel: 2, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 3, // 0-10;
+    },
+    deinonychus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.cre,
+        size: 10,
+        tags: ["generalistPredator", "persuitPredator", "runningEscape", "smallHerdAnimal"],
+        moistureLevel: 9, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 8, // 0-10;
+    },
+    utahRaptor: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.cre,
+        size: 30,
+        tags: ["generalistPredator", "persuitPredator", "runningEscape", "smallHerdAnimal", "largeTerritory"],
+        moistureLevel: 6, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 4, // 0-10;
+    },
+    ///////////////////////////////// ------------ Spinosaurids ----------------
+    baryonyx: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.cre,
+        size: 40,
+        tags: ["specialistPredator", "ambushPredator"],
+        moistureLevel: 14, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 6, // 0-10;
+    },
+    spinosaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.cre,
+        size: 70,
+        tags: ["generalistPredator", "ambushPredator"],
+        moistureLevel: 13, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
         foliageDensity: 2, // 0-10;
+    },
+    ///////////////////////////////// ------------ Tyrannosaurids ----------------
+    tarbosaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.cre,
+        size: 55,
+        tags: ["generalistPredator", "ambushPredator", "largeTerritory"],
+        moistureLevel: 6, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 4, // 0-10;
     },
     tyrannosaurus: {
         ...genericCreatureStats,
         timePeriod: timePeriods.cre,
         size: 60,
-        types: [ct.generalistPredator, ct.ambushPredator],
+        tags: ["generalistPredator", "ambushPredator", "largeTerritory"],
         moistureLevel: 3, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
         foliageDensity: 2, // 0-10;
+    },
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Marine Predators ----------------
+    ///////////////////////////////// ------------ Mososaurs ----------------
+    blueMosasaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.cre,
+        isUnderWater: true,
+        size: 40,
+        tags: ["generalistPredator", "ambushPredator"],
+        moistureLevel: 22, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 0, // 0-10;
+    },
+    greenMosasaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.cre,
+        isUnderWater: true,
+        size: 70,
+        tags: ["generalistPredator", "ambushPredator"],
+        moistureLevel: 25, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 0, // 0-10;
     }
 }
 
-function addCreatureToPeriod(periodKey, entity) {
-    const timePeriod = creaturesByPeriod[periodKey];
-    const {key, sizeRange, isPredator} = entity;
+// export default creatureDirectory;
 
-    timePeriod.allCreatures.push(key);
-    if(isPredator) {
-        timePeriod.predators[sizeRange].push(key);
-        timePeriod.predatorCount ++;
-    } else {
-        timePeriod.prey[sizeRange].push(key);
-        timePeriod.preyCount ++;
-    }
-}
-
-function addCreatureToPeriods(entity) {
-    if(Array.isArray(entity.timePeriod)) {
-        forEach(entity.timePeriod, (period) => (period) => addCreatureToPeriod(period, entity))
-    } else {
-        addCreatureToPeriod(entity.timePeriod, entity);
-    }
-}
-
-
-export function generateCreatureStats() {
-    forEach(creatureDirectory, (entity, key) => {
-        entity.key = key;
-        entity.name = entity.name || generateNameFromKey(key);
-        entity.heightToSquare = entity.heightToSquare || round(entity.size/5);
-        entity.widthToWidth = entity.widthToWidth || 1.5;
-        entity.hp = entity.hp || generateHpFromSize(entity.size);
-        entity.attack = entity.attack || generateAttackFromSize(entity.size);
-        entity.defence = entity.defence || generateDefenceFromSize(entity.size);
-        entity.isMega = entity.isMega || entity.size > 50;
-        entity.terrainPreference = getTerrainPreference(entity);
-        // entity.commonality = getCommonality(entity);
-        
-        try {
-            require(`./images/${entity.key}/e-swim.png`);
-            entity.isSwim = true;
-        } catch (error) {
-            console.log(entity.name, "has water terrain but no swim", entity.moistureLevel);
-            entity.isSwim = false;
-            adjustForNoSwim(entity);
-        }
-
-        for (let index = 0; index < entity.types.length; index++) {
-            try {
-                entity.types[index](entity);
-            } catch (error) {
-                console.log("Entity type error", entity.types, index);
-            }
-            
-        }
-
-        entity.health = entity.hp;        
-        entity.endurancePoints = entity.endurance;
-
-        entity.sizeRange = getSizeRangeForEntity(entity);
-
-        addCreatureToPeriods(entity);
-    });
-
-    console.log("TEST DIRECTORY", creatureDirectory);
-}
-
-generateCreatureStats();
-console.log("TIME_PERIODS", creaturesByPeriod);
-
-
-export default creatureDirectory;
+/*
+allosaurus
+apatosaurus
+baryonyx
+desmatosuchus
+meganeura
+diictodon
+stegosaurus
+ornitholestes
+styracosaurus
+postosuchus
+scutosaurus
+deinonychus
+diplodocus
+dunkleosteus
+gorgonopsid
+arthropleura
+lystrosaurus
+edaphosaurus
+proterogyrinus
+herrerasaurus
+pulmonoscorpius
+mesothelae
+mosasaurus
+dimetrodon
+ouranosaurus
+saurophaganax
+parasaurolophus
+koolasuchus -- giant cretaceous amphibian
+*/
 
 // const genericDarter = {
 //     heightToSquare: .3,

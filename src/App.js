@@ -3,7 +3,6 @@ import {random, sample} from "lodash"
 import './App.css';
 import Grid from "./components/grid";
 import {getPosition} from "./helpers/grid-helpers";
-// import Units from "./components/units";
 import createNewWorld, {setVisibility, createNewTestWorld} from "./helpers/world-creator";
 import {setUpNewPlayer} from "./helpers/player-helpers";
 import {addStructure, tribeAction} from "./helpers/tribe-helpers";
@@ -23,9 +22,7 @@ import TestPosition from "./components/test-position";
 import structureDirectory from "./components/structures/structure-directory";
 import tribeDirectory from "./components/units/tribeDirectory";
 import {worldNames} from "./constants/world-types";
-
 import worldChoices from "./constants/world-config/world-choices";
-
 import {takeEntityTurn} from "./new-helpers/creature-helpers";
 
 const {

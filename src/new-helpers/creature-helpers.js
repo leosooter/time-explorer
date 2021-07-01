@@ -189,3 +189,23 @@ function moveToAttack(entity, other, motivationLevel) {
 function idleAction({entity, grid}) {
     idleMove(entity);
 }
+
+// function addEntityToTerrain(entity, terrainType) {
+//     let scoreForTerrain = getDiffFromIdeal(entity.terrainPreference[terrainType.key], 100, 100);
+//     console.log(entity.name, "scoreForTerrain", scoreForTerrain);
+// }
+
+// function addEntityToWorld(entity) {
+//     const world = worldTypes[entity.timePeriod];
+
+//     forEach(world.terrainTypes, (terrainType) => addEntityToTerrain(entity, terrainType))
+// }
+
+// export function addToWorld(entity) {
+//     if(Array.isArray(entity.timePeriod)) {
+//         forEach(entity.timePeriod, addEntityToWorld)
+//     } else {
+//         addEntityToWorld(entity);
+//     }
+
+// }
