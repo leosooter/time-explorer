@@ -1,11 +1,35 @@
 
 export const terrainColors = {
-      ordovician: {
-        // desert: {r:220, g:170, b:38},
-        desert: {r:255, g:180, b:38},
-        savannah: {r:148, g:150, b:100},
+
+    generic: {
+        desert: {r:255, g:190, b:48},
+        desertScrub: {r:255, g:180, b:38},
+        desertForest: {r:245, g:170, b:28},
+
+        savannah: {r:253, g:210, b:48},
+        savannahScrub: {r:243, g:200, b:38},
+        savannahForest: {r:233, g:190, b:28},
+
+        plain: {r:190, g:200, b:48},
+        grassland: {r:180, g:190, b:38},
+        forest: {r:150, g:160, b:38},
+
+        snow: {r:240, g:255, b:255},
+
+        swampForest: {r:24, g:154, b:149},
+        marsh: {r:74, g:154, b:99},
         shallowWater: {r:82, g:142, b:172},
+
         deepWater: {r:47, g:127, b:163},
+    },
+    ordovician: {
+        color: "blue",
+        opacity: 20
+        // desert: {r:220, g:170, b:38},
+        // desert: {r:255, g:180, b:38},
+        // savannah: {r:148, g:150, b:100},
+        // shallowWater: {r:82, g:142, b:172},
+        // deepWater: {r:47, g:127, b:163},
     },
     devonian: {
         // desert: {r:220, g:170, b:38},
@@ -66,11 +90,21 @@ export const terrainColors = {
         shallowWater: {r:82, g:142, b:172},
         deepWater: {r:47, g:127, b:163},
     },
-    pleistocene: {
-        forest: [{r:120, g:180, b:108}, {r:240, g:255, b:255}],
+    paleogene: {
+        desert: {r:220, g:170, b:38},
+        savannah: {r:213, g:209, b:38},
+        grassland: {r:67, g:142, b:34},
+        forest: {r:49, g:85, b:17},
+        swampForest: {r:71, g:127, b:131},
+        marsh: {r:34, g:134, b:99},
+        shallowWater: {r:82, g:142, b:172},
+        deepWater: {r:47, g:127, b:163},
+    },
+    quarternary: {
+        forest: {r:120, g:180, b:108},
+        plain: {r:120, g:180, b:108},
         grassland: {r:120, g:180, b:108},
-        tundra: {r:240, g:255, b:255},
-        snowForest: {r:240, g:255, b:255},
+        snow: {r:240, g:255, b:255},
         swampForest: {r:71, g:127, b:131},
         marsh: {r:34, g:134, b:99},
         shallowWater: {r:62, g:122, b:152},

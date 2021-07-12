@@ -134,6 +134,7 @@ export default {
             key: "grassland",
             type: "grassland",
             color: terrainColors.grassland,
+            creatureDensity: 10,
             isWater: false,
             creatures: [],
             plants: generateWeightedArray([
@@ -153,6 +154,7 @@ export default {
             key: "forest",
             type: "forest",
             color: terrainColors.forest,
+            creatureDensity: 10,
             isWater: false,
             creatures: [],
             plants: generateWeightedArray([
@@ -172,6 +174,7 @@ export default {
             key: "savannah",
             type: "savannah",
             color: terrainColors.savannah,
+            creatureDensity: 20,
             isWater: false,
             creatures: [],
             plants: generateWeightedArray([
@@ -190,6 +193,7 @@ export default {
             key: "marsh",
             type: "marsh",
             color: terrainColors.marsh,
+            creatureDensity: 20,
             isWater: true,
             isSwim: true,
             creatures: [],

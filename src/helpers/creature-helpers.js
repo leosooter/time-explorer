@@ -54,10 +54,10 @@ export function getNewCreature(creatureType, square) {
     // Add to square(s)
     square.currentEntity = creature;
 
-    if(creature.isPredator) {
-        creature.idealPreySize = creature.hp * .6;
-        creature.preySizeRange = creature.idealPreySize * .75;
-    }
+    // if(creature.isPredator) {
+    //     creature.idealPreySize = creature.hp * .6;
+    //     creature.preySizeRange = creature.idealPreySize * .75;
+    // }
 
     if(creature.isGroup) {
         creature.groupCohesion = creature.groupCohesion || 3;

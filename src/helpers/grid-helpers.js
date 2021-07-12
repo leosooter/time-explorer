@@ -18,6 +18,8 @@ export function getPosition(heightIndex, widthIndex, height, widthToHeight, topO
     left -= width / 3;
     top -= height / 3;
 
+    // top = top * 400 / w
+
     return {top, left};
 }
 

@@ -73,6 +73,7 @@ export default {
             isWater: false,
             isSwim: false,
             creatures: [],
+            creatureDensity: 20,
             plants: generateWeightedArray([
                 {type: horsetail, occurance: 1},
                 {type: fern, occurance: 5},
@@ -93,6 +94,7 @@ export default {
             isWater: false,
             isSwim: false,
             creatures: [],
+            creatureDensity: 20,
             plants: generateWeightedArray([
                 {type: giantHorsetail, occurance: 5}, 
                 {type: greenFern, occurance: 3},
@@ -116,6 +118,7 @@ export default {
             isWater: false,
             isSwim: false,
             creatures: [],
+            creatureDensity: 20,
             plants: generateWeightedArray([
                 {type: yellowMoss, occurance: 5}, 
                 {type: redFern, occurance: 5},
@@ -133,6 +136,7 @@ export default {
             isWater: true,
             isSwim: true,
             creatures: [],
+            creatureDensity: 20,
             plants: generateWeightedArray([
                 {type: horsetail, occurance: 10},
                 {type: giantHorsetail, occurance: 5},
@@ -147,6 +151,7 @@ export default {
             isWater: true,
             isSwim: true,
             creatures: [],
+            creatureDensity: 20,
             plants: generateWeightedArray([
                 {type: buttressRoot, occurance: 15},
                 {type: goldenButtressRoot, occurance: 1}, 
@@ -160,6 +165,7 @@ export default {
             isWater: true,
             isSwim: true,
             creatures: [],
+            creatureDensity: 20,
             plants: [],
             resources: []
         },
@@ -170,6 +176,7 @@ export default {
             isWater: true,
             isSwim: true,
             creatures: [],
+            creatureDensity: 20,
             plants: [],
             resources: []
         },

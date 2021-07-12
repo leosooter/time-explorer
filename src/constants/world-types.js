@@ -6,7 +6,9 @@ import permian from "./world-config/permian";
 import triassic from "./world-config/triassic";
 import jurassic from "./world-config/jurassic";
 import cretaceous from "./world-config/cretaceous";
-import pleistocene from "./world-config/pleistocene";
+import paleogene from "./world-config/paleogene";
+import neogene from "./world-config/neogene";
+import quarternary from "./world-config/quarternary";
 import ultraRealm from "./world-config/ultra-realm";
 import testWorld from "./world-config/test-world";
 
@@ -17,10 +19,9 @@ export const PERMIAN = "permian";
 export const TRIASSIC = "triassic";
 export const JURASSIC = "jurassic";
 export const CRETACEOUS = "cretaceous";
-export const EOCENE = "eocene";
-export const OGLIOCENE = "ogliocene";
-export const PLIOCENE = "pliocene";
-export const PLEISTOCENE = "pleistocene";
+export const PALEOGENE = "paleogene";
+export const NEOGENE = "neogene";
+export const QUARTERNARY = "quarternary";
 export const ULTRA_REALM = "ultraRealm";
 export const TEST_WORLD = "testWorld";
 
@@ -28,7 +29,7 @@ export const TEST_WORLD = "testWorld";
 import {
   PLEISTOCENE,
   PLIOCENE,
-  OGLIOCENE,
+  OLIGOCENE,
   EOCENE,
   CRETACEOUS,
   JURASSIC,
@@ -41,31 +42,31 @@ import {
 */
 
 export const worldNames = {
-  PLEISTOCENE,
-  PLIOCENE,
-  OGLIOCENE,
-  EOCENE,
-  CRETACEOUS,
-  JURASSIC,
-  TRIASSIC,
-  PERMIAN,
-  CARBONIFEROUS,
+  ORDOVICIAN,
   DEVONIAN,
-  ORDOVICIAN
+  CARBONIFEROUS,
+  PERMIAN,
+  TRIASSIC,
+  JURASSIC,
+  CRETACEOUS,
+  PALEOGENE,
+  NEOGENE,
+  QUARTERNARY,
+  TEST_WORLD
 }
 
 export const timePeriods = {
-    ple: PLEISTOCENE,
-    pli: PLIOCENE,
-    ogl: OGLIOCENE,
-    eoc: EOCENE,
-    cre: CRETACEOUS,
-    jur: JURASSIC,
-    tri: TRIASSIC,
-    per: PERMIAN,
-    car: CARBONIFEROUS,
-    dev: DEVONIAN,
-    ord: ORDOVICIAN
+  ord: ORDOVICIAN,
+  dev: DEVONIAN,
+  car: CARBONIFEROUS,
+  per: PERMIAN,
+  tri: TRIASSIC,
+  jur: JURASSIC,
+  cre: CRETACEOUS,
+  pal: PALEOGENE,
+  neo: NEOGENE,
+  qua: QUARTERNARY,
+  tes: TEST_WORLD
 }
 
 export default {
@@ -76,15 +77,12 @@ export default {
     triassic,
     jurassic,
     cretaceous,
-    pleistocene,
+    paleogene,
+    neogene,
+    quarternary,
     ultraRealm,
     testWorld
 }
-
-
-
-
-
 
 /*
 Ordovician

@@ -7,6 +7,7 @@ import createNewWorld, {setVisibility, createNewTestWorld} from "./helpers/world
 import {setUpNewPlayer} from "./helpers/player-helpers";
 import {addStructure, tribeAction} from "./helpers/tribe-helpers";
 import Background from './components/texture-background';
+import FilterLayer from './components/filter-layer';
 import {worldParams} from "./constants/world";
 import Creature from './components/creatures/creature';
 import Creatures from "./components/creatures/creatures";
@@ -33,9 +34,10 @@ const {
   TRIASSIC,
   JURASSIC,
   CRETACEOUS,
-  PLEISTOCENE,
-  ULTRA_REALM,
-  TEST_WORLD,
+  NEOGENE,
+  PALEOGENE,
+  QUARTERNARY,
+  TEST_WORLD
 } = worldNames;
 
 let isStart = false;
@@ -46,18 +48,22 @@ let updateNumber = 0;
 
 const creatureActionChance = 1;
 
-let defaultWorld = CRETACEOUS;
+let defaultWorld = QUARTERNARY;
 let isExplorerMode = true;
 isExplorerMode = false;
 let world;
 
-// world = createNewWorld(100, 100, defaultWorld, isExplorerMode, "permianAdobe");
-world = createNewTestWorld(100, 100, isExplorerMode, "permianAdobe", false);
+world = createNewWorld(100, 100, defaultWorld, isExplorerMode, "permianAdobe");
+// world = createNewTestWorld(100, 100, isExplorerMode, "permianAdobe", false);
 
 function App() {
   
   // const [squaresById, setSquaresById] = useState(newGrid[1]);
   const [turn, setTurn] = useState(0);
+  const [opacity, setOpacity] = useState(null);
+  const [color, setColor] = useState(null);
+  // const [filteropacity, setFilterOpacity] = useState(null);
+  // const [filtercolor, setFilterColor] = useState(0);
   // const [grid, setGrid] = useState(world.grid);
   // const [creatures, setCreatures] = useState(world.creatures);
   // const [structures, setStructures] = useState(world.structures);
@@ -79,7 +85,9 @@ function App() {
     tribes,
     structures,
     playerUnits,
-    resources
+    resources,
+    filterColor,
+    filterOpacity
   } = world;
 
   function updateAll() {
@@ -108,6 +116,10 @@ function App() {
     isStart = false;
     scrollToEntity(selectedUnit);
     // handleTurn();
+  }
+
+  function handleFilterLayerOpacity(opacityLevel) {
+    setOpacity(opacityLevel);
   }
 
 
@@ -309,24 +321,47 @@ function App() {
   return (
     <div className="App" style={appStyles}>
       <div style={wrapperStyles}>
-        <Background></Background>
+        <Background />
         <Grid
           handleSquareSelect={handleSquareSelect}
+        />
+        <FilterLayer // Terrain color
+          color={color || filterColor}
+          opacity={opacity || filterOpacity}
         />
       </div>
       
       <div style={unitsWrapper}>
         {/* <TestPosition /> */}
+        <Plants turn={turn} plants={plants} handlePlayerHarvestResource={handlePlayerHarvestResource}/>
+        {/* <FilterLayer // Season
+          color={"yellow"}
+          opacity={90}
+        /> */}
         <Structures turn={turn} updateNumber={updateNumber} structures={structures}/>
         <Units turn={turn} updateNumber={updateNumber} units={units} handlePlayerAttackEntity={handlePlayerAttackEntity}/>
-        <Plants turn={turn} plants={plants} handlePlayerHarvestResource={handlePlayerHarvestResource}/>
         <Resources turn={turn} resources={resources} handlePlayerHarvestResource={handlePlayerHarvestResource}/>
         <Creatures turn={turn} updateNumber={updateNumber} creatures={creatures} handlePlayerAttackEntity={handlePlayerAttackEntity}/>
         <PlayerUnits turn={turn} playerUnits={playerUnits} handleUnitSelect={handleUnitSelect}/>
         {/* <Player heightIndex={playerPosition.heightIndex} widthIndex={playerPosition.widthIndex} id={"player-1"} currentSquareId={null} heightToSquare={.4} handleUnitSelect={handleUnitSelect}/> */}
       </div>
+
+      {/* <FilterLayer // Day Night
+          color={"black"}
+          opacity={30}
+      /> */}
       
-      <ActionBar handleTurn={handleTurn} handleWorldSelect={handleWorldSelect} healPlayer={healPlayer} turn={turn} playerResources={world.player.resources} handleBuildStructure={handleBuildStructure}/>
+      <ActionBar 
+        handleTurn={handleTurn}
+        handleWorldSelect={handleWorldSelect}
+        healPlayer={healPlayer} turn={turn}
+        playerResources={world.player.resources}
+        handleBuildStructure={handleBuildStructure}
+        color={color || filterColor}
+        setColor={setColor}
+        setOpacity={setOpacity}
+        opacity={opacity || filterOpacity}
+      />
       <StartScreen worldChoices={worldChoices} isStart={isStart} handleWorldSelect={handleWorldSelect}/>
   </div>
 

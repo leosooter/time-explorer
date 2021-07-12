@@ -47,6 +47,11 @@ desert
 marsh - wet version of grassland
 swamp forest - wet version of forest
 
+Ocean -
+    large predators
+        greenMosasaurus
+        gblueMosasaurus
+
 Land - 
     large predators
         tarborosaurus grassland savannah
@@ -59,7 +64,7 @@ Land -
         velociraptor desert savannah
 
 
-    large Herbivore
+    large Herbivores
         apatasauros savanah
 
         greyTriceratops savanah grassland
@@ -139,6 +144,7 @@ export default {
                 {type: pd.yellowFernClump, occurance: 8},
                 {type: pd.lightGreenFernClump, occurance: 12},
                 {type: pd.darkGreenFernClump, occurance: 2},
+                {type: pd.greenMagnolia, occurance: 4},
                 {type: pd.yellowFern, occurance: 8},
                 {type: pd.greenFern, occurance: 5},
                 {type: pd.redFern, occurance: 1},
@@ -160,33 +166,8 @@ export default {
             isWater: false,
             creatures: [],
             plants: generateWeightedArray([
-                {type: pd.greenFern, occurance: 3},
-                {type: pd.lowFern, occurance: 3},
-                {type: pd.blueFern, occurance: 3},
-                {type: pd.darkFern, occurance: 3},
-                {type: pd.darkGreenFernClump, occurance: 3},
-                {type: pd.fern, occurance: 3},
-                {type: pd.tallFern, occurance: 10}, 
-                {type: pd.blueTreeFern, occurance: 10},
-                {type: pd.scalyTreeFern, occurance: 8},
-                {type: pd.youngBlueTreeFern, occurance: 6}, 
-                {type: pd.youngLightGreenTreeFern, occurance: 8},
-                {type: pd.polycarpus, occurance: 10},
-                {type: pd.fallenPolycarpus, occurance: 18},
-                {type: pd.LightGreenTreeFern, occurance: 10},
-                {type: pd.lightMarshPine, occurance: 1},
-                {type: pd.buttressRoot, occurance: 5},
-                {type: pd.goldenButtressRoot, occurance: 5},
-                {type: pd.greenRoundleaf, occurance: 6},
-                {type: pd.darkPine, occurance: 2},
-                {type: pd.umbrellaPine, occurance: 2},
-                {type: pd.greyUmbrellaPine, occurance: 1},
-                {type: pd.silverFir, occurance: 1}
             ], 20),
             resources: [
-              // {type: largeBlackRock, occurance: 1},
-              // {type: largeGreyRock, occurance: 1},
-              // {type: xLargeGreyRock, occurance: 1}
             ]
         },
         swampForest: {
@@ -200,6 +181,7 @@ export default {
                 {type: pd.buttressRoot, occurance: 15},
                 {type: pd.goldenButtressRoot, occurance: 5},
                 {type: pd.darkMarshPine, occurance: 8},
+                {type: pd.greenMagnolia, occurance: 6},
                 {type: pd.lightMarshPine, occurance: 4}
             ], 20),
             resources: []

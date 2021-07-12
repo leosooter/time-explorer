@@ -2,8 +2,8 @@ import React from "react";
 import {worldParams} from "../constants/world";
 
 export default function Background() {
-    const xTranslate = -937;
-    const yTranslate = -687
+    const xTranslate = -937 * 400 / worldParams.squareSize;
+    const yTranslate = -687 * 400 / worldParams.squareSize;
     const backgroundStyle = {
         position: "absolute",
         backgroundImage: 'url("background1.jpg")',

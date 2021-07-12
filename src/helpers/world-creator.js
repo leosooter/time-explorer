@@ -100,6 +100,13 @@ initializeCreatureDirectory();
 
 function resetWorld(worldTypeSet) {
     worldType = worldTypes[worldTypeSet];
+    // setColor(worldType.filterColor || "black");
+    // setOpacity(worldType.filterOpacity || 0);
+
+    // handleFilterColorChange(worldType.filterColor || "black");
+    // handleFilterOpacityChange(worldType.filterOpacity || 0);
+
+    const {filterOpacity, filterColor} = worldType;
 
     terrainArrays = {};
     creatureArrays = {};
@@ -132,6 +139,8 @@ function resetWorld(worldTypeSet) {
 
 
     world = {
+        filterColor,
+        filterOpacity,
         grid: [],
         creatures,
         groupCreatures,
@@ -996,6 +1005,7 @@ function addTestEntity(square, entity, type, dir) {
         console.log("Adding test creature", entity);
         
         newEntity = getNewCreature(entity, square);
+        newEntity.dir = dir || "s";
     } else if (type === "units") {
         console.log("Adding test unit", entity);
         newEntity = newUnit(square, tribeDirectory.permianAdobe);
@@ -1053,28 +1063,30 @@ export function createNewTestWorld(height, width, tribeName, renderAll= true) {
         triassicLake4
     } = structureDirectory;
 
-    const tribe = worldType.tribes[0];
+    // const tribe = worldType.tribes[0];
     
     assignSides(world.grid);
     assignWater(world.grid, seaPoints, worldType.seaPower);
     assignWater(world.grid, lakePoints, worldType.lakePower);
-    // addTestTerrain(world.grid[0][0], "deepWater", 10);   //+++++++++++++++++++++++++++++++++++++++++ Test Terrain
-    mapCoast(world.grid);
-    mapOpenOcean(world.grid);
+    addTestTerrain(world.grid[0][0], "desertScrub", 0);   //+++++++++++++++++++++++++++++++++++++++++ Test Terrain
+    addTestTerrain(world.grid[10][0], "desertForest", 0);
+
+    // mapCoast(world.grid);
+    // mapOpenOcean(world.grid);
     assignTerrain(world.grid, worldType.landPower);
     loadTerrainArrays(world.grid);
     // const startSquare = sample(landSquares);
     // const startSquare = world.grid[random(2,97)][random(2,97)];
     // const startSquare = world.grid[world.grid.length/2][world.grid[0].length/2];
     const startSquare = world.grid[50][50];
-    const tribeSquare = world.grid[52][52];
+    // const tribeSquare = world.grid[52][52];
     
     setVisibility(startSquare, 3);
     assignPlayerUnit(world.grid, startSquare.heightIndex, startSquare.widthIndex);
-    // testAllCreatures(6, "n");
-    // testAllCreatures(8, "e");
-    testAllCreatures(0, "s");
-    // testAllCreatures(12, "w");
+    // testAllCreatures(8, "n");
+    // testAllCreatures(10, "e");
+    // testAllCreatures(12, "s");
+    // testAllCreatures(14, "w");
     // startVillage(tribeSquare, tribe, 3);
     // assignTribes(world.grid, 10, 3);
 
@@ -1114,8 +1126,13 @@ export function createNewTestWorld(height, width, tribeName, renderAll= true) {
     // addTestEntity(world.grid[2][5], apatosaurusHouse1, "creatures", "n");
     // addTestEntity(world.grid[2][12], sarcophaganax, "creatures", "n");
     // addTestEntity(world.grid[3][11], apatosaurus, "creatures", "n");
-    // addTestEntity(world.grid[4][4], allosaurus, "creatures", "n");   
+    // addTestEntity(world.grid[0][0], creatureDirectory.apatosaurus, "creatures", "n");
+    // addTestEntity(world.grid[2][0], creatureDirectory.apatosaurus, "creatures", "s");
+    // addTestEntity(world.grid[4][0], creatureDirectory.apatosaurus, "creatures", "e");
+    // addTestEntity(world.grid[6][0], creatureDirectory.apatosaurus, "creatures", "w");   
     // addTestEntity(world.grid[2][4], creatureDirectory.tyrannosaurus, "creatures", "n");
+    // addTestEntity(world.grid[8][4], creatureDirectory.tyrannosaurus, "creatures", "n");
+    // addTestEntity(world.grid[16][4], creatureDirectory.tyrannosaurus, "creatures", "n");
     // addTestEntity(world.grid[2][6], creatureDirectory.greyTriceratops, "creatures", "n");
 
     // testCreaturePredation(creatureDirectory.tyrannosaurus);

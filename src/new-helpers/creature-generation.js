@@ -2,6 +2,7 @@ import {round, clamp, forEach, cloneDeep, fill} from "lodash";
 import {getDiffFromIdeal, addXToArray} from "./utilities";
 import creatureDirectory from "../components/creatures/creature-directory";
 import worldTypes, {timePeriods, worldNames} from "../constants/world-types";
+import {worldParams} from "../constants/world";
 
 console.log("WorldTypes", worldTypes);
 const SMALL_TERRITORY = 3;
@@ -26,16 +27,17 @@ export function adjustPredator(entity) {
         return
     }
 
+    entity.idealPreySize = entity.hp * .6;
+    entity.preySizeRange = entity.idealPreySize * .75;
+
     entity.isPredator = true;
-    adjust(entity, "hp", .6);
-    adjust(entity, "attack", 1.5);
 }
 
 export function adjustForHerdAnimal(entity, size) {
     entity.isGroup = true;
     entity.groupMaxSize = size;
     entity.groupCohesion = 3;
-    entity.groupDensity = 3;
+    entity.groupDensity = 10;
 }
 
 export function adjustForNoSwim(entity) {
@@ -65,9 +67,9 @@ export function adjustForNoLand(entity) {
 }
 
 export function adjustForOceanOnly(entity) {
-    forEach(entity.terrainPreference, (value, key) => {
-        if(key !== "ocean") {
-            entity.terrainPreference[key] = 0;
+    forEach(entity.terrainPreference, (value, keyName) => {
+        if(keyName !== "ocean") {
+            entity.terrainPreference[keyName] = 0;
         }
     });
 }
@@ -80,8 +82,8 @@ export function adjustSpeed(entity, speed) {
     entity.speed = speed;
 }
 
-export function adjust(entity, key, multiplier) {
-    entity[key] = normalize(entity[key] * multiplier);
+export function adjust(entity, keyName, multiplier) {
+    entity[keyName] = normalize(entity[keyName] * multiplier);
 }
 
 const timePeriodDetails = {
@@ -126,31 +128,31 @@ const creatureTags = {
     // Predator type
     specialistPredator: (entity) => {
         adjustPredator(entity);
-        adjust(entity, "preyRange", .75);
+        adjust(entity, "preySizeRange", .75);
     }, // Narrow prey range
     generalistPredator: (entity) => {
         adjustPredator(entity);
-        adjust(entity, "preyRange", 1.5);
+        adjust(entity, "preySizeRange", 1.5);
     }, // Wide prey range -- Default
     
     // Predator strategy
     ambushPredator: (entity) => {
-        adjustPredator(entity);
         adjustSpeed(entity, 2);
         adjust(entity, "endurance", .75);
+        adjustPredator(entity);
     }, // high speed but lacks endurance, good camoflage
     persuitPredator: (entity) => {
-        adjustPredator(entity);
         adjust(entity, "hp", .8);
         adjust(entity, "endurance", 1.5);
+        adjustPredator(entity);
         // adjust(entity, "heightToSquare", 1.5);
     }, // high endurance but moderate speed
     omnivore: (entity) => {
-        adjustPredator(entity);
         adjust(entity, "endurance", 1.2);
         adjust(entity, "hp", 1.2);
         adjust(entity, "attack", .75);
         adjust(entity, "defence", 1.5);
+        adjustPredator(entity);
         // adjust(entity, "heightToSquare", .5);
     }, // moderate endurance and speed -- Default
 
@@ -227,7 +229,7 @@ const creatureTags = {
     }
 }
 
-const terraintags = {
+const terrainTags = {
     "desert": {moistureLevel: 0, foliageDensity: 0},
     "desertScrub": {moistureLevel: 0, foliageDensity: 5},
     "desertForest": {moistureLevel: 0, foliageDensity: 10},
@@ -237,6 +239,9 @@ const terraintags = {
     "plain": {moistureLevel: 10, foliageDensity: 0},
     "grassland": {moistureLevel: 10, foliageDensity: 5},
     "forest": {moistureLevel: 10, foliageDensity: 10},
+    "tundra": {moistureLevel: 10, foliageDensity: 0, coldLevel: 10},
+    "taiga": {moistureLevel: 10, foliageDensity: 5, coldLevel: 10},
+    "snowForest": {moistureLevel: 10, foliageDensity: 10, coldLevel: 10},
     "shallowWater": {moistureLevel: 15, foliageDensity: 0},
     "marsh": {moistureLevel: 15, foliageDensity: 5},
     "swampForest": {moistureLevel: 15, foliageDensity: 10},
@@ -244,19 +249,40 @@ const terraintags = {
     "ocean": {moistureLevel: 25, foliageDensity: 0}
 }
 
-function getLevelForTerrain(key, moistureLevel, foliageDensity, range = 10) {
-    const moistureScore = getDiffFromIdeal(moistureLevel, terraintags[key].moistureLevel, 10);
-    if(key === "ocean" || key === "deepWater") {
+function getLevelForTerrain(keyName, moistureLevel, foliageDensity, coldLevel, range = 10, entity) {
+    if(!entity.terrainScores) {
+        entity.terrainScores = {};
+    }
+
+    const moistureScore = getDiffFromIdeal(moistureLevel, terrainTags[keyName].moistureLevel, 10);
+    if(keyName === "ocean" || keyName === "deepWater") {
+        entity.terrainScores[keyName] = {
+            moistureScore,
+            total: round(moistureScore)
+        }
         return round(moistureScore);
     }
 
-    const densityScore = getDiffFromIdeal(foliageDensity, terraintags[key].foliageDensity, 10);
+    const densityScore = getDiffFromIdeal(foliageDensity, terrainTags[keyName].foliageDensity, 10);
+    let coldScore = 0;
+    let numLevels = coldLevel ? 3 : 2;
 
-    return round((moistureScore + densityScore) / 2);
+    if(coldLevel) {
+        coldScore = getDiffFromIdeal(coldLevel, terrainTags[keyName].coldLevel || 0, 10);
+    }
+
+    entity.terrainScores[keyName] = {
+        moistureScore,
+        densityScore,
+        coldScore,
+        total: round((moistureScore + densityScore + coldScore) / numLevels)
+    }
+
+    return round((moistureScore + densityScore + coldScore) / numLevels);
 }
 
 export function getTerrainPreference(entity) {
-    const {moistureLevel, foliageDensity} = entity;
+    const {moistureLevel, foliageDensity, coldLevel} = entity;
     const preferences = {
         "desert": 0,
         "desertScrub": 0,
@@ -267,6 +293,9 @@ export function getTerrainPreference(entity) {
         "plain": 0,
         "grassland": 0,
         "forest": 0,
+        "tundra": 0,
+        "taiga": 0,
+        "snowForest": 0,
         "shallowWater": 0,
         "marsh": 0,
         "swampForest": 0,
@@ -274,20 +303,34 @@ export function getTerrainPreference(entity) {
         "ocean": 0
     }
 
-    forEach(preferences, (value, key) => {
-        preferences[key] = getLevelForTerrain(key, moistureLevel, foliageDensity, entity.terrainRange);
+    forEach(preferences, (value, keyName) => {
+        preferences[keyName] = getLevelForTerrain(keyName, moistureLevel, foliageDensity, coldLevel, entity.terrainRange, entity);
     });
 
     return preferences;
 }
 
-function getCommonality(entity) {
-    // Returns a score of 1 - 100 for how common a creature is
-    return entity.isPredatore ? 50 : 100;
+const commonalityBySizeRange = {
+    "small": 80,
+    "medium": 60,
+    "large": 40,
+    "xLarge": 20,
+    "xxLarge": 10
 }
 
-function generateNameFromKey(key) {
-    return key;
+function getCommonality(entity) {
+    // Returns a score of 1 - 100 for how common a creature is
+    let baseCommonality = commonalityBySizeRange[entity.sizeRange];
+    if(entity.isGroup) {
+        baseCommonality = baseCommonality / entity.groupMaxSize;
+    }
+    const modifier = entity.isPredator ? .75 : 1.5;
+    
+    return baseCommonality * modifier;
+}
+
+function generateNameFromKey(keyName) {
+    return keyName;
 }
 
 function generateHpFromSize (size) {
@@ -319,6 +362,134 @@ function getSizeRangeForEntity(entity) {
     return "small"
 }
 
+
+function assignOffsets(entity) {
+    const {modifier} = worldParams;
+    const sizeModifier = modifier * .5;
+    const {size} = entity;
+    if(size * sizeModifier < 30 * sizeModifier) {
+        return;
+    }
+
+    const offSetsByType = {
+        "default": {
+            n: {
+                top: -2,
+                left: 1
+            },
+            s: {
+                top: -1.5,
+                left: -2
+            },
+            e: {
+                top: -3,
+                left: -1
+            },
+            w: {
+                top: -2,
+                left: 1
+            }
+        },
+        "largeQuadraped": {
+            n: {
+                top: -3,
+                left: -.5
+            },
+            s: {
+                top: -1.5,
+                left: -2
+            },
+            e: {
+                top: -3,
+                left: -1
+            },
+            w: {
+                top: -2,
+                left: 2
+            }
+        },
+        "megaQuadraped": {
+            n: {
+                top: -1,
+                left: -.5
+            },
+            s: {
+                top: -2.5,
+                left: -1.5
+            },
+            e: {
+                top: -1,
+                left: 0
+            },
+            w: {
+                top: -2.5,
+                left: .5
+            }
+        },
+        "largeBipedal": {
+            n: {
+                top: -2,
+                left: 1
+            },
+            s: {
+                top: -1.5,
+                left: -2
+            },
+            e: {
+                top: -3,
+                left: -1
+            },
+            w: {
+                top: -2,
+                left: 1
+            }
+        },
+        "longWater": {
+            n: {
+                top: 2.5,
+                left: 2
+            },
+            s: {
+                top:0,
+                left: -3
+            },
+            e: {
+                top: 2,
+                left: -2
+            },
+            w: {
+                top: 0,
+                left: 2
+            }
+        }
+    }
+
+    forEach(entity.offSets, (offSets, key) => {
+        const typeOffSets = offSetsByType[entity.offSetType] || offSetsByType["default"];
+        offSets.topOffset = size * sizeModifier * typeOffSets[key].top * sizeModifier;
+        offSets.leftOffset = size * sizeModifier * typeOffSets[key].left * sizeModifier;
+    })
+
+    // if(entity.isPredator) {
+    //     entity.offSets.n.topOffset = size * -2 * 400 / worldParams.squareSize;
+    //     entity.offSets.n.leftOffset = size * 1 * 400 / worldParams.squareSize;
+    //     entity.offSets.s.topOffset = size * -1.5 * 400 / worldParams.squareSize;
+    //     entity.offSets.s.leftOffset = size * -2 * 400 / worldParams.squareSize;
+    //     entity.offSets.e.topOffset = size * -3 * 400 / worldParams.squareSize;
+    //     entity.offSets.e.leftOffset = size * -1 * 400 / worldParams.squareSize;
+    //     entity.offSets.w.topOffset = size * -2 * 400 / worldParams.squareSize;
+    //     entity.offSets.w.leftOffset = size * 1 * 400 / worldParams.squareSize;
+    // } else {
+    //     entity.offSets.n.topOffset = size * -2 * 400 / worldParams.squareSize;
+    //     entity.offSets.n.leftOffset = size * 1 * 400 / worldParams.squareSize;
+    //     entity.offSets.s.topOffset = size * -1.5 * 400 / worldParams.squareSize;
+    //     entity.offSets.s.leftOffset = size * -2 * 400 / worldParams.squareSize;
+    //     entity.offSets.e.topOffset = size * -3 * 400 / worldParams.squareSize;
+    //     entity.offSets.e.leftOffset = size * 1 * 400 / worldParams.squareSize;
+    //     entity.offSets.w.topOffset = size * -2 * 400 / worldParams.squareSize;
+    //     entity.offSets.w.leftOffset = size * 1 * 400 / worldParams.squareSize;
+    // }
+}
 /*
 const timePeriodDetails = {
     allCreatures: [],
@@ -339,13 +510,32 @@ const timePeriodDetails = {
         xxLarge: [],
     }
 }
+
+offSets: {
+    n: {
+        topOffset: -50, size * -.75
+        leftOffset: 200, size * 2
+    },
+    s: {
+        topOffset: -180, size * -2
+        leftOffset: 120, size * 1.4
+    },
+    e: {
+        topOffset: -90, size * -1
+        leftOffset: 150, size * 2
+    },
+    w: {
+        topOffset: -150, size * -2
+        leftOffset: 220, size * 2
+    }
+}
 */
 
-const NULL_DENSITY = 1000;
+const NULL_DENSITY = 100;
 
 function loadCreatureIntoTerrain(entityKey, terrain, terrainKey) {
     if(!terrain.creatureDensity) {
-        terrain.creatureDensity = 1000;
+        terrain.creatureDensity = NULL_DENSITY;
     }
 
     if(!terrain.creatureDetails) {
@@ -395,14 +585,14 @@ export function loadCreaturesIntoWorlds() {
 
 function addCreatureToPeriod(periodKey, entity) {
     const timePeriod = creaturesByTimePeriod[periodKey];
-    const {key, sizeRange, isPredator} = entity;
+    const {keyName, sizeRange, isPredator} = entity;
 
-    timePeriod.allCreatures.push(key);
+    timePeriod.allCreatures.push(keyName);
     if(isPredator) {
-        timePeriod.predators[sizeRange].push(key);
+        timePeriod.predators[sizeRange].push(keyName);
         timePeriod.predatorCount ++;
     } else {
-        timePeriod.prey[sizeRange].push(key);
+        timePeriod.prey[sizeRange].push(keyName);
         timePeriod.preyCount ++;
     }
 }
@@ -417,11 +607,11 @@ function addCreatureToPeriods(entity) {
 
 function checkForSwim(entity) {
     try {
-        require(`../components/creatures/images/${entity.key}/e-swim.png`);
-        entity.isSwim = true;
+        require(`../components/creatures/images/${entity.keyName}/e-swim.png`);
+        entity.hasSwim = true;
     } catch (error) {
         console.log(entity.name, "has water terrain but no swim", entity.moistureLevel);
-        entity.isSwim = false;
+        entity.hasSwim = false;
         adjustForNoSwim(entity);
     }
 }
@@ -438,12 +628,13 @@ function applyTags(entity) {
 }
 
 export function generateCreatureStats() {
-    forEach(creatureDirectory, (entity, key) => {
+    forEach(creatureDirectory, (entityType, keyName) => {
+        const entity = cloneDeep(entityType);
         const sizeModifier = entity.sizeModifier || 1;
-        entity.key = key;
-        entity.imgDir = key;
-        entity.name = entity.name || generateNameFromKey(key);
-        entity.heightToSquare = clamp(round((entity.size / 5) * sizeModifier), .5, 50);
+        entity.keyName = keyName;
+        entity.imgDir = keyName;
+        entity.name = entity.name || generateNameFromKey(keyName);
+        entity.heightToSquare = clamp(round((entity.size / 8) * sizeModifier), .5, 50);
         entity.widthToHeight= entity.widthToHeight || 1.5;
         entity.hp = entity.hp || generateHpFromSize(entity.size);
         entity.attack = entity.attack || generateAttackFromSize(entity.size);
@@ -457,18 +648,22 @@ export function generateCreatureStats() {
             checkForSwim(entity);
         } else if(entity.isUnderWater) {
             adjustForNoLand(entity);
-            if(entity.isMega) {
-                adjustForOceanOnly(entity);
-            }
+            // if(entity.isMega) {
+            //     adjustForOceanOnly(entity);
+            // }
         }
 
         entity.health = entity.hp;        
         entity.endurancePoints = entity.endurance;
         entity.sizeRange = getSizeRangeForEntity(entity);
-        entity.type = `${entity.sizeRange} ${entity.isPredator ? "perdator" : "herbivore"}`
+        entity.type = `${entity.sizeRange}${entity.isPredator ? "Predator" : "Herbivore"}`
         entity.commonality = getCommonality(entity);
 
+        assignOffsets(entity);
+
         addCreatureToPeriods(entity);
+
+        creatureDirectory[keyName] = entity;
     });
 
     console.log("TEST DIRECTORY", creatureDirectory);

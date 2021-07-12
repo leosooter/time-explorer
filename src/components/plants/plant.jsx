@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect, useRef, useLayoutEffect} from "react";
-import {random, sample, clone} from "lodash";
+import {random, sample, clone, clamp, round} from "lodash";
 import Status from "../status/status";
 import {getPosition, getZIndex} from "../../helpers/grid-helpers";
 import plantDirectory from "./plant-directory.js";
@@ -22,7 +22,7 @@ export default function Plant(props) {
     }
 
     const plantStyle = {
-        height: `${height}px`,
+        height: `${clamp(height, 1, 1000)}px`,
         pointerEvents: "none"
     }
 
@@ -34,11 +34,11 @@ export default function Plant(props) {
         <Fragment>
             {/* <div style={StatusStyle}></div> */}
             <div style={wrapperStyle}>
-                <span>{health}</span>
+                {/* <span>{health}</span> */}
                 {/* <Status size={size} /> */}
                 <img src={require(`./images/${image}`)} style={plantStyle}></img>
                 {/* {hasTarget && <div style={targetStyle} onClick={()=> handlePlayerHarvestResource("plants", id)}></div>} */}
-                <Target {...props.targetSpecs} handleClick={handleClick}></Target>
+                {/* <Target {...props.targetSpecs} handleClick={handleClick}></Target> */}
 
             </div>
         </Fragment>

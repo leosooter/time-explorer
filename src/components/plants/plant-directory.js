@@ -298,7 +298,7 @@ export default {
     darkPine: {
         name: "Dark Pine",
         imageArray: ["dark-pine1.png", "dark-pine2.png", "dark-pine3.png", "dark-pine4.png"],
-        heightToSquare: 2,
+        heightToSquare: 4,
         widthToHeight: .75,
         sizeRange: 20,
         resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
@@ -330,7 +330,7 @@ export default {
     umbrellaPine: {
         name: "Umbrella Pine",
         imageArray: ["umbrella-pine1.png", "umbrella-pine2.png", "umbrella-pine3.png", "umbrella-pine4.png"],
-        heightToSquare: 2,
+        heightToSquare: 3,
         widthToHeight: .75,
         sizeRange: 20,
         resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
@@ -362,7 +362,7 @@ export default {
     redwood: {
         name: "Umbrella Pine",
         imageArray: ["umbrella-pine1.png", "umbrella-pine2.png", "umbrella-pine3.png", "umbrella-pine4.png"],
-        heightToSquare: 5,
+        heightToSquare: 6,
         widthToHeight: .75,
         sizeRange: 20,
         resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
@@ -412,6 +412,72 @@ export default {
         imageArray: ["snow-spruce1.png", "snow-spruce2.png", "snow-spruce3.png"],
         heightToSquare: 3.5,
         widthToHeight: .75,
+        sizeRange: 100,
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+
+    ///////////////////////////////////////////////////////////////////////////////////////
+    greenMagnolia: {
+        name: "Green Magnolia",
+        imageArray: ["dec-blue-green-thick1.png", "dec-blue-green-thick2.png", "dec-blue-green-thick3.png"],
+        heightToSquare: 5,
+        widthToHeight: .75,
+        sizeRange: 100,
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    redMagnolia: {
+        name: "Red Magnolia",
+        imageArray: ["dec-dark1.png", "dec-dark2.png", "dec-dark3.png", "dec-dark4.png", "dec-dark5.png"],
+        heightToSquare: 5,
+        widthToHeight: .75,
+        sizeRange: 100,
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    oak: {
+        name: "Oak",
+        imageArray: ["dec-grey-green1.png", "dec-grey-green2.png", "dec-grey-green3.png"],
+        heightToSquare: 5,
+        widthToHeight: .75,
+        sizeRange: 100,
+        resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    oakGrove: {
+        name: "Oak Grove",
+        imageArray: ["dec-grey-green-grove1.png", "dec-grey-green-grove2.png", "dec-grey-green-grove3.png"],
+        heightToSquare: 5,
+        widthToHeight: 1,
         sizeRange: 100,
         resources: [{type: "wood", quantity: 20}, {type: "food", quantity: [1,2]}],
         health: 20,

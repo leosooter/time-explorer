@@ -1,9 +1,13 @@
+const worldSize = 200;
+
 export const worldParams = {
-    size: 40000,
+    size: worldSize * 100,
+    modifier: worldSize / 400
 }
-worldParams.squareSize = 400;
-worldParams.squareHeight = 360;
-worldParams.squareWidth = 771.6;
+
+worldParams.squareSize = worldParams.size / 100;
+worldParams.squareHeight = .9 * worldParams.squareSize;
+worldParams.squareWidth = 1.929 * worldParams.squareSize;
 
 // worldParams.squareHeight = worldParams.size * .009;
 // worldParams.squareWidth = worldParams.size * .01929;

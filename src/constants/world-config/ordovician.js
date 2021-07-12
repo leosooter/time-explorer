@@ -1,77 +1,161 @@
-import plantDirectory from "../../components/plants/plant-directory";
+import pd from "../../components/plants/plant-directory";
 import {generateWeightedArray} from "../../helpers/utility-helpers";
-import {generateCreatureArray} from "../../new-helpers/creature-helpers";
 import {terrainColors as colors} from "../colors";
 
-const terrainColors = colors.devonian;
-
-const {
-    /////////////////////////////////// Trees
-    /////////////////////////////////// Conifers
-    /////////////////////////////////// Ferns
-    ////////////////////////////////// Reeds
-    //////////////////////////////// Moss
-    //////////////////////////////// Misc
-    yellowGlobe,
-    purpleGlobe,
-    //////////////////////////////// Shrubs
-} = plantDirectory;
-
-/*
-Terrain Types define plant density and animal habitat and player movement types
-example: 
-    Player can move farther over plains or savannah than through forest or marsh, 
-    shallow/deep water may require different types of boats
-
-deep water
-shallow water
-plain
-savannah
-forest
-desert
-marsh - wet version of plains
-swamp forest - wet version of forest
-*/
+const terrainColors = colors.generic;
 
 export default {
-    defualtTerrainType: "desert",
+    defualtTerrainType: "savannah",
     seaPoints: [1, 3],
     seaPower: 100,
     lakePoints: [20, 30],
     lakePower: 20,
-    riverPoints: [20, 30],
-    riverPower: 20,
-    landPower: 30,
+    landPower: 50,
+    filterColor: "cyan",
+    filterOpacity: 18,
     possTerrain: generateWeightedArray([
-            {type: "grassland", occurance: 1}, 
-            {type: "savannah", occurance: 1}, 
-            {type: "marsh", occurance: 3}
+            {type: "desert", occurance: 10},
+            {type: "desertScrub", occurance: 10},
+            {type: "desertForest", occurance: 10},
+
+            {type: "savannah", occurance: 10},
+            {type: "savannahScrub", occurance: 10},
+            {type: "savannahForest", occurance: 10},
+
+            {type: "plain", occurance: 10},
+            {type: "grassland", occurance: 10}, 
+            {type: "forest", occurance: 10}, 
+            
+            {type: "marsh", occurance: 10},
+            {type: "swampForest", occurance: 10},
+            
         ], 0),
     terrainTypes: {
         desert: {
-            key: "desert",
-            type: "desert",
-            color: terrainColors.desert,
-            isWater: false,
-            creatures: [],
-            plants: generateWeightedArray([
-            ], 100),
-            resources: [
-            ]
+          key: "desert",
+          type: "desert",
+          color: terrainColors.desert,
+          isWater: false,
+          creatures: [],
+          plants: generateWeightedArray([
+                {type: pd.horsetail, occurance: 1}
+            ], 10),
+          resources: []
         },
+        desertScrub: {
+          key: "desertScrub",
+          type: "desertScrub",
+          color: terrainColors.desert,
+          isWater: false,
+          creatures: [],
+          plants: generateWeightedArray([
+                {type: pd.horsetail, occurance: 1}
+            ], 10),
+          resources: []
+        },
+        desertForest: {
+          key: "desertForest",
+          type: "desertForest",
+          color: terrainColors.desert,
+          isWater: false,
+          creatures: [],
+          plants: generateWeightedArray([
+                {type: pd.horsetail, occurance: 1}
+            ], 10),
+          resources: []
+        },
+
         savannah: {
             key: "savannah",
             type: "savannah",
             color: terrainColors.savannah,
             isWater: false,
-            isSwim: false,
             creatures: [],
             plants: generateWeightedArray([
-                {type: purpleGlobe, occurance: 3},
-                {type: yellowGlobe, occurance: 5},
+                {type: pd.horsetail, occurance: 1}
+            ], 10),
+            resources: []
+        },
+        savannahScrub: {
+            key: "savannahScrub",
+            type: "savannahScrub",
+            color: terrainColors.savannah,
+            isWater: false,
+            creatures: [],
+            plants: generateWeightedArray([
+                {type: pd.horsetail, occurance: 1}
+            ], 10),
+            resources: []
+        },
+        savannahForest: {
+            key: "savannahForest",
+            type: "savannahForest",
+            color: terrainColors.savannah,
+            isWater: false,
+            creatures: [],
+            plants: generateWeightedArray([
+                {type: pd.horsetail, occurance: 1}
+            ], 10),
+            resources: []
+        },
+
+        plain: {
+            key: "plain",
+            type: "plain",
+            color: terrainColors.grassland,
+            isWater: false,
+            creatures: [],
+            plants: generateWeightedArray([
+                {type: pd.horsetail, occurance: 1}
+            ], 10),
+            resources: []            
+        },
+        grassland: {
+            key: "grassland",
+            type: "grassland",
+            color: terrainColors.grassland,
+            isWater: false,
+            creatures: [],
+            plants: generateWeightedArray([
+                {type: pd.horsetail, occurance: 1}
+            ], 10),
+            resources: []            
+        },
+        forest: {
+            key: "forest",
+            type: "forest",
+            color: terrainColors.forest,
+            isWater: false,
+            creatures: [],
+            plants: generateWeightedArray([
+                {type: pd.horsetail, occurance: 1}
             ], 10),
             resources: [
             ]
+        },
+        swampForest: {
+            key: "swampForest",
+            type: "swamp forest",
+            color: terrainColors.swampForest,
+            isWater: true,
+            isSwim: true,
+            creatures: [],
+            plants: generateWeightedArray([
+                {type: pd.horsetail, occurance: 1}
+            ], 10),
+            resources: []
+        },
+        marsh: {
+            key: "marsh",
+            type: "marsh",
+            color: terrainColors.marsh,
+            isWater: true,
+            isSwim: true,
+            creatures: [],
+            plants: generateWeightedArray([
+                {type: pd.horsetail, occurance: 1}
+            ], 10),
+            resources: []
         },
         shallowWater: {
             key: "shallowWater",

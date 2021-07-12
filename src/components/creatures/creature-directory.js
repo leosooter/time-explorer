@@ -41,7 +41,7 @@ prey
 
 //////////////////////////// X-Large
 60 camarasarus - indricotherium
-70 apatosaurus
+80 apatosaurus
 80 brachiosaurus
 
 //////////////////////////// XX-Large
@@ -61,6 +61,24 @@ const genericCreatureStats = {
     range: 1,
     aggression: 50,
     isUnderWater: false,
+    offSets: {
+        n: {
+            topOffset: 0,
+            leftOffset: 0,
+        },
+        s: {
+            topOffset: 0,
+            leftOffset: 0,
+        },
+        e: {
+            topOffset: 0,
+            leftOffset: 0,
+        },
+        w: {
+            topOffset: 0,
+            leftOffset: 0,
+        }
+    }
     /* generated stats
     hp,
     attack,
@@ -84,25 +102,25 @@ export default {
     ///////////////////////////////// ------------ Arthropods ----------------
     yellowDarter: {
         ...genericDarter,
-        timePeriod: [timePeriods.car, timePeriods.tri, timePeriods.jur, timePeriods.ogl],
+        timePeriod: [timePeriods.car, timePeriods.tri, timePeriods.jur, timePeriods.pal],
     },
     purpleDarter: {
         ...genericDarter,
         size: 2,
-        timePeriod: [timePeriods.per, timePeriods.cre, timePeriods.eoc, timePeriods.pli],
+        timePeriod: [timePeriods.per, timePeriods.cre, timePeriods.neo, timePeriods.qua],
     },
     greenDarter: {
         ...genericDarter,
-        timePeriod: [timePeriods.per, timePeriods.tri, timePeriods.eoc, timePeriods.ple],
+        timePeriod: [timePeriods.per, timePeriods.tri, timePeriods.neo, timePeriods.qua],
     },
     redDarter: {
         ...genericDarter,
         size: 2,
-        timePeriod: [timePeriods.car, timePeriods.jur, timePeriods.cre, timePeriods.pli],
+        timePeriod: [timePeriods.car, timePeriods.jur, timePeriods.cre, timePeriods.qua],
     },
     scorpion: {
         ...genericCreatureStats,
-        timePeriod: [timePeriods.ord, timePeriods.dev, timePeriods.car, timePeriods.per, timePeriods.tri, timePeriods.jur, timePeriods.cre, timePeriods.eoc, timePeriods.ogl, timePeriods.pli],
+        timePeriod: [timePeriods.ord, timePeriods.dev, timePeriods.car, timePeriods.per, timePeriods.tri, timePeriods.jur, timePeriods.cre, timePeriods.neo, timePeriods.pal, timePeriods.qua],
         size: 1,
         tags: ["passiveDefence", "ambushPredator"],
         moistureLevel: 3, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
@@ -110,7 +128,7 @@ export default {
     },
     yellowScorpion: {
         ...genericCreatureStats,
-        timePeriod: [timePeriods.ord, timePeriods.dev, timePeriods.car, timePeriods.per, timePeriods.tri, timePeriods.jur, timePeriods.cre, timePeriods.eoc, timePeriods.ogl, timePeriods.pli],
+        timePeriod: [timePeriods.ord, timePeriods.dev, timePeriods.car, timePeriods.per, timePeriods.tri, timePeriods.jur, timePeriods.cre, timePeriods.neo, timePeriods.pal, timePeriods.qua],
         size: 2,
         tags: ["passiveDefence", "ambushPredator"],
         moistureLevel: 6, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
@@ -120,7 +138,7 @@ export default {
     ///////////////////////////////// ------------ Fish ----------------
     yellowFish: {
         ...genericCreatureStats,
-        timePeriod: [timePeriods.per, timePeriods.tri, timePeriods.eoc, timePeriods.ple],
+        timePeriod: [timePeriods.per, timePeriods.tri, timePeriods.neo, timePeriods.qua],
         isUnderWater: true,
         size: 5,
         tags: ["runningEscape", "ambushPredator"],
@@ -129,7 +147,7 @@ export default {
     },
     greenFish: {
         ...genericCreatureStats,
-        timePeriod: [timePeriods.car, timePeriods.tri, timePeriods.jur, timePeriods.ogl],
+        timePeriod: [timePeriods.car, timePeriods.tri, timePeriods.jur, timePeriods.pal],
         isUnderWater: true,
         size: 3,
         tags: ["runningEscape", "smallHerdAnimal"],
@@ -138,7 +156,7 @@ export default {
     },
     blueFish: {
         ...genericCreatureStats,
-        timePeriod: [timePeriods.car, timePeriods.jur, timePeriods.cre, timePeriods.pli],
+        timePeriod: [timePeriods.car, timePeriods.jur, timePeriods.cre, timePeriods.qua],
         isUnderWater: true,
         size: 7,
         tags: ["runningEscape", "ambushPredator"],
@@ -147,20 +165,253 @@ export default {
     },
     silverBarb: {
         ...genericCreatureStats,
-        timePeriod: [timePeriods.per, timePeriods.cre, timePeriods.eoc, timePeriods.pli],
+        timePeriod: [timePeriods.per, timePeriods.cre, timePeriods.neo, timePeriods.qua],
         isUnderWater: true,
         size: 15,
         tags: ["runningEscape", "smallHerdAnimal"],
         moistureLevel: 24, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
         foliageDensity: 0, // 0-10;
     },
-
-    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ------------ Jurrasic ----------------
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ------------ Devonian ----------------
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Prey ----------------
-    ///////////////////////////////// ------------ Stegosaurs ----------------
+
+
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ------------ Carboniferous ----------------
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Prey ----------------
+    blueMeganeura: {
+        ...genericDarter,
+        timePeriod: timePeriods.car,
+        size: 4,
+        moistureLevel: 8, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 8, // 0-10;
+    },
+    orangeMeganeura: {
+        ...genericDarter,
+        timePeriod: timePeriods.car,
+        size: 5,
+        moistureLevel: 8, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 8, // 0-10;
+    },
+    lesserArthropleura: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.car,
+        tags: ["passiveDefence"],
+        size: 10,
+        moistureLevel: 12, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 8, // 0-10;
+    },
+    greaterArthropleura: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.car,
+        tags: ["passiveDefence"],
+        size: 15,
+        moistureLevel: 10, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 5, // 0-10;
+    },
+
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Predators ----------------
+    pulmonoscorpius: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.car,
+        size: 3,
+        tags: ["generalistPredator", "ambushPredator"],
+        moistureLevel: 3, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 8, // 0-10;
+    },
+    lesserMesothelae: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.car,
+        size: 3,
+        tags: ["generalistPredator", "ambushPredator"],
+        moistureLevel: 5, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 8, // 0-10;
+    },
+    greaterMesothelae: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.car,
+        size: 4,
+        tags: ["generalistPredator", "ambushPredator"],
+        moistureLevel: 4, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 6, // 0-10;
+    },
+    proterogyrinus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.car,
+        size: 15,
+        tags: ["generalistPredator", "ambushPredator", "wideRange"],
+        moistureLevel: 15, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 2, // 0-10;
+    },
+    
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ------------ Permian ----------------
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Prey ----------------
+    blueDiictodon: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.per,
+        size: 4,
+        tags: ["runningEscape"],
+        moistureLevel: 5, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 8, // 0-10;
+    },
+    brownDiictodon: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.per,
+        size: 5,
+        tags: ["runningEscape"],
+        moistureLevel: 2, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 4, // 0-10;
+    },
+    greenEdaphosaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.per,
+        size: 10,
+        tags: ["runningEscape"],
+        moistureLevel: 8, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 8, // 0-10;
+    },
+    greyEdaphosaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.per,
+        size: 8,
+        tags: ["runningEscape"],
+        moistureLevel: 5, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 5, // 0-10;
+    },
+    yellowEdaphosaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.per,
+        size: 12,
+        tags: ["runningEscape"],
+        moistureLevel: 2, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 1, // 0-10;
+    },
+
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Predators ----------------
+    orangeDimetrodon: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.per,
+        size: 15,
+        tags: ["generalistPredator", "ambushPredator"],
+        moistureLevel: 5, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 5, // 0-10;
+    },
+    lesserGorgonopsid: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.per,
+        size: 18,
+        tags: ["generalistPredator", "persuitPredator"],
+        moistureLevel: 9, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 8, // 0-10;
+    },
+    greaterGorgonopsid: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.per,
+        size: 25,
+        tags: ["specialistPredator", "persuitPredator"],
+        moistureLevel: 2, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 2, // 0-10;
+    },
+
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ------------ Triassic ----------------
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Prey ----------------
+    redLystrosaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.tri,
+        size: 8,
+        tags: ["runningEscape"],
+        moistureLevel: 4, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 3, // 0-10;
+    },
+    purpleLystrosaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.tri,
+        size: 10,
+        tags: ["runningEscape"],
+        moistureLevel: 7, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 7, // 0-10;
+    },
+    brownDesmatosuchus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.tri,
+        size: 27,
+        tags: ["passiveDefence"],
+        moistureLevel: 4, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 2, // 0-10;
+    },
+    blueDesmatosuchus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.tri,
+        size: 27,
+        tags: ["passiveDefence"],
+        moistureLevel: 14, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 7, // 0-10;
+    },
+    yellowDesmatosuchus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.tri,
+        size: 30,
+        tags: ["passiveDefence"],
+        moistureLevel: 5, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 10, // 0-10;
+    },
+
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Predators ----------------
+    greenHerrerasaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.tri,
+        size: 20,
+        tags: ["generalistPredator", "persuitPredator"],
+        moistureLevel: 6, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 10, // 0-10;
+    },
+    yellowHerrerasaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.tri,
+        size: 12,
+        tags: ["generalistPredator", "persuitPredator"],
+        moistureLevel: 5, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 5, // 0-10;
+    },
+    greenPostosuchus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.tri,
+        size: 30,
+        tags: ["generalistPredator", "ambushPredator"],
+        moistureLevel: 7, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 6, // 0-10;
+    },
+    brownPostosuchus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.tri,
+        size: 35,
+        tags: ["generalistPredator", "ambushPredator"],
+        moistureLevel: 2, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 4, // 0-10;
+    },
+
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ------------ Jurassic ----------------
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Prey ----------------
+    greenKentrosaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.jur,
+        size: 27,
+        tags: ["passiveDefence"],
+        moistureLevel: 14, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 7, // 0-10;
+    },
+    yellowKentrosaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.jur,
+        offSetType: "largeQuadraped",
+        size: 30,
+        tags: ["passiveDefence"],
+        moistureLevel: 5, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 10, // 0-10;
+    },
     blueStegosaurus: {
         ...genericCreatureStats,
         timePeriod: timePeriods.jur,
+        offSetType: "largeQuadraped",
         size: 35,
         tags: ["passiveDefence"],
         moistureLevel: 14, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
@@ -169,18 +420,73 @@ export default {
     redStegosaurus: {
         ...genericCreatureStats,
         timePeriod: timePeriods.jur,
+        offSetType: "largeQuadraped",
         size: 43,
         tags: ["passiveDefence"],
         moistureLevel: 6, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
         foliageDensity: 2, // 0-10;
     },
-    
+    apatosaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.jur,
+        offSetType: "megaQuadraped",
+        size: 80,
+        tags: ["passiveDefence"],
+        moistureLevel: 5, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 3, // 0-10;
+    },
+
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Predators ----------------
+    yellowOrnitholestes: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.jur,
+        size: 6,
+        tags: ["generalistPredator", "persuitPredator"],
+        moistureLevel: 2, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 5, // 0-10;
+    },
+    blueOrnitholestes: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.jur,
+        size: 7,
+        tags: ["generalistPredator", "persuitPredator"],
+        moistureLevel: 5, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 5, // 0-10;
+    },
+    ceratosaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.jur,
+        offSetType: "largeQuadraped",
+        size: 30,
+        tags: ["generalistPredator", "persuitPredator"],
+        moistureLevel: 2, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 5, // 0-10;
+    },
+    allosaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.jur,
+        offSetType: "largeBipedal",
+        size: 40,
+        tags: ["generalistPredator", "ambushPredator"],
+        moistureLevel: 8, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 6, // 0-10;
+    },
+    saurophaganax: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.jur,
+        offSetType: "largeBipedal",
+        size: 50,
+        tags: ["generalistPredator", "ambushPredator"],
+        moistureLevel: 5, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 1, // 0-10;
+    },
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ------------ Cretaceous ----------------
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Prey ----------------
     ///////////////////////////////// ------------ Duckbills ----------------
     greyParasaurolophus: {
         ...genericCreatureStats,
         timePeriod: timePeriods.cre,
+        offSetType: "largeQuadraped",
         size: 43,
         tags: ["runningEscape", "smallHerdAnimal"],
         moistureLevel: 10, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
@@ -189,6 +495,7 @@ export default {
     blueParasaurolophus: {
         ...genericCreatureStats,
         timePeriod: timePeriods.cre,
+        offSetType: "largeQuadraped",
         size: 40,
         tags: ["runningEscape"],
         moistureLevel: 12, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
@@ -197,6 +504,7 @@ export default {
     brownOuranosaurus: {
         ...genericCreatureStats,
         timePeriod: timePeriods.cre,
+        offSetType: "largeQuadraped",
         size: 35,
         tags: ["runningEscape"],
         moistureLevel: 5, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
@@ -205,6 +513,7 @@ export default {
     yellowOuranosaurus: {
         ...genericCreatureStats,
         timePeriod: timePeriods.cre,
+        offSetType: "largeQuadraped",
         size: 33,
         tags: ["runningEscape", "narrowRange", "smallHerdAnimal"],
         moistureLevel: 2, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
@@ -214,6 +523,7 @@ export default {
     greenStyracosaurus: {
         ...genericCreatureStats,
         timePeriod: timePeriods.cre,
+        offSetType: "largeQuadraped",
         size: 32,
         tags: ["activeDefence"],
         moistureLevel: 12, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
@@ -222,6 +532,7 @@ export default {
     blueStyracosaurus: {
         ...genericCreatureStats,
         timePeriod: timePeriods.cre,
+        offSetType: "largeQuadraped",
         size: 35,
         tags: ["activeDefence", "smallHerdAnimal"],
         moistureLevel: 14, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
@@ -230,7 +541,8 @@ export default {
     greyTriceratops: {
         ...genericCreatureStats,
         timePeriod: timePeriods.cre,
-        size: 45,
+        offSetType: "largeQuadraped",
+        size: 40,
         tags: ["activeDefence", "aggressive", "largeHerdAnimal"],
         moistureLevel: 2, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
         foliageDensity: 2, // 0-10;
@@ -238,7 +550,8 @@ export default {
     brownTriceratops: {
         ...genericCreatureStats,
         timePeriod: timePeriods.cre,
-        size: 50,
+        offSetType: "largeQuadraped",
+        size: 43,
         tags: ["activeDefence", "aggressive", "mediumHerdAnimal"],
         moistureLevel: 4, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
         foliageDensity: 0, // 0-10;
@@ -256,7 +569,7 @@ export default {
     deinonychus: {
         ...genericCreatureStats,
         timePeriod: timePeriods.cre,
-        size: 10,
+        size: 12,
         tags: ["generalistPredator", "persuitPredator", "runningEscape", "smallHerdAnimal"],
         moistureLevel: 9, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
         foliageDensity: 8, // 0-10;
@@ -269,27 +582,11 @@ export default {
         moistureLevel: 6, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
         foliageDensity: 4, // 0-10;
     },
-    ///////////////////////////////// ------------ Spinosaurids ----------------
-    baryonyx: {
-        ...genericCreatureStats,
-        timePeriod: timePeriods.cre,
-        size: 40,
-        tags: ["specialistPredator", "ambushPredator"],
-        moistureLevel: 14, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
-        foliageDensity: 6, // 0-10;
-    },
-    spinosaurus: {
-        ...genericCreatureStats,
-        timePeriod: timePeriods.cre,
-        size: 70,
-        tags: ["generalistPredator", "ambushPredator"],
-        moistureLevel: 13, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
-        foliageDensity: 2, // 0-10;
-    },
     ///////////////////////////////// ------------ Tyrannosaurids ----------------
     tarbosaurus: {
         ...genericCreatureStats,
         timePeriod: timePeriods.cre,
+        offSetType: "largeBipedal",
         size: 55,
         tags: ["generalistPredator", "ambushPredator", "largeTerritory"],
         moistureLevel: 6, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
@@ -298,9 +595,29 @@ export default {
     tyrannosaurus: {
         ...genericCreatureStats,
         timePeriod: timePeriods.cre,
+        offSetType: "largeBipedal",
         size: 60,
         tags: ["generalistPredator", "ambushPredator", "largeTerritory"],
         moistureLevel: 3, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 2, // 0-10;
+    },
+    ///////////////////////////////// ------------ Spinosaurids ----------------
+    baryonyx: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.cre,
+        offSetType: "largeBipedal",
+        size: 40,
+        tags: ["specialistPredator", "ambushPredator"],
+        moistureLevel: 14, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 6, // 0-10;
+    },
+    spinosaurus: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.cre,
+        offSetType: "largeBipedal",
+        size: 70,
+        tags: ["generalistPredator", "ambushPredator"],
+        moistureLevel: 13, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
         foliageDensity: 2, // 0-10;
     },
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Marine Predators ----------------
@@ -308,6 +625,7 @@ export default {
     blueMosasaurus: {
         ...genericCreatureStats,
         timePeriod: timePeriods.cre,
+        offSetType: "longWater",
         isUnderWater: true,
         size: 40,
         tags: ["generalistPredator", "ambushPredator"],
@@ -317,12 +635,102 @@ export default {
     greenMosasaurus: {
         ...genericCreatureStats,
         timePeriod: timePeriods.cre,
+        offSetType: "longWater",
         isUnderWater: true,
         size: 70,
         tags: ["generalistPredator", "ambushPredator"],
-        moistureLevel: 25, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        moistureLevel: 22, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
         foliageDensity: 0, // 0-10;
+    },
+
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ------------ PALEOGENE ----------------
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Prey ----------------
+    
+    uintatherium: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.pal,
+        offSetType: "largeQuadraped",
+        size: 30,
+        tags: ["activeDefence", "narrowRange"],
+        moistureLevel: 8, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 10, // 0-10;
+    },
+    brontotherium: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.pal,
+        offSetType: "largeQuadraped",
+        size: 38,
+        tags: ["activeDefence", "aggressive", "smallHerdAnimal", "narrowRange"],
+        moistureLevel: 4, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 0, // 0-10;
+    },
+
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ------------ NEOGENE ----------------
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Prey ----------------
+
+
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ------------ QUARTERNARY ----------------
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Prey ----------------
+    woolyRhino: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.qua,
+        offSetType: "largeQuadraped",
+        size: 30,
+        tags: ["activeDefence", "aggressive"],
+        moistureLevel: 4, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 5, // 0-10;
+        coldLevel: 7 // 0-10
+    },
+    elasmotherium: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.qua,
+        offSetType: "largeQuadraped",
+        size: 35,
+        tags: ["activeDefence"],
+        moistureLevel: 4, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 5, // 0-10;
+        coldLevel: 5 // 0-10
+    },
+    woolyMammoth: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.qua,
+        offSetType: "largeQuadraped",
+        size: 40,
+        tags: ["activeDefence", "smallHerdAnimal"],
+        moistureLevel: 8, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 0, // 0-10;
+        coldLevel: 10 // 0-10
+    },
+    greyMastodon: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.qua,
+        offSetType: "largeQuadraped",
+        size: 45,
+        tags: ["activeDefence", "smallHerdAnimal"],
+        moistureLevel: 8, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 4, // 0-10;
+        coldLevel: 1 // 0-10
+    },
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ------------ Predators ----------------
+    greyDinofelis: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.qua,
+        size: 12,
+        tags: ["generalistPredator", "ambushPredator", "runningEscape"],
+        moistureLevel: 8, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 10, // 0-10;
+        coldLevel: 1 // 0-10
+    },
+    whiteLion: {
+        ...genericCreatureStats,
+        timePeriod: timePeriods.qua,
+        size: 20,
+        tags: ["generalistPredator", "ambushPredator", "runningEscape", "smallHerdAnimal"],
+        moistureLevel: 5, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 5, // 0-10;
+        coldLevel: 10 // 0-10
     }
+
 }
 
 // export default creatureDirectory;
