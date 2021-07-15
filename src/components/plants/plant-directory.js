@@ -2,6 +2,231 @@
 // const {wood, nuts, fruit, food, "medicine", "poison"} = resources; 
 
 export default {
+    /////////////////////////////////// GroundCovers
+    groundFernGreen: {
+        name: "Green Ground Fern",
+        imageArray: ["groundFernGreen1.png", "groundFernGreen2.png", "groundFernGreen3.png", "groundFernGreen4.png", "groundFernGreen5.png", "groundFernGreen6.png", "groundFernGreen7.png"],
+        heightToSquare: 1,
+        widthToHeight: 1,
+        sizeRange: 10,
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    groundFernYellow: {
+        name: "Yellow Ground Fern",
+        imageArray: ["groundFernYellow1.png", "groundFernYellow2.png", "groundFernYellow3.png", "groundFernYellow4.png", "groundFernYellow5.png", "groundFernYellow6.png", "groundFernYellow7.png"],
+        heightToSquare: 1,
+        widthToHeight: 1,
+        sizeRange: 10,
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    groundFernBrown: {
+        name: "Brown Ground Fern",
+        imageArray: ["groundFernBrown1.png", "groundFernBrown2.png", "groundFernBrown3.png", "groundFernBrown4.png", "groundFernBrown5.png", "groundFernBrown6.png", "groundFernBrown7.png"],
+        heightToSquare: 1,
+        widthToHeight: 1,
+        sizeRange: 10,
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    greyPebbles: {
+        name: "Grey Pebbles",
+        imageArray: ["greyPebbles1.png", "greyPebbles2.png", "greyPebbles3.png", "greyPebbles4.png", "greyPebbles5.png", "greyPebbles6.png"],
+        heightToSquare: 1,
+        widthToHeight: 1,
+        sizeRange: 10,
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    yellowPebbles: {
+        name: "Yellow Pebbles",
+        imageArray: ["yellowPebbles1.png", "yellowPebbles2.png", "yellowPebbles3.png", "yellowPebbles4.png", "yellowPebbles5.png", "yellowPebbles6.png"],
+        heightToSquare: 1,
+        widthToHeight: 1,
+        sizeRange: 10,
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    shortGreenGrass: {
+        name: "Short Green Grass",
+        imageArray: ["shortGreenGrass1.png", "shortGreenGrass2.png", "shortGreenGrass3.png", "shortGreenGrass4.png"],
+        heightToSquare: 1,
+        widthToHeight: 1,
+        sizeRange: 50,
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    groundFernGreen: {
+        name: "Spread Green Grass",
+        imageArray: ["groundFernGreen1.png", "groundFernGreen2.png", "groundFernGreen3.png", "groundFernGreen4.png", "groundFernGreen5.png", "groundFernGreen6.png", "groundFernGreen7.png"],
+        heightToSquare: 1,
+        widthToHeight: 1,
+        sizeRange: 50,
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    spreadYellowGrass: {
+        name: "Spread Yellow Grass",
+        imageArray: ["spreadYellowGrass1.png", "spreadYellowGrass2.png", "spreadYellowGrass3.png", "spreadYellowGrass4.png", "spreadYellowGrass5.png", "spreadYellowGrass6.png", "spreadYellowGrass7.png"],
+        heightToSquare: 1,
+        widthToHeight: 1,
+        sizeRange: 50,
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    spreadTanGrass: {
+        name: "Spread Tan Grass",
+        imageArray: ["spreadTanGrass1.png", "spreadTanGrass2.png", "spreadTanGrass3.png", "spreadTanGrass4.png"],
+        heightToSquare: 1,
+        widthToHeight: 1,
+        sizeRange: 50,
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    spreadRedGrass: {
+        name: "Spread Yellow Grass",
+        imageArray: ["spreadRedGrass1.png", "spreadRedGrass2.png", "spreadRedGrass3.png", "spreadRedGrass4.png"],
+        heightToSquare: 1,
+        widthToHeight: 1,
+        sizeRange: 50,
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    spreadBlueGrass: {
+        name: "Spread Yellow Grass",
+        imageArray: ["spreadBlueGrass1.png", "spreadBlueGrass2.png", "spreadBlueGrass3.png", "spreadBlueGrass4.png"],
+        heightToSquare: 1,
+        widthToHeight: 1,
+        sizeRange: 50,
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    spreadBlackGrass: {
+        name: "Spread Yellow Grass",
+        imageArray: ["spreadBlackGrass1.png", "spreadBlackGrass2.png", "spreadBlackGrass3.png", "spreadBlackGrass4.png"],
+        heightToSquare: 1,
+        widthToHeight: 1,
+        sizeRange: 50,
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    tallGreenGrass: {
+        name: "Tall Green Grass",
+        imageArray: ["tallGreenGrass1.png", "tallGreenGrass2.png", "tallGreenGrass3.png", "tallGreenGrass4.png", "tallGreenGrass5.png", "tallGreenGrass6.png", "tallGreenGrass7.png", "tallGreenGrass8.png"],
+        heightToSquare: 1,
+        widthToHeight: 1,
+        sizeRange: 50,
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
+    tallTanGrass: {
+        name: "Tall Tan Grass",
+        imageArray: ["tallTanGrass1.png", "tallTanGrass2.png", "tallTanGrass3.png", "tallTanGrass4.png", "tallTanGrass5.png", "tallTanGrass6.png", "tallTanGrass7.png", "tallTanGrass8.png", "tallTanGrass9.png"],
+        heightToSquare: 1,
+        widthToHeight: 1,
+        sizeRange: 50,
+        resources: [{type: "medicine", quantity: 2}],
+        health: 20,
+        targetSpecs: {
+            top: 50,
+            left: 50,
+            height: 100,
+            width: 100,
+            color: "green"
+        }
+    },
     /////////////////////////////////// Horsetails
     horsetail: {
         name: "Horsetail",

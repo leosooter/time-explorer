@@ -533,9 +533,9 @@ offSets: {
 
 const NULL_DENSITY = 100;
 
-function loadCreatureIntoTerrain(entityKey, terrain, terrainKey) {
+function loadCreatureIntoTerrain(entityKey, terrain, terrainKey, world) {
     if(!terrain.creatureDensity) {
-        terrain.creatureDensity = NULL_DENSITY;
+        terrain.creatureDensity = world.creatureDensity || NULL_DENSITY;
     }
 
     if(!terrain.creatureDetails) {
@@ -558,7 +558,7 @@ function loadCreatureIntoTerrain(entityKey, terrain, terrainKey) {
 }
 
 function loadCreatureIntoWorld(entityKey, world) {
-    forEach(world.terrainTypes, (terrain, terrainKey) => loadCreatureIntoTerrain(entityKey, terrain, terrainKey))
+    forEach(world.terrainTypes, (terrain, terrainKey) => loadCreatureIntoTerrain(entityKey, terrain, terrainKey, world))
 }
 
 function loadCreaturesIntoWorld(period, periodKey) {

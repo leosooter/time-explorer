@@ -121,7 +121,8 @@ export default {
             creatures: [],
             plants: generateWeightedArray([
                 {type: barrelFern, occurance: 1},
-                {type: yellowRoundleaf, occurance: 1}
+                {type: yellowRoundleaf, occurance: 1},
+                {type: plantDirectory.yellowPebbles, occurance: 10}
             ], 100),
             resources: [
               // {type: largeYellowRock, occurance: 1},

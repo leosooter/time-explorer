@@ -118,6 +118,14 @@ export default {
         size: 2,
         timePeriod: [timePeriods.car, timePeriods.jur, timePeriods.cre, timePeriods.qua],
     },
+    blackSquare: {
+        ...genericCreatureStats,
+        timePeriod: [],
+        size: 1,
+        tags: [],
+        moistureLevel: 5, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        foliageDensity: 5, // 0-10;
+    },
     scorpion: {
         ...genericCreatureStats,
         timePeriod: [timePeriods.ord, timePeriods.dev, timePeriods.car, timePeriods.per, timePeriods.tri, timePeriods.jur, timePeriods.cre, timePeriods.neo, timePeriods.pal, timePeriods.qua],
@@ -652,7 +660,7 @@ export default {
         offSetType: "largeQuadraped",
         size: 30,
         tags: ["activeDefence", "narrowRange"],
-        moistureLevel: 8, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
+        moistureLevel: 10, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
         foliageDensity: 10, // 0-10;
     },
     brontotherium: {
@@ -678,7 +686,7 @@ export default {
         size: 30,
         tags: ["activeDefence", "aggressive"],
         moistureLevel: 4, // 0-25 -- 0-10 land 10-15 shallow water 15-25 deep water
-        foliageDensity: 5, // 0-10;
+        foliageDensity: 7, // 0-10;
         coldLevel: 7 // 0-10
     },
     elasmotherium: {
@@ -730,7 +738,6 @@ export default {
         foliageDensity: 5, // 0-10;
         coldLevel: 10 // 0-10
     }
-
 }
 
 // export default creatureDirectory;

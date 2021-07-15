@@ -48,13 +48,13 @@ let updateNumber = 0;
 
 const creatureActionChance = 1;
 
-let defaultWorld = QUARTERNARY;
+let defaultWorld = CRETACEOUS;
 let isExplorerMode = true;
 isExplorerMode = false;
 let world;
 
 world = createNewWorld(100, 100, defaultWorld, isExplorerMode, "permianAdobe");
-// world = createNewTestWorld(100, 100, isExplorerMode, "permianAdobe", false);
+//world = createNewTestWorld(100, 100, isExplorerMode, "permianAdobe", false);
 
 function App() {
   
@@ -301,21 +301,19 @@ function App() {
   }
 
   const appStyles = {
-    // height: `${worldParams.size * 1.2}px`,
-    // minWidth: `${worldParams.size}px`,
-    // backgroundColor: "black"
+    
   }
 
   const wrapperStyles = {
     height: `${worldParams.size * .7}px`,
     width: `${1}px`,
     border: "1px solid red",
-    position: "absolute"
+    position: "absolute",
   }
 
   const unitsWrapper = {
     position: "absolute",
-    transform: `translate(${(worldParams.size / 36.5)}px, ${worldParams.size / 2}px)`
+    transform: `translate(${(worldParams.size / 36.5)}px, ${worldParams.size / 2}px)`,
   }
 
   return (

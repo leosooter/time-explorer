@@ -36,8 +36,8 @@ export default {
           isWater: false,
           creatures: [],
           plants: generateWeightedArray([
-                {type: pd.oak, occurance: 1}
-            ], 10),
+                {type: pd.spreadRedGrass, occurance: 7}
+            ], 100),
           resources: []
         },
         desertScrub: {
@@ -47,8 +47,10 @@ export default {
           isWater: false,
           creatures: [],
           plants: generateWeightedArray([
-                {type: pd.oak, occurance: 1}
-            ], 10),
+                {type: pd.oak, occurance: 1},
+                {type: pd.spreadRedGrass, occurance: 7},
+                {type: pd.orangeRoundleaf, occurance: 10}
+            ], 100),
           resources: []
         },
         desertForest: {
@@ -58,8 +60,10 @@ export default {
           isWater: false,
           creatures: [],
           plants: generateWeightedArray([
-                {type: pd.oak, occurance: 1}
-            ], 10),
+                {type: pd.oak, occurance: 7},
+                {type: pd.barrelFern, occurance: 10},
+                {type: pd.spreadRedGrass, occurance: 3},
+            ], 100),
           resources: []
         },
 
@@ -70,8 +74,11 @@ export default {
             isWater: false,
             creatures: [],
             plants: generateWeightedArray([
+                {type: pd.spreadYellowGrass, occurance: 10},
+                {type: pd.spreadTanGrass, occurance: 100},
+                {type: pd.yellowRoundleaf, occurance: 1},
                 {type: pd.oak, occurance: 1}
-            ], 10),
+            ], 100),
             resources: []
         },
         savannahScrub: {
@@ -81,8 +88,12 @@ export default {
             isWater: false,
             creatures: [],
             plants: generateWeightedArray([
-                {type: pd.oak, occurance: 1}
-            ], 10),
+                {type: pd.spreadTanGrass, occurance: 100},
+                {type: pd.spreadYellowGrass, occurance: 10},
+                {type: pd.yellowRoundleaf, occurance: 10},
+                {type: pd.spreadRedGrass, occurance: 1},
+                {type: pd.oak, occurance: 8}
+            ], 100),
             resources: []
         },
         savannahForest: {
@@ -93,8 +104,13 @@ export default {
             creatures: [],
             plants: generateWeightedArray([
                 {type: pd.oak, occurance: 1},
-                {type: pd.oakGrove, occurance: 1}
-            ], 10),
+                {type: pd.spreadTanGrass, occurance: 100},
+                {type: pd.spreadYellowGrass, occurance: 10},
+                {type: pd.yellowRoundleaf, occurance: 20},
+                {type: pd.spreadRedGrass, occurance: 1},
+                {type: pd.spreadGreenGrass, occurance: 1},
+                {type: pd.oakGrove, occurance: 20}
+            ], 100),
             resources: []
         },
 
@@ -105,6 +121,8 @@ export default {
             isWater: false,
             creatures: [],
             plants: generateWeightedArray([
+                {type: pd.spreadGreenGrass, occurance: 10},
+                {type: pd.shortGreenGrass, occurance: 10},
                 {type: pd.oak, occurance: 1}
             ], 10),
             resources: []            
@@ -116,6 +134,8 @@ export default {
             isWater: false,
             creatures: [],
             plants: generateWeightedArray([
+                {type: pd.spreadGreenGrass, occurance: 10},
+                {type: pd.shortGreenGrass, occurance: 10},
                 {type: pd.oak, occurance: 1}
             ], 10),
             resources: []            
@@ -128,7 +148,8 @@ export default {
             creatures: [],
             plants: generateWeightedArray([
                 {type: pd.oak, occurance: 1},
-                {type: pd.oakGrove, occurance: 1}
+                {type: pd.oakGrove, occurance: 1},
+                {type: pd.shortGreenGrass, occurance: 10},
             ], 10),
             resources: [
             ]

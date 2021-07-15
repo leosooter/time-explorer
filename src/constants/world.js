@@ -1,4 +1,4 @@
-const worldSize = 200;
+const worldSize = 100;
 
 export const worldParams = {
     size: worldSize * 100,

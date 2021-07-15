@@ -120,12 +120,9 @@ export default {
             isWater: false,
             creatures: [],
             plants: generateWeightedArray([
-                {type: pd.redFern, occurance: 5},
+                {type: pd.groundFernYellow, occurance: 10},
                 {type: pd.yellowFern, occurance: 5},
                 {type: pd.yellowFernClump, occurance: 8},
-                {type: pd.redFernClump, occurance: 4},
-                {type: pd.yellowRoundleaf, occurance: 3},
-                {type: pd.orangeRoundleaf, occurance: 1}
             ], 50),
             resources: [
               // {type: largeYellowRock, occurance: 1}
@@ -138,20 +135,22 @@ export default {
             isWater: false,
             creatures: [],
             plants: generateWeightedArray([
-                {type: pd.greenBrownFernClump, occurance: 10},
-                {type: pd.greenFernClump, occurance: 5},
+                {type: pd.groundFernGreen, occurance: 10},
+                {type: pd.greenBrownFernClump, occurance: 1},
+                {type: pd.greenFernClump, occurance: 1},
                 {type: pd.redFernClump, occurance: 1},
-                {type: pd.yellowFernClump, occurance: 8},
-                {type: pd.lightGreenFernClump, occurance: 12},
+                {type: pd.yellowFernClump, occurance: 1},
+                {type: pd.lightGreenFernClump, occurance: 1},
                 {type: pd.darkGreenFernClump, occurance: 2},
                 {type: pd.greenMagnolia, occurance: 4},
-                {type: pd.yellowFern, occurance: 8},
-                {type: pd.greenFern, occurance: 5},
+                {type: pd.yellowFern, occurance: 1},
+                {type: pd.greenFern, occurance: 1},
                 {type: pd.redFern, occurance: 1},
                 {type: pd.blueFern, occurance: 3},
                 {type: pd.lowFern, occurance: 2},
                 {type: pd.fern, occurance: 4},
-                {type: pd.darkFern, occurance: 1}
+                {type: pd.darkFern, occurance: 1},
+                {type: pd.greyPebbles, occurance: 3}
             ], 50),
             resources: [
               // {type: largeYellowRock, occurance: 1},

@@ -95,8 +95,8 @@ export default {
     possTerrain: generateWeightedArray([
             {type: "taiga", occurance: 10},
             {type: "snowForest", occurance: 10},
-            {type: "plain", occurance: 10},
-            {type: "grassland", occurance: 10},
+            {type: "plain", occurance: 15},
+            {type: "grassland", occurance: 20},
             {type: "forest", occurance: 10},
             {type: "marsh", occurance: 10},
             {type: "swampForest", occurance: 10}

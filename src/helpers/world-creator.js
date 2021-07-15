@@ -1115,12 +1115,13 @@ export function createNewTestWorld(height, width, tribeName, renderAll= true) {
     // addTestStructure(world.grid[11][2], permianNomad2);
     // addTestStructure(world.grid[11][3], permianNomad3);
     // addTestStructure(world.grid[11][6], permianNomad4);
-    // addTestPlant(world.grid[1][1], plantDirectory.polycarpus)
+    addTestPlant(world.grid[1][1], plantDirectory.oak)
     
     // testMatches();
     // addTestEntity(world.grid[1][1], null, "units");
     
-    // addTestEntity(world.grid[2][2], apatosaurusHouse4, "creatures", "n");
+    addTestEntity(world.grid[2][2], creatureDirectory.blackSquare, "creatures", "n");
+    addTestEntity(world.grid[99][99], creatureDirectory.blackSquare, "creatures", "n");
     // addTestEntity(world.grid[2][3], apatosaurusHouse3, "creatures", "n");
     // addTestEntity(world.grid[2][4], apatosaurusHouse2, "creatures", "n");
     // addTestEntity(world.grid[2][5], apatosaurusHouse1, "creatures", "n");
