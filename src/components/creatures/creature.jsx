@@ -28,7 +28,8 @@ export default React.memo(function Creature(props) {
         offSets,
         statusSpecs,
         isGroupLeader,
-        mode
+        mode,
+        size
         // leftOffset,
         // topOffset
     } = props;
@@ -68,6 +69,7 @@ export default React.memo(function Creature(props) {
     const creatureStyle = {
         position: "absolute",
         width: `${height}px`,
+        border: "1px solid rgba(100, 100, 100, .3)",
         opacity
     }
 
@@ -92,7 +94,7 @@ export default React.memo(function Creature(props) {
             {...getAnimateProps()}
         >
             <div style={wrapperStyle} className={"wiggle"}>
-                <span>{health}</span>
+                <span>{size}</span>
                 {oldIndex != newIndex && <Outline size={height} color={"blue"} />}
                 <Status specs={statusSpecs} size={height} mode={mode} isGroupLeader={isGroupLeader}/>
                 <img src={require(`./images/${imgDir}/${dir}.png`)} style={creatureStyle}></img>

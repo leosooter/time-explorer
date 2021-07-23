@@ -1,4 +1,5 @@
-import {random, sample, clone} from "lodash";
+import {random, sample, clone, sortBy} from "lodash";
+import {React} from "react";
 import {nanoid} from "nanoid";
 import {worldParams} from "../constants/world";
 import {getNewCreature, creatureAction} from "../helpers/creature-helpers";
@@ -910,31 +911,51 @@ function updateCreatureDirectory() {
     }
 }
 
-function testAllCreatures(row, dir) {
+function getSortedCreatureArrays() {
+    let creatureArray = sortBy(creatureDirectory, 'size')
+    let predatorArray = [];
+    let preyArray = [];
+    creatureArray.map((creature) => {
+        if(creature.isPredator) {
+            predatorArray.push(creature);
+        } else {
+            preyArray.push(creature);
+        }
+    });
+
+    return {predatorArray, preyArray};
+}
+
+function loadCreatureArray(array, row, dir) {
     let heightIndex = row;
     let widthIndex = 0;
-    for (const key in creatureDirectory) {
-        if (creatureDirectory.hasOwnProperty(key)) {
-            const creatureType = creatureDirectory[key];
-            if(!creatureType.waterOnly) {
-                let widthChange = creatureType.heightToSquare >= 3 ? 2 : 1;
-                widthIndex += widthChange;
 
-                if(widthIndex >= 99) {
-                  heightIndex += 3;
-                  widthIndex = 1;
-                }
+    for (let index = 0; index < array.length; index++) {
+        const creatureType = array[index];
 
-                const creature = getNewCreature(creatureType, world.grid[heightIndex][widthIndex]);
+        if(!creatureType.waterOnly) {
+            let widthChange = creatureType.heightToSquare >= 3 ? 2 : 1;
+            widthIndex += widthChange;
 
-                if(dir) {
-                    creature.dir = dir;
-                }
-                creatures.push(creature);
+            if(widthIndex >= 99) {
+                heightIndex += 2;
+                widthIndex = 1;
             }
-            
+
+            const creature = getNewCreature(creatureType, world.grid[heightIndex][widthIndex]);
+
+            if(dir) {
+                creature.dir = dir;
+            }
+            creatures.push(creature);
         }
     }
+}
+
+function testAllCreatures(row, dir) {
+    const {predatorArray, preyArray} = getSortedCreatureArrays();
+    
+    loadCreatureArray(preyArray, row, dir);
 }
 
 function testAllResources(row) {
@@ -1066,10 +1087,10 @@ export function createNewTestWorld(height, width, tribeName, renderAll= true) {
     // const tribe = worldType.tribes[0];
     
     assignSides(world.grid);
-    assignWater(world.grid, seaPoints, worldType.seaPower);
-    assignWater(world.grid, lakePoints, worldType.lakePower);
-    addTestTerrain(world.grid[0][0], "desertScrub", 0);   //+++++++++++++++++++++++++++++++++++++++++ Test Terrain
-    addTestTerrain(world.grid[10][0], "desertForest", 0);
+    // assignWater(world.grid, seaPoints, worldType.seaPower);
+    // assignWater(world.grid, lakePoints, worldType.lakePower);
+    // addTestTerrain(world.grid[0][0], "desertScrub", 0);   //+++++++++++++++++++++++++++++++++++++++++ Test Terrain
+    // addTestTerrain(world.grid[10][0], "desertForest", 0);
 
     // mapCoast(world.grid);
     // mapOpenOcean(world.grid);
@@ -1083,10 +1104,10 @@ export function createNewTestWorld(height, width, tribeName, renderAll= true) {
     
     setVisibility(startSquare, 3);
     assignPlayerUnit(world.grid, startSquare.heightIndex, startSquare.widthIndex);
-    // testAllCreatures(8, "n");
-    // testAllCreatures(10, "e");
-    // testAllCreatures(12, "s");
-    // testAllCreatures(14, "w");
+    testAllCreatures(8, "n");
+    testAllCreatures(14, "e");
+    testAllCreatures(18, "s");
+    testAllCreatures(22, "w");
     // startVillage(tribeSquare, tribe, 3);
     // assignTribes(world.grid, 10, 3);
 

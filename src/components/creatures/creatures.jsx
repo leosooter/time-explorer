@@ -4,6 +4,7 @@ import {worldParams} from "../../constants/world";
 
 export default React.memo(function Creatures(props) {
   const {creatures, handlePlayerAttackEntity} = props;
+  console.log("Starting creatures render", creatures);
 
   return (
       creatures.map((creature) => {

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {random, sample} from "lodash"
 import './App.css';
 import Grid from "./components/grid";
+import ReadImages from "./components/read-images.jsx"
 import {getPosition} from "./helpers/grid-helpers";
 import createNewWorld, {setVisibility, createNewTestWorld} from "./helpers/world-creator";
 import {setUpNewPlayer} from "./helpers/player-helpers";
@@ -53,8 +54,8 @@ let isExplorerMode = true;
 isExplorerMode = false;
 let world;
 
-world = createNewWorld(100, 100, defaultWorld, isExplorerMode, "permianAdobe");
-//world = createNewTestWorld(100, 100, isExplorerMode, "permianAdobe", false);
+// world = createNewWorld(100, 100, defaultWorld, isExplorerMode, "permianAdobe");
+world = createNewTestWorld(100, 100, isExplorerMode, "permianAdobe", false);
 
 function App() {
   
@@ -76,6 +77,7 @@ function App() {
   const [selectedUnit, setSelectedUnit] = useState(world.playerUnits[0]);
   const [selectedUnitId, setSelectedUnitId] = useState(null);
   const [playerPosition, setPlayerPosition] = useState({});
+  const [isInitialLoad, setIsInitialLoad] = useState(false);
 
   const {
     grid,
@@ -317,7 +319,9 @@ function App() {
   }
 
   return (
-    <div className="App" style={appStyles}>
+    <>
+    {isInitialLoad && <ReadImages handleFinish={setIsInitialLoad}/>}
+    {!isInitialLoad && <div className="App" style={appStyles}>
       <div style={wrapperStyles}>
         <Background />
         <Grid
@@ -361,8 +365,8 @@ function App() {
         opacity={opacity || filterOpacity}
       />
       <StartScreen worldChoices={worldChoices} isStart={isStart} handleWorldSelect={handleWorldSelect}/>
-  </div>
-
+  </div>} 
+  </>
   );
 }
 

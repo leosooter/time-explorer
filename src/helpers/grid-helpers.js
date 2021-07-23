@@ -6,8 +6,10 @@ export function getPosition(heightIndex, widthIndex, height, widthToHeight, topO
 
     let topAdjust = worldParams.squareHeight;
     let leftAdjust = worldParams.squareWidth;
-    let top = topOffset;
-    let left = leftOffset;
+    // let top = topOffset;
+    // let left = leftOffset;
+    let top = 0;
+    let left = 0;
 
     top += ((topAdjust / 2) * heightIndex);
     left += ((leftAdjust / 2) * heightIndex);
